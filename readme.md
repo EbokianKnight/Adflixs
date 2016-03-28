@@ -1,6 +1,12 @@
 #AdFlixs
 ##Minimally Viable Product
-This website will allow a user to create an account, profiles and within each profile view lists of advertisements which they can view and rate. These add lists will be sorted by genre and have a default priority. This priority will change as users view and rate adds. Users will be able to save and remove adds to their favorites list. Users will be able to leave reviews on ads and ads will show the average user rating. 
+This website clone brings together and sorts video advertisements for easy to access streaming and data analytics.
+* Create/Cancel an Account
+* Accounts will have Profiles
+* Ads will be listed in rows sorted by product / genre
+* Rows will be given priority based on user view/rating history
+* Users will can add/remove ads from a MyList row
+* Ads will be able to be rated, watched, and have unique images
 
 ##User Authentication and Project Setup (few hours)
 * Setup Rails / React / Flux
@@ -32,8 +38,8 @@ will have very basic layout of corresponding Netflix pages mimicked.
 
 ##Advertisement Implementation (2 days)
 * Table Migration: Ads (company, product, description, year),
-* Table Migration: AdGenres (ad_id, genre_id), 
-* Table Migration: Genres (name), 
+* Table Migration: AdGenres (ad_id, genre_id),
+* Table Migration: Genres (name),
 * Associations: Ads, AdGenres, Genres
 * Rails MVC: Ads, AdGenres, Genres
 * Components: AdsIndex, AdRow, AdThumb, AdDetailPane
@@ -47,7 +53,7 @@ will be able to see video thumbs.
 will be able to expand/close video details.  
 will be able to see genres assigned to videos.  
 will be able to see videos transition rollovers.  
-will be able to carousel through videos. 
+will be able to carousel through videos.
 
 ##Account Details (0.5 day)
 * Components: AccountDetail, MembershipBilling, ChangePassword, ChangeEmail, CancelMembership
@@ -167,14 +173,4 @@ will search through product, ad-titles
 
 ##Allow Drag/n/Drop Management of "MyList"
 * under Account Detail, Profile Details add link
-* dynamic table sorting 
-
-
-
-
-
-
-
-
-
-
+* dynamic table sorting
