@@ -18,9 +18,7 @@ string: name, (indexed, not null)
 string: email, (indexed, unique, not null)  
 string: password_digest, (not null)  
 string: session_token, (indexed, unique, not null)
-boolean: admin, (default false, not null)
-string: name, (not null)  
-string: profile_token, (unique)    
+boolean: admin, (default false, not null)  
 string: avatar_url, (not null)  
 
 ###Views
