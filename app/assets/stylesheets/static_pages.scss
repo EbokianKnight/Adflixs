@@ -1,3 +1,60 @@
 // Place all the styles related to the StaticPages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.homepage-header {
+	width: 100%;
+	height: 900px;
+	background-size: cover;
+	background-image: asset-url("homepage/OutsideLarge.jpg");
+	position: relative;
+}
+
+.logo {
+	padding: 30px;
+	width: 200px;
+	color: #B9090B;
+	font-size: 46px;
+	text-transform: uppercase;
+}
+
+.cta-wrapper {
+	margin: 200px 30px;
+
+}
+
+.cta-text {
+	color: white;
+}
+
+.cta-pitch {
+	font-size: 46px;
+	font-weight: bold;
+}
+
+.cta-pricing {
+	font-size: 24px;
+}
+
+.cta-wrapper a {
+	display: block;
+	font-size: 20px;
+	text-align: center;
+	width: 300px;
+	padding: 10px;
+	color: white;
+	text-transform: uppercase;
+	background: #B9090B;
+}
+
+.sign-in {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	border: 0px solid #B9090B;
+	border-radius: 5px;
+	display:block;
+	background: #B9090B;
+	color: white;
+	padding: 10px 20px;
+}

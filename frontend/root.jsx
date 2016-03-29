@@ -7,6 +7,7 @@ var IndexRoute = require('react-router').IndexRoute;
 
 var App = require('./components/app');
 var HomePage = require('./components/homepage');
+var HashHistory = require('react-router').HashHistory;
 
 var routes = (
   <Route path="/" component={App}>

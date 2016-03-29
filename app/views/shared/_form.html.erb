@@ -1,8 +1,8 @@
 <% if current_user %>
-	<a class="logout-button" href="<%= session_url %>">Logout</a>
+	<form action="<%= session_url %>" method="POST">
+		<%= auth_token %>
+		<input type="hidden" name="_method" value="DELETE">
+		<input type="submit" value="Sign Out">
+	</form>
 	<div><%= current_user.email %></div>
-<% else %>
-<div>yyy<%= current_user %>yyy</div>
-	<a class="login-button" href="<%= new_session_url %>"> Sign In</a>
-	<a class="signup-button" href="<%= new_user_url %>">Sign Up</a>
 <% end %>

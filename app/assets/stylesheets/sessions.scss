@@ -1,3 +1,62 @@
 // Place all the styles related to the Sessions controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.sign-in-header {
+	width: 100%;
+	height: 650px;
+	display:block;
+	background-size: cover;
+	background-image: asset-url("signin/Daredevil.jpg");
+}
+
+.sign-in-pane {
+	width: 460px;
+	background: #eee;
+	margin: 0 auto;
+}
+
+.sign-in-pane h1 {
+	font-size: 36px;
+	padding: 20px 40px 0;
+}
+
+.sign-in-form {
+	padding: 40px;
+}
+
+.sign-in-text {
+	font-size: 18px;
+	padding: 20px 0;
+}
+
+.sign-in-text label {
+	display: block;
+}
+
+.sign-in-input {
+	width: 380px;
+	height: 25px;
+	display: block;
+	padding: 10px;
+	margin: 0 0 10px 0;
+}
+
+.sign-in-forgot {
+	text-align: right;
+	color: blue;
+}
+
+.sign-in-button {
+	width: 380px;
+	margin: 20px 0;
+	height: 50px;
+	display: block;
+	text-align: center;
+	color: white;
+	background: #B9090B;
+}
+
+.sign-in-button:hover {
+	cursor: pointer;
+}

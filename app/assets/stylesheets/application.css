@@ -13,3 +13,23 @@
  *= require_tree .
  *= require_self
  */
+
+html body, header nav, h1, h2, h3, h4, h5, h6,
+li, ul, ol, div, span, strong, main, section,
+img, div, p, form, fieldset, label, input, textarea,
+button, article, footer, small {
+	vertical-align: baseline;
+	font-weight: inherit;
+	text-decoration: none;
+	font-family: inherit;
+	font-style: inherit;
+	font-size: 100%;
+	border: 0 none;
+	outline: 0;
+	padding: 0;
+	margin: 0;
+}
+
+.body {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
