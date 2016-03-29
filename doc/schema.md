@@ -1,11 +1,4 @@
 ##Schema Notes
-###Profiles
-string: name, (not null)  
-string: profile_token, (unique)  
-integer: account_id, (indexed, not null)  
-string: avatar_url, (not null)  
-timestamps  
-
 ###Ads
 string: company, (indexed, not null)  
 string: product, (indexed, not null)  
@@ -21,13 +14,26 @@ integer: genre_id, (indexed, not null)
 ###Genres
 string: name, (indexed, not null)  
 
-###Account
+###Users
 string: email, (indexed, unique, not null)  
 string: password_digest, (not null)  
 string: session_token, (indexed, unique, not null)
-boolean: admin, (default false, not null)   
+boolean: admin, (default false, not null)
+string: name, (not null)  
+string: profile_token, (unique)    
+string: avatar_url, (not null)  
 
 ###Views
 integer: ad_id, (indexed, not null)  
 integer: profile_id, (indexed, not null)  
-integer: rating, (indexed, only[0-5], not null)  
+integer: rating, (indexed, only[0-5], not null)
+
+##images
+string: imagable_type (not null)
+integer: imagable_id (indexed, not null)
+string: image_url (not null)
+text: thumbs (JSON array, not null)
+
+##features
+integer: ad_id (indexed, not null)
+text: images (JSON array, not null)
