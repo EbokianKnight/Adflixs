@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
 	validates :email, :password_digest, :session_token, presence: true
-	validates :password, length: ( minimum: 6, maximum: 60, allow_nil: true)
+	validates :password, length: { minimum: 6, maximum: 60, allow_nil: true }
 	before_validation :ensure_session_token
 	attr_reader :password
 
@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
 	end
 
 	def self.find_by_credentials(email, password)
-		user = user.find_by_email(email)
+		user = User.find_by_email(email)
 		return nil unless user && user.valid_password?(password)
 		user
 	end
@@ -28,14 +28,15 @@ class User < ActiveRecord::Base
 	end
 
 	def reset_session_token!
-		user.session_token = self.generate_session_token
-		user.save!
+		self.session_token = User.generate_session_token
+		self.save!
+		self.session_token
 	end
 
 	private
 
 	def ensure_session_token
-		user.session_token ||= self.generate_session_token
+		self.session_token ||= User.generate_session_token
 	end
 
 end
