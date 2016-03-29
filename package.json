@@ -1,0 +1,36 @@
+{
+  "name": "NetflixClone",
+  "version": "1.0.0",
+  "description": "This website clone brings together and sorts video advertisements for easy to access streaming and data analytics. * Create/Cancel an Account * Accounts will have Profiles * Ads will be listed in rows sorted by product / genre * Rows will be given priority based on user view/rating history * Users will can add/remove ads from a MyList row * Ads will be able to be rated, watched, and have unique images",
+  "main": "index.js",
+  "directories": {
+    "doc": "doc",
+    "test": "test"
+  },
+  "dependencies": {
+    "babel-core": "^6.7.4",
+    "babel-loader": "^6.2.4",
+    "babel-preset-react": "^6.5.0",
+    "react": "^0.14.7",
+    "react-addons-linked-state-mixin": "^0.14.7",
+    "react-dom": "^0.14.7",
+    "react-flux": "^1.0.1",
+    "react-router": "^2.0.1",
+    "webpack": "^1.12.14"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EbokianKnight/NetflixClone.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EbokianKnight/NetflixClone/issues"
+  },
+  "homepage": "https://github.com/EbokianKnight/NetflixClone#readme"
+}
