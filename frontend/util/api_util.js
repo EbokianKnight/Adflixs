@@ -23,12 +23,12 @@ module.exports = {
 			}
     });
   },
-	logout: function () {
+	logout: function (callback) {
 		$.ajax({
 			method: "DELETE",
       url: "session",
       success: function () {
-        console.log("User Logged Out");
+        callback();
       },
 			error: function (e) {
 				console.log("ApiUtil#fetchGenres Error");
