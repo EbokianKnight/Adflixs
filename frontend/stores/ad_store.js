@@ -17,7 +17,7 @@ var updateAdvert = function (ad) {
 
 AdStore.__onDispatch = function (payload) {
 	switch (payload.actionType) {
-		case AdConstants.ADS_RECEIVED:
+		case AdConstantsa.ADS_RECEIVED:
 			resetAdverts(payload.adverts);
 			AdStore.__emitChange();
 		break;

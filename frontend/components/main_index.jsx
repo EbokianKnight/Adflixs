@@ -3,7 +3,7 @@ var PropTypes = React.PropTypes;
 var AdStore = require('../stores/ad_store');
 var ApiUtil = require('../util/api_util');
 
-var AdIndex = React.createClass({
+var MainIndex = React.createClass({
 
 	getInitialState: function() {
 		return { ads: [] };
@@ -29,4 +29,4 @@ var AdIndex = React.createClass({
 
 });
 
-module.exports = AdIndex;
+module.exports = MainIndex;
