@@ -8,7 +8,7 @@ var browserHistory = require('react-router').browserHistory;
 
 var App = require('./components/app');
 var HomePage = require('./components/homepage');
-var MainIndex = require('./components/main_index');
+var MainIndex = require('./components/ads/main_index');
 var NotFound = require('./components/not_found');
 
 var routes = (
