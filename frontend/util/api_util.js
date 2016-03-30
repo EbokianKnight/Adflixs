@@ -17,7 +17,10 @@ module.exports = {
       url: "api/genres",
       success: function (genres) {
         GenreActions.recieveAllGenres(genres);
-      }
+      },
+			error: function (e) {
+				console.log("ApiUtil#fetchGenres Error");
+			}
     });
   }
 };
