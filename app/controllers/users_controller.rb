@@ -11,7 +11,7 @@ class UsersController < ApplicationController
 		@user.admin = false
 		if @user.save
 			sign_in(@user)
-			redirect_to root_url + "/ads"
+			redirect_to root_url + "ads"
 		else
 			flash.now[:errors] = @user.errors.full_messages
 			render :new
