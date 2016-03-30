@@ -1,5 +1,4 @@
 var AppDispatcher = require('../dispatcher/dispatcher');
-var ApiUtil = require('../util/api_util');
 var Store = require('flux/utils').Store;
 var AdConstants = require('../constants/ad_constants');
 
@@ -15,7 +14,6 @@ var resetAdverts = function (ads) {
 var updateAdvert = function (ad) {
 	_adverts[ad.id] = ad;
 };
-
 
 AdStore.__onDispatch = function (payload) {
 	switch (payload.actionType) {
