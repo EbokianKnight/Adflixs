@@ -6,6 +6,7 @@ class Api::GenresController < ApplicationController
 
 	def index
 		@genres = Genre.all
+		@genres.includes(:ads)
 	end
 
 	def create
