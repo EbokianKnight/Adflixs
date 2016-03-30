@@ -1,6 +1,7 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
 var Advert = require('./ad_index_item.jsx');
+var Slider = require('react-slick');
 
 var AdvertRow = React.createClass({
 
