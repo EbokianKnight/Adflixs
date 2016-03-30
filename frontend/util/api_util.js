@@ -22,5 +22,17 @@ module.exports = {
 				console.log("ApiUtil#fetchGenres Error");
 			}
     });
-  }
+  },
+	logout: function () {
+		$.ajax({
+			method: "DELETE",
+      url: "session",
+      success: function () {
+        console.log("User Logged Out");
+      },
+			error: function (e) {
+				console.log("ApiUtil#fetchGenres Error");
+			}
+    });
+	}
 };
