@@ -31,3 +31,5 @@ GenreStore.all = function () {
 GenreStore.find = function (id) {
 	return _genres[id];
 };
+
+module.exports = GenreStore;
