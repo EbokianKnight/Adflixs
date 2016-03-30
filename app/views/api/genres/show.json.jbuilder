@@ -1,1 +1,1 @@
-json.partial!('genre', genre: @genre)
+json.partial!('genre', genre: @genre, show_ads: true)
