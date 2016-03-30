@@ -31,5 +31,6 @@ button, article, footer, small {
 }
 
 .body {
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif";
+	font-size: 62.5%
 }

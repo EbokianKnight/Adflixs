@@ -7,18 +7,20 @@ var IndexRoute = require('react-router').IndexRoute;
 
 var App = require('./components/app');
 var HomePage = require('./components/homepage');
-var HashHistory = require('react-router').HashHistory;
+var browserHistory = require('react-router').browserHistory;
+var NotFound = require('./components/not_found');
 
 var routes = (
   <Route path="/" component={App}>
     <IndexRoute component={HomePage}/>
+    <Route path="*" component={NotFound}/>
   </Route>
 );
 
 
 document.addEventListener("DOMContentLoaded", function () {
   ReactDOM.render(
-    <Router>{ routes }</Router>,
+    <Router history={browserHistory}>{ routes }</Router>,
     document.getElementById('root')
   );
 });
