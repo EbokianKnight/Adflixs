@@ -5,7 +5,7 @@ var HomePage = React.createClass({
 	generateHomeHeader: function () {
 		return (
 			<div className="homepage-header" >
-				<h1 className="logo">AdFlixs</h1>
+				<div className="logo"/>
 				<div className="cta-wrapper">
 					<div className="cta-text">
 						<h1 className="cta-pitch">See what's next.</h1>

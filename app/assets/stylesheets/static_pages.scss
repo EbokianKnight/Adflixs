@@ -5,17 +5,20 @@
 .homepage-header {
 	width: 100%;
 	height: 55%;
-	background-size: auto 100%;
+	background-size: cover;
 	background-image: asset-url("homepage/OutsideLarge.jpg");
 	position: relative;
+	border: 1px solid transparent;
 }
 
 .logo {
-	padding: 30px;
-	width: 200px;
-	color: #B9090B;
-	font-size: 46px;
-	text-transform: uppercase;
+	display: block;
+	height: 50px;
+	width: 170px;
+	margin: 10px 30px;
+	background: asset-url("AdFlixLogo.svg");
+	background-size: cover;
+	background-repeat: no-repeat;
 }
 
 .cta-wrapper {
