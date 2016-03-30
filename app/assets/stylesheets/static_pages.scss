@@ -21,6 +21,11 @@
 	background-repeat: no-repeat;
 }
 
+.logo-small {
+	height: 35px;
+	width: 120px;
+}
+
 .cta-wrapper {
 	margin: 200px 30px;
 }
@@ -59,4 +64,76 @@
 	background: #B9090B;
 	color: white;
 	padding: 10px 20px;
+}
+
+.main-index-header {
+	display: block;
+	width: 100%;
+	height: 500px;
+	background: #777;
+}
+
+.nav-bar {
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 100;
+	min-height: 40px;
+	align-items: center;
+	display: flex;
+	padding: 0 4%;
+	white-space: nowrap;
+	box-sizing: border-box;
+	// transition-property: opacity;
+	// transition-duration: 0.4s;
+	// transition-timing-function: cubic-bezier(0.665, 0.253, 0.265, 0.8);
+	background-image: linear-gradient(to bottom,rgba(0,0,0,.7) 10%,rgba(0,0,0,0));
+	transition-delay: 0s;
+}
+
+.main-index-body {
+	background: #111;
+}
+
+.row-bar {
+	width:140%;
+	overflow: hidden;
+	height:210px;
+	background: transparent;
+	overflow: hidden;
+	position: relative;
+	margin-top:30px;
+}
+
+.row-caption {
+	position:absolute;
+	top: 0;
+	left: 10px;
+	color: white;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+}
+
+.fliximg{
+	float:left;
+	width:200px;
+	height:150px;
+	position: relative;
+	z-index: 3;
+	background:#B9090B;
+	margin:30px 20px;
+	transition: width .5s, height .5s, margin .5s;
+}
+
+.fliximg:hover {
+	width:280px;
+	height:210px;
+	margin:0px 20px;
+}
+
+.main-footer {
+	width: 100%;
+	height: 70px;
+	background: #444;
+	display: block;
 }

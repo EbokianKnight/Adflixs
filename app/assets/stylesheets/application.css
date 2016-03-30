@@ -14,7 +14,7 @@
  *= require_self
  */
 
-html body, header nav, h1, h2, h3, h4, h5, h6,
+html body, header nav, a, h1, h2, h3, h4, h5, h6,
 li, ul, ol, div, span, strong, main, section,
 img, div, p, form, fieldset, label, input, textarea,
 button, article, footer, small {
@@ -26,9 +26,16 @@ button, article, footer, small {
 	font-size: 100%;
 	border: 0 none;
 	outline: 0;
+	color: inherit;
 	padding: 0;
 	margin: 0;
 	background: transparent;
+}
+
+.group:after {
+	content: "";
+	display: block;
+	clear: both;
 }
 
 .body {
@@ -36,15 +43,18 @@ button, article, footer, small {
 	font-size: 16px;
 }
 
-.admin-bar {
-	background: #eee;
-	height: 25px;
+/*.admin-bar {
+	background: #111;
+	padding: 5px;
+	width: 100%;
+	color: white;
 }
 
 .admin-button {
 	background: #B9090B;
 	border: 0;
 	padding: 5px;
+	margin: 0 15px;
 	border-radius: 5px;
 	cursor: pointer;
 	float: left;
@@ -53,10 +63,4 @@ button, article, footer, small {
 
 .admin-button:hover {
 	background: #Ad0C14;
-}
-
-.group {
-	content: "";
-	display: block;
-	clear: both;
-}
+}*/
