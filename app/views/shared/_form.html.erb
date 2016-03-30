@@ -1,6 +1,6 @@
 
 <% if current_user && current_user.admin %>
-	<span class="admin-bar group">
+	<div class="admin-bar group">
 		<form class="admin-button" action="<%= session_url %>" method="POST">
 			<%= auth_token %>
 			<input type="hidden" name="_method" value="DELETE">
@@ -8,5 +8,5 @@
 		</form>
 		<a class="admin-button" href="/"> HomePage</a>
 		<a class="admin-button" href="/ads"> MainIndex</a>
-	</span>
+	</div>
 <% end %>
