@@ -6,7 +6,6 @@ var AdConstants = require('../constants/ad_constants');
 var AdStore = new Store(AppDispatcher);
 
 var _adverts = {};
-var _ad = "";
 
 var resetAdverts = function (ads) {
 	_adverts = {};
