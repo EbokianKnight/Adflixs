@@ -1,8 +1,11 @@
-<% if current_user %>
-	<form action="<%= session_url %>" method="POST">
-		<%= auth_token %>
-		<input type="hidden" name="_method" value="DELETE">
-		<input type="submit" value="Sign Out">
-	</form>
-	<div><%= current_user.email %></div>
+
+<% if current_user && current_user.admin %>
+	<span class="admin-bar group">
+		<form class="admin-button" action="<%= session_url %>" method="POST">
+			<%= auth_token %>
+			<input type="hidden" name="_method" value="DELETE">
+			<input type="submit" value="<%= current_user.email %>">
+		</form>
+		<a class="admin-button" href="/"> HomePage</a>
+	</span>
 <% end %>

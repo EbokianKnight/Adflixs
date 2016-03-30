@@ -37,8 +37,9 @@
 
 .sign-in-input {
 	width: 380px;
-	height: 25px;
+	height: 30px;
 	display: block;
+	background: white;
 	padding: 10px;
 	margin: 0 0 10px 0;
 }
@@ -56,6 +57,7 @@
 	text-align: center;
 	color: white;
 	background: #B9090B;
+	z-index: 1;
 }
 
 .sign-in-button:hover {

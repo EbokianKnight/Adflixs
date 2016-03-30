@@ -11,10 +11,40 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160329152844) do
+ActiveRecord::Schema.define(version: 20160330135315) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "ad_genres", force: :cascade do |t|
+    t.integer  "ad_id",      null: false
+    t.integer  "genre_id",   null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "ad_genres", ["ad_id"], name: "index_ad_genres_on_ad_id", using: :btree
+  add_index "ad_genres", ["genre_id"], name: "index_ad_genres_on_genre_id", using: :btree
+
+  create_table "ads", force: :cascade do |t|
+    t.string   "product",     null: false
+    t.string   "company",     null: false
+    t.text     "description", null: false
+    t.integer  "year",        null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "ads", ["company"], name: "index_ads_on_company", using: :btree
+  add_index "ads", ["product"], name: "index_ads_on_product", using: :btree
+
+  create_table "genres", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "genres", ["name"], name: "index_genres_on_name", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                           null: false
