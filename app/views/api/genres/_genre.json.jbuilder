@@ -1,1 +1,1 @@
-json.extract!( genre, :name )
+json.extract!( genre, :name, :id )
