@@ -206,3 +206,59 @@
 	position: absolute;
 	height: 0px;
 }
+
+.header-left-arrow, .header-right-arrow {
+	border: 1px solid red;
+	width: 50px;
+	height: 500px;
+	position: absolute;
+	top:0;
+}
+
+.header-left-arrow {
+	left: 0px;
+}
+
+.header-right-arrow {
+	right: 0px;
+}
+
+.header-info-container {
+	width: 550px;
+	box-sizing: border-box;
+	height: 330px;
+	border: 1px solid red;
+	position: absolute;
+	top: 170px;
+	left: 50px;
+	color: white;
+}
+
+.feature-title {
+	position: relative;
+	display: block;
+	box-sizing: border-box;
+	font-size: 48px;
+	font-weight: bold;
+	width: 100%;
+	border: 1px solid red;
+}
+
+.feature-info-bar > li {
+	border: 1px solid red;
+	display: block;
+	float: left;
+	padding: 5px;
+}
+
+.feature-description {
+	border: 1px solid red;
+	box-sizing: border-box;
+}
+
+.more-features > button {
+	border: 1px solid red;
+	padding: 5px;
+	box-sizing: border-box;
+	position: relative;
+}
