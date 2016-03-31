@@ -5,6 +5,7 @@ var AdConstants = require('../constants/ad_constants');
 var AdStore = new Store(AppDispatcher);
 
 var _adverts = {};
+var _shownAd = null;
 
 var resetAdverts = function (ads) {
 	_adverts = {};
@@ -12,12 +13,16 @@ var resetAdverts = function (ads) {
 };
 
 var updateAdvert = function (ad) {
-	_adverts[ad.id] = ad;
+	_shownAd = ad;
+};
+
+var clearShownAd = function () {
+	_shownAd = null;
 };
 
 AdStore.__onDispatch = function (payload) {
 	switch (payload.actionType) {
-		case AdConstantsa.ADS_RECEIVED:
+		case AdConstants.ADS_RECEIVED:
 			resetAdverts(payload.adverts);
 			AdStore.__emitChange();
 		break;
@@ -25,6 +30,9 @@ AdStore.__onDispatch = function (payload) {
 			updateAdvert(payload.advert);
 			AdStore.__emitChange();
 		break;
+		case AdConstants.CLOSE_DETAILS:
+			clearShownAd();
+			AdStore.__emitChange();
 	}
 };
 
@@ -36,6 +44,9 @@ AdStore.all = function () {
 	return ads;
 };
 
-AdStore.find = function (id) {
-	return _adverts[id];
+AdStore.getAd = function () {
+	var copy = Object.assign({}, _shownAd);
+	return copy;
 };
+
+module.exports = AdStore;

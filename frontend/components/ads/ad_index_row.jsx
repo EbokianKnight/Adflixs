@@ -3,35 +3,43 @@ var PropTypes = React.PropTypes;
 var Advert = require('./ad_index_item');
 var Slider = require('react-slick');
 var AdDetailPane = require('./ad_detail_pane');
-
+var AdStore = require('../../stores/ad_store');
 
 var AdvertRow = React.createClass({
 
 	getInitialState: function() {
-		return { showDetail: false, adID: null };
+		return { showDetail: false };
+	},
+
+	componentDidMount: function() {
+		this.adStoreToken = AdStore.addListener(this.checkDetails);
+	},
+
+	componentWillUnmount: function() {
+		this.adStoreToken.remove();
+	},
+
+	checkDetails: function() {
+		if (AdStore.getAd().rowID === this.props.genre.id){
+			this.setState({ showDetail: true });
+		} else if (this.state.showDetail) {
+			this.setState({ showDetail: false });
+		}
 	},
 
 	fetchRowName: function () {
 		return <div className="row-caption">{ this.props.genre.name }</div>;
 	},
 
-	showDetail: function () {
-		this.setState({ showDetail: true });
-	},
-
-	hideDetail: function () {
-		this.setState({ showDetail: false });
-	},
-
 	fetchAdverts: function () {
 		return this.props.genre.ads.map(function(ad){
-			return <Advert ad={ad} key={ad.id} showDetail={this.showDetail} hideDetail={this.hideDetail}/>;
+			return <Advert ad={ad} key={ad.id} rowID={ this.props.genre.id } show={ this.state.showDetail }/>;
 		}.bind(this));
 	},
 
 	renderDetail: function () {
 		if (this.state.showDetail) {
-			return <AdDetailPane />;
+			return <AdDetailPane show={this.state.showDetail}/>;
 		} else {
 			return "";
 		}
@@ -58,9 +66,12 @@ var AdvertRow = React.createClass({
 				{ breakpoint: 100000, settings: 'unslick' }
 			]
     };
+
 		if(!this.props.genre) { return ""; }
+		var klass = this.state.showDetail ? " row-extend" : "";
+
 		return (
-			<div className="row-bar">
+			<div className={ "row-bar" + klass }>
 				{ this.fetchRowName() }
 				<Slider {...settings}>
 					{ this.fetchAdverts() }

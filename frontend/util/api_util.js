@@ -11,6 +11,19 @@ module.exports = {
       }
     });
   },
+	fetchAdvert: function (id, rowID) {
+    $.ajax({
+			method: "GET",
+      url: "api/ads/" + id,
+      success: function (advert) {
+				advert.rowID = rowID;
+        AdActions.recieveAdvert(advert);
+      },
+			error: function (err) {
+				console.log("ApiUtil#fetchAdvert Error");
+			}
+    });
+  },
 	fetchGenres: function () {
     $.ajax({
 			method: "GET",
@@ -18,7 +31,7 @@ module.exports = {
       success: function (genres) {
         GenreActions.recieveAllGenres(genres);
       },
-			error: function (e) {
+			error: function (err) {
 				console.log("ApiUtil#fetchGenres Error");
 			}
     });
@@ -30,7 +43,7 @@ module.exports = {
       success: function () {
         callback();
       },
-			error: function (e) {
+			error: function (err) {
 				console.log("ApiUtil#fetchGenres Error");
 			}
     });
