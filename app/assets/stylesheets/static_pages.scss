@@ -148,9 +148,16 @@
 	background: #333;
 }
 
+.ad-detail-pane-box {
+
+}
+
 .ad-detail-button {
+	position: relative;
 	display: block;
-	bottom: 0;
+	top: 100%;
+	width: 50px;
+	margin: -45px auto 0 auto;
 	height: 30px;
 	background: #ccc;
 }

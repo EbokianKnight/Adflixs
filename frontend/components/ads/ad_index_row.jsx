@@ -3,20 +3,38 @@ var PropTypes = React.PropTypes;
 var Advert = require('./ad_index_item');
 var Slider = require('react-slick');
 var AdDetailPane = require('./ad_detail_pane');
+
+
 var AdvertRow = React.createClass({
+
+	getInitialState: function() {
+		return { showDetail: false, adID: null };
+	},
 
 	fetchRowName: function () {
 		return <div className="row-caption">{ this.props.genre.name }</div>;
 	},
 
-	fetchAdverts: function () {
-		return this.props.genre.ads.map(function(ad){
-			return <Advert ad={ad} key={ad.id} showDetail={this.showDetail}/>;
-		});
+	showDetail: function () {
+		this.setState({ showDetail: true });
 	},
 
-	showDetail: function (id) {
+	hideDetail: function () {
+		this.setState({ showDetail: false });
+	},
 
+	fetchAdverts: function () {
+		return this.props.genre.ads.map(function(ad){
+			return <Advert ad={ad} key={ad.id} showDetail={this.showDetail} hideDetail={this.hideDetail}/>;
+		}.bind(this));
+	},
+
+	renderDetail: function () {
+		if (this.state.showDetail) {
+			return <AdDetailPane />;
+		} else {
+			return "";
+		}
 	},
 
 	render: function() {
@@ -47,6 +65,7 @@ var AdvertRow = React.createClass({
 				<Slider {...settings}>
 					{ this.fetchAdverts() }
 				</Slider>
+				{ this.renderDetail() }
 			</div>
 		);
 	}
