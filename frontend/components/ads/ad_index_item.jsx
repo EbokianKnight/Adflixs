@@ -7,6 +7,7 @@ var Advert = React.createClass({
 		return (
 			<div className="fliximg">
 				{ this.props.ad.description }
+				<button className="ad-detail-button" />
 			</div>
 		);
 	}
