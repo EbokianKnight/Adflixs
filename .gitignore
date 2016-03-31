@@ -25,3 +25,4 @@ node_modules
 # Ignore bundle
 bundle.js
 bundle.js.map
+.DS_Store

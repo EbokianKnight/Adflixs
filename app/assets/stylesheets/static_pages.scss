@@ -147,14 +147,16 @@
 
 .ad-detail-pane {
 	width: 100%;
+	box-sizing: border-box;
 	height: 500px;
-	margin-left: 25px;
 	position: relative;
 	background: #333;
 }
 
 .ad-detail-pane-box {
 	position: absolute;
+	box-sizing: border-box;
+	padding: 0 25px;
 	width: 100%;
 	top: 190px;
 	left:0;
@@ -162,16 +164,28 @@
 }
 
 .ad-detail-button {
-	position: absolute;;
+	position: absolute;
+	z-index: 5;
 	display: block;
 	top: 100%;
 	width: 100%;
 	margin: -30px auto 0 auto;
 	height: 30px;
+	color: white;
 	background: #999;
 }
 
+.back-grade {
+	background-image: asset-url("BackGradiant.png");
+	background-size: cover;
+	height: 100%;
+	width: 600px;
+}
+
 .top-right-x {
+	position: absolute;
+	top: 20px;
+	right: 25px;
 	border: 1px dashed white;
 	padding: 5px;
 	font-weight: bold;

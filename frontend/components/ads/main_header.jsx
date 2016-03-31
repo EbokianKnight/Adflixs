@@ -5,7 +5,9 @@ var MainHeader = React.createClass({
 
 	render: function() {
 		return (
-			<div className="main-index-header"></div>
+			<div className="main-index-header">
+				<div className="back-grade"></div>
+			</div>
 		);
 	}
 });

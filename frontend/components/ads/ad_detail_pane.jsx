@@ -13,6 +13,7 @@ var AdDetailPane = React.createClass({
 		return (
 			<div className="ad-detail-pane-box">
 				<div className="ad-detail-pane">
+					<div className="back-grade"></div>
 					<button className="top-right-x" onClick={this.close_details}>X</button>
 				</div>
 			</div>
