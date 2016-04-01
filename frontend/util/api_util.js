@@ -1,5 +1,6 @@
-var AdActions = require('../actions/ad_actions.js');
-var GenreActions = require('../actions/genre_actions.js');
+var AdActions = require('../actions/ad_actions');
+var GenreActions = require('../actions/genre_actions');
+var UserActions = require('../actions/user_actions');
 
 module.exports = {
   fetchAdverts: function () {
@@ -33,6 +34,43 @@ module.exports = {
       },
 			error: function (err) {
 				console.log("ApiUtil#fetchGenres Error");
+			}
+    });
+  },
+  makeUser: function (user, callback) {
+    $.ajax({
+			method: "POST",
+      url: "api/users",
+      success: function (userJson) {
+        UserActions.registerNewUser(userJson);
+        //callback to redirect
+      },
+			error: function (err) {
+				console.log("ApiUtil#makeUser Error");
+			}
+    });
+  },
+  removeUser: function (callback) {
+    $.ajax({
+      method: "POST",
+      url: "api/users",
+      success: function () {
+        callback();
+      },
+      error: function (err) {
+        console.log("ApiUtil#makeUser Error");
+      }
+    });
+  },
+  logIn: function (callback) {
+    $.ajax({
+			method: "POST",
+      url: "api/session",
+      success: function (userJson) {
+        //callback to redirect
+      },
+			error: function (err) {
+				console.log("ApiUtil#logIn Error");
 			}
     });
   },
