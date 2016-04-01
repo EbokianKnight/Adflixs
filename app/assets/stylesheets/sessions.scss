@@ -12,7 +12,8 @@
 }
 
 .sign-in-pane {
-	width: 400px;
+	width: 360px;
+	height: auto;
 	background: #eee;
 	margin: 0 auto;
 	padding: 20px;
@@ -25,21 +26,12 @@
 	text-transform: uppercase;
 }
 
-.sign-in-form {
-	padding: 40px;
-}
-
-.sign-in-text {
-	font-size: 18px;
-	padding: 20px 0;
-}
-
 .sign-in-text label {
 	display: block;
 }
 
 .sign-in-input {
-	width: 380px;
+	width: 340px;
 	display: block;
 	background: white;
 	padding: 10px;
@@ -57,16 +49,31 @@
 }
 
 .sign-in-button {
-	width: 380px;
-	margin: 20px 0;
-	height: 50px;
+	width: 360px;
+	height: 70px;
+	z-index: 1;
 	display: block;
+	margin-bottom: 10px;
+}
+
+.sign-in-adflix:hover {
+	cursor: pointer;
+}
+
+.sign-in-adflix {
 	text-align: center;
 	color: white;
 	background: #B9090B;
-	z-index: 1;
 }
 
-.sign-in-button:hover {
-	cursor: pointer;
+.sign-in-facebook {
+	background-image: asset-url("signin/facebook.svg");
+	background-size:cover;
+	background-repeat: no-repeat;
+}
+
+.sign-in-google {
+	background-image: asset-url("signin/googleplus.svg");
+	background-size: cover;
+	background-repeat: no-repeat;
 }

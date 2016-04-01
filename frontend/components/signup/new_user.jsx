@@ -81,7 +81,7 @@ var NewUser = React.createClass({
         <br/><br/>
 
         { this.createFlashedMessage() }
-        <button className="sign-in-button">SignUp</button>
+        <button className="sign-in-button sign-in-adflix">SignUp</button>
       </form>
     );
   },

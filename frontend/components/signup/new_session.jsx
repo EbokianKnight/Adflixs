@@ -51,7 +51,9 @@ var NewSession = React.createClass({
         </label>
         <br/><br/>
 
-        <button className="sign-in-button">Sign In</button>
+        <button className="sign-in-button sign-in-adflix">Sign In</button>
+        <svg className="sign-in-button sign-in-google"/>
+        <svg className="sign-in-button sign-in-facebook"/>
       </form>
     );
   },
