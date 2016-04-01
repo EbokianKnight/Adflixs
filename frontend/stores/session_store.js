@@ -5,18 +5,14 @@ var AppDispatcher = require('../dispatcher/dispatcher');
 var SessionStore = new Store(AppDispatcher);
 
 var _currentUser;
-var _currentUserHasBeenFetched = false;
+var _isLoggedIn = false;
 
 SessionStore.currentUser = function () {
   return _currentUser;
 };
 
 SessionStore.isLoggedIn = function () {
-  return !!_currentUser;
-};
-
-SessionStore.currentUserHasBeenFetched = function () {
-  return _currentUserHasBeenFetched;
+  return _isLoggedIn;
 };
 
 SessionStore.__onDispatch = function (payload) {

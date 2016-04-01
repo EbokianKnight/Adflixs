@@ -17,13 +17,13 @@ module.exports = {
   },
   currentUserRecieved: function (currentUser) {
     Dispatcher.dispatch({
-      actionType: UserConstants.RECIEVE_USER,
+      actionType: SessionConstants.RECIEVE_USER,
       currentUser: currentUser
     });
   },
   logout: function () {
     Dispatcher.dispatch({
-      actionType: UserConstants.LOGOUT,
+      actionType: SessionConstants.LOGOUT,
     });
   }
 };

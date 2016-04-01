@@ -57,8 +57,8 @@ module.exports = {
 			method: "POST",
       url: "/api/session",
       data: { user: credentials },
-      success: function (userJson) {
-        UserActions.currentUserRecieved(userJson);
+      success: function (user) {
+        UserActions.currentUserRecieved(user);
         redirectCallback();
       },
 			error: function (err) {
