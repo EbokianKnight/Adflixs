@@ -33,7 +33,7 @@ module.exports = {
         UserActions.recieveUser(user);
       },
       complete: function () {
-        completion || completion();
+        completion();
       },
 			error: function (err) {
 				console.log("UserUtil#fetchCurrentUser Error");
@@ -47,7 +47,7 @@ module.exports = {
       data: { user: user },
       success: function (userJson) {
         UserActions.registerNewUser(userJson);
-        redirectCallback || redirectCallback();
+        redirectCallback();
       },
 			error: function (err) {
 				console.log("UserUtil#makeUser Error");
@@ -60,7 +60,7 @@ module.exports = {
       url: "/api/users" + user.id,
       success: function () {
         UserActions.removeUser(userID);
-        redirectCallback || redirectCallback();
+        redirectCallback();
       },
       error: function (err) {
         console.log("UserUtil#removeUser Error");
@@ -73,8 +73,8 @@ module.exports = {
       url: "/api/session",
       data: { user: credentials },
       success: function (user) {
-        UserActions.currentUserRecieved(user);
-        redirectCallback || redirectCallback();
+        UserActions.recieveUser(user);
+        redirectCallback();
       },
 			error: function (err) {
 				console.log("UserUtil#signIn Error");
@@ -87,7 +87,7 @@ module.exports = {
       url: "api/session",
       success: function () {
         UserActions.logout();
-        redirectCallback || redirectCallback();
+        redirectCallback();
       },
 			error: function (err) {
 				console.log("UserUtil#logout Error");
