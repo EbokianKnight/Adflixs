@@ -1,16 +1,14 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
 
-var MoreLikeThisDetail = React.createClass({
+var AccountIndex = React.createClass({
 
   render: function() {
     return (
-      <div>
-        
-      </div>
+      <div>I'm the Account Index</div>
     );
   }
 
 });
 
-module.exports = MoreLikeThisDetail;
+module.exports = AccountIndex;

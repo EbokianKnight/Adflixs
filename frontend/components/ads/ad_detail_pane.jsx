@@ -53,8 +53,8 @@ var AdDetailPane = React.createClass({
 
 	render: function() {
 		return (
-			<div className="ad-detail-pane-box">
-				<div className="ad-detail-pane">
+			<div className="">
+				<div className="ad-detail-pane-box ad-detail-pane">
 					<div className="back-grade">
 						<div className="header-spacer header-left-arrow"/>
 						<ReactCSS

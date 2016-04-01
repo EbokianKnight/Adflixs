@@ -30,7 +30,7 @@ var ProfileDropDown = React.createClass({
   },
 
   goToAccount: function (e) {
-    console.log("We Link to the Account Pages!");
+    this.context.router.push("/account")
   },
 
   createRollOverMenu: function () {
