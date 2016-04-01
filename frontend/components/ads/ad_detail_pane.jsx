@@ -38,8 +38,8 @@ var AdDetailPane = React.createClass({
 						<button>More Like this</button>
 						<button>Details</button>
 					</nav>
-					<button className="top-right-x" onClick={this.close_details}>X</button>
 					<div className="header-spacer header-right-arrow"/>
+					<button className="top-right-x" onClick={this.close_details}>X</button>
 				</div>
 				<div className="bottom-grade"></div>
 			</div>
