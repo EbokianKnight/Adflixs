@@ -1,6 +1,6 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
-var ApiUtil = require('../../util/api_util');
+var UserUtil = require('../../util/user_util');
 
 var NewUser = React.createClass({
 
@@ -33,7 +33,7 @@ var NewUser = React.createClass({
     } else {
       this.setState({ flashMessage: false });
     }
-    ApiUtil.makeUser({
+    UserUtil.makeUser({
       email: e.target.email.value(),
       password: e.target.password.value()
     });
