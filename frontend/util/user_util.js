@@ -58,6 +58,7 @@ module.exports = {
       url: "/api/session",
       daat: { credentials: credentials },
       success: function (userJson) {
+        UserActions.currentUserRecieved(userJson);
         redirectCallback();
       },
 			error: function (err) {
@@ -70,6 +71,7 @@ module.exports = {
 			method: "DELETE",
       url: "api/session",
       success: function () {
+        UserActions.logout();
         redirectCallback();
       },
 			error: function (err) {
