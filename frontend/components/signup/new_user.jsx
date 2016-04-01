@@ -37,9 +37,11 @@ var NewUser = React.createClass({
     UserUtil.makeUser({
       email: e.currentTarget.email.value,
       password: e.currentTarget.password.value
-    }, function () { //redirectCallback
-      this.context.router.push("/ads");
-    });
+    }, this.redirectCallback );
+  },
+
+  redirectCallback: function () {
+    this.context.router.push("/ads");
   },
 
   createFlashedMessage: function () {
