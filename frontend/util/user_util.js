@@ -52,7 +52,7 @@ module.exports = {
       }
     });
   },
-  logIn: function (credentials, redirectCallback) {
+  signIn: function (credentials, redirectCallback) {
     $.ajax({
 			method: "POST",
       url: "/api/session",
