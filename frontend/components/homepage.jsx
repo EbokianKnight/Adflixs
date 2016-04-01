@@ -27,7 +27,7 @@ var HomePage = React.createClass({
 						</button>
 					</div>
 					<button className="cta-sign-in"
-						onClick={this.goToSignUp}>Sign In
+						onClick={this.goToSignIn}>Sign In
 					</button>
 				</header>
 			</div>
