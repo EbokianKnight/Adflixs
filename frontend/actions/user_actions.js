@@ -15,7 +15,7 @@ module.exports = {
       userID: userID
     });
   },
-  currentUserRecieved: function (currentUser) {
+  recieveUser: function (currentUser) {
     Dispatcher.dispatch({
       actionType: SessionConstants.RECIEVE_USER,
       currentUser: currentUser

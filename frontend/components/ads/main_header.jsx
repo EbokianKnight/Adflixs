@@ -3,6 +3,7 @@ var PropTypes = React.PropTypes;
 var OverviewDetail = require('./feature_panes/overview');
 var MoreDetails = require('./feature_panes/detail');
 var MoreLikeThisDetail = require('./feature_panes/more_like_this');
+var ReactCSS = require('react-addons-css-transition-group');
 
 var MainHeader = React.createClass({
 
@@ -37,11 +38,11 @@ var MainHeader = React.createClass({
 
 	displayPane: function () {
 		if (this.state.display === 0) {
-			return <OverviewDetail />;
+			return <OverviewDetail key={1} />;
 		} else if (this.state.display === 1) {
-			return <MoreLikeThisDetail />;
+			return <MoreLikeThisDetail key={2} />;
 		} else {
-			return <MoreDetails />;
+			return <MoreDetails key={3}/>;
 		}
 	},
 
@@ -51,7 +52,12 @@ var MainHeader = React.createClass({
 				<div className="bottom-grade"></div>
 				<div className="back-grade">
 					<div className="header-spacer header-left-arrow"/>
-					{ this.displayPane() }
+					<ReactCSS
+		        transitionName="fader"
+		        transitionEnterTimeout={500}
+		        transitionLeaveTimeout={300}>
+						{ this.displayPane() }
+					</ReactCSS>
 					{ this.createMenuButtons() }
 					<button className="header-right-arrow header-spacer"></button>
 				</div>

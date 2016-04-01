@@ -1,11 +1,12 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
+var ReactCSS = require('react-addons-css-transition-group');
 
 var OverviewDetail = React.createClass({
 
   render: function () {
 		return (
-			<div className="ad-display-container fade-in">
+			<div className="ad-display-container">
 				<h2 className="feature-title">The Title</h2>
 				<ul className="feature-info-bar group">
 					<li>&#x2605; &#x2605; &#x2605; &#x2605; &#x2605;</li>

@@ -9,11 +9,11 @@ module.exports = {
         AdActions.recieveAllUsers(users);
       },
 			error: function (err) {
-				console.log("ApiUtil#fetchAllUsers Error");
+				console.log("UserUtil#fetchAllUsers Error");
 			}
     });
   },
-	fetchCurrentUser: function (id) {
+	fetchUser: function (id) {
     $.ajax({
 			method: "GET",
       url: "/api/ads/" + id,
@@ -21,7 +21,22 @@ module.exports = {
         AdActions.recieveUser(user);
       },
 			error: function (err) {
-				console.log("ApiUtil#fetchUser Error");
+				console.log("UserUtil#fetchUser Error");
+			}
+    });
+  },
+  fetchCurrentUser: function (completion) {
+    $.ajax({
+			method: "GET",
+      url: "/api/session/",
+      success: function (user) {
+        UserActions.recieveUser(user);
+      },
+      complete: function () {
+        completion || completion();
+      },
+			error: function (err) {
+				console.log("UserUtil#fetchCurrentUser Error");
 			}
     });
   },
@@ -32,10 +47,10 @@ module.exports = {
       data: { user: user },
       success: function (userJson) {
         UserActions.registerNewUser(userJson);
-        redirectCallback();
+        redirectCallback || redirectCallback();
       },
 			error: function (err) {
-				console.log("ApiUtil#makeUser Error");
+				console.log("UserUtil#makeUser Error");
 			}
     });
   },
@@ -45,10 +60,10 @@ module.exports = {
       url: "/api/users" + user.id,
       success: function () {
         UserActions.removeUser(userID);
-        redirectCallback();
+        redirectCallback || redirectCallback();
       },
       error: function (err) {
-        console.log("ApiUtil#removeUser Error");
+        console.log("UserUtil#removeUser Error");
       }
     });
   },
@@ -59,10 +74,10 @@ module.exports = {
       data: { user: credentials },
       success: function (user) {
         UserActions.currentUserRecieved(user);
-        redirectCallback();
+        redirectCallback || redirectCallback();
       },
 			error: function (err) {
-				console.log("ApiUtil#signIn Error");
+				console.log("UserUtil#signIn Error");
 			}
     });
   },
@@ -72,10 +87,10 @@ module.exports = {
       url: "api/session",
       success: function () {
         UserActions.logout();
-        redirectCallback();
+        redirectCallback || redirectCallback();
       },
 			error: function (err) {
-				console.log("ApiUtil#logout Error");
+				console.log("UserUtil#logout Error");
 			}
     });
 	}

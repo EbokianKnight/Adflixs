@@ -4,7 +4,7 @@ var Advert = require('./ad_index_item');
 var Slider = require('react-slick');
 var AdDetailPane = require('./ad_detail_pane');
 var AdStore = require('../../stores/ad_store');
-
+var ReactCSS = require('react-addons-css-transition-group');
 var AdvertRow = React.createClass({
 
 	getInitialState: function() {
@@ -76,6 +76,7 @@ var AdvertRow = React.createClass({
 				<Slider {...settings}>
 					{ this.fetchAdverts() }
 				</Slider>
+
 				{ this.renderDetail() }
 			</div>
 		);

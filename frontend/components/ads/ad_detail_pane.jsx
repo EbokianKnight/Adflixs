@@ -4,6 +4,7 @@ var AdAction = require('../../actions/ad_actions');
 var OverviewDetail = require('./feature_panes/overview');
 var MoreDetails = require('./feature_panes/detail');
 var MoreLikeThisDetail = require('./feature_panes/more_like_this');
+var ReactCSS = require('react-addons-css-transition-group');
 
 var AdDetailPane = React.createClass({
 
@@ -38,11 +39,11 @@ var AdDetailPane = React.createClass({
 
 	displayPane: function () {
 		if (this.state.display === 0) {
-			return <OverviewDetail />;
+			return <OverviewDetail key={1}/>;
 		} else if (this.state.display === 1) {
-			return <MoreLikeThisDetail />;
+			return <MoreLikeThisDetail key={2}/>;
 		} else {
-			return <MoreDetails />;
+			return <MoreDetails key={3}/>;
 		}
 	},
 
@@ -56,7 +57,12 @@ var AdDetailPane = React.createClass({
 				<div className="ad-detail-pane">
 					<div className="back-grade">
 						<div className="header-spacer header-left-arrow"/>
-						{ this.displayPane() }
+						<ReactCSS
+							transitionName="fader"
+							transitionEnterTimeout={1000}
+							transitionLeaveTimeout={300}>
+							{ this.displayPane() }
+						</ReactCSS>
 						{ this.createMenuButtons() }
 						<div className="header-spacer header-right-arrow"/>
 						<button className="top-right-x" onClick={this.close_details}>X</button>

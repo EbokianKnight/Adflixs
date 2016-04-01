@@ -85,9 +85,6 @@
 	padding: 0 4%;
 	white-space: nowrap;
 	box-sizing: border-box;
-	// transition-property: opacity;
-	// transition-duration: 0.4s;
-	// transition-timing-function: cubic-bezier(0.665, 0.253, 0.265, 0.8);
 	background-image: linear-gradient(to bottom,rgba(0,0,0,.7) 10%,rgba(0,0,0,0));
 }
 
@@ -210,35 +207,20 @@
 	color: #ccc;
 }
 
-.fade-in {
-	-webkit-animation: fadein 1s;
-	animation: fadein 1s;
+.fader-enter {
+  opacity: 0.01;
 }
-
-@keyframes fadein {
-	from { opacity: 0; }
-	to { opacity: 1; }
+.fader-enter.fader-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
 }
-
-@-ms-keyframes fadein {
-	from { opacity: 0; }
-	to { opacity: 1; }
+.fader-leave {
+  opacity: 1;
 }
-
-// .fade-out {
-// 	-webkit-animation: fadeout 1s;
-// 	animation: fadeout 1s;
-// }
-//
-// @keyframes fadein {
-// 	from { opacity: 1; }
-// 	to { opacity: 0; }
-// }
-//
-// @-ms-keyframes fadein {
-// 	from { opacity: 1; }
-// 	to { opacity: 0; }
-// }
+.fader-leave.fader-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}
 
 .ad-display-nav {
 	position: absolute;

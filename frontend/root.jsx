@@ -5,7 +5,7 @@ var Router = require('react-router').Router;
 var Route = require('react-router').Route;
 var IndexRoute = require('react-router').IndexRoute;
 var browserHistory = require('react-router').browserHistory;
-SessionStore = require('./stores/session_store');
+var SessionStore = require('./stores/session_store');
 var UserUtil = require('./util/user_util');
 
 var App = require('./components/app');
