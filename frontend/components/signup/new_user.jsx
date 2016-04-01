@@ -3,6 +3,7 @@ var PropTypes = React.PropTypes;
 var UserUtil = require('../../util/user_util');
 
 var NewUser = React.createClass({
+  contextTypes: { router: PropTypes.object.isRequired },
 
   getInitialState: function() {
     return {
@@ -36,6 +37,8 @@ var NewUser = React.createClass({
     UserUtil.makeUser({
       email: e.currentTarget.email.value,
       password: e.currentTarget.password.value
+    }, function () { //redirectCallback
+      this.context.router.push("/ads");
     });
   },
 
