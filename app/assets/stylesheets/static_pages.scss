@@ -83,7 +83,7 @@
 	align-items: center;
 	padding: 0 4%;
 	white-space: nowrap;
-	border: 1px solid red;
+	// border: 1px solid red;
 	box-sizing: border-box;
 	background-image: linear-gradient(to bottom,rgba(0,0,0,.7) 10%,rgba(0,0,0,0));
 }
@@ -92,7 +92,7 @@
 	display: block;
 	float: right;
 	padding: 10px;
-	border: 1px solid red;
+	// border: 1px solid red;
 	margin: 10px 0px 10px 30px;
 }
 
@@ -100,7 +100,6 @@
 	display: block;
 	float: right;
 	padding: 10px;
-	border: 1px solid red;
 	margin: 10px 0px 10px 30px;
 	width: 150px;
 	padding: 0;
@@ -109,7 +108,6 @@
 .nav-profile-dropdown {
 	display: block;
 	float: right;
-	border: 1px solid red;
 	height: 250px;
 	width: 150px;
 	position: fixed;
@@ -121,16 +119,17 @@
 .nav-menu-fill {
 	position: relative;
 	display: block;
+	border: 1px solid #333;
 	width: 150px;
 	height: 185px;
-	background: #111;
+	// background: #111;
+	background-color:rgba(0, 0, 0, 0.5);
 }
 
 .sixty-pix {
 	display: block;
 	height: 60px;
 	width: 150px;
-	border: 1px solid red;
 	position: relative;
 }
 
@@ -169,6 +168,20 @@
 	font-weight: bold;
 	color: #999;
 	margin: 10px 5px;
+}
+
+.nav-profile-item {
+	width: 150px;
+	height: 40px;
+	float: left;
+	color: #ccc;
+	padding: 10px;
+	font-size: 14px;
+	text-align: center;
+}
+
+.nav-profile-item:hover {
+	background: #333;
 }
 
 .nav-logo {
@@ -281,7 +294,7 @@
 	position: absolute;
 	top: 20px;
 	right: 25px;
-	border: 1px solid red;
+	// border: 1px solid red;
 	padding: 5px;
 	font-weight: bold;
 }
@@ -289,7 +302,7 @@
 .ad-display-container {
 	width: 450px;
 	height: 450px;
-	border: 1px solid red;
+	// border: 1px solid red;
 	position: absolute;
 	top: 50px;
 	left: 50px;
@@ -349,7 +362,7 @@
 }
 
 .header-spacer {
-	border: 1px solid red;
+	// border: 1px solid red;
 	width: 50px;
 	height: 500px;
 	position: absolute;
@@ -368,7 +381,7 @@
 	width: 550px;
 	box-sizing: border-box;
 	height: 330px;
-	border: 1px solid red;
+	// border: 1px solid red;
 	position: absolute;
 	top: 170px;
 	left: 50px;
@@ -382,23 +395,23 @@
 	font-size: 48px;
 	font-weight: bold;
 	width: 100%;
-	border: 1px solid red;
+	// border: 1px solid red;
 }
 
 .feature-info-bar > li {
-	border: 1px solid red;
+	// border: 1px solid red;
 	display: block;
 	float: left;
 	padding: 5px;
 }
 
 .feature-description {
-	border: 1px solid red;
+	// border: 1px solid red;
 	box-sizing: border-box;
 }
 
 .more-features {
-	border: 1px solid red;
+	// border: 1px solid red;
 	padding: 5px;
 	box-sizing: border-box;
 	position: relative;
