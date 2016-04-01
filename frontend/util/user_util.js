@@ -25,51 +25,52 @@ module.exports = {
 			}
     });
   },
-  makeUser: function (user, callback) {
+  makeUser: function (user, redirectCallback) {
     $.ajax({
 			method: "POST",
       url: "/api/users",
       data: { user: user },
       success: function (userJson) {
         UserActions.registerNewUser(userJson);
-        //callback to redirect
+        redirectCallback();
       },
 			error: function (err) {
 				console.log("ApiUtil#makeUser Error");
 			}
     });
   },
-  removeUser: function (userID, callback) {
+  removeUser: function (userID, redirectCallback) {
     $.ajax({
       method: "POST",
       url: "/api/users" + user.id,
       success: function () {
         UserActions.removeUser(userID);
-        callback();
+        redirectCallback();
       },
       error: function (err) {
         console.log("ApiUtil#makeUser Error");
       }
     });
   },
-  logIn: function (callback) {
+  logIn: function (credentials, redirectCallback) {
     $.ajax({
 			method: "POST",
       url: "/api/session",
+      daat: { credentials: credentials },
       success: function (userJson) {
-        //callback to redirect
+        redirectCallback();
       },
 			error: function (err) {
 				console.log("ApiUtil#logIn Error");
 			}
     });
   },
-	logout: function (callback) {
+	logout: function (redirectCallback) {
 		$.ajax({
 			method: "DELETE",
       url: "api/session",
       success: function () {
-        callback();
+        redirectCallback();
       },
 			error: function (err) {
 				console.log("ApiUtil#fetchGenres Error");
