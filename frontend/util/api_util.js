@@ -50,11 +50,12 @@ module.exports = {
 			}
     });
   },
-  removeUser: function (callback) {
+  removeUser: function (userID, callback) {
     $.ajax({
       method: "POST",
-      url: "api/users",
+      url: "api/users" + user.id,
       success: function () {
+        UserActions.removeUser(userID);
         callback();
       },
       error: function (err) {
