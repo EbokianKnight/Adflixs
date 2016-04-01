@@ -6,6 +6,7 @@ var Route = require('react-router').Route;
 var IndexRoute = require('react-router').IndexRoute;
 var browserHistory = require('react-router').browserHistory;
 var SessionStore = require('./stores/session_store');
+var UserUtil = require('./util/user_util');
 
 var App = require('./components/app');
 var HomePage = require('./components/homepage');
@@ -19,10 +20,10 @@ var routes = (
   <Route path="/" component={App}>
     <IndexRoute component={HomePage}/>
     <Route path="users/new" component={NewUser} />
-    <Route path="users/signin" component={SignIn} />
+    <Route path="signin" component={SignIn} />
 
-		<Route path="ads" component={MainIndex} onEnter={_requireLoggedIn}/>
-		<Route path="test" component={Test} onEnter={_requireLoggedIn}/>
+		<Route path="ads" component={MainIndex} />
+		<Route path="test" component={Test} />
     <Route path="*" component={NotFound}/>
   </Route>
 );
@@ -35,13 +36,14 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function _redirectUnlessLogin(replace, callback) {
-  if (!SessionStore.isLoggedIn()) { replace("/login"); }
+  if (!SessionStore.isLoggedIn()) { replace("/signin"); }
   callback();
 }
 
 function _requireLoggedIn(nextState, replace, asyncCallback) {
   if (!SessionStore.currentUserHasBeenFetched()) {
-    UserApi.fetchCurrentUser(_redirectUnlessLogin(replace, asyncCallback));
+    debugger;
+    UserUtil.fetchCurrentUser(_redirectUnlessLogin(replace, asyncCallback));
   } else {
     _redirectUnlessLogin(replace, asyncCallback);
   }

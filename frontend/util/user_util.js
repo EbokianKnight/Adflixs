@@ -1,7 +1,7 @@
 var UserActions = require('./../actions/user_actions');
 
 module.exports = {
-  fetchUsers: function () {
+  fetchAllUsers: function () {
     $.ajax({
 			method: "GET",
       url: "/api/ads",
@@ -9,11 +9,11 @@ module.exports = {
         AdActions.recieveAllUsers(users);
       },
 			error: function (err) {
-				console.log("ApiUtil#fetchUsers Error");
+				console.log("ApiUtil#fetchAllUsers Error");
 			}
     });
   },
-	fetchUser: function (id) {
+	fetchCurrentUser: function (id) {
     $.ajax({
 			method: "GET",
       url: "/api/ads/" + id,
@@ -48,7 +48,7 @@ module.exports = {
         redirectCallback();
       },
       error: function (err) {
-        console.log("ApiUtil#makeUser Error");
+        console.log("ApiUtil#removeUser Error");
       }
     });
   },
@@ -56,13 +56,13 @@ module.exports = {
     $.ajax({
 			method: "POST",
       url: "/api/session",
-      daat: { credentials: credentials },
+      data: { user: credentials },
       success: function (userJson) {
         UserActions.currentUserRecieved(userJson);
         redirectCallback();
       },
 			error: function (err) {
-				console.log("ApiUtil#logIn Error");
+				console.log("ApiUtil#signIn Error");
 			}
     });
   },
@@ -75,7 +75,7 @@ module.exports = {
         redirectCallback();
       },
 			error: function (err) {
-				console.log("ApiUtil#fetchGenres Error");
+				console.log("ApiUtil#logout Error");
 			}
     });
 	}

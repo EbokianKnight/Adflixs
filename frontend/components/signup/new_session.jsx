@@ -34,7 +34,7 @@ var NewSession = React.createClass({
 
   createNewSessionForm: function () {
     return (
-      <form  className="sign-in-pane" onSubmit={this.makeUser}>
+      <form  className="sign-in-pane" onSubmit={this.signIn}>
         <h1>Sign In</h1>
 
         <label>Email
@@ -51,7 +51,7 @@ var NewSession = React.createClass({
         </label>
         <br/><br/>
 
-        <button className="sign-in-button sign-in-adflix">Sign In</button>
+        <input type="submit" className="sign-in-button sign-in-adflix" value="Sign In"/>
         <svg className="sign-in-button sign-in-facebook"/>
         <svg className="sign-in-button sign-in-google"/>
       </form>
