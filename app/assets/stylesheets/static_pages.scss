@@ -21,11 +21,6 @@
 	background-repeat: no-repeat;
 }
 
-.logo-small {
-	height: 35px;
-	width: 120px;
-}
-
 .cta-wrapper {
 	margin: 200px 30px;
 }
@@ -66,6 +61,11 @@
 	padding: 10px 20px;
 }
 
+.main-nav-background {
+	display: block;
+	height: 60px;
+}
+
 .main-index-header {
 	display: block;
 	position: relative;
@@ -81,11 +81,100 @@
 	z-index: 100;
 	min-height: 40px;
 	align-items: center;
-	display: flex;
 	padding: 0 4%;
 	white-space: nowrap;
+	border: 1px solid red;
 	box-sizing: border-box;
 	background-image: linear-gradient(to bottom,rgba(0,0,0,.7) 10%,rgba(0,0,0,0));
+}
+
+.nav-search {
+	display: block;
+	float: right;
+	padding: 10px;
+	border: 1px solid red;
+	margin: 10px 0px 10px 30px;
+}
+
+.nav-profile-menu {
+	display: block;
+	float: right;
+	padding: 10px;
+	border: 1px solid red;
+	margin: 10px 0px 10px 30px;
+	width: 150px;
+	padding: 0;
+}
+
+.nav-profile-dropdown {
+	display: block;
+	float: right;
+	border: 1px solid red;
+	height: 250px;
+	width: 150px;
+	position: fixed;
+	top: 0px;
+	right: 50px;
+
+}
+
+.nav-menu-fill {
+	position: relative;
+	display: block;
+	width: 150px;
+	height: 185px;
+	background: #111;
+}
+
+.sixty-pix {
+	display: block;
+	height: 60px;
+	width: 150px;
+	border: 1px solid red;
+	position: relative;
+}
+
+.nav-white-bar {
+	display: block;
+	height: 2px;
+	width: 100%;
+	background: #999;
+}
+
+.nav-white-arrow {
+	position: relative;
+	display: block;
+	margin:auto;
+	top: 50px;
+	width: 1px;
+	height: 1px;
+	border-bottom: 8px solid #999;
+	border-left: 8px solid transparent;
+	border-right: 8px solid transparent;
+}
+
+.nav-profile-thumb {
+	background-image: asset-url('signin/profile.png');
+	width: 30px;
+	height: 30px;
+	margin: 4px;
+	display: block;
+	float:left;
+}
+
+.nav-user {
+	display: block;
+	float: left;
+	font-size: 12;
+	font-weight: bold;
+	color: #999;
+	margin: 10px 5px;
+}
+
+.nav-logo {
+	float: left;
+	height: 35px;
+	width: 120px;
 }
 
 .main-index-body {

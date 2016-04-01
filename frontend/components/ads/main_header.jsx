@@ -48,6 +48,8 @@ var MainHeader = React.createClass({
 
 	render: function() {
 		return (
+			<div>
+			<spacer className="main-nav-background"></spacer>
 			<div className="main-index-header">
 				<div className="bottom-grade"></div>
 				<div className="back-grade">
@@ -61,6 +63,7 @@ var MainHeader = React.createClass({
 					{ this.createMenuButtons() }
 					<button className="header-right-arrow header-spacer"></button>
 				</div>
+			</div>
 			</div>
 		);
 	}

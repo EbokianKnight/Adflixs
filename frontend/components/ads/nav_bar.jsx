@@ -1,6 +1,8 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
-var ApiUtil = require('../../util/api_util');
+var UserUtil = require('../../util/user_util');
+var ProfileDropDown = require('./nav-panes/profile_dropdown');
+var SearchComponent = require('./nav-panes/search_bar');
 
 var NavBar = React.createClass({
 
@@ -14,8 +16,10 @@ var NavBar = React.createClass({
 
 	render: function() {
 		return (
-			<nav className="nav-bar">
-				<svg className="logo logo-small"></svg>
+			<nav className="nav-bar group">
+				<svg className="logo nav-logo"></svg>
+				<ProfileDropDown />
+				<SearchComponent />
 			</nav>
 		);
 	}
