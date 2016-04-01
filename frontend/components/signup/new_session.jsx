@@ -66,4 +66,4 @@ var NewSession = React.createClass({
 
 });
 
-module.exports = NewUser;
+module.exports = NewSession;
