@@ -25,4 +25,7 @@ node_modules
 # Ignore bundle
 bundle.js
 bundle.js.map
+
+# Ignore Buybug and DSStore
 .DS_Store
+.bugbuy_history
