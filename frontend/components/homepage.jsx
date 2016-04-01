@@ -2,18 +2,34 @@ var React = require('react');
 var PropTypes = React.PropTypes;
 
 var HomePage = React.createClass({
+	contextTypes: { router: PropTypes.object.isRequired },
+
+	goToSignUp: function () {
+		this.context.router.push("/users/new");
+	},
+
+	goToSignIn: function () {
+		this.context.router.push("/signin");
+	},
+
 	generateHomeHeader: function () {
 		return (
-			<div className="homepage-header" >
-				<div className="logo"/>
-				<div className="cta-wrapper">
-					<div className="cta-text">
-						<h1 className="cta-pitch">See what's next.</h1>
-						<p className="cta-pricing">WATCH ANYWHERE. CANCEL ANYTIME.</p>
+			<div>
+				<header className="homepage-header" >
+					<src className="logo"/>
+					<div className="cta-wrapper">
+						<content className="cta-text">
+							<h1 className="cta-pitch">See what's next.</h1>
+							<p className="cta-pricing">WATCH ANYWHERE. CANCEL ANYTIME.</p>
+						</content>
+						<button className="cta-sign-up"
+							onClick={this.goToSignUp}>JOIN FREE FOR ONE MONTH
+						</button>
 					</div>
-					<a href="/users/new">JOIN FREE FOR ONE MONTH</a>
-				</div>
-				<a href="/session/new" className="sign-in">Sign In</a>
+					<button className="cta-sign-in"
+						onClick={this.goToSignUp}>Sign In
+					</button>
+				</header>
 			</div>
 		);
 	},

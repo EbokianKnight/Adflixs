@@ -22,7 +22,7 @@ var routes = (
     <Route path="users/new" component={NewUser} />
     <Route path="signin" component={SignIn} />
 
-		<Route path="ads" component={MainIndex} onEnter={this._requireLoggedIn}/>
+		<Route path="ads" component={MainIndex} onEnter={_requireLoggedIn}/>
 		<Route path="test" component={Test} />
     <Route path="*" component={NotFound}/>
   </Route>
