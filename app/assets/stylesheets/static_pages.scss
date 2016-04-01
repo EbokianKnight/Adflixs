@@ -221,9 +221,14 @@
 
 .ad-display-nav > button {
 	float: left;
-	color: #fff;
-	border: 1px solid red;
+	color: #ccc;
+	text-transform: uppercase;
+	font-size: 14px;
 	padding: 5px 25px;
+}
+
+.ad-display-nav > button:hover {
+	color: white;
 }
 
 .slick-dots {
