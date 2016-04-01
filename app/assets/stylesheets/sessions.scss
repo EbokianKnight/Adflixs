@@ -12,14 +12,17 @@
 }
 
 .sign-in-pane {
-	width: 460px;
+	width: 400px;
 	background: #eee;
 	margin: 0 auto;
+	padding: 20px;
 }
 
 .sign-in-pane h1 {
 	font-size: 36px;
-	padding: 20px 40px 0;
+	display: block;
+	padding-bottom: 20px;
+	text-transform: uppercase;
 }
 
 .sign-in-form {
@@ -37,16 +40,20 @@
 
 .sign-in-input {
 	width: 380px;
-	height: 30px;
 	display: block;
 	background: white;
 	padding: 10px;
-	margin: 0 0 10px 0;
 }
 
 .sign-in-forgot {
 	text-align: right;
 	color: blue;
+}
+
+.flash-message {
+	color: red;
+	font-size: 14px;
+	font-weight: bold;
 }
 
 .sign-in-button {

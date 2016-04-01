@@ -1,10 +1,10 @@
-var UserActions = require('../actions/user_actions');
+var UserActions = require('./../actions/user_actions');
 
 module.exports = {
   fetchUsers: function () {
     $.ajax({
 			method: "GET",
-      url: "api/ads",
+      url: "/api/ads",
       success: function (users) {
         AdActions.recieveAllUsers(users);
       },
@@ -16,7 +16,7 @@ module.exports = {
 	fetchUser: function (id) {
     $.ajax({
 			method: "GET",
-      url: "api/ads/" + id,
+      url: "/api/ads/" + id,
       success: function (user) {
         AdActions.recieveUser(user);
       },
@@ -28,7 +28,8 @@ module.exports = {
   makeUser: function (user, callback) {
     $.ajax({
 			method: "POST",
-      url: "api/users",
+      url: "/api/users",
+      data: { user: user },
       success: function (userJson) {
         UserActions.registerNewUser(userJson);
         //callback to redirect
@@ -41,7 +42,7 @@ module.exports = {
   removeUser: function (userID, callback) {
     $.ajax({
       method: "POST",
-      url: "api/users" + user.id,
+      url: "/api/users" + user.id,
       success: function () {
         UserActions.removeUser(userID);
         callback();
@@ -54,7 +55,7 @@ module.exports = {
   logIn: function (callback) {
     $.ajax({
 			method: "POST",
-      url: "api/session",
+      url: "/api/session",
       success: function (userJson) {
         //callback to redirect
       },
@@ -66,7 +67,7 @@ module.exports = {
 	logout: function (callback) {
 		$.ajax({
 			method: "DELETE",
-      url: "session",
+      url: "api/session",
       success: function () {
         callback();
       },

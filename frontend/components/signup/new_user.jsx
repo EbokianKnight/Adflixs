@@ -34,8 +34,8 @@ var NewUser = React.createClass({
       this.setState({ flashMessage: false });
     }
     UserUtil.makeUser({
-      email: e.target.email.value(),
-      password: e.target.password.value()
+      email: e.currentTarget.email.value,
+      password: e.currentTarget.password.value
     });
   },
 
@@ -51,21 +51,32 @@ var NewUser = React.createClass({
 
   createNewUserForm: function () {
     return (
-      <form onSubmit={this.makeUser}>
-        <label for="email"/>Email
-        <input id="email" type="text" name="email"
+      <form  className="sign-in-pane" onSubmit={this.makeUser}>
+        <h1>Register New User</h1>
+
+        <label>Email
+        <input className="sign-in-input" type="text" name="email"
           onChange={this.setEmail}
-          value={this.state.email}/><br/><br/>
-        <label for="password"/>Password
-        <input id="password" type="text" name="password"
+          value={this.state.email}/>
+        </label>
+        <br/><br/>
+
+        <label>Password
+        <input className="sign-in-input" type="password" name="password"
           onChange={this.setPassword}
-          value={this.state.password}/><br/><br/>
-        <label for="confirmation"/>Confirmation
-        <input id="confirmation" type="text" name="confirmation"
+          value={this.state.password}/>
+        </label>
+        <br/><br/>
+
+        <label>Confirmation
+        <input className="sign-in-input" type="password" name="confirmation"
           onChange={this.setConfirmation}
-          value={this.state.confirmation}/><br/><br/>
+          value={this.state.confirmation}/>
+        </label>
+        <br/><br/>
+
         { this.createFlashedMessage() }
-        <button value="Signup" />
+        <button className="sign-in-button">SignUp</button>
       </form>
     );
   },
