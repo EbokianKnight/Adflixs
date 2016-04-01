@@ -5,7 +5,7 @@ var OverviewDetail = React.createClass({
 
   render: function () {
 		return (
-			<div className="ad-display-container">
+			<div className="ad-display-container fade-in">
 				<h2 className="feature-title">The Title</h2>
 				<ul className="feature-info-bar group">
 					<li>&#x2605; &#x2605; &#x2605; &#x2605; &#x2605;</li>
