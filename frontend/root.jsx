@@ -45,7 +45,7 @@ function _redirectUnlessLogin(replace, callback) {
 function _requireLoggedIn(nextState, replace, asyncCallback) {
   if (!SessionStore.isLoggedIn()) {
     UserUtil.fetchCurrentUser(
-      _redirectUnlessLogin.bind(this, replace, asyncCallback())
+      _redirectUnlessLogin.bind(this, replace, asyncCallback)
     );
   } else {
     _redirectUnlessLogin(replace, asyncCallback);
