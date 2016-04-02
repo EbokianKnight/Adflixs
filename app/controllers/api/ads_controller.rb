@@ -31,6 +31,6 @@ class Api::AdsController < ApplicationController
 	end
 
 	def ad_params
-		params.require(:ad).permit(:company, :product, :description, :year)
+		params.require(:ad).permit(:title, :company, :product, :description, :year, genre_ids: [])
 	end
 end
