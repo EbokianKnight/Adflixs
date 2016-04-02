@@ -1,6 +1,7 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
 var UserUtil = require('../../util/user_util');
+var SessionStore = require('../../stores/session_store');
 
 var NewSession = React.createClass({
   contextTypes: { router: PropTypes.object.isRequired },
@@ -9,7 +10,27 @@ var NewSession = React.createClass({
     return {
       email: "",
       password: "",
+      message: null
     };
+  },
+
+  componentDidMount: function() {
+    this.sessionToken = SessionStore.addListener(this.flashMessage);
+  },
+
+  componentWillUnmount: function() {
+    this.sessionToken.remove();
+  },
+
+  flashMessage: function () {
+    this.setState({ message: SessionStore.flashMessage() });
+  },
+
+  renderFlash: function () {
+    if (!this.state.message) return "";
+    return (
+      <div className="flash-message">{ this.state.message }</div>
+    );
   },
 
   setEmail: function (e) {
@@ -37,6 +58,7 @@ var NewSession = React.createClass({
       <form  className="sign-in-pane" onSubmit={this.signIn}>
         <h1>Sign In</h1>
 
+        { this.renderFlash() }
         <label>Email
         <input className="sign-in-input" type="text" name="email"
           onChange={this.setEmail}
@@ -50,7 +72,6 @@ var NewSession = React.createClass({
           value={this.state.password}/>
         </label>
         <br/><br/>
-
         <input type="submit" className="sign-in-button sign-in-adflix" value="Sign In"/>
         <svg className="sign-in-button sign-in-facebook"/>
         <svg className="sign-in-button sign-in-google"/>

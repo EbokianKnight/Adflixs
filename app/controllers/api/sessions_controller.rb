@@ -1,12 +1,12 @@
 class Api::SessionsController < ApplicationController
 	# Log in
 	def show
+		@user = current_user
 		if signed_in?
-			@user = current_user
-      render :create
+      render :show
     else
       render json: { message: "Not logged in" }, status: 401
-    end
+  	end
 	end
 
 	def create
@@ -16,9 +16,9 @@ class Api::SessionsController < ApplicationController
 		)
 		if @user
 			sign_in(@user)
-      render :create
+      render :show
 		else
-      render json: { message: "Invalid credentials" }, status: 401
+      render json: { message: "Invalid email or password" }, status: 401
 		end
 	end
 

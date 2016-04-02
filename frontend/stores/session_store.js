@@ -6,6 +6,7 @@ var SessionStore = new Store(AppDispatcher);
 
 var _currentUser;
 var _isLoggedIn = false;
+var _flashedMessage = null;
 
 SessionStore.currentUser = function () {
   return _currentUser;
@@ -15,14 +16,38 @@ SessionStore.isLoggedIn = function () {
   return _isLoggedIn;
 };
 
+var makeSession = function (payload) {
+  _currentUser = payload.currentUser;
+  _isLoggedIn = true;
+  if (payload.callback) { payload.callback(); }
+};
+
+var destroySession = function (payload) {
+  _currentUser = null;
+  _isLoggedIn = false;
+  if (payload.callback) { payload.callback(); }
+};
+
+var flashMessage = function (message) {
+  _flashedMessage = message;
+};
+
+SessionStore.flashMessage = function () {
+  var message = _flashedMessage;
+  _flashedMessage = null;
+  return message;
+};
+
 SessionStore.__onDispatch = function (payload) {
   switch (payload.actionType) {
     case SessionConstants.RECIEVE_USER:
-      _currentUser = payload.currentUser;
-      _currentUserHasBeenFetched = true;
+      makeSession(payload);
       break;
     case SessionConstants.LOGOUT:
-      _currentUser = null;
+      destroySession(payload);
+      break;
+    case SessionConstants.FLASH:
+      flashMessage(payload.message);
       SessionStore.__emitChange();
       break;
   }

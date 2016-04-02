@@ -1,29 +1,37 @@
-var Dispatcher = require('../dispatcher/dispatcher');
+var AppDispatcher = require('../dispatcher/dispatcher');
 var UserConstants = require('../constants/user_constants');
 var SessionConstants = require('../constants/session_constants');
 
 module.exports = {
   registerNewUser: function (user) {
-    Dispatcher.dispatch({
+    AppDispatcher.dispatch({
       actionType: UserConstants.REGISTER_USER,
       user: user
     });
   },
   removeUser: function (userID) {
-    Dispatcher.dispatch({
+    AppDispatcher.dispatch({
       actionType: UserConstants.REMOVE_USER,
       userID: userID
     });
   },
-  recieveUser: function (currentUser) {
-    Dispatcher.dispatch({
+  receiveCurrentUser: function ( currentUser, callback ) {
+    AppDispatcher.dispatch({
       actionType: SessionConstants.RECIEVE_USER,
-      currentUser: currentUser
+      currentUser: currentUser,
+      callback: callback
     });
   },
-  logout: function () {
-    Dispatcher.dispatch({
+  logout: function (callback) {
+    AppDispatcher.dispatch({
       actionType: SessionConstants.LOGOUT,
+      callback: callback
+    });
+  },
+  flashMessage: function (message) {
+    AppDispatcher.dispatch({
+      actionType: SessionConstants.FLASH,
+      message: message,
     });
   }
 };

@@ -1,39 +1,15 @@
 var UserActions = require('./../actions/user_actions');
 
 module.exports = {
-  fetchAllUsers: function () {
-    $.ajax({
-			method: "GET",
-      url: "/api/ads",
-      success: function (users) {
-        AdActions.recieveAllUsers(users);
-      },
-			error: function (err) {
-				console.log("UserUtil#fetchAllUsers Error");
-			}
-    });
-  },
-	fetchUser: function (id) {
-    $.ajax({
-			method: "GET",
-      url: "/api/ads/" + id,
-      success: function (user) {
-        AdActions.recieveUser(user);
-      },
-			error: function (err) {
-				console.log("UserUtil#fetchUser Error");
-			}
-    });
-  },
   fetchCurrentUser: function (completion) {
     $.ajax({
 			method: "GET",
       url: "/api/session/",
       success: function (user) {
-        UserActions.recieveUser(user);
+        UserActions.receiveCurrentUser(user);
       },
       complete: function () {
-        completion();
+        if (completion) { completion(); }
       },
 			error: function (err) {
 				console.log("UserUtil#fetchCurrentUser Error");
@@ -47,10 +23,10 @@ module.exports = {
       data: { user: user },
       success: function (userJson) {
         UserActions.registerNewUser(userJson);
-        redirectCallback();
+        if (redirectCallback) { redirectCallback(); }
       },
 			error: function (err) {
-				console.log("UserUtil#makeUser Error");
+        console.log('UserUtil#makeUser Error');
 			}
     });
   },
@@ -60,7 +36,7 @@ module.exports = {
       url: "/api/users" + user.id,
       success: function () {
         UserActions.removeUser(userID);
-        redirectCallback();
+        if (redirectCallback) { redirectCallback(); }
       },
       error: function (err) {
         console.log("UserUtil#removeUser Error");
@@ -73,11 +49,11 @@ module.exports = {
       url: "/api/session",
       data: { user: credentials },
       success: function (user) {
-        UserActions.recieveUser(user);
-        redirectCallback();
+        UserActions.receiveCurrentUser(user, redirectCallback);
       },
 			error: function (err) {
 				console.log("UserUtil#signIn Error");
+        UserActions.flashMessage(err.responseJSON.message);
 			}
     });
   },
@@ -86,8 +62,7 @@ module.exports = {
 			method: "DELETE",
       url: "api/session",
       success: function () {
-        UserActions.logout();
-        redirectCallback();
+        UserActions.logout(redirectCallback);
       },
 			error: function (err) {
 				console.log("UserUtil#logout Error");
