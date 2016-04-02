@@ -5,19 +5,16 @@ var ProfileDropDown = require('./nav-panes/profile_dropdown');
 var SearchComponent = require('./nav-panes/search_bar');
 
 var NavBar = React.createClass({
+	contextTypes: { router: PropTypes.object.isRequired },
 
-	// logout: function (e) {
-	// 	ApiUtil.logout(this.redirect);
-	// },
-	//
-	// redirect: function () {
-	// 	context.history.push("/");
-	// },
+	goToAds: function () {
+		this.context.router.push("/ads");
+	},
 
 	render: function() {
 		return (
 			<nav className="nav-bar group">
-				<svg className="logo nav-logo"></svg>
+				<svg className="logo nav-logo" onClick={this.goToAds}></svg>
 				<ProfileDropDown />
 				<SearchComponent />
 			</nav>

@@ -21,7 +21,7 @@ var ProfileDropDown = React.createClass({
     this.setState({ show: false });
   },
 
-  goToLogout: function (e) {
+  logOut: function (e) {
     UserUtil.logout(this.redirectToHome);
   },
 
@@ -46,7 +46,7 @@ var ProfileDropDown = React.createClass({
             <button className="nav-profile-item"
               onClick={this.goToAccount}>Your Account</button>
             <button className="nav-profile-item"
-              onClick={this.goToLogout}>Logout of Adflix</button>
+              onClick={this.logOut}>Logout of Adflix</button>
           </spacer>
         </div>
       );
