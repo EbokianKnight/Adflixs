@@ -113,7 +113,6 @@
 	position: fixed;
 	top: 0px;
 	right: 50px;
-
 }
 
 .nav-menu-fill {
@@ -122,8 +121,8 @@
 	border: 1px solid #333;
 	width: 150px;
 	height: 185px;
-	// background: #111;
-	background-color:rgba(0, 0, 0, 0.5);
+	background: #111;
+	// background-color:rgba(0, 0, 0, 0.5);
 }
 
 .sixty-pix {
@@ -137,17 +136,17 @@
 	display: block;
 	height: 2px;
 	width: 100%;
-	background: #999;
+	background: #f3f3f3;
 }
 
 .nav-white-arrow {
 	position: relative;
 	display: block;
 	margin:auto;
-	top: 50px;
+	top: 52px;
 	width: 1px;
 	height: 1px;
-	border-bottom: 8px solid #999;
+	border-bottom: 8px solid #f3f3f3;
 	border-left: 8px solid transparent;
 	border-right: 8px solid transparent;
 }
@@ -166,7 +165,7 @@
 	float: left;
 	font-size: 12;
 	font-weight: bold;
-	color: #999;
+	color: #f3f3f3;
 	margin: 10px 5px;
 }
 
@@ -304,7 +303,7 @@
 	height: 450px;
 	// border: 1px solid red;
 	position: absolute;
-	top: 50px;
+	top: 70px;
 	left: 50px;
 	color: #ccc;
 }
@@ -340,8 +339,8 @@
 }
 
 .ad-display-nav > button:hover {
-	color: white;
-	text-shadow: 0 0 1px white;
+	color: #f3f3f3;
+	text-shadow: 0 0 1px #f3f3f3;
 }
 
 
@@ -389,12 +388,15 @@
 }
 
 .feature-title {
-	position: relative;
+	position: absolute;
+	top: 15px;
+	left: 50px;
 	display: block;
 	box-sizing: border-box;
 	font-size: 48px;
 	font-weight: bold;
 	width: 100%;
+	// margin: 0 0 0 50px;
 	// border: 1px solid red;
 }
 

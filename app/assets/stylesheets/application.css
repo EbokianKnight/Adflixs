@@ -14,7 +14,7 @@
  *= require_self
  */
 
-html body, header nav, a, h1, h2, h3, h4, h5, h6,
+body, header nav, a, h1, h2, h3, h4, h5, h6,
 li, ul, ol, div, span, strong, main, section,
 img, div, p, form, fieldset, label, input, textarea,
 button, article, footer, small {
@@ -38,9 +38,9 @@ button, article, footer, small {
 	clear: both;
 }
 
-.body {
+body {
 	font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif";
-	font-size: 16px;
+	font-size: 14px;
 	color: #ccc;
-	background: #B9090B;
+	background: #f3f3f3;
 }

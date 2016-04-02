@@ -46,6 +46,13 @@
 	color: red;
 	font-size: 14px;
 	font-weight: bold;
+	animation: fadein 500ms;
+	position: relative;
+}
+
+@keyframes fadein {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 .sign-in-button {
