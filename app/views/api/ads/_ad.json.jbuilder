@@ -1,4 +1,4 @@
-json.extract!( ad, :description, :product, :company, :year, :id )
+json.extract!( ad, :title, :youtube, :description, :product, :company, :year, :id )
 
 if show_genres
   json.genres do
