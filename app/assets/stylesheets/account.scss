@@ -1,0 +1,101 @@
+// Place all the styles related to the Users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.account-main {
+  width: 80%;
+  display: block;
+  margin: 0 auto;
+  color: #333;
+}
+
+.account-main h1 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.account-spacer {
+  display: block;
+  height: 80px;
+}
+
+.black-nav {
+  position: fixed;
+	top: 0;
+  z-index: 90px;
+	width: 100%;
+  height: 60px;
+  background: black;
+}
+
+.account-footer {
+  width: 100%;
+  height: 200px;
+	color: #333;
+	background: #f3f3f3;
+}
+
+.account-pane {
+  position: relative;
+  border-top: 1px solid #ccc;
+  margin-bottom: 10px;
+}
+
+.account-section-heading {
+  text-transform: uppercase;
+  font-size: 18px;
+  width: 20%;
+  height: 80px;
+  margin: 15px 0 20px 0;
+  display: block;
+  float: left;
+  color: #999;
+  font-weight: 400;
+}
+
+.account-item-left, .account-item-right {
+  display: block;
+}
+
+.account-item-left {
+  float:left;
+  margin-left: 10px;
+}
+
+.account-item-right {
+  float:right;
+  margin-right: 10px;
+}
+
+.account-pane > strong {
+  float: left;
+  display: block;
+  display: block;
+  margin: auto;
+  float: left;
+}
+
+.account-section-row {
+  display: block;
+  float: right;
+  width: 78%;
+  height: 20px;
+  margin-top: 10px;
+}
+
+.account-aside-button {
+  position: relative;
+  margin: auto;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: #111;
+  float: left;
+  padding: 10px;
+  background: #e6e6e6;
+  box-shadow: 1px 2px 1px #999;
+}
+
+.account-aside-button:hover {
+  background: #eee;
+}
