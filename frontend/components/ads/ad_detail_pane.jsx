@@ -57,6 +57,7 @@ var AdDetailPane = React.createClass({
 				<div className="ad-detail-pane-box ad-detail-pane">
 					<div className="back-grade">
 						<div className="header-spacer header-left-arrow"/>
+						<h2 className="feature-title">The Title</h2>
 						<ReactCSS
 							transitionName="fader"
 							transitionEnterTimeout={1000}
