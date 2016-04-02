@@ -19,8 +19,19 @@ var AccountIndex = React.createClass({
     this.setState({ show: "password" });
   },
 
+  newAdvert: function () {
+    this.setState({ show: "advert" });
+  },
+
   close: function () {
     this.setState({ show: "" });
+  },
+
+  showAdvertForm: function () {
+    if (this.state.show === "advert") {
+      return <AdSubmission close={this.close}/>;
+    }
+    return "";
   },
 
   sendPasswordChange: function (e) {
@@ -130,6 +141,11 @@ var AccountIndex = React.createClass({
           <button onClick={this.editPassword} className="account-item-right">
             Change Password</button>
         </section>
+        <section className="account-section-row group">
+          <p className="account-item-left">Admin Commands</p>
+          <button onClick={this.newAdvert} className="account-item-right">
+            Add New Advert</button>
+        </section>
       </div>
     );
   },
@@ -164,9 +180,9 @@ var AccountIndex = React.createClass({
           { this.renderMembership() }
             { this.showEmailEdit() }
             { this.showPasswordEdit() }
+            { this.showAdvertForm() }
           { this.renderPlanDetails() }
           { this.renderMyProfile() }
-        <AdSubmission close={this.close}/>
         </content>
         <div className='black-nav'><NavBar /></div>
         { this.renderFooter() }
