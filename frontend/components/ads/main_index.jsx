@@ -10,12 +10,14 @@ var Footer = require('./main_footer');
 var MainIndex = React.createClass({
 
 	getInitialState: function() {
-		return { genres: [] };
+		return { genres: GenreStore.all() };
 	},
 
 	componentDidMount: function() {
 		genreStoreToken = GenreStore.addListener(this.getStateFromStore);
-		ApiUtil.fetchGenres();
+		if (this.state.genres.length === 0) {
+			ApiUtil.fetchGenres();
+		}
 	},
 
 	componentWillUnmount: function() {
