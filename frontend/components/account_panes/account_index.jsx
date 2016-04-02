@@ -7,16 +7,113 @@ var UserUtil = require('../../util/user_util');
 
 var AccountIndex = React.createClass({
 
-  componentDidMount: function() {
-    this.user = SessionStore.currentUser()
-    if (!this.user) {
-      UserUtil.fetchCurrentUser()
-      this.user = SessionStore.currentUser()
-    };
-    debugger;
+  getInitialState: function() {
+    return { show: "" };
   },
 
+  editEmail: function () {
+    this.setState({ show: "email" });
+  },
+
+  editPassword: function () {
+    this.setState({ show: "password" });
+  },
+
+  close: function () {
+    this.setState({ show: "" });
+  },
+
+  sendPasswordChange: function (e) {
+    e.preventDefault
+  },
+
+  sendEmailChange: function (e) {
+    e.preventDefault
+  },
+
+  showPasswordEdit: function () {
+    if (this.state.show === "password") {
+      return (
+        <div className="account-pane group">
+          <section className="account-section-heading">
+            <strong>Edit Password</strong>
+            <button onClick={this.close} className="account-aside-button">
+              Cancel</button>
+          </section>
+          <form onClick={this.sendPasswordChange}>
+            <row className="account-section-row group">
+              <label className="account-item-left group">
+                <div className="form-row">Old Password</div>
+                <input className="account-section-input" type="password"
+                  name="oldpassword"/>
+              </label>
+              <input type="submit" value="Update Password"
+                className="account-aside-button account-item-right"/>
+            </row>
+            <row className="account-section-row group">
+              <label className="account-item-left group">
+                <div className="form-row">New Password</div>
+                <input className="account-section-input" type="password"
+                  name="newpassword"/>
+              </label>
+            </row>
+            <row className="account-section-row group">
+              <label className="account-item-left group">
+                <div className="form-row">Password Confirmation</div>
+                <input className="account-section-input" type="password"
+                  name="passconfirm"/>
+              </label>
+            </row>
+          </form>
+        </div>
+      );
+    }
+    return "";
+  },
+
+  showEmailEdit: function () {
+    if (this.state.show === "email") {
+      return (
+        <div className="account-pane group">
+          <section className="account-section-heading">
+            <strong>Edit Email</strong>
+            <button onClick={this.close} className="account-aside-button">
+              Cancel</button>
+          </section>
+          <form onClick={this.sendEmailChange}>
+            <row className="account-section-row group">
+              <label className="account-item-left group">
+                <div className="form-row">Old Password</div>
+                <input className="account-section-input" type="password"
+                  name="password"/>
+              </label>
+              <input type="submit" value="Update Email"
+                className="account-aside-button account-item-right"/>
+            </row>
+            <row className="account-section-row group">
+              <label className="account-item-left group">
+                <div className="form-row">New Email</div>
+                <input className="account-section-input" type="password"
+                  name="email"/>
+              </label>
+            </row>
+            <row className="account-section-row group">
+              <label className="account-item-left group">
+                <div className="form-row">Email Confirmation</div>
+                <input className="account-section-input" type="password"
+                  name="emailconfirm"/>
+              </label>
+            </row>
+          </form>
+        </div>
+      );
+    }
+    return "";
+  },
+
+
   renderMembership: function () {
+    var user = SessionStore.currentUser()
     return (
       <div className="account-pane group">
         <section className="account-section-heading">
@@ -24,12 +121,14 @@ var AccountIndex = React.createClass({
           <button className="account-aside-button">Cancel Membership</button>
         </section>
         <section className="account-section-row group">
-          <strong className="account-item-left">Your Email: myself@me.com</strong>
-          <a href="#" className="account-item-right">Change Email</a>
+          <strong className="account-item-left">Your Email: {user.email}</strong>
+          <button onClick={this.editEmail} className="account-item-right">
+            Change Email</button>
         </section>
         <section className="account-section-row group">
-          <strong className="account-item-left">Your Password: ******</strong>
-          <a href="#" className="account-item-right">Change Password</a>
+          <p className="account-item-left">Your Password: ******</p>
+          <button onClick={this.editPassword} className="account-item-right">
+            Change Password</button>
         </section>
       </div>
     );
@@ -63,6 +162,8 @@ var AccountIndex = React.createClass({
         <content className='account-main'>
           <h1>My Account</h1>
           { this.renderMembership() }
+            { this.showEmailEdit() }
+            { this.showPasswordEdit() }
           { this.renderPlanDetails() }
           { this.renderMyProfile() }
         <AdSubmission />

@@ -45,6 +45,7 @@
   text-transform: uppercase;
   font-size: 18px;
   width: 20%;
+  min-width: 200px;
   height: 80px;
   margin: 15px 0 20px 0;
   display: block;
@@ -53,18 +54,9 @@
   font-weight: 400;
 }
 
-.account-item-left, .account-item-right {
+.account-section-heading > strong {
+  min-width: 75px;
   display: block;
-}
-
-.account-item-left {
-  float:left;
-  margin-left: 10px;
-}
-
-.account-item-right {
-  float:right;
-  margin-right: 10px;
 }
 
 .account-pane > strong {
@@ -81,11 +73,35 @@
   width: 78%;
   height: 20px;
   margin-top: 10px;
+  color: #999;
+}
+
+.account-section-row > strong {
+  color: #111;
+  font-weight: bold;
+}
+
+.account-section-row > button {
+  color: blue;
+}
+
+.account-section-row > button:hover {
+  cursor: pointer;
+}
+
+.account-section-input {
+  background: white;
+  width: 200px;
+  float: left;
+  padding: 3px;
+}
+
+.form-row {
+  width: 150px;
+  float: left;
 }
 
 .account-aside-button {
-  position: relative;
-  margin: auto;
   font-size: 12px;
   font-weight: 500;
   text-transform: uppercase;
@@ -98,4 +114,18 @@
 
 .account-aside-button:hover {
   background: #eee;
+}
+
+.account-item-left, .account-item-right {
+  display: block;
+}
+
+.account-item-left {
+  float:left;
+  margin-left: 10px;
+}
+
+.account-item-right {
+  float:right;
+  margin-right: 10px;
 }
