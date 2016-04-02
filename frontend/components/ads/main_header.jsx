@@ -54,6 +54,7 @@ var MainHeader = React.createClass({
 				<div className="bottom-grade"></div>
 				<div className="back-grade">
 					<div className="header-spacer header-left-arrow"/>
+					<h2 className="feature-title">The Title</h2>
 					<ReactCSS
 		        transitionName="fader"
 		        transitionEnterTimeout={500}
