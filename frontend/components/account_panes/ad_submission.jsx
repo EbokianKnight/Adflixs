@@ -6,7 +6,9 @@ var GenreStore = require('../../stores/genre_store');
 var AddSubmission = React.createClass({
 
   getInitialState: function() {
-    return { genres: GenreStore.all() };
+    return {
+      genres: GenreStore.all(),
+    };
   },
 
   componentDidMount: function() {
@@ -16,29 +18,51 @@ var AddSubmission = React.createClass({
     }
   },
 
-  updateGenres: function() {
-    this.setState({ genres: GenreStore.all() })
-  },
-
   componentWillUnmount: function() {
     this.genreToken.remove();
   },
 
-  listAllGenres: function () {
+  updateGenres: function() {
+    this.setState({ genres: GenreStore.all() })
+  },
+
+  extractCheckedBoxes: function (nodeList) {
+    var checked = [];
+    for (var i = 0; i < nodeList.length; i++) {
+      if (nodeList[i].checked) {
+        checked.push( nodeList[i].id )
+      }
+    }
+    return checked;
+  },
+
+
+  createCheckBoxes: function () {
     return (
       this.state.genres.map(function(genre, idx){
         return (
           <div className="account-checkbox" key={idx}>
             <input className="account-checkbox-item" type="checkbox"
-              name={genre.name} key={genre.id} /> <strong>{genre.name}</strong>
+              name="genres" key={genre.id} id={genre.id}/>
+            <strong>{genre.name}</strong>
           </div>
         );
       })
     );
   },
 
-  sendNewAdvertRequest: function () {
-
+  sendNewAdvertRequest: function (e) {
+    e.preventDefault()
+    var form = e.currentTarget
+    ApiUtil.createAdvert({
+      description: form.description.value,
+      title: form.title.value,
+      year: form.year.value,
+      product: form.product.value,
+      company: form.company.value,
+      youtube: form.youtube.value,
+      genre_ids: this.extractCheckedBoxes(form.genres)
+    });
   },
 
   createAdForm: function () {
@@ -49,7 +73,7 @@ var AddSubmission = React.createClass({
           <button onClick={this.props.close} className="account-aside-button">
             Cancel</button>
         </section>
-        <form onClick={this.sendNewAdvertRequest}>
+        <form onSubmit={this.sendNewAdvertRequest}>
           <row className="account-section-row group">
             <label className="account-item-left group">
               <div className="form-row">Title</div>
@@ -81,12 +105,12 @@ var AddSubmission = React.createClass({
             </label>
           </row>
           <row className="account-section-row account-checkbox-container group">
-            { this.listAllGenres() }
+            { this.createCheckBoxes() }
           </row>
           <row className="account-section-row group">
             <label className="account-item-left group">
               <div className="form-row">Description</div>
-              <input className="account-section-input as-area" type="textarea"
+              <textarea className="account-section-input as-area" type="textarea"
                 name="description"/>
             </label>
           </row>
