@@ -6,6 +6,10 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+Genre.destroy_all
+Ad.destroy_all
+AdGenre.destroy_all
+
 fun = Genre.create!(name: "funny")
 drink = Genre.create!(name: "drinks")
 prev = Genre.create!(name: "previews")
