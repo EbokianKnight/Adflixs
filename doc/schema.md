@@ -4,8 +4,8 @@ string: company, (indexed, not null)
 string: product, (indexed, not null)  
 string: description, (not null)  
 string: year, (not null)  
-string: thumb_url, (default, not null)  
-string: youtube_link, (not null)  
+string: title, (default: "Advert")
+string: youtube_link, (default: "")  
 
 ###AdGenres
 integer: ad_id, (indexed, not null)  
