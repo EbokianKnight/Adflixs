@@ -1,0 +1,39 @@
+.mammoth {
+  width: 300px;
+  height: 300px;
+  display: block;
+  margin: auto;
+  background-image: asset-url("ebokian-mammoth");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.not-found-body {
+  width: 100%;
+}
+
+.test {
+  animation: fallin 1s;
+  animation-delay: bounce-up 1s;
+}
+
+@keyframes fallin {
+  from { transform: translate(0px,-500px);
+         opacity: 0; }
+  to { transform: translate(0px,0px);
+        opacity: 1; }
+}
+
+.not-found-message {
+  color: #8B4928;
+  font-size: 48px;
+  font-weight: bolder;
+  text-align: center;
+}
+
+
+.copyright {
+  display: block;
+  margin: 40px auto 0;
+  text-align: center;
+}
