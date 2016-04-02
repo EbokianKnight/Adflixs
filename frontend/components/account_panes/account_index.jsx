@@ -166,7 +166,7 @@ var AccountIndex = React.createClass({
             { this.showPasswordEdit() }
           { this.renderPlanDetails() }
           { this.renderMyProfile() }
-        <AdSubmission />
+        <AdSubmission close={this.close}/>
         </content>
         <div className='black-nav'><NavBar /></div>
         { this.renderFooter() }
