@@ -2,6 +2,19 @@ var AdActions = require('../actions/ad_actions');
 var GenreActions = require('../actions/genre_actions');
 
 module.exports = {
+  createAdvert: function (advertData) {
+    $.ajax({
+			method: "POST",
+      url: "api/ads",
+      data: { ad: advertData },
+      success: function (adverts) {
+        AdActions.recieveAllAdverts(adverts);
+      },
+      error: function (err) {
+        console.log("ApiUtil#createAdvert Error");
+      }
+    });
+  },
   fetchAdverts: function () {
     $.ajax({
 			method: "GET",
