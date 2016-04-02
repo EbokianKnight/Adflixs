@@ -91,7 +91,8 @@
 
 .account-section-input {
   background: white;
-  width: 200px;
+  width: 300px;
+  margin-left: 10px;
   float: left;
   padding: 3px;
 }
@@ -129,4 +130,22 @@
 .account-item-right {
   float:right;
   margin-right: 10px;
+}
+
+.account-checkbox-container {
+  height: auto;
+}
+
+.account-checkbox {
+  float: left;
+  display: block;
+  margin: 5px 25px 5px 10px;
+}
+
+.account-checkbox-item > strong {
+  margin: 5px;
+}
+
+.as-area {
+  height: 75px;
 }
