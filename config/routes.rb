@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 		resources :genres, only: [:show, :index, :create, :destroy]
 		resources :ads, only: [:show, :index, :create, :destroy]
     resource :session, only: [:show, :create, :destroy]
+		get 'list', :to => 'genres#list'
 	end
 
 	root to: "static_pages#root"
