@@ -6,9 +6,10 @@ module.exports = {
     $.ajax({
 			method: "POST",
       url: "api/ads",
-      data: { ad: advertData },
+      data: advertData,
       success: function (advert) {
         AdActions.recieveAdvert(advert);
+        console.log("success");
       },
       error: function (err) {
         console.log("ApiUtil#createAdvert Error");
@@ -34,6 +35,18 @@ module.exports = {
       },
 			error: function (err) {
 				console.log("ApiUtil#fetchAdvert Error");
+			}
+    });
+  },
+  fetchGenreList: function () {
+    $.ajax({
+			method: "GET",
+      url: "api/list",
+      success: function (list) {
+        GenreActions.recieveGenreList(list);
+      },
+			error: function (err) {
+				console.log("ApiUtil#fetchGenres Error");
 			}
     });
   },

@@ -7,5 +7,11 @@ module.exports = {
       actionType: GenreConstants.GENRES_RECEIVED,
       genres: genres
     });
+  },
+  recieveGenreList: function (list) {
+    Dispatcher.dispatch({
+      actionType: GenreConstants.GENRE_LIST,
+      list: list
+    });
   }
 };
