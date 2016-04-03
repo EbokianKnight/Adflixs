@@ -9,8 +9,10 @@ class Api::AdsController < ApplicationController
 	end
 
 	def create
-		ad = Ad.new(ad_params)
-		ad.genre_ids = (params[:genres_ids])
+		my_params = ad_params
+		my_params["genre_ids"].map!(&:to_i) if ad_params["genre_ids"]
+
+		ad = Ad.new(my_params)
 		if ad.save!
 			render :index
 		else
@@ -32,6 +34,6 @@ class Api::AdsController < ApplicationController
 	end
 
 	def ad_params
-		params.require(:ad).permit(:title, :company, :product, :description, :year, genre_ids: [])
+		params.require(:ad).permit(:title, :company, :product, :description, :year, :youtube, genre_ids: [])
 	end
 end
