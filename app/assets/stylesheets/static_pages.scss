@@ -223,7 +223,9 @@
 	height:150px;
 	position: relative;
 	z-index: 3;
-	background:#B9090B;
+	background: asset-url("youtube-logo.jpg");
+	background: cover;
+	background-repeat: no-repeat;
 	margin:30px 5px;
 	transition: width .5s, height .5s, margin .5s;
 }

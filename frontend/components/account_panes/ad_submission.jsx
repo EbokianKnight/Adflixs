@@ -21,25 +21,26 @@ var AddSubmission = React.createClass({
 
   updateTitle: function (e) {
     if (this.state.success) {
-      this.setState({ titles: e.target.value, success: false });
+      this.setState({ title: e.target.value, success: false });
     } else {
-      this.setState({ titles: e.target.value });
+      this.setState({ title: e.target.value });
     }
   },
+
   updateProduct: function (e) {
-    this.setState({ genres: e.target.value });
+    this.setState({ product: e.target.value });
   },
   updateCompany: function (e) {
-    this.setState({ genres: e.target.value });
+    this.setState({ company: e.target.value });
   },
   updateYear: function (e) {
-    this.setState({ genres: e.target.value });
+    this.setState({ year: e.target.value });
   },
   updateDescription: function (e) {
-    this.setState({ genres: e.target.value });
+    this.setState({ description: e.target.value });
   },
   updateYouTube: function (e) {
-    this.setState({ genres: e.target.value });
+    this.setState({ youtube: e.target.value });
   },
 
   componentDidMount: function() {
@@ -56,26 +57,25 @@ var AddSubmission = React.createClass({
   },
 
   adRecieved: function () {
-    this.setState({
-      success: AdStore.successMessage(),
-      title: "",
-      product: "",
-      company: "",
-      year: 0,
-      description: "",
-      youtube: ""
-    });
-  },
-
-  updateGenres: function() {
-    this.setState({ genres: GenreStore.all() })
+    var success = AdStore.successMessage()
+    if (success) {
+      this.setState({
+        success: success,
+        title: "",
+        product: "",
+        company: "",
+        year: 0,
+        description: "",
+        youtube: ""
+      });
+    }
   },
 
   extractCheckedBoxes: function (nodeList) {
     var checked = [];
     for (var i = 0; i < nodeList.length; i++) {
       if (nodeList[i].checked) {
-        checked.push( nodeList[i].id )
+        checked.push( parseInt(nodeList[i].id) )
       }
     }
     return checked;
@@ -95,6 +95,10 @@ var AddSubmission = React.createClass({
     );
   },
 
+  updateGenres: function() {
+    this.setState({ genres: GenreStore.all() })
+  },
+
   sayMessage: function () {
     if (this.state.success) {
       return <div className="flash-message">SUCCESS!!</div>
@@ -107,7 +111,7 @@ var AddSubmission = React.createClass({
     ApiUtil.createAdvert({
       description: form.description.value,
       title: form.title.value,
-      year: parseInt(form.year.value),
+      year: form.year.value,
       product: form.product.value,
       company: form.company.value,
       youtube: form.youtube.value,
@@ -145,7 +149,7 @@ var AddSubmission = React.createClass({
           <row className="account-section-row group">
             <label className="account-item-left group">
               <div className="form-row">Year</div>
-              <input className="account-section-input" type="number"
+              <input className="account-section-input" type="date"
                 name="year" value={this.state.year}
                 onChange={this.updateYear}/>
             </label>

@@ -3,7 +3,6 @@ var GenreActions = require('../actions/genre_actions');
 
 module.exports = {
   createAdvert: function (advertData) {
-    debugger;
     $.ajax({
 			method: "POST",
       url: "api/ads",
