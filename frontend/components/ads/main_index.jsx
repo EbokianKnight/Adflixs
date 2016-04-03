@@ -10,7 +10,7 @@ var Footer = require('./main_footer');
 var MainIndex = React.createClass({
 
 	getInitialState: function() {
-		return { genres: GenreStore.all() };
+		return { genres: GenreStore.all()};
 	},
 
 	componentDidMount: function() {
@@ -32,11 +32,17 @@ var MainIndex = React.createClass({
 		});
 	},
 
+	fetchRandomAd: function () {
+		var ads = this.state.genres[Math.floor(Math.random() * this.state.genres.length)].ads;
+		return ads[Math.floor(Math.random() * ads.length)];
+	},
+
 	render: function() {
+		if (this.state.genres.length === 0) return <div></div>;
 		return (
 			<div className="main-index-body">
 				<NavBar />
-				<MainHeader />
+				<MainHeader ad={ this.fetchRandomAd() }/>
 				{ this.fetchRows() }
 				<Footer />
 			</div>

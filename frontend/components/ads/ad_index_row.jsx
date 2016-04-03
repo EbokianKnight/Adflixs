@@ -21,7 +21,9 @@ var AdvertRow = React.createClass({
 
 	checkDetails: function() {
 		if (AdStore.getAd().rowID === this.props.genre.id){
-			this.setState({ showDetail: true });
+			this.setState({
+				showDetail: true
+			});
 		} else if (this.state.showDetail) {
 			this.setState({ showDetail: false });
 		}
@@ -39,7 +41,7 @@ var AdvertRow = React.createClass({
 
 	renderDetail: function () {
 		if (this.state.showDetail) {
-			return <AdDetailPane show={this.state.showDetail}/>;
+			return <AdDetailPane show={this.state.showDetail} ad={AdStore.getAd()}/>;
 		} else {
 			return "";
 		}
@@ -67,7 +69,7 @@ var AdvertRow = React.createClass({
 			]
     };
 
-		if(!this.props.genre) { return ""; }
+		if(!this.props.genre) { return <div></div>; }
 		var klass = this.state.showDetail ? " row-extend" : "";
 
 		return (

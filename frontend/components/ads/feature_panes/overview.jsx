@@ -5,16 +5,19 @@ var ReactCSS = require('react-addons-css-transition-group');
 var OverviewDetail = React.createClass({
 
   render: function () {
+    if (!this.props.ad) { return <div></div>; }
 		return (
 			<div className="ad-display-container">
 				<ul className="feature-info-bar group">
-					<li>&#x2605; &#x2605; &#x2605; &#x2605; &#x2605;</li>
-					<li>Company</li>
-					<li>Product</li>
-					<li>Year</li>
+					<li>Company: {this.props.ad.company}</li>
+					<li>Product: {this.props.ad.product}</li>
+					<li>Year: {this.props.ad.year}</li>
 				</ul>
-				<p className="feature-description"> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+				<p className="feature-description">{this.props.ad.description}</p>
 				<button className="more-features">Add To MyList</button>
+        <ul className="more-features group">
+        <li>&#x2605;</li><li>&#x2605;</li><li>&#x2605;</li><li>&#x2605;</li><li>&#x2605;</li>
+        </ul>
 			</div>
 		);
 	}

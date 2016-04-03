@@ -38,15 +38,16 @@ var MainHeader = React.createClass({
 
 	displayPane: function () {
 		if (this.state.display === 0) {
-			return <OverviewDetail key={1} />;
+			return <OverviewDetail key={1} ad={this.props.ad}/>;
 		} else if (this.state.display === 1) {
-			return <MoreLikeThisDetail key={2} />;
+			return <MoreLikeThisDetail key={2} ad={this.props.ad}/>;
 		} else {
-			return <MoreDetails key={3}/>;
+			return <MoreDetails key={3} ad={this.props.ad}/>;
 		}
 	},
 
 	render: function() {
+		if (!this.props.ad) { return <div></div> }
 		return (
 			<div>
 			<spacer className="main-nav-background"></spacer>
@@ -54,7 +55,7 @@ var MainHeader = React.createClass({
 				<div className="bottom-grade"></div>
 				<div className="back-grade">
 					<div className="header-spacer header-left-arrow"/>
-					<h2 className="feature-title">The Title</h2>
+					<h2 className="feature-title">{this.props.ad.title}</h2>
 					<ReactCSS
 		        transitionName="fader"
 		        transitionEnterTimeout={500}

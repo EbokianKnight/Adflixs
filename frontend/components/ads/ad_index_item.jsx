@@ -13,8 +13,9 @@ var Advert = React.createClass({
 		var klass = this.props.show ? "" : " fliximg-effect";
 		return (
 			<div className={ "fliximg" + klass }>
-				{ this.props.ad.description }
-				<button className={ "ad-detail-button" } onClick={this.sendBackID}/>
+				<button className="ad-detail-button" onClick={this.sendBackID}>
+					{ this.props.ad.title }
+				</button>
 			</div>
 		);
 	}

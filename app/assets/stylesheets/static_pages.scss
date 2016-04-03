@@ -271,7 +271,7 @@
 	margin: -30px auto 0 auto;
 	height: 30px;
 	color: #ccc;
-	background: #999;
+	background: trasparent;
 }
 
 .back-grade {
@@ -419,4 +419,9 @@
 	padding: 5px;
 	box-sizing: border-box;
 	position: relative;
+}
+.more-features > li {
+	float:left;
+	list-style: none;
+	font-size: 14px;
 }
