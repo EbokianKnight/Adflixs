@@ -9,9 +9,22 @@ var ProfileDropDown = React.createClass({
 
   getInitialState: function() {
     return {
-      show: false
+      show: false,
+      user: SessionStore.currentUser()
     };
   }, //onMouseEnter
+
+  componentDidMount: function() {
+    this.sessionToken = SessionStore.addListener(this.getUserFromStore)
+  },
+
+  componentWillUnmount: function() {
+    this.sessionToken.remove();
+  },
+
+  getUserFromStore: function() {
+    this.setState({ user: SessionStore.currentUser() });
+  },
 
   onRollOver: function () {
     this.setState({ show: true });
@@ -60,7 +73,7 @@ var ProfileDropDown = React.createClass({
       <menu className="nav-profile-menu group"
         onMouseEnter={this.onRollOver}>
         <img className='nav-profile-thumb'/>
-        <h3 className='nav-user'>Username</h3>
+        <h3 className='nav-user'>{this.state.user.email}</h3>
         <ReactCSS
           transitionName="fader"
           transitionEnterTimeout={500}

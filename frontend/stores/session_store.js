@@ -42,9 +42,11 @@ SessionStore.__onDispatch = function (payload) {
   switch (payload.actionType) {
     case SessionConstants.RECIEVE_USER:
       makeSession(payload);
+      SessionStore.__emitChange();
       break;
     case SessionConstants.LOGOUT:
       destroySession(payload);
+      SessionStore.__emitChange();
       break;
     case SessionConstants.FLASH:
       flashMessage(payload.message);
