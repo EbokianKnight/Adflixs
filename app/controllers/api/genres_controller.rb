@@ -9,6 +9,11 @@ class Api::GenresController < ApplicationController
 		@genres.includes(:ads)
 	end
 
+	def list
+		@genres = Genre.all
+		render :list
+	end
+
 	def create
 		genre = Genre.new(genre_params)
 		genre.save
