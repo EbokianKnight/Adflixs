@@ -23,8 +23,9 @@ var AccountIndex = React.createClass({
     this.setState({ show: "advert" });
   },
 
-  close: function () {
-    this.setState({ show: "" });
+  close: function (command) {
+    command = command || ""
+    this.setState({ show: command });
   },
 
   showAdvertForm: function () {
@@ -80,6 +81,20 @@ var AccountIndex = React.createClass({
       );
     }
     return "";
+  },
+
+  showSuccessMessage: function () {
+    if (this.state.show === "success") {
+      return (
+        <div className="account-pane group">
+          <section className="account-section-heading">
+            <button onClick={this.close} className="account-aside-button">
+              Okay</button>
+          </section>
+          <div className="account-submission-success">Success</div>
+        </div>
+      );
+    }
   },
 
   showEmailEdit: function () {
@@ -181,6 +196,7 @@ var AccountIndex = React.createClass({
             { this.showEmailEdit() }
             { this.showPasswordEdit() }
             { this.showAdvertForm() }
+            { this.showSuccessMessage() }
           { this.renderPlanDetails() }
           { this.renderMyProfile() }
         </content>

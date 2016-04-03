@@ -116,6 +116,7 @@
 
 .account-aside-button:hover {
   background: #eee;
+  cursor: pointer;
 }
 
 .account-item-left, .account-item-right {
@@ -157,6 +158,14 @@
   width: auto;
 }
 
-.account-checkbox-title {
-  float: left;
+.account-submission-success {
+  color: red;
+  font-size: 24px;
+  font-weight: bold;
+  padding: 5px;
+  margin: 25px;
+  border: 3px solid red;
+  border-radius: 10px;
+  float:left;
+  width: auto;
 }
