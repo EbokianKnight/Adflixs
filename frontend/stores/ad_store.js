@@ -6,6 +6,7 @@ var AdStore = new Store(AppDispatcher);
 
 var _adverts = {};
 var _shownAd = null;
+var _recievedAd = false;
 
 var resetAdverts = function (ads) {
 	_adverts = {};
@@ -20,17 +21,27 @@ var clearShownAd = function () {
 	_shownAd = null;
 };
 
+AdStore.successMessage = function () {
+	var flash = _recievedAd;
+	console.log(flash);
+	_recievedAd = false;
+	return flash;
+};
+
 AdStore.__onDispatch = function (payload) {
 	switch (payload.actionType) {
 		case AdConstants.ADS_RECEIVED:
 			resetAdverts(payload.adverts);
+			_recievedAd = true;
 			AdStore.__emitChange();
 		break;
 		case AdConstants.AD_RECEIVED:
 			updateAdvert(payload.advert);
+			_recievedAd = true;
 			AdStore.__emitChange();
 		break;
 		case AdConstants.CLOSE_DETAILS:
+			_recievedAd = true;
 			clearShownAd();
 			AdStore.__emitChange();
 	}

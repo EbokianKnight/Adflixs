@@ -15,9 +15,7 @@ var MainIndex = React.createClass({
 
 	componentDidMount: function() {
 		genreStoreToken = GenreStore.addListener(this.getStateFromStore);
-		if (this.state.genres.length === 0) {
-			ApiUtil.fetchGenres();
-		}
+		ApiUtil.fetchGenres();
 	},
 
 	componentWillUnmount: function() {

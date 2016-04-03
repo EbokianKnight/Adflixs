@@ -10,24 +10,29 @@ Genre.destroy_all
 Ad.destroy_all
 AdGenre.destroy_all
 
-fun = Genre.create!(name: "funny")
-drink = Genre.create!(name: "drinks")
-prev = Genre.create!(name: "previews")
 
-movie1 = Ad.create!(description:"This is a serious movie", year:2015, company:"SeriousMovieStudios", product:"Stern")
-movie2 = Ad.create!(description:"This is a funny movie", year:2015, company:"MovieStudios", product:"Jokes Ahoy")
-funny1 = Ad.create!(description:"Sexy Humor", year:2016, company:"BeerCompany", product:"Beer")
-funny2 = Ad.create!(description:"Polar Bear chases a Coke bottle", year:2016, company:"Coke", product:"Coke")
-drinks1 = Ad.create!(description:"Someone drinks a pepsi", year:2014, company:"Pepsi", product:"Pepsi")
-drinks2 = Ad.create!(description:"Someone made a movie about sprite", year:2016, company:"Coke", product:"Sprite TheMovie")
+funny = Genre.create!(name: "funny")
+cars = Genre.create!(name: "cars")
+previews = Genre.create!(name: "previews")
+foods = Genre.create!(name: "foods")
+drinks = Genre.create!(name: "drinks")
+clothing = Genre.create!(name: "clothing")
+arty = Genre.create!(name: "arty")
+animals = Genre.create!(name: "animals")
+politics = Genre.create!(name: "politics")
+tech = Genre.create!(name: "tech")
 
-AdGenre.create!(ad_id: movie1.id, genre_id: prev.id )
-AdGenre.create!(ad_id: movie2.id, genre_id: fun.id )
-AdGenre.create!(ad_id: movie2.id, genre_id: prev.id )
-AdGenre.create!(ad_id: funny1.id, genre_id: fun.id )
-AdGenre.create!(ad_id: funny1.id, genre_id: drink.id )
-AdGenre.create!(ad_id: funny2.id, genre_id: drink.id )
-AdGenre.create!(ad_id: funny2.id, genre_id: fun.id )
-AdGenre.create!(ad_id: drinks1.id, genre_id: drink.id )
-AdGenre.create!(ad_id: drinks2.id, genre_id: drink.id )
-AdGenre.create!(ad_id: drinks2.id, genre_id: prev.id )
+genres = [funny,cars,previews,foods,drinks,clothing,arty,animals,politics,tech]
+g_ids = genres.sample(rand(3)+1).map{ |g| g.id }
+
+200.times do |i|
+  g_ids = genres.sample(rand(3)+1).map{ |g| g.id }
+  Ad.create!(
+    title: Faker::Superhero.power,
+    company: Faker::Company.name,
+    product: Faker::Superhero.name,
+    description: Faker::Lorem.paragraph,
+    year: Faker::Date.between(1.year.ago, Date.today),
+    genre_ids: g_ids
+  )
+end

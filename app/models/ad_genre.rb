@@ -1,5 +1,5 @@
 class AdGenre < ActiveRecord::Base
-	validates :ad_id, :genre_id, presence: true
+	validates_associated :ad, :genre
 	belongs_to :ad
 	belongs_to :genre
 end

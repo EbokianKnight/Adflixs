@@ -10,6 +10,7 @@ class Api::AdsController < ApplicationController
 
 	def create
 		ad = Ad.new(ad_params)
+		ad.genre_ids = (params[:genres_ids])
 		if ad.save!
 			render :index
 		else
