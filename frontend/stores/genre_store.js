@@ -5,10 +5,16 @@ var GenresConstants = require('../constants/genre_constants');
 var GenreStore = new Store(AppDispatcher);
 
 var _genres = {};
+var _list = {};
 
 var resetGenres = function (genres) {
 	_genres = {};
 	genres.forEach( function (el) { _genres[el.id] = el; });
+};
+
+var resetGenreList = function (list) {
+	_list = {};
+	list.forEach( function (el) { _list[el.id] = el; });
 };
 
 GenreStore.__onDispatch = function (payload) {
@@ -17,6 +23,10 @@ GenreStore.__onDispatch = function (payload) {
 			resetGenres(payload.genres);
 			GenreStore.__emitChange();
 		break;
+		case GenresConstants.GENRE_LIST:
+			resetGenreList(payload.list);
+			GenreStore.__emitChange();
+			break;
 	}
 };
 
@@ -24,6 +34,14 @@ GenreStore.all = function () {
 	var genres = [];
 	Object.keys(_genres).forEach(function(id){
 		genres.push(_genres[id]);
+	});
+	return genres;
+};
+
+GenreStore.fetchGenreList = function () {
+	var genres = [];
+	Object.keys(_list).forEach(function(id){
+		genres.push(_list[id]);
 	});
 	return genres;
 };
