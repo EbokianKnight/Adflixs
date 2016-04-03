@@ -8,7 +8,20 @@ var UserUtil = require('../../util/user_util');
 var AccountIndex = React.createClass({
 
   getInitialState: function() {
-    return { show: "" };
+    return { show: "", user: "" };
+  },
+
+  componentDidMount: function() {
+    this.sessionToken = SessionStore.addListener(this.getUserFromStore)
+    this.flash = null;
+  },
+
+  componentWillUnmount: function() {
+    this.sessionToken.remove();
+  },
+
+  getUserFromStore: function() {
+    this.setState({ user: SessionStore.currentUser() });
   },
 
   editEmail: function () {
@@ -36,11 +49,31 @@ var AccountIndex = React.createClass({
   },
 
   sendPasswordChange: function (e) {
-    e.preventDefault
+    e.preventDefault();
+    // debugger;
+    // if (e.currentTarget.oldpassword.value !== e.currentTarget.passconfirm.value ) {
+    //   this.flash = "password confirmation does not match"
+    //   return;
+    // }
+    // UserUtil.updateUser({ user: {
+    //     password: e.currentTarget.password.value,
+    //     oldpassword: e.currentTarget.oldpassword.value,
+    //     email: this.state.user.email
+    //   }
+    // })
   },
 
+  // flashMessage: function () {
+  //   if (this.flash) {
+  //     var message = this.flash
+  //     this.flash = null
+  //     return <div className="flash-message">{message}</div>
+  //   }
+  // },
+
   sendEmailChange: function (e) {
-    e.preventDefault
+    e.preventDefault();
+    UserUtil.updateUser($(this.refs.EmailRequest).serialize())
   },
 
   showPasswordEdit: function () {
@@ -52,7 +85,7 @@ var AccountIndex = React.createClass({
             <button onClick={this.close} className="account-aside-button">
               Cancel</button>
           </section>
-          <form onClick={this.sendPasswordChange}>
+          <form ref="PasswordRequest" onSubmit={this.sendPasswordChange}>
             <row className="account-section-row group">
               <label className="account-item-left group">
                 <div className="form-row">Old Password</div>
@@ -106,7 +139,7 @@ var AccountIndex = React.createClass({
             <button onClick={this.close} className="account-aside-button">
               Cancel</button>
           </section>
-          <form onClick={this.sendEmailChange}>
+          <form onSubmit={this.sendEmailChange}>
             <row className="account-section-row group">
               <label className="account-item-left group">
                 <div className="form-row">Old Password</div>
@@ -139,7 +172,6 @@ var AccountIndex = React.createClass({
 
 
   renderMembership: function () {
-    var user = SessionStore.currentUser()
     return (
       <div className="account-pane group">
         <section className="account-section-heading">
@@ -147,7 +179,7 @@ var AccountIndex = React.createClass({
           <button className="account-aside-button">Cancel Membership</button>
         </section>
         <section className="account-section-row group">
-          <strong className="account-item-left">Your Email: {user.email}</strong>
+          <strong className="account-item-left">Your Email: {this.state.user.email}</strong>
           <button onClick={this.editEmail} className="account-item-right">
             Change Email</button>
         </section>
