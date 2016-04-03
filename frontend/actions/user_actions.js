@@ -1,6 +1,5 @@
 var AppDispatcher = require('../dispatcher/dispatcher');
 var UserConstants = require('../constants/user_constants');
-var SessionConstants = require('../constants/session_constants');
 
 module.exports = {
   registerNewUser: function (user) {
@@ -17,20 +16,20 @@ module.exports = {
   },
   receiveCurrentUser: function ( currentUser, callback ) {
     AppDispatcher.dispatch({
-      actionType: SessionConstants.RECIEVE_USER,
+      actionType: UserConstants.RECIEVE_USER,
       currentUser: currentUser,
       callback: callback
     });
   },
   logout: function (callback) {
     AppDispatcher.dispatch({
-      actionType: SessionConstants.LOGOUT,
+      actionType: UserConstants.LOGOUT,
       callback: callback
     });
   },
   flashMessage: function (message) {
     AppDispatcher.dispatch({
-      actionType: SessionConstants.FLASH,
+      actionType: UserConstants.FLASH,
       message: message,
     });
   }

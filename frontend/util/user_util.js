@@ -30,6 +30,19 @@ module.exports = {
 			}
     });
   },
+  updateUser: function (user, id, callback) {
+    $.ajax({
+			method: "POST",
+      url: "/api/users" + id,
+      data: { user: user },
+      success: function (user) {
+        UserActions.receiveCurrentUser(user, callback);
+      },
+			error: function (err) {
+        console.log('UserUtil#createUser Error');
+			}
+    });
+  },
   removeUser: function (userID, redirectCallback) {
     $.ajax({
       method: "POST",

@@ -1,5 +1,5 @@
 var Store = require('flux/utils').Store;
-var SessionConstants = require('../constants/session_constants');
+var UserConstants = require('../constants/user_constants');
 var AppDispatcher = require('../dispatcher/dispatcher');
 
 var SessionStore = new Store(AppDispatcher);
@@ -16,7 +16,7 @@ SessionStore.isLoggedIn = function () {
   return _isLoggedIn;
 };
 
-var makeSession = function (payload) {
+var setUser = function (payload) {
   _currentUser = payload.currentUser;
   _isLoggedIn = true;
   if (payload.callback) { payload.callback(); }
@@ -40,15 +40,15 @@ SessionStore.flashMessage = function () {
 
 SessionStore.__onDispatch = function (payload) {
   switch (payload.actionType) {
-    case SessionConstants.RECIEVE_USER:
-      makeSession(payload);
+    case UserConstants.RECIEVE_USER:
+      setUser(payload);
       SessionStore.__emitChange();
       break;
-    case SessionConstants.LOGOUT:
+    case UserConstants.LOGOUT:
       destroySession(payload);
       SessionStore.__emitChange();
       break;
-    case SessionConstants.FLASH:
+    case UserConstants.FLASH:
       flashMessage(payload.message);
       SessionStore.__emitChange();
       break;
