@@ -10,6 +10,22 @@ class Api::UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def update
+    @user = User.find_by_credentials({
+      password: params[:oldpassword],
+      email: params[:email]
+    })
+		if @user
+      if @user.update_attributes!(user_params)
+        render :show
+  		else
+  			render json: { message: @user.errors.full_messages }
+  		end
+    else
+      render json: { message: ["Incorrect email or password"] }
+    end
+  end
+
 	#Register New User
 	def create
 		@user = User.new(user_params)
@@ -18,8 +34,7 @@ class Api::UsersController < ApplicationController
 			sign_in(@user)
       render :show
 		else
-			flash.now[:errors] = @user.errors.full_messages
-			render text: "User Registration Failed"
+			render json: { message: @user.errors.full_messages }
 		end
 	end
 
@@ -27,12 +42,12 @@ class Api::UsersController < ApplicationController
 	def destroy
 		redirect_to root_url unless @current_user.admin
 		User.find(params[:id]).destroy!
-		render text: "User Account Destroyed"
+		render json: { message: ["user account destroyed"] }
 	end
 
 	private
 
 	def user_params
-		params.require(:user).permit(:password, :email)
+		params.require(:user).permit(:password, :email, :oldpassword)
 	end
 end
