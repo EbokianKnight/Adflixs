@@ -17,16 +17,16 @@ var HomePage = React.createClass({
 			<div>
 				<header className="homepage-header" >
 					<src className="logo"/>
-					<div className="cta-wrapper">
-						<content className="cta-text">
-							<h1 className="cta-pitch">See what's next.</h1>
-							<p className="cta-pricing">WATCH ANYWHERE. CANCEL ANYTIME.</p>
+					<div className="home-wrapper">
+						<content className="home-text">
+							<h1 className="home-pitch">See what's next.</h1>
+							<p className="home-pricing">WATCH ANYWHERE. CANCEL ANYTIME.</p>
 						</content>
-						<button className="cta-sign-up"
+						<button className="home-sign-up home-button"
 							onClick={this.goToSignUp}>JOIN FREE FOR ONE MONTH
 						</button>
 					</div>
-					<button className="cta-sign-in"
+					<button className="home-sign-in home-button"
 						onClick={this.goToSignIn}>Sign In
 					</button>
 				</header>
