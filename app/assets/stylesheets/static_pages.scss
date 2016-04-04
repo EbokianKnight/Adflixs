@@ -21,44 +21,44 @@
 	background-repeat: no-repeat;
 }
 
-.cta-wrapper {
+.home-wrapper {
 	margin: 200px 30px;
 }
 
-.cta-text {
+.home-text {
 	color: #ccc;
 }
 
-.cta-pitch {
+.home-pitch {
 	font-size: 46px;
 	font-weight: bold;
 }
 
-.cta-pricing {
+.home-pricing {
 	font-size: 24px;
 }
 
-.cta-sign-up {
-	display: block;
-	font-size: 20px;
+.home-sign-up {
 	text-align: center;
 	width: 300px;
-	padding: 10px;
-	color: #ccc;
-	text-transform: uppercase;
-	background: #B9090B;
 }
 
-.cta-sign-in {
+.home-sign-in {
 	position: absolute;
 	top: 10px;
 	right: 10px;
-	border: 0px solid #B9090B;
-	border-radius: 5px;
-	display:block;
-	background: #B9090B;
-	color: #ccc;
+}
+
+.home-button {
+	color: white;
+	text-transform: uppercase;
+	background: #E50914;
+	display: block;
 	padding: 10px 20px;
+}
+.home-button:hover {
+	background: #f40612;
+	cursor: pointer;
 }
 
 .main-nav-background {
@@ -66,11 +66,13 @@
 	height: 60px;
 }
 
+
 .main-index-header {
 	display: block;
 	position: relative;
 	width: 100%;
 	height: 500px;
+	box-sizing: border-box;
 	background: #444;
 }
 
@@ -81,7 +83,7 @@
 	z-index: 100;
 	padding: 0 4%;
 	white-space: nowrap;
-	border: 1px solid red;
+	// border: 1px solid red;
 	box-sizing: border-box;
 	background-image: linear-gradient(to bottom,rgba(0,0,0,.7) 10%,rgba(0,0,0,0));
 }
@@ -90,7 +92,7 @@
 	display: block;
 	float: right;
 	padding: 10px;
-	border: 1px solid red;
+	// border: 1px solid red;
 	margin: 10px 0px 10px 30px;
 }
 
@@ -194,7 +196,7 @@
 }
 
 .row-bar {
-	width:100%;
+	width:95%;
 	height:210px;
 	padding-left: 20px;
 	overflow: hidden;
@@ -224,9 +226,12 @@
 	height:150px;
 	position: relative;
 	z-index: 3;
-	background-color: black;
+	background-image: asset-url("demo.jpg");
+	background-size: cover;
 	margin:30px 5px;
 	transition: width .5s, height .5s, margin .5s;
+	transition: background-image, .5s;
+	transition: background-size, .5s;
 }
 
 .fliximg-effect:hover {
@@ -264,64 +269,35 @@
 	background: trasparent;
 }
 
-.back-grade {
-	background-image: asset-url("BackGradiant.png");
-	background-size: cover;
-	border: 1px solid red;
-	height: 500px;
-	width: 600px;
-}
-
-.bottom-grade {
-	background-image: asset-url("nav-shadow.png");
-	background-size: cover;
-	position: absolute;
-	bottom:0px;
-	left: 0px;
-	height: 150px;
-	width: 100%;
-}
-
 .top-right-x {
 	position: absolute;
 	top: 20px;
 	right: 25px;
-	border: 1px solid red;
-	padding: 5px;
-	font-weight: bold;
+	// border: 1px solid red;
+	padding: 3px;
+	z-index: 60;
+	font-size: 22px;
+	font-weight: bolder;
+	color: #ccc;
 }
 
 .ad-display-container {
-	width: 450px;
+	width: 400px;
 	height: auto;
-	border: 1px solid red;
-	position: relative;
+	// border: 1px solid red;
+	position: absolute;
 	font-size: 16px;
 	top: 80px;
 	left: 50px;
 	color: #999;
-}
-
-.fader-enter {
-  opacity: 0.01;
-}
-.fader-enter.fader-enter-active {
-  opacity: 1;
-  transition: opacity 500ms ease-in;
-}
-.fader-leave {
-  opacity: 1;
-}
-.fader-leave.fader-leave-active {
-  opacity: 0.01;
-  transition: opacity 300ms ease-in;
+	z-index: 50;
 }
 
 .ad-display-nav {
 	position: absolute;
 	left: 40%;
 	bottom: 0;
-	z-index: 2;
+	z-index: 40;
 }
 
 .ad-display-nav > button {
@@ -330,6 +306,7 @@
 	text-transform: uppercase;
 	font-size: 14px;
 	padding: 5px 25px;
+	z-index: 40;
 }
 
 .ad-display-nav > button:hover {
@@ -352,11 +329,12 @@
 }
 
 .header-spacer {
-	border: 1px solid red;
+	// border: 1px solid red;
 	width: 50px;
 	height: 500px;
 	position: absolute;
 	top:0;
+	z-index: 30;
 }
 
 .header-left-arrow {
@@ -372,7 +350,7 @@
 	width: 550px;
 	box-sizing: border-box;
 	height: 330px;
-	border: 1px solid red;
+	// border: 1px solid red;
 	position: absolute;
 	top: 170px;
 	left: 50px;
@@ -385,39 +363,57 @@
 	left: 50px;
 	display: block;
 	box-sizing: border-box;
+	box-shadow: 10px 10px 80px black;
+	border-radius: 25px;
+	background: rgba(0,0,0,0.4);
 	font-size: 48px;
 	font-weight: bold;
-	border: 1px solid red;
+	// border: 1px solid red;
+	z-index: 40;
 }
 
 .feature-description {
-	border: 1px solid red;
+	// border: 1px solid red;
 	margin: 10px 0;
 	box-sizing: border-box;
 }
 
 .rating-features {
-	border: 1px solid red;
+	// border: 1px solid red;
 	padding: 0 5px;
 	margin-top: 10px;
-	box-sizing: border-box;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: flex-start;
+	align-content: flex-start;
 	position: relative;
 }
-.rating-features > li {
-	float:left;
+
+.rate {
+	flex-grow:0;
+	flex-shrink: 0;
+	flex-basis: auto;
 	font-size: 14px;
-	color: gold;
 	cursor: pointer;
+	color: #777;
+	// border: 1px solid red;
+}
+
+.gold {
+	color: gold;
 }
 
 .feature-info-bar {
-	border: 1px solid red;
+	// border: 1px solid red;
 	margin: 10px 0;
 }
 
 .feature-info-item {
-	border: 1px solid red;
+	// border: 1px solid red;
 	width: 100%;
+	margin: 3px 10px 3px 0;
 }
 
 .feature-info-item > strong, li {
@@ -431,12 +427,15 @@
 
 .feature-my-list {
 	margin-top: 10px;
-	padding: 5px;
-	border: 2px solid #ccc;
-	border-radius: 10px;
-	cursor: pointer;
-	font-weight: bold;
-	transition: background-color 500ms linear;
+  padding: 0 8px 4px;
+  text-align: left;
+  border: 3px solid #ccc;
+  border-radius: 50%;
+  cursor: pointer;
+  color: #ccc;
+  font-weight: 900;
+  font-size: 22px;
+  transition: background-color 500ms linear;
 }
 
 .feature-my-list:hover {
@@ -447,4 +446,38 @@
 
 .dark-background {
 	background: #141414;
+}
+
+.feature-background-image{
+	background-image: asset-url("default.jpg");
+	background-size: cover;
+	width: 80%;
+	height: 500px;
+	display: block;
+	position: absolute;
+	overflow: hidden;
+	z-index: 1;
+	right: 0;
+	top: 0;
+}
+
+.back-grade {
+	background-image: asset-url("BackGradiant.png");
+	background-size: cover;
+	// border: 1px solid red;
+	position: relative;
+	height: 500px;
+	width: 600px;
+	z-index: 10;
+}
+
+.bottom-grade {
+	background-image: asset-url("nav-shadow.png");
+	background-size: cover;
+	position: absolute;
+	bottom:0px;
+	left: 0px;
+	z-index: 20;
+	height: 150px;
+	width: 100%;
 }
