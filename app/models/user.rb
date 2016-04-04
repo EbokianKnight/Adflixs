@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
 	attr_reader :password
 
 	has_many :views
+	has_many :viewed, through: :views, source: :ad
 
 	def self.generate_session_token
 		token = SecureRandom.urlsafe_base64(16)
