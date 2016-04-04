@@ -1,6 +1,5 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
-var ReactCSS = require('react-addons-css-transition-group');
 
 var OverviewDetail = React.createClass({
 
@@ -8,16 +7,29 @@ var OverviewDetail = React.createClass({
     if (!this.props.ad) { return <div></div>; }
 		return (
 			<div className="ad-display-container">
+        <p className="feature-description">{this.props.ad.description}</p>
 				<ul className="feature-info-bar group">
-					<li>Company: {this.props.ad.company}</li>
-					<li>Product: {this.props.ad.product}</li>
-					<li>Year: {this.props.ad.year}</li>
+          <li className="feature-info-item group">
+            <strong>Company:</strong>
+            <p>{this.props.ad.company}</p>
+          </li>
+          <li className="feature-info-item group">
+            <strong>Product:</strong>
+            <p>{this.props.ad.product}</p>
+          </li>
+          <li className="feature-info-item group">
+            <strong>Year:</strong>
+            <p>{this.props.ad.year}</p>
+          </li>
 				</ul>
-				<p className="feature-description">{this.props.ad.description}</p>
-				<button className="more-features">Add To MyList</button>
-        <ul className="more-features group">
-        <li>&#x2605;</li><li>&#x2605;</li><li>&#x2605;</li><li>&#x2605;</li><li>&#x2605;</li>
+        <ul className="rating-features group">
+          <li>&#x2605;</li>
+          <li>&#x2605;</li>
+          <li>&#x2605;</li>
+          <li>&#x2605;</li>
+          <li>&#x2605;</li>
         </ul>
+        <button className="feature-my-list">Add To MyList</button>
 			</div>
 		);
 	}
