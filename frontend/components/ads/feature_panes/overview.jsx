@@ -1,5 +1,6 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
+var RateStars = require('./stars');
 
 var OverviewDetail = React.createClass({
 
@@ -22,14 +23,8 @@ var OverviewDetail = React.createClass({
             <p>{this.props.ad.year}</p>
           </li>
 				</ul>
-        <ul className="rating-features group">
-          <li>&#x2605;</li>
-          <li>&#x2605;</li>
-          <li>&#x2605;</li>
-          <li>&#x2605;</li>
-          <li>&#x2605;</li>
-        </ul>
-        <button className="feature-my-list">Add To MyList</button>
+        { <RateStars /> }
+        <button className="feature-my-list">+</button>
 			</div>
 		);
 	}
