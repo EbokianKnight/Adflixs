@@ -9,22 +9,22 @@ var ReactCSS = require('react-addons-css-transition-group');
 var AdDetailPane = React.createClass({
 
 	getInitialState: function() {
-		return { display: 0 };
+		return { display: "overview" };
 	},
 
 	showDetailPane: function () {
-		if (this.state.display === 2) return ;
-		this.setState({ display: 2 });
+		if (this.state.display === "detail") return ;
+		this.setState({ display: "detail" });
 	},
 
 	showSimilarPane: function () {
-		if (this.state.display === 1) return ;
-		this.setState({ display: 1 });
+		if (this.state.display === "similar") return ;
+		this.setState({ display: "similar" });
 	},
 
 	showOverviewPane: function () {
-		if (this.state.display === 0) return ;
-		this.setState({ display: 0 });
+		if (this.state.display === "overview") return ;
+		this.setState({ display: "overview" });
 	},
 
 	createMenuButtons: function () {
@@ -38,11 +38,11 @@ var AdDetailPane = React.createClass({
 	},
 
 	displayPane: function () {
-		if (this.state.display === 0) {
+		if (this.state.display === "overview") {
 			return <OverviewDetail key={1} ad={this.props.ad}/>;
-		} else if (this.state.display === 1) {
+		} else if (this.state.display === "similar") {
 			return <MoreLikeThisDetail key={2} ad={this.props.ad}/>;
-		} else {
+		} else if (this.state.display === "detail") {
 			return <MoreDetails key={3} ad={this.props.ad}/>;
 		}
 	},
@@ -60,20 +60,19 @@ var AdDetailPane = React.createClass({
 
 	render: function() {
 		if (!this.props.ad) { return <div></div>; }
+		var klass = this.state.display === "overview" ? "" : " blur";
 		return (
-			<div className="back-grade">
-        <div className="bottom-grade"></div>
-				<div className="header-spacer header-left-arrow"/>
-				<h2 className="feature-title">{this.props.ad.title}</h2>
-				<ReactCSS
-					transitionName="fader"
-					transitionEnterTimeout={1000}
-					transitionLeaveTimeout={300}>
-					{ this.displayPane() }
-				</ReactCSS>
-				{ this.createMenuButtons() }
-				<div className="header-spacer header-right-arrow"/>
-				{ this.closeButton() }
+			<div >
+				<div className={ "feature-background-image" + klass }/>
+					<div className="back-grade"/>
+	        <div className="bottom-grade"/>
+					<div className="header-spacer header-left-arrow"/>
+					<h2 className="feature-title">{this.props.ad.title}</h2>
+						{ this.displayPane() }
+
+					{ this.createMenuButtons() }
+					<div className="header-spacer header-right-arrow"/>
+					{ this.closeButton() }
 			</div>
 		);
 	}
