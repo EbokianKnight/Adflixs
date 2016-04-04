@@ -2,9 +2,10 @@ var React = require('react');
 var PropTypes = React.PropTypes;
 var Advert = require('./ad_index_item');
 var Slider = require('react-slick');
-var AdDetailPane = require('./ad_detail_pane');
+var DetailMain = require('./feature_panes/detail_main');
 var AdStore = require('../../stores/ad_store');
 var ReactCSS = require('react-addons-css-transition-group');
+
 var AdvertRow = React.createClass({
 
 	getInitialState: function() {
@@ -41,7 +42,11 @@ var AdvertRow = React.createClass({
 
 	renderDetail: function () {
 		if (this.state.showDetail) {
-			return <AdDetailPane show={this.state.showDetail} ad={AdStore.getAd()}/>;
+			return (
+				<div className="ad-detail-pane">
+					<DetailMain show={this.state.showDetail} ad={AdStore.getAd()}/>
+				</div>
+			);
 		} else {
 			return "";
 		}
