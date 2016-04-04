@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 		resources :genres, only: [:show, :index, :create, :destroy]
 		resources :ads, only: [:show, :index, :create, :destroy]
     resource :session, only: [:show, :create, :destroy]
+		resources :views, only: [:show, :create, :update]
 		get 'list', :to => 'genres#list'
 	end
 
