@@ -363,9 +363,7 @@
 	left: 50px;
 	display: block;
 	box-sizing: border-box;
-	box-shadow: 10px 10px 80px black;
-	border-radius: 25px;
-	background: rgba(0,0,0,0.4);
+	text-shadow: 3px 3px 20px black;
 	font-size: 48px;
 	font-weight: bold;
 	// border: 1px solid red;
@@ -442,6 +440,168 @@
 	transition: background-color 300ms linear;
 	background-color: #ccc;
 	color: #141414;
+}
+
+.ad-review-main {
+	// border: 1px solid red;
+	width: 95%;
+	margin: auto;
+	height: 375px;
+	top: -410px;
+	position: relative;
+	z-index: 60;
+	box-sizing: border-box;
+}
+
+.ad-review-flex-container {
+	// border: 1px solid red;
+	float:left;
+	width: 60%;
+	height: 310px;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	align-items: flex-start;
+	align-content: flex-start;
+	overflow: hidden;
+}
+
+.ad-review-title {
+	width: 100%;
+	// border: 1px solid red;
+	display: block;
+	padding: 5px;
+	font-weight: bold;
+	font-size: 16px;
+	box-sizing: border-box;
+}
+
+.ad-review-flex-article {
+	width: auto;
+	height: auto;
+	padding: 10px;
+	flex-grow: 1;
+	flex-basis: 200px;
+}
+
+.ad-link:hover {
+	color: white;
+	text-shadow: 0 0 1px white;
+}
+
+.review-flex-header {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+	align-items: flex-start;
+	align-content: flex-start;
+}
+
+.review-h3 {
+	font-weight: bold;
+	margin-right: 5px;
+}
+
+.review-star {
+	color: red;
+}
+
+.ad-review-right-panel {
+	// border: 1px solid red;
+	float: left;
+	width: 40%;
+	height: 320px;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	padding: 0 10px;
+}
+
+.ad-review-flex-form {
+	justify-content: flex-start;
+	align-items: flex-start;
+	align-content: flex-start;
+}
+
+.ad-review-flex-button {
+	justify-content: center;
+	align-items: center;
+	align-content: center;
+}
+
+.ad-review-button {
+	width: 20%;
+	border-radius: 10px;
+	background: #E50914;
+	padding: 15px;
+	margin-top: 15px;
+}
+.ad-review-button:hover {
+	background: #f40612;
+	cursor: pointer;
+}
+
+.ad-review-cancel {
+	width: 20%;
+	border-radius: 10px;
+	background: #999;
+	padding: 15px;
+}
+.ad-review-cancel:hover {
+	background: #ccc;
+	cursor: pointer;
+}
+
+.button-flex-form-container {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	margin: 0 10px;
+	width: 95%;
+	justify-content: space-between;;
+	align-items: center;
+	align-content: flex-start;
+	position: relative;
+	top: 10px;
+}
+
+.review-form-flex-container {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	width: 95%;
+	justify-content: flex-start;;
+	align-items: flex-start;
+	align-content: flex-start;
+}
+
+.form-review-input {
+	width: 100%;
+	padding: 5px;
+	background: rgba(0,0,0,0.7);
+	border-radius: 5px;
+}
+
+.form-review-area {
+	min-width: 100%;
+	max-width: 100%;
+	height: 190px;
+	flex-grow: 1;
+	flex-basis: 200px;
+	overflow:scroll;
+	max-height: 190px;
+	min-height: 190px;
+}
+
+.review-form-h3 {
+	padding: 10px;
+	font-size: 16px;
+	font-weight: bold;
+	margin-right: 5px;
 }
 
 .dark-background {
