@@ -45,3 +45,42 @@ body {
 	color: #ccc;
 	background: #f3f3f3;
 }
+
+.blur {
+	-webkit-filter: blur(2px) brightness(0.5);
+	filter: blur(2px) brightness(0.8);
+}
+
+.fader-enter {
+  opacity: 0.01;
+}
+.fader-enter.fader-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+.fader-leave {
+  opacity: 1;
+}
+.fader-leave.fader-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}
+
+.dropdown-enter {
+  opacity: 0.01;
+	height: 210px;
+}
+.dropdown-enter.dropdown-enter-active {
+  height: 695px;
+	opacity: 1;
+  transition: height 0.54s cubic-bezier(0.5, 0, 0.1, 1) 0s, opacity 0.44s cubic-bezier(0.5, 0, 0.1, 1) 0.1s;
+}
+.dropdown-leave {
+	opacity: 1;
+	height: 695px;
+}
+.dropdown-leave.dropdown-leave-active {
+	height: 210px;
+	opacity: 0.01;
+  transition: height 0.54s cubic-bezier(0.5, 0, 0.1, 1) 0s, opacity 0.44s cubic-bezier(0.5, 0, 0.1, 1) 0.1s;
+}
