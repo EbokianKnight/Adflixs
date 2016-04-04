@@ -6,7 +6,7 @@ var MoreLikeThisDetail = React.createClass({
 
   /// ??_??
   createRow: function () {
-    if (!this.props.ad.genres) { return ""; }
+    if (this.props.header) { return ""; }
     var getRow = GenreStore.find(this.props.ad.genres[0].id);
     return (
       <AdvertRow genre={getRow}/>

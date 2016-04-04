@@ -39,11 +39,11 @@ var AdDetailPane = React.createClass({
 
 	displayPane: function () {
 		if (this.state.display === "overview") {
-			return <OverviewDetail key={1} ad={this.props.ad}/>;
+			return <OverviewDetail key={1} ad={this.props.ad} header={this.props.header}/>;
 		} else if (this.state.display === "similar") {
-			return <MoreLikeThisDetail key={2} ad={this.props.ad}/>;
+			return <MoreLikeThisDetail key={2} ad={this.props.ad} header={this.props.header}/>;
 		} else if (this.state.display === "detail") {
-			return <MoreDetails key={3} ad={this.props.ad}/>;
+			return <MoreDetails key={3} ad={this.props.ad} header={this.props.header}/>;
 		}
 	},
 
@@ -62,7 +62,7 @@ var AdDetailPane = React.createClass({
 		if (!this.props.ad) { return <div></div>; }
 		var klass = this.state.display === "overview" ? "" : " blur";
 		return (
-			<div >
+			<div className="review-details">
 				<div className={ "feature-background-image" + klass }/>
 					<div className="back-grade"/>
 	        <div className="bottom-grade"/>
