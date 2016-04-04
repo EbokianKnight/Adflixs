@@ -1,11 +1,12 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
-var OverviewDetail = require('./feature_panes/overview');
-var MoreDetails = require('./feature_panes/detail');
-var MoreLikeThisDetail = require('./feature_panes/more_like_this');
+var AdAction = require('../../../actions/ad_actions');
+var OverviewDetail = require('./overview');
+var MoreDetails = require('./detail');
+var MoreLikeThisDetail = require('./more_like_this');
 var ReactCSS = require('react-addons-css-transition-group');
 
-var MainHeader = React.createClass({
+var AdDetailPane = React.createClass({
 
 	getInitialState: function() {
 		return { display: 0 };
@@ -30,7 +31,7 @@ var MainHeader = React.createClass({
 		return (
 			<nav className="ad-display-nav group">
 				<button onClick={this.showOverviewPane}>Overview</button>
-				<button onClick={this.showSimilarPane}>More Like this</button>
+				<button onClick={this.showSimilarPane}>More Like This</button>
 				<button onClick={this.showDetailPane}>Details</button>
 			</nav>
 		);
@@ -46,29 +47,36 @@ var MainHeader = React.createClass({
 		}
 	},
 
+	close_details: function () {
+		AdAction.closeDetails();
+	},
+
+  closeButton: function () {
+    if (this.props.header) return "";
+    return (
+      <button className="top-right-x" onClick={this.close_details}>X</button>
+    );
+  },
+
 	render: function() {
-		if (!this.props.ad) { return <div></div> }
+		if (!this.props.ad) { return <div></div>; }
 		return (
-			<div>
-			<spacer className="main-nav-background"></spacer>
-			<div className="main-index-header">
-				<div className="bottom-grade"></div>
-				<div className="back-grade">
-					<div className="header-spacer header-left-arrow"/>
-					<h2 className="feature-title">{this.props.ad.title}</h2>
-					<ReactCSS
-		        transitionName="fader"
-		        transitionEnterTimeout={500}
-		        transitionLeaveTimeout={300}>
-						{ this.displayPane() }
-					</ReactCSS>
-					{ this.createMenuButtons() }
-					<button className="header-right-arrow header-spacer"></button>
-				</div>
-			</div>
+			<div className="back-grade">
+        <div className="bottom-grade"></div>
+				<div className="header-spacer header-left-arrow"/>
+				<h2 className="feature-title">{this.props.ad.title}</h2>
+				<ReactCSS
+					transitionName="fader"
+					transitionEnterTimeout={1000}
+					transitionLeaveTimeout={300}>
+					{ this.displayPane() }
+				</ReactCSS>
+				{ this.createMenuButtons() }
+				<div className="header-spacer header-right-arrow"/>
+				{ this.closeButton() }
 			</div>
 		);
 	}
 });
 
-module.exports = MainHeader;
+module.exports = AdDetailPane;
