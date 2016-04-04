@@ -44,12 +44,7 @@ var AdvertRow = React.createClass({
 		if (this.state.showDetail) {
 			return (
 				<div className="ad-detail-pane">
-					<ReactCSS
-						transitionName="dropdown"
-						transitionEnterTimeout={600}
-						transitionLeaveTimeout={200}>
 					<DetailMain show={this.state.showDetail} ad={AdStore.getAd()}/>
-					</ReactCSS>
 				</div>
 			);
 		} else {
