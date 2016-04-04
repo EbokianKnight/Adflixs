@@ -12,6 +12,7 @@ var AccountIndex = React.createClass({
   },
 
   componentDidMount: function() {
+    document.body.style.backgroundColor = "#f3f3f3";
     this.sessionToken = SessionStore.addListener(this.getUserFromStore)
     this.flash = null;
   },
