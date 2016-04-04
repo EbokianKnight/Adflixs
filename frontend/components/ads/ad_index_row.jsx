@@ -44,7 +44,12 @@ var AdvertRow = React.createClass({
 		if (this.state.showDetail) {
 			return (
 				<div className="ad-detail-pane">
+					<ReactCSS
+						transitionName="dropdown"
+						transitionEnterTimeout={600}
+						transitionLeaveTimeout={200}>
 					<DetailMain show={this.state.showDetail} ad={AdStore.getAd()}/>
+					</ReactCSS>
 				</div>
 			);
 		} else {
@@ -59,18 +64,16 @@ var AdvertRow = React.createClass({
       speed: 500,
 			arrows: true,
 			useCSS: true,
-			variableWidth: false,
 			responsive: [
-				{ breakpoint: 210, settings: { slidesToShow: 1, slidesToScroll: 1 } },
-				{ breakpoint: 420, settings: { slidesToShow: 2, slidesToScroll: 2 } },
-				{ breakpoint: 630, settings: { slidesToShow: 3, slidesToScroll: 3 } },
-				{ breakpoint: 840, settings: { slidesToShow: 4, slidesToScroll: 4 } },
-				{ breakpoint: 1050, settings: { slidesToShow: 5, slidesToScroll: 5 } },
-				{ breakpoint: 1260, settings: { slidesToShow: 6, slidesToScroll: 6 } },
-				{ breakpoint: 1470, settings: { slidesToShow: 7, slidesToScroll: 7 } },
-				{ breakpoint: 1680, settings: { slidesToShow: 8, slidesToScroll: 8 } },
-				{ breakpoint: 1890, settings: { slidesToShow: 9, slidesToScroll: 9 } },
-				{ breakpoint: 100000, settings: 'unslick' }
+				{ breakpoint: 410, settings: { slidesToShow: 1, slidesToScroll: 1 } },
+				{ breakpoint: 620, settings: { slidesToShow: 2, slidesToScroll: 2 } },
+				{ breakpoint: 830, settings: { slidesToShow: 3, slidesToScroll: 3 } },
+				{ breakpoint: 1040, settings: { slidesToShow: 4, slidesToScroll: 4 } },
+				{ breakpoint: 1250, settings: { slidesToShow: 5, slidesToScroll: 5 } },
+				{ breakpoint: 1460, settings: { slidesToShow: 6, slidesToScroll: 6 } },
+				{ breakpoint: 1870, settings: { slidesToShow: 7, slidesToScroll: 7 } },
+				{ breakpoint: 1980, settings: { slidesToShow: 8, slidesToScroll: 8 } },
+				{ breakpoint: 2190, settings: { slidesToShow: 9, slidesToScroll: 9 } }
 			]
     };
 
