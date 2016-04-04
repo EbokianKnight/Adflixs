@@ -68,7 +68,7 @@ var AdDetailPane = React.createClass({
 	        <div className="bottom-grade"/>
 					<div className="header-spacer header-left-arrow"/>
 					<h2 className="feature-title">{this.props.ad.title}</h2>
-						{ this.displayPane() }
+					{ this.displayPane() }
 
 					{ this.createMenuButtons() }
 					<div className="header-spacer header-right-arrow"/>
