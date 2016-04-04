@@ -22,7 +22,7 @@ class Api::UsersController < ApplicationController
   			render json: { message: @user.errors.full_messages }
   		end
     else
-      render json: { message: ["Incorrect email or password"] }
+      render json: { message: ["Incorrect email or password"] }, status: 401
     end
   end
 
