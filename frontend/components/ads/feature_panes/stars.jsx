@@ -8,7 +8,7 @@ var RateStars = React.createClass({
 
   getInitialState: function() {
     return {
-      rate: 0
+      rate: SessionStore.fetchView(this.props.ad.id).rate || 0
     };
   },
 
