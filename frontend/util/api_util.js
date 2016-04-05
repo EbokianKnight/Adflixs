@@ -1,5 +1,6 @@
 var AdActions = require('../actions/ad_actions');
 var GenreActions = require('../actions/genre_actions');
+var UserActions = require('./../actions/user_actions');
 
 module.exports = {
   createAdvert: function (advertData) {
@@ -9,10 +10,35 @@ module.exports = {
       data: advertData,
       success: function (advert) {
         AdActions.recieveAdvert(advert);
-        console.log("success");
       },
       error: function (err) {
         console.log("ApiUtil#createAdvert Error");
+      }
+    });
+  },
+  createView: function (viewData) {
+    $.ajax({
+			method: "POST",
+      url: "api/views",
+      data: { view: viewData },
+      success: function (view) {
+        UserActions.recieveView(view);
+      },
+      error: function (err) {
+        console.log("ApiUtil#createView Error");
+      }
+    });
+  },
+  updateView: function (viewID, viewData) {
+    $.ajax({
+			method: "PATCH",
+      url: "api/views/" + viewID,
+      data: { view: viewData },
+      success: function (view) {
+        UserActions.recieveView(view);
+      },
+      error: function (err) {
+        console.log("ApiUtil#updateView Error");
       }
     });
   },
