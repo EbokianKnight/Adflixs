@@ -3,6 +3,7 @@ class Api::UsersController < ApplicationController
   #show a list of all users
   def index
     @users = User.all
+    @user.includes(:views)
   end
 
   #show a user
@@ -22,7 +23,7 @@ class Api::UsersController < ApplicationController
   			render json: { message: @user.errors.full_messages }
   		end
     else
-      render json: { message: ["Incorrect email or password"] }, status: 401
+      render json: { message: ["Incorrect email or password"] }
     end
   end
 
