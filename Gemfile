@@ -26,7 +26,7 @@ gem 'bcrypt'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
-
+gem 'faker'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
@@ -36,7 +36,6 @@ group :development, :test do
 	gem 'rspec-rails'
 	gem 'capybara'
 	gem 'launchy'
-	gem 'faker'
 	gem 'factory_girl_rails'
 end
 
