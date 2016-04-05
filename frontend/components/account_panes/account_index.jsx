@@ -51,7 +51,6 @@ var AccountIndex = React.createClass({
 
   sendPasswordChange: function (e) {
     e.preventDefault();
-    // debugger;
     // if (e.currentTarget.oldpassword.value !== e.currentTarget.passconfirm.value ) {
     //   this.flash = "password confirmation does not match"
     //   return;
