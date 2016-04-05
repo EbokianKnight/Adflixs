@@ -17,7 +17,8 @@ var Detail = React.createClass({
     this.setState({ show: "form" });
   },
 
-  closeForm: function () {
+  closeForm: function (e) {
+    if (e) { e.preventDefault(); }
     this.setState({ show: "none" });
   },
 
