@@ -9,30 +9,53 @@
 Genre.destroy_all
 Ad.destroy_all
 AdGenre.destroy_all
+User.destroy_all
 
+User.create!(email: "Guest", password: "password", admin: false)
+User.create!(email: "MyTest", password: "testtest", admin: true)
 
-funny = Genre.create!(name: "funny")
-cars = Genre.create!(name: "cars")
-previews = Genre.create!(name: "previews")
-foods = Genre.create!(name: "foods")
-drinks = Genre.create!(name: "drinks")
-clothing = Genre.create!(name: "clothing")
-arty = Genre.create!(name: "arty")
-animals = Genre.create!(name: "animals")
-politics = Genre.create!(name: "politics")
-tech = Genre.create!(name: "tech")
+youtube = [
+  '0oYlOBun8UI', 'OlZqBR3yTiw', 'S2nBBMbjS8w', 'zV7N21LSr_Y', 'RZd2NDzQzA4',
+  'M0D3jKLz6sA', '40DykbPa4Lc', 'k3NrLgfp_4w', 'oIfNv9qLvy4', 'WMI3nDccXtc',
+  'LT6n1HcJOio'
+]
 
-genres = [funny,cars,previews,foods,drinks,clothing,arty,animals,politics,tech]
-g_ids = genres.sample(rand(3)+1).map{ |g| g.id }
+genres = [
+  Genre.create!(name: "funny"),
+  Genre.create!(name: "cars"),
+  Genre.create!(name: "previews"),
+  Genre.create!(name: "foods"),
+  Genre.create!(name: "drinks"),
+  Genre.create!(name: "clothing"),
+  Genre.create!(name: "arty"),
+  Genre.create!(name: "animals"),
+  Genre.create!(name: "politics"),
+  Genre.create!(name: "tech")
+]
 
-200.times do |i|
+ads = []
+
+150.times do |i|
   g_ids = genres.sample(rand(3)+1).map{ |g| g.id }
-  Ad.create!(
+  ads.push(Ad.create!(
     title: Faker::Superhero.power,
     company: Faker::Company.name,
     product: Faker::Superhero.name,
     description: Faker::Lorem.paragraph,
     year: Faker::Date.between(1.year.ago, Date.today),
-    genre_ids: g_ids
-  )
+    genre_ids: g_ids,
+    youtube: youtube.sample(1)
+  ))
+end
+
+20.times do |user|
+  t = User.create!(email: Faker::Internet.free_email, password: "lolcats" )
+  ads.sample(60).each do |ad|
+    t.views.create!(
+      ad_id: ad.id,
+      rate: rand(5) + 1,
+      title: Faker::Hipster.word,
+      review: Faker::Hipster.paragraph(2)
+      )
+  end
 end
