@@ -5,7 +5,7 @@ class Api::AdsController < ApplicationController
 	end
 
 	def index
-		@ads = Ad.all
+		@ads = Ad.all.includes(:genres)
 	end
 
 	def create
