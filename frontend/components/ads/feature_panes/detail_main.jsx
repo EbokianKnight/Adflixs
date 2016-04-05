@@ -2,7 +2,7 @@ var React = require('react');
 var PropTypes = React.PropTypes;
 var AdAction = require('../../../actions/ad_actions');
 var OverviewDetail = require('./overview');
-var MoreDetails = require('./detail');
+var ReviewIndex = require('./review_index');
 var MoreLikeThisDetail = require('./more_like_this');
 var ReactCSS = require('react-addons-css-transition-group');
 
@@ -28,6 +28,7 @@ var AdDetailPane = React.createClass({
 	},
 
 	createMenuButtons: function () {
+		if (this.props.header) {return;}
 		return (
 			<nav className="ad-display-nav group">
 				<button onClick={this.showOverviewPane}>Overview</button>
@@ -43,7 +44,8 @@ var AdDetailPane = React.createClass({
 		} else if (this.state.display === "similar") {
 			return <MoreLikeThisDetail key={2} ad={this.props.ad} header={this.props.header}/>;
 		} else if (this.state.display === "detail") {
-			return <MoreDetails key={3} ad={this.props.ad} header={this.props.header}/>;
+			return <ReviewIndex key={3} ad={this.props.ad}
+				header={this.props.header} refresh={this.props.refresh}/>;
 		}
 	},
 

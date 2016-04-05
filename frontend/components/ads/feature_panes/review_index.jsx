@@ -4,8 +4,9 @@ var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 var RateStars = require('./stars');
 var SessionStore = require('../../../stores/session_store');
 var ApiUtil = require('../../../util/api_util');
+var ReviewIndexItem = require ('./review_index_item');
 
-var Detail = React.createClass({
+var ReviewIndex = React.createClass({
 
   getInitialState: function() {
     return {
@@ -19,6 +20,7 @@ var Detail = React.createClass({
 
   closeForm: function (e) {
     if (e) { e.preventDefault(); }
+    this.props.refresh(this.props.ad.id);
     this.setState({ show: "none" });
   },
 
@@ -51,24 +53,11 @@ var Detail = React.createClass({
   },
 
   loadReviews: function () {
-    var reviews = [];
-    for (var i = 0; i < 8; i++) {
-      reviews.push(
-        <article key={i} className="ad-review-flex-article ad-link">
-          <div className="review-flex-header">
-            <h3 className="review-h3">Good Ad!</h3>
-            <div className="review-star">&#x2605;</div>
-            <div className="review-star">&#x2605;</div>
-            <div className="review-star">&#x2605;</div>
-            <div className="review-star">&#x2605;</div>
-            <div className="review-star">&#x2605;</div></div>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-            sed do eiusmod tempor incididunt...</p>
-          <p>author: thisReview@guy.com</p>
-        </article>
-      );
-    }
-    return reviews;
+    if (!this.props.ad.views) return "";
+    return this.props.ad.views.map(function(view, i){
+      if (!view.review) { return ""; }
+      return <ReviewIndexItem key={i} view={view} />;
+    });
   },
 
   reviewForm: function () {
@@ -114,11 +103,11 @@ var Detail = React.createClass({
           { this.loadReviews() }
         </section>
         { this.reviewForm() }
-        <a className="ad-review-title ad-link" href="#">Read More...</a>
+        <a className="ad-review-title ad-link">Read More...</a>
       </section>
     );
   }
 
 });
 
-module.exports = Detail;
+module.exports = ReviewIndex;

@@ -5,6 +5,7 @@ var Slider = require('react-slick');
 var DetailMain = require('./feature_panes/detail_main');
 var AdStore = require('../../stores/ad_store');
 var ReactCSS = require('react-addons-css-transition-group');
+var ApiUtil = require('../../util/api_util');
 
 var AdvertRow = React.createClass({
 
@@ -30,13 +31,20 @@ var AdvertRow = React.createClass({
 		}
 	},
 
+	refreshState: function (adID) {
+		if (adID) {
+			ApiUtil.fetchAdvert(adID, this.props.genre.id);
+		}
+	},
+
 	fetchRowName: function () {
 		return <div className="row-caption">{ this.props.genre.name }</div>;
 	},
 
 	fetchAdverts: function () {
 		return this.props.genre.ads.map(function(ad){
-			return <Advert ad={ad} key={ad.id} rowID={ this.props.genre.id } show={ this.state.showDetail }/>;
+			return <Advert ad={ad} key={ad.id} rowID={ this.props.genre.id }
+				show={ this.state.showDetail }/>;
 		}.bind(this));
 	},
 
@@ -44,7 +52,7 @@ var AdvertRow = React.createClass({
 		if (this.state.showDetail) {
 			return (
 				<div className="ad-detail-pane">
-					<DetailMain show={this.state.showDetail} ad={AdStore.getAd()}/>
+					<DetailMain show={this.state.showDetail} ad={AdStore.getAd()} refresh={this.refreshState}/>
 				</div>
 			);
 		} else {

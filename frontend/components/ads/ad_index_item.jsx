@@ -4,6 +4,8 @@ var ApiUtil = require('../../util/api_util');
 
 var Advert = React.createClass({
 
+	// Update the Store with the last row that was clicked, as movies can exist
+	// in multiple rows, Row is listening for changes.
 	sendBackID: function (e) {
 		e.preventDefault();
 		ApiUtil.fetchAdvert(this.props.ad.id, this.props.rowID);
