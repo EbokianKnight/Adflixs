@@ -32,5 +32,11 @@ module.exports = {
       actionType: UserConstants.FLASH,
       message: message,
     });
+  },
+  recieveView: function (view) {
+    AppDispatcher.dispatch({
+      actionType: UserConstants.UPDATE_VIEW,
+      view: view
+    });
   }
 };
