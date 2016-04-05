@@ -646,3 +646,78 @@
 	height: 150px;
 	width: 100%;
 }
+
+.close-modal-button {
+	display: block;
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	font-size: 30px;
+}
+
+.modal-container {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: flex-start;
+}
+
+.modal-review-header {
+	color: #ccc;
+	font-size: 32px;
+	padding: 10px;
+	height: 3em;
+	width: 80%;
+	border-top: 5px solid #E50914;
+	border-bottom: 1px solid #333;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	justify-content: center;
+	align-items: flex-start;
+	align-content: flex-start;
+	border-bottom: 1px solid #333;
+}
+
+body,
+.scrollY {
+  overflow-y: auto;
+}
+
+
+.modal-review-spacer {
+	font-size: 32px;
+	height: 3em;
+	width: 80%;
+}
+
+.modal-ad-review {
+	width: 100%;
+	font-size: 16px;
+  height: auto;
+  padding: 10px;
+  flex-grow: 1;
+  flex-basis: 200px;
+}
+
+.modal-footer {
+	height: 3em;
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+}
+
+.modal-review-body {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+	width: 100%;
+	padding: 10px;
+	height: 30px;
+	background: orange;
+	justify-content: flex-start;;
+	align-items: flex-start;
+	align-content: flex-start;
+	border-bottom: 1px solid #333;
+}

@@ -5,14 +5,54 @@ var RateStars = require('./stars');
 var SessionStore = require('../../../stores/session_store');
 var ApiUtil = require('../../../util/api_util');
 var ReviewIndexItem = require ('./review_index_item');
+var Modal = require('react-modal');
+
+var settings = {
+  overlay : {
+    position          : 'fixed',
+    top               : 0,
+    left              : 0,
+    right             : 0,
+    bottom            : 0,
+    backgroundColor   : 'rgba(0, 0, 0, 0.5)'
+  },
+  content : {
+    position                   : 'absolute',
+    top                        : '10%',
+    bottom                     : '5%',
+    right                      : '5%',
+    left                       : '5%',
+    border                     : '1px solid #000',
+    overflow                   : 'auto',
+    WebkitOverflowScrolling    : 'touch',
+    borderRadius               : '4px',
+    background                 : 'rgba(0, 0, 0, 0.8)',
+    padding                    : '5%',
+    zIndex                    : '200'
+  }
+};
 
 var ReviewIndex = React.createClass({
 
   getInitialState: function() {
     return {
-      show: "none"
+      show: "none",
+      modalIsOpen: false
     };
   },
+
+  componentWillMount: function() {
+    Modal.setAppElement(document.body);
+  },
+
+  openModal: function() {
+    this.setState({modalIsOpen: true});
+  },
+
+  closeModal: function() {
+    this.setState({modalIsOpen: false});
+  },
+
 
   showForm: function () {
     this.setState({ show: "form" });
@@ -97,14 +137,33 @@ var ReviewIndex = React.createClass({
 
   render: function() {
     return (
-      <section className="ad-review-main group">
-        <h2 className="ad-review-title">Member Reviews</h2>
-        <section className="ad-review-flex-container">
-          { this.loadReviews() }
+      <div>
+        <section className="ad-review-main group">
+          <h2 className="ad-review-title">Member Reviews</h2>
+          <section className="ad-review-flex-container">
+            { this.loadReviews() }
+          </section>
+          { this.reviewForm() }
+          <a onClick={this.openModal} className="ad-review-title ad-link">
+            Read More...</a>
         </section>
-        { this.reviewForm() }
-        <a className="ad-review-title ad-link">Read More...</a>
-      </section>
+        <Modal
+          isOpen={this.state.modalIsOpen}
+          onRequestClose={this.closeModal}
+          style={settings} >
+          <div className="modal-container">
+            <div className="modal-review-header">
+              <div className="close-modal-button">X</div>
+              <p>Member Reviews for { this.props.ad.title }</p>
+            </div>
+            <div className="modal-review-spacer"></div>
+            <div className="modal-review-body">
+
+            </div>
+            <footer className="modal-footer"/>
+          </div>
+        </Modal>
+      </div>
     );
   }
 

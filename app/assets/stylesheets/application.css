@@ -48,7 +48,7 @@ body {
 
 .blur {
 	-webkit-filter: blur(2px) brightness(0.5);
-	filter: blur(2px) brightness(0.8);
+	filter: blur(2px) brightness(0.5);
 }
 
 .fader-enter {
