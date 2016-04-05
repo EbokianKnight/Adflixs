@@ -41,6 +41,13 @@ var NewSession = React.createClass({
     this.setState({ password: e.target.value });
   },
 
+  signUpAsGuest: function () {
+    UserUtil.signIn({
+      email: "GuestGuestGuest",
+      password: "123456"
+    }, this.redirectCallback );
+  },
+
   signIn: function (e) {
     e.preventDefault();
     UserUtil.signIn({
@@ -55,6 +62,9 @@ var NewSession = React.createClass({
 
   createNewSessionForm: function () {
     return (
+      <div>
+      <div onClick={this.signUpAsGuest} className="sign-in-button sign-in-adflix">
+        Sign In As Guest</div>
       <form  className="sign-in-pane" onSubmit={this.signIn}>
         <h1>Sign In</h1>
 
@@ -76,6 +86,7 @@ var NewSession = React.createClass({
         <svg className="sign-in-button sign-in-facebook"/>
         <svg className="sign-in-button sign-in-google"/>
       </form>
+      </div>
     );
   },
 
