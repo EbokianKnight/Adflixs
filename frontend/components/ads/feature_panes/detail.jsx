@@ -2,6 +2,8 @@ var React = require('react');
 var PropTypes = React.PropTypes;
 var ReactCSSTransitionGroup = require('react-addons-css-transition-group');
 var RateStars = require('./stars');
+var SessionStore = require('../../../stores/session_store');
+var ApiUtil = require('../../../util/api_util');
 
 var Detail = React.createClass({
 
@@ -50,7 +52,7 @@ var Detail = React.createClass({
     if (this.state.show === "none") {
       return (
         <section className="ad-review-flex-button ad-review-right-panel">
-          <RateStars />
+          <RateStars ad={this.props.ad}/>
           <button className="ad-review-button" onClick={this.showForm}>
             Review</button>
         </section>
@@ -66,7 +68,7 @@ var Detail = React.createClass({
           </form>
           <div className="button-flex-form-container">
             <input className="ad-review-button" type="submit" value="Submit"/>
-            <RateStars />
+            <RateStars ad={this.props.ad}/>
             <button className="ad-review-cancel" onClick={this.closeForm}>
               Cancel</button>
           </div>
