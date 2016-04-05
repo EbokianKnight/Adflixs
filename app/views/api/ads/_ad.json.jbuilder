@@ -6,4 +6,10 @@ if show_genres
       json.partial!('api/genres/genre', genre: genre, show_ads: false)
     end
   end
+
+  json.views do
+    json.array!(ad.views) do |view|
+      json.partial!('api/views/view', view: view)
+    end
+  end
 end
