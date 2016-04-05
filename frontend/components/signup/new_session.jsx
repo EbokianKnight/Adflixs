@@ -43,8 +43,8 @@ var NewSession = React.createClass({
 
   signUpAsGuest: function () {
     UserUtil.signIn({
-      email: "GuestGuestGuest",
-      password: "123456"
+      email: "Guest",
+      password: "password"
     }, this.redirectCallback );
   },
 
