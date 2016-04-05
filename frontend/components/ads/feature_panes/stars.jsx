@@ -1,5 +1,8 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
+var SessionStore = require('../../../stores/session_store');
+var ApiUtil = require('../../../util/api_util');
+
 
 var RateStars = React.createClass({
 
@@ -9,8 +12,34 @@ var RateStars = React.createClass({
     };
   },
 
+  componentDidMount: function() {
+    this.sessionToken = SessionStore.addListener(this.setStarsFromStore);
+  },
+
+  componentWillUnmount: function() {
+    this.sessionToken.remove();
+  },
+
+  setStarsFromStore: function () {
+    var view = SessionStore.fetchView(this.props.ad.id);
+    var stars = 0;
+    if (view) { stars = view.rate; }
+    this.setState({ rate: stars });
+  },
+
   rate: function (e) {
-    console.log($(e.currentTarget).attr("name"));
+    var adID = this.props.ad.id;
+    var userID = SessionStore.currentUser().id;
+    var view = SessionStore.fetchView(this.props.ad.id);
+    if (view) {
+      ApiUtil.updateView(view.id, { rate: this.state.rate });
+    } else {
+      ApiUtil.createView({
+        user_id: userID,
+        ad_id: adID,
+        rate: this.state.rate
+      });
+    }
   },
 
   makeGold: function (e) {
@@ -25,7 +54,7 @@ var RateStars = React.createClass({
     var four = this.state.rate > 3 ? " gold" : "";
     var five = this.state.rate > 4 ? " gold" : "";
     return (
-      <ul className="rating-features">
+      <ul className="rating-features" onMouseLeave={this.setStarsFromStore}>
         <div className={"rate" + one} name="1"
           onMouseEnter={this.makeGold} onClick={this.rate}>&#x2605;</div>
         <div className={"rate" + two} name="2"
