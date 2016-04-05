@@ -8,7 +8,7 @@ if show_genres
   end
 
   json.views do
-    json.array!(ad.views) do |view|
+    json.array!(ad.views.order('updated_at DESC')) do |view|
       json.partial!('api/views/view', view: view)
     end
   end
