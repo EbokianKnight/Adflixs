@@ -37,6 +37,13 @@ class User < ActiveRecord::Base
 		self.session_token
 	end
 
+	def get_watched_hash
+		return self.views.map.with_object(Hash.new) do |view, hash|
+			hash[view.ad_id] = view
+		end
+	end
+
+
 	private
 
 	def ensure_session_token

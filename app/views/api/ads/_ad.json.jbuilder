@@ -7,9 +7,3 @@ if show_genres
     end
   end
 end
-
-json.views do
-  json.array!(ad.views) do |view|
-    json.partial!('api/views/view', view: view)
-  end
-end
