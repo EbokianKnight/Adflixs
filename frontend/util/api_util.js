@@ -16,26 +16,28 @@ module.exports = {
       }
     });
   },
-  createView: function (viewData) {
+  createView: function (viewData, callback) {
     $.ajax({
 			method: "POST",
       url: "api/views",
       data: { view: viewData },
       success: function (view) {
         UserActions.recieveView(view);
+        if (callback) { callback(); }
       },
       error: function (err) {
         console.log("ApiUtil#createView Error");
       }
     });
   },
-  updateView: function (viewID, viewData) {
+  updateView: function (viewID, viewData, callback) {
     $.ajax({
 			method: "PATCH",
       url: "api/views/" + viewID,
       data: { view: viewData },
       success: function (view) {
         UserActions.recieveView(view);
+        if (callback) { callback(); }
       },
       error: function (err) {
         console.log("ApiUtil#updateView Error");

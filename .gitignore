@@ -28,4 +28,4 @@ bundle.js.map
 
 # Ignore Byebug and DSStore
 .DS_Store
-byebug_history
+.byebug_history

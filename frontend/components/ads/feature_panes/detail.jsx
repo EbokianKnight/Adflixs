@@ -23,8 +23,30 @@ var Detail = React.createClass({
 
   sendReview: function (e) {
     e.preventDefault();
-    this.closeForm();
-    console.log("sent!");
+    var fetch = SessionStore.fetchView(this.props.ad.id);
+
+    if (fetch) {
+      ApiUtil.updateView(fetch.id, {
+        title: e.target[0].value,
+        review: e.target[1].value,
+        ad_id: this.props.ad.id
+      }, this.closeForm);
+    } else {
+      ApiUtil.createView({
+        title: e.target[0].value,
+        review: e.target[1].value,
+        ad_id: this.props.ad.id
+      }, this.closeForm);
+    }
+  },
+
+  checkCurrentUser: function () {
+    var view = SessionStore.fetchView(this.props.ad.id);
+    return (
+      { title: view && view.title ? view.title : "",
+        review: view && view.review ? view.review : ""
+      }
+    );
   },
 
   loadReviews: function () {
@@ -49,6 +71,7 @@ var Detail = React.createClass({
   },
 
   reviewForm: function () {
+    var view = this.checkCurrentUser();
     if (this.state.show === "none") {
       return (
         <section className="ad-review-flex-button ad-review-right-panel">
@@ -60,18 +83,23 @@ var Detail = React.createClass({
     } else if (this.state.show === "form") {
       return (
         <section className="ad-review-flex-form ad-review-right-panel">
-          <form onSubmit={this.sendReview} className="review-form-flex-container">
-            <label>Title</label>
-            <input type="text" className="form-review-input"></input>
-            <label>Review</label>
-            <textarea className="form-review-input form-review-area"></textarea>
+          <form onSubmit={this.sendReview} ref="UpdateForm"
+            className="review-form-flex-container">
+            <label>Title
+              <input type="text" name="title" defaultValue={view.title}
+                className="form-review-input"/>
+            </label>
+            <label>Review
+              <textarea name="review" defaultValue={view.review}
+                className="form-review-input form-review-area" />
+            </label>
+            <div className="button-flex-form-container">
+              <input className="ad-review-button" type="submit" value="Submit"/>
+              <RateStars ad={this.props.ad}/>
+              <button className="ad-review-cancel" onClick={this.closeForm}>
+                Cancel</button>
+            </div>
           </form>
-          <div className="button-flex-form-container">
-            <input className="ad-review-button" type="submit" value="Submit"/>
-            <RateStars ad={this.props.ad}/>
-            <button className="ad-review-cancel" onClick={this.closeForm}>
-              Cancel</button>
-          </div>
         </section>
       );
     }

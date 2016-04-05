@@ -32,7 +32,7 @@ module.exports = {
   },
   updateUser: function (user, id, callback) {
     $.ajax({
-			method: "POST",
+			method: "PATCH",
       url: "/api/users" + id,
       data: { user: user },
       success: function (user) {
