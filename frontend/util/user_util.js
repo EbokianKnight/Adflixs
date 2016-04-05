@@ -30,7 +30,7 @@ module.exports = {
 			}
     });
   },
-  updateUser: function (user, id, callback) {
+  updateUser: function (id, user, callback) {
     $.ajax({
 			method: "PATCH",
       url: "/api/users" + id,
@@ -39,7 +39,7 @@ module.exports = {
         UserActions.receiveCurrentUser(user, callback);
       },
 			error: function (err) {
-        console.log('UserUtil#createUser Error');
+        console.log('UserUtil#updateUser Error');
 			}
     });
   },

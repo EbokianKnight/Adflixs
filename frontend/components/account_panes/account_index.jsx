@@ -51,29 +51,33 @@ var AccountIndex = React.createClass({
 
   sendPasswordChange: function (e) {
     e.preventDefault();
-    // if (e.currentTarget.oldpassword.value !== e.currentTarget.passconfirm.value ) {
-    //   this.flash = "password confirmation does not match"
-    //   return;
-    // }
-    // UserUtil.updateUser({ user: {
-    //     password: e.currentTarget.password.value,
-    //     oldpassword: e.currentTarget.oldpassword.value,
-    //     email: this.state.user.email
-    //   }
-    // })
+    if (e.currentTarget.oldpassword.value !== e.currentTarget.passconfirm.value ) {
+      this.flash = "password confirmation does not match"
+      return;
+    }
+    UserUtil.updateUser(SessionStore.currentUser.id,
+      {
+        password: e.currentTarget.password.value,
+        oldpassword: e.currentTarget.oldpassword.value,
+        email: this.state.user.email
+      },
+      this.close)
   },
 
-  // flashMessage: function () {
-  //   if (this.flash) {
-  //     var message = this.flash
-  //     this.flash = null
-  //     return <div className="flash-message">{message}</div>
-  //   }
-  // },
+  flashMessage: function () {
+    if (this.flash) {
+      var message = this.flash
+      this.flash = null
+      return <div className="flash-message">{message}</div>
+    }
+  },
 
   sendEmailChange: function (e) {
     e.preventDefault();
-    UserUtil.updateUser($(this.refs.EmailRequest).serialize())
+    UserUtil.updateUser(SessionStore.currentUser.id,
+      $(this.refs.EmailRequest).serialize(),
+      this.close
+    )
   },
 
   showPasswordEdit: function () {
@@ -85,7 +89,7 @@ var AccountIndex = React.createClass({
             <button onClick={this.close} className="account-aside-button">
               Cancel</button>
           </section>
-          <form ref="PasswordRequest" onSubmit={this.sendPasswordChange}>
+          <form ref="PasswordRequest">
             <row className="account-section-row group">
               <label className="account-item-left group">
                 <div className="form-row">Old Password</div>
@@ -139,12 +143,12 @@ var AccountIndex = React.createClass({
             <button onClick={this.close} className="account-aside-button">
               Cancel</button>
           </section>
-          <form onSubmit={this.sendEmailChange}>
+          <form>
             <row className="account-section-row group">
               <label className="account-item-left group">
-                <div className="form-row">Old Password</div>
+                <div className="form-row">Password</div>
                 <input className="account-section-input" type="password"
-                  name="password"/>
+                  name="user[password]"/>
               </label>
               <input type="submit" value="Update Email"
                 className="account-aside-button account-item-right"/>
@@ -153,7 +157,7 @@ var AccountIndex = React.createClass({
               <label className="account-item-left group">
                 <div className="form-row">New Email</div>
                 <input className="account-section-input" type="password"
-                  name="email"/>
+                  name="user[email]"/>
               </label>
             </row>
             <row className="account-section-row group">
