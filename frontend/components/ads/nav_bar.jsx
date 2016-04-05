@@ -8,7 +8,7 @@ var NavBar = React.createClass({
 	contextTypes: { router: PropTypes.object.isRequired },
 
 	goToAds: function () {
-		this.context.router.push("/ads");
+		this.context.router.push("/main");
 	},
 
 	render: function() {

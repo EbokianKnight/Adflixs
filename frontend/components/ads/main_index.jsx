@@ -4,8 +4,6 @@ var GenreStore = require('../../stores/genre_store');
 var ApiUtil = require('../../util/api_util');
 var AdvertRow = require('./ad_index_row');
 var DetailMain = require('./feature_panes/detail_main');
-var NavBar = require('./nav_bar');
-var Footer = require('./main_footer');
 
 var MainIndex = React.createClass({
 
@@ -14,7 +12,6 @@ var MainIndex = React.createClass({
 	},
 
 	componentDidMount: function() {
-		document.body.style.backgroundColor = "#141414";
 		genreStoreToken = GenreStore.addListener(this.getStateFromStore);
 		if (this.state.genres.length === 0){
 			ApiUtil.fetchGenres();
@@ -44,13 +41,10 @@ var MainIndex = React.createClass({
 		if (this.state.genres.length === 0) return <div></div>;
 		return (
 			<div className="main-index-body">
-				<NavBar />
-				<spacer className="main-nav-background"></spacer>
 				<div className="main-index-header">
 					<DetailMain ad={ this.fetchRandomAd() } header={true}/>
 				</div>
 				{ this.fetchRows() }
-				<Footer />
 			</div>
 		);
 	}

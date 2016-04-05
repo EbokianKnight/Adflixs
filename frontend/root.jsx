@@ -10,6 +10,7 @@ var UserUtil = require('./util/user_util');
 
 var App = require('./components/app');
 var HomePage = require('./components/homepage');
+var MainPage = require('./components/main_page');
 var MainIndex = require('./components/ads/main_index');
 var NotFound = require('./components/not_found');
 var NewUser = require('./components/signup/new_user');
@@ -21,9 +22,10 @@ var routes = (
     <IndexRoute component={HomePage}/>
     <Route path="users/new" component={NewUser} />
     <Route path="signin" component={SignIn} />
-
-		<Route path="ads" component={MainIndex} onEnter={_requireLoggedIn}/>
-    <Route path="account" component={Account} onEnter={_requireLoggedIn}/>
+    <Route path="main" component={MainPage} onEnter={_requireLoggedIn}>
+      <IndexRoute component={MainIndex} />
+      <Route path="account" component={Account} />
+    </Route>
     <Route path="*" component={NotFound}/>
   </Route>
 );

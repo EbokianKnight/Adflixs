@@ -41,7 +41,7 @@ var NewUser = React.createClass({
   },
 
   redirectCallback: function () {
-    this.context.router.push("/ads");
+    this.context.router.push("/main");
   },
 
   createFlashedMessage: function () {

@@ -6,7 +6,7 @@ module.exports = {
   createAdvert: function (advertData) {
     $.ajax({
 			method: "POST",
-      url: "api/ads",
+      url: "/api/ads",
       data: advertData,
       success: function (advert) {
         AdActions.recieveAdvert(advert);
@@ -19,7 +19,7 @@ module.exports = {
   createView: function (viewData, callback) {
     $.ajax({
 			method: "POST",
-      url: "api/views",
+      url: "/api/views",
       data: { view: viewData },
       success: function (view) {
         UserActions.recieveView(view);
@@ -33,7 +33,7 @@ module.exports = {
   updateView: function (viewID, viewData, callback) {
     $.ajax({
 			method: "PATCH",
-      url: "api/views/" + viewID,
+      url: "/api/views/" + viewID,
       data: { view: viewData },
       success: function (view) {
         UserActions.recieveView(view);
@@ -47,7 +47,7 @@ module.exports = {
   fetchAdverts: function () {
     $.ajax({
 			method: "GET",
-      url: "api/ads",
+      url: "/api/ads",
       success: function (adverts) {
         AdActions.recieveAllAdverts(adverts);
       }
@@ -56,7 +56,7 @@ module.exports = {
 	fetchAdvert: function (id, rowID) {
     $.ajax({
 			method: "GET",
-      url: "api/ads/" + id,
+      url: "/api/ads/" + id,
       success: function (advert) {
 				advert.rowID = rowID;
         AdActions.recieveAdvert(advert);
@@ -69,7 +69,7 @@ module.exports = {
   fetchGenreList: function () {
     $.ajax({
 			method: "GET",
-      url: "api/list",
+      url: "/api/list",
       success: function (list) {
         GenreActions.recieveGenreList(list);
       },
@@ -81,7 +81,7 @@ module.exports = {
 	fetchGenres: function () {
     $.ajax({
 			method: "GET",
-      url: "api/genres",
+      url: "/api/genres",
       success: function (genres) {
         GenreActions.recieveAllGenres(genres);
       },

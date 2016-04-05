@@ -57,7 +57,7 @@ var NewSession = React.createClass({
   },
 
   redirectCallback: function () {
-    this.context.router.push("/ads");
+    this.context.router.push("/main");
   },
 
   createNewSessionForm: function () {
