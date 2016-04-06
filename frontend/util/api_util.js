@@ -78,6 +78,18 @@ module.exports = {
 			}
     });
   },
+  fetchMyList: function () {
+    $.ajax({
+			method: "GET",
+      url: "/api/favorites",
+      success: function (list) {
+        myListActions.recieveMyList(list);
+      },
+			error: function (err) {
+				console.log("ApiUtil#fetchMyList Error");
+			}
+    });
+  },
 	fetchGenres: function (page, callback) {
     $.ajax({
 			method: "GET",
