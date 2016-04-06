@@ -19,21 +19,39 @@ var MyListButton = React.createClass({
     };
   },
 
+  componentDidMount: function() {
+    this.token = MyListStore.addListener(this.getStateFromStore);
+  },
+
+  componentWillUnmount: function() {
+    this.token.remove();
+  },
+
+  getStateFromStore: function () {
+    var state;
+    if (MyListStore.find(this.props.ad.id)) {
+      state = "removeFrom";
+    } else {
+      state = "addTo";
+    }
+    this.setState({ show: state });
+  },
+
   toggleList: function () {
     if (this.state.show === "addTo") {
-      ApiUtil.addToMyList(this.props.ad, this.toggleState);
+      ApiUtil.addToMyList(this.props.ad);
     } else {
-      ApiUtil.removeFromMyList(this.props.ad, this.toggleState);
+      ApiUtil.removeFromMyList(this.props.ad);
     }
   },
 
-  toggleState: function () {
-    if (this.state.show === "addTo") {
-      this.setState({ show: "removeFrom" });
-    } else {
-      this.setState({ show: "addTo" });
-    }
-  },
+  // toggleState: function () {
+  //   if (this.state.show === "addTo") {
+  //     this.setState({ show: "removeFrom" });
+  //   } else {
+  //     this.setState({ show: "addTo" });
+  //   }
+  // },
 
   onHover: function () {
     this.setState({ hover: "on" });

@@ -7,5 +7,17 @@ module.exports = {
       actionType: MyListConstants.MY_LIST,
       list: list
     });
+  },
+  addToMyList: function (ad) {
+    Dispatcher.dispatch({
+      actionType: MyListConstants.ADD_TO,
+      ad: ad
+    });
+  },
+  removeFromMyList: function (ad) {
+    Dispatcher.dispatch({
+      actionType: MyListConstants.REMOVE_FROM,
+      ad: ad
+    });
   }
 };
