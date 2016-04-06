@@ -8,17 +8,44 @@ var DetailMain = require('./feature_panes/detail_main');
 var MainIndex = React.createClass({
 
 	getInitialState: function() {
-		return { genres: GenreStore.all()};
+		return {
+			genres: GenreStore.all()
+		};
+	},
+
+	handleScroll: function (e) {
+		if (this.waiting) return;
+		if ((window.innerHeight + window.scrollY + 10) >= document.body.offsetHeight) {
+			this.getMoreRows();
+			// console.log(GenreStore.getCurrentPage());
+			this.waiting = true;
+		}
+  },
+
+	timeoutCallback: function () {
+		setTimeout(function(){ this.waiting = false; }.bind(this), 500);
 	},
 
 	componentDidMount: function() {
+		this.waiting = false;
+		$(window).bind('mousewheel', this.handleScroll);
 		genreStoreToken = GenreStore.addListener(this.getStateFromStore);
 		if (this.state.genres.length === 0){
-			ApiUtil.fetchGenres();
+			this.getMoreRows();
+		}
+	},
+
+	getMoreRows: function () {
+		var page = GenreStore.getCurrentPage();
+		if ( page >= GenreStore.getLastPage() ) {
+			$(window).unbind('mousewheel');
+		} else {
+			ApiUtil.fetchGenres(page++, this.timeoutCallback);
 		}
 	},
 
 	componentWillUnmount: function() {
+		$(window).unbind('mousewheel');
 		genreStoreToken.remove();
 	},
 
@@ -28,7 +55,7 @@ var MainIndex = React.createClass({
 
 	fetchRows: function () {
 		return this.state.genres.map(function(row){
-			return <AdvertRow key={row.id} genre={row}/>;
+			return <AdvertRow key={row.id} genre={row} />;
 		});
 	},
 
@@ -40,9 +67,9 @@ var MainIndex = React.createClass({
 	render: function() {
 		if (this.state.genres.length === 0) return <div></div>;
 		return (
-			<div className="main-index-body">
+			<div ref="GenreRows" className="main-index-body">
 				<div className="main-index-header">
-					<DetailMain ad={ this.fetchRandomAd() } header={true}/>
+					<DetailMain ad={ this.fetchRandomAd() } header={true} />
 				</div>
 				{ this.fetchRows() }
 			</div>

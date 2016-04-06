@@ -52,7 +52,8 @@ var AdvertRow = React.createClass({
 		if (this.state.showDetail) {
 			return (
 				<div className="ad-detail-pane">
-					<DetailMain show={this.state.showDetail} ad={AdStore.getAd()} refresh={this.refreshState}/>
+					<DetailMain show={this.state.showDetail} ad={AdStore.getAd()}
+						refresh={this.refreshState}/>
 				</div>
 			);
 		} else {
