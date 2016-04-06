@@ -7,7 +7,6 @@ var MyListStore = new Store(AppDispatcher);
 var _list = [];
 
 var resetMyList = function (list) {
-	console.log(list);
 	_list = list;
 };
 

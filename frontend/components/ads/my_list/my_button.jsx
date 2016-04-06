@@ -1,7 +1,9 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
 var MyListStore = require('../../../stores/my_list_store.js');
+var AdStore = require('../../../stores/ad_store.js');
 var ApiUtil = require('../../../util/api_util');
+var AdActions = require('../../../actions/ad_actions');
 // this is the button that toggles ads listed on my list
 // it requires an ad id to function
 
@@ -21,10 +23,12 @@ var MyListButton = React.createClass({
 
   componentDidMount: function() {
     this.token = MyListStore.addListener(this.getStateFromStore);
+    this.adToken = AdStore.addListener(this.getStateFromStore);
   },
 
   componentWillUnmount: function() {
     this.token.remove();
+    this.adToken.remove();
   },
 
   getStateFromStore: function () {
@@ -44,14 +48,6 @@ var MyListButton = React.createClass({
       ApiUtil.removeFromMyList(this.props.ad);
     }
   },
-
-  // toggleState: function () {
-  //   if (this.state.show === "addTo") {
-  //     this.setState({ show: "removeFrom" });
-  //   } else {
-  //     this.setState({ show: "addTo" });
-  //   }
-  // },
 
   onHover: function () {
     this.setState({ hover: "on" });
