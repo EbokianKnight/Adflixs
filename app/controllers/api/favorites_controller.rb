@@ -1,5 +1,10 @@
 class Api::FavoritesController < ApplicationController
 
+  def index
+    @favorites = current_user.includes(:mylist => [:genres, :views])
+    @favorites.order(:created_at)
+  end
+
   def create
     @favorite = Favorite.new(params[:ad_id])
     @favorite.user_id = current_user.id
