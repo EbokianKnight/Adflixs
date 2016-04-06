@@ -23,7 +23,6 @@ var clearShownAd = function () {
 
 AdStore.successMessage = function () {
 	var flash = _recievedAd;
-	console.log(flash);
 	_recievedAd = false;
 	return flash;
 };
