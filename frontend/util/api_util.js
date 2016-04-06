@@ -96,8 +96,8 @@ module.exports = {
 			method: "POST",
       url: "/api/favorites",
       data: { favorite: { ad_id: ad.id } },
-      success: function (list) {
-        MyListActions.recieveMyList(list);
+      success: function () {
+        MyListActions.addToMyList(ad);
         if (callback) { callback(); }
       },
 			error: function (err) {
@@ -109,8 +109,8 @@ module.exports = {
     $.ajax({
 			method: "DELETE",
       url: "/api/favorites/" + ad.id,
-      success: function (list) {
-        MyListActions.recieveMyList(list);
+      success: function () {
+        MyListActions.removeFromMyList(ad);
         if (callback) { callback(); }
       },
 			error: function (err) {

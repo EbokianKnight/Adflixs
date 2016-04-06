@@ -7,7 +7,17 @@ var MyListStore = new Store(AppDispatcher);
 var _list = [];
 
 var resetMyList = function (list) {
+	console.log(list);
 	_list = list;
+};
+
+var addToMyList = function (ad) {
+	_list.push(ad);
+};
+
+var removeFromMyList = function (ad) {
+	var index = MyListStore.find(ad.id);
+	_list.splice(index - 1, 1);
 };
 
 MyListStore.__onDispatch = function (payload) {
@@ -16,21 +26,26 @@ MyListStore.__onDispatch = function (payload) {
 			resetMyList(payload.list);
 			MyListStore.__emitChange();
 			break;
+		case MyListConstants.ADD_TO:
+			addToMyList(payload.ad);
+			MyListStore.__emitChange();
+			break;
+		case MyListConstants.REMOVE_FROM:
+			removeFromMyList(payload.ad);
+			MyListStore.__emitChange();
+			break;
 	}
 };
 
 MyListStore.all = function () {
-	var genres = [];
-	Object.keys(_list).forEach(function(id){
-		genres.push(_list[id]);
-	});
-	return genres;
+	return _list.slice();
 };
 
+// Hacky return value to be used for var removeFromMyList above
 MyListStore.find = function (adID) {
 	for (var i = 0; i < _list.length; i++) {
-		if (_list[i].ad_id === adID) {
-			return true;
+		if (_list[i].id === adID) {
+			return i + 1;
 		}
 	}
 	return false;
