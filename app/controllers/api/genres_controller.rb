@@ -5,8 +5,10 @@ class Api::GenresController < ApplicationController
 	end
 
 	def index
-		@genres = Genre.all
-		@genres.includes(:ads)
+		@page = params[:page].to_i || 1
+		genre_records = Genre.all.page(@page)
+		@page_count = genre_records.num_pages
+		@genres = genre_records.includes(:ads)
 	end
 
 	def list
