@@ -2,10 +2,11 @@ var Dispatcher = require('../dispatcher/dispatcher.js');
 var GenreConstants = require('../constants/genre_constants.js');
 
 module.exports = {
-  recieveAllGenres: function (genres) {
+  recieveAllGenres: function (genres, callback) {
     Dispatcher.dispatch({
       actionType: GenreConstants.GENRES_RECEIVED,
-      genres: genres
+      genres: genres,
+      callback: callback
     });
   },
   recieveGenreList: function (list) {

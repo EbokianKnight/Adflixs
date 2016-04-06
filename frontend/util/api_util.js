@@ -78,12 +78,13 @@ module.exports = {
 			}
     });
   },
-	fetchGenres: function () {
+	fetchGenres: function (page, callback) {
     $.ajax({
 			method: "GET",
       url: "/api/genres",
+      data: { page: page },
       success: function (genres) {
-        GenreActions.recieveAllGenres(genres);
+        GenreActions.recieveAllGenres(genres, callback);
       },
 			error: function (err) {
 				console.log("ApiUtil#fetchGenres Error");
