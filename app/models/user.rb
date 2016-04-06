@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
 
 	has_many :views
 	has_many :viewed, through: :views, source: :ad
+	has_many :favorites
+	has_many :mylist, through: :favorites, source: :ad
 
 	def self.generate_session_token
 		token = SecureRandom.urlsafe_base64(16)
