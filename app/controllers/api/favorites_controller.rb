@@ -6,19 +6,24 @@ class Api::FavoritesController < ApplicationController
   end
 
   def create
-    @favorite = Favorite.new(params[:ad_id])
+    @favorite = Favorite.new(favorite_params)
     @favorite.user_id = current_user.id
     if @favorite.save!
-      render :create
+      render json: {}
     else
       render json: { messages: @favorite.errors.full_messages }, status: 401
     end
   end
 
   def destroy
-    @favorite = Favorite.find(params[:id])
-    @favorite.destroy!
+    ad = Ad.find(params[:id])
+    @favorite = ad.favorites.where(user_id: current_user.id)
+    @favorite[0].destroy!
     render json: {}
+  end
+
+  def favorite_params
+    params.require(:favorite).permit(:ad_id)
   end
 
 end
