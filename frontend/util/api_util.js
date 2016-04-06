@@ -110,8 +110,8 @@ module.exports = {
 			method: "DELETE",
       url: "/api/favorites/" + ad.id,
       success: function () {
-        MyListActions.removeFromMyList(ad);
         if (callback) { callback(); }
+        MyListActions.removeFromMyList(ad);
       },
 			error: function (err) {
 				console.log("ApiUtil#removeFromMyList Error");

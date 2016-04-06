@@ -38,25 +38,14 @@ var AdvertRow = React.createClass({
 	},
 
 	fetchRowName: function () {
-		if (this.props.genre === "My List") {
-			return <div className="row-caption">My List</div>;
-		} else {
-			return <div className="row-caption">{ this.props.genre.name }</div>;
-		}
+		return <div className="row-caption">{ this.props.genre.name }</div>;
 	},
 
 	fetchAdverts: function () {
-		if (this.props.genre === "My List") {
-			return this.props.ads.map(function(ad){
-				return <Advert ad={ad} key={ad.id} rowID={ "My List" }
-					show={ this.state.showDetail }/>;
-			}.bind(this));
-		} else {
-			return this.props.genre.ads.map(function(ad){
-				return <Advert ad={ad} key={ad.id} rowID={ this.props.genre.id }
-					show={ this.state.showDetail }/>;
-			}.bind(this));
-		}
+		return this.props.genre.ads.map(function(ad){
+			return <Advert ad={ad} key={ad.id} rowID={ this.props.genre.id }
+				show={ this.state.showDetail }/>;
+		}.bind(this));
 	},
 
 	renderDetail: function () {
