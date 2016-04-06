@@ -31,7 +31,8 @@ var AdDetailPane = React.createClass({
 		if (this.props.header) {return;}
 		return (
 			<nav className="ad-display-nav group">
-				<button onClick={this.showOverviewPane}>Overview</button>
+				<button onClick={this.showOverviewPane}
+					genre={this.props.genre}>Overview</button>
 				<button onClick={this.showSimilarPane}>More Like This</button>
 				<button onClick={this.showDetailPane}>Details</button>
 			</nav>
@@ -70,7 +71,11 @@ var AdDetailPane = React.createClass({
 	        <div className="bottom-grade"/>
 					<div className="header-spacer header-left-arrow"/>
 					<h2 className="feature-title">{this.props.ad.title}</h2>
-					{ this.displayPane() }
+					<ReactCSS transitionName="fader"
+						transitionEnterTimeout={500}
+						transitionLeaveTimeout={300}>
+						{ this.displayPane() }
+					</ReactCSS>
 
 					{ this.createMenuButtons() }
 					<div className="header-spacer header-right-arrow"/>
