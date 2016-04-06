@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160405233629) do
+ActiveRecord::Schema.define(version: 20160406142738) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,14 @@ ActiveRecord::Schema.define(version: 20160405233629) do
 
   add_index "ads", ["company"], name: "index_ads_on_company", using: :btree
   add_index "ads", ["product"], name: "index_ads_on_product", using: :btree
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer  "ad_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "favorites", ["ad_id"], name: "index_favorites_on_ad_id", unique: true, using: :btree
 
   create_table "genres", force: :cascade do |t|
     t.string   "name",       null: false
