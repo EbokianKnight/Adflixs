@@ -55,7 +55,11 @@ AdStore.all = function () {
 };
 
 AdStore.getAd = function () {
-	return Object.assign({}, _shownAd);
+	if (_shownAd) {
+		return Object.assign({}, _shownAd);
+	} else {
+		return null;
+	}
 };
 
 module.exports = AdStore;

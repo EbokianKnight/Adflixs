@@ -22,7 +22,9 @@ var AdvertRow = React.createClass({
 	},
 
 	checkDetails: function() {
-		if (AdStore.getAd().rowID === this.props.genre.id){
+		if (AdStore.getAd() === null) {
+			this.setState({ showDetail: false });
+		} else if (AdStore.getAd().rowID === this.props.genre.id){
 			this.setState({
 				showDetail: true
 			});

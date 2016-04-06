@@ -46,6 +46,7 @@ var MyListButton = React.createClass({
       ApiUtil.addToMyList(this.props.ad);
     } else {
       ApiUtil.removeFromMyList(this.props.ad);
+      AdActions.closeDetails();
     }
   },
 
