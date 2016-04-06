@@ -240,6 +240,16 @@
 	margin: 0px 20px;
 }
 
+.add-play-button {
+	width: 30%;
+	position: absolute;;
+	top: 50px;
+	left: 75px;
+	background-image: asset-url("playbutton.svg");
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+
 .main-footer {
 	width: 100%;
 	height: 70px;

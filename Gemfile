@@ -1,5 +1,13 @@
 source 'https://rubygems.org'
 
+## Useful Docs
+# [Paperclip](https://github.com/thoughtbot/paperclip#paperclip)
+# [Figaro] (https://github.com/laserlemon/figaro#why-does-figaro-exist)
+# [AWS] (http://aws.amazon.com/)
+# [FileReader] (https://developer.mozilla.org/en-US/docs/Web/API/FileReader)
+# [FormData] (https://developer.mozilla.org/en-US/docs/Web/API/FormData)
+
+
 ruby '2.2.3'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5.1'
@@ -27,6 +35,13 @@ gem 'bcrypt'
 # Use Unicorn as the app server
 # gem 'unicorn'
 gem 'faker'
+gem 'kaminari'
+gem 'pg_search'
+gem "paperclip", '5.0.0.beta1'
+gem 'figaro'
+gem 'aws-sdk', '>= 2.0'
+gem 'omniauth-facebook'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

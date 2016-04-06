@@ -11,13 +11,18 @@ var Advert = React.createClass({
 		ApiUtil.fetchAdvert(this.props.ad.id, this.props.rowID);
 	},
 
+	playAd: function (e) {
+		e.preventDefault();
+		e.stopPropagation();
+		console.log("push(/main/watching?=" + this.props.ad.youtube + ")");
+	},
+
 	render: function() {
 		var klass = this.props.show ? "" : " fliximg-effect";
 		return (
-			<div className={ "fliximg" + klass }>
-				<button className="ad-detail-button" onClick={this.sendBackID}>
+			<div className={ "fliximg" + klass } onClick={this.sendBackID}>
+				<svg className="add-play-button" onClick={this.playAd}/>
 					{ this.props.ad.title }
-				</button>
 			</div>
 		);
 	}
