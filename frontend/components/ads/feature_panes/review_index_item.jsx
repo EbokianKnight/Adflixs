@@ -13,7 +13,7 @@ var ReviewItem = React.createClass({
     var title = this.props.view.title || "Review";
     var review;
     if (this.props.view.review.length > 120) {
-      review = this.props.view.review.slice(120) + "...";
+      review = this.props.view.review.slice(0,120) + "...";
     } else {
       review = this.props.view.review;
     }
