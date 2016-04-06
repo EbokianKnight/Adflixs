@@ -1,6 +1,7 @@
 var AdActions = require('../actions/ad_actions');
 var GenreActions = require('../actions/genre_actions');
 var UserActions = require('./../actions/user_actions');
+var MyListActions = require('./../actions/my_list_actions');
 
 module.exports = {
   createAdvert: function (advertData) {
@@ -83,10 +84,37 @@ module.exports = {
 			method: "GET",
       url: "/api/favorites",
       success: function (list) {
-        myListActions.recieveMyList(list);
+        MyListActions.recieveMyList(list);
       },
 			error: function (err) {
 				console.log("ApiUtil#fetchMyList Error");
+			}
+    });
+  },
+  addToMyList: function (ad, callback) {
+    $.ajax({
+			method: "POST",
+      url: "/api/favorites",
+      data: { favorite: { ad_id: ad.id } },
+      success: function (list) {
+        MyListActions.recieveMyList(list);
+        if (callback) { callback(); }
+      },
+			error: function (err) {
+				console.log("ApiUtil#addToMyList Error");
+			}
+    });
+  },
+  removeFromMyList: function (ad, callback) {
+    $.ajax({
+			method: "DELETE",
+      url: "/api/favorites/" + ad.id,
+      success: function (list) {
+        MyListActions.recieveMyList(list);
+        if (callback) { callback(); }
+      },
+			error: function (err) {
+				console.log("ApiUtil#removeFromMyList Error");
 			}
     });
   },
