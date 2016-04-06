@@ -45,12 +45,14 @@ ActiveRecord::Schema.define(version: 20160406142738) do
   add_index "ads", ["product"], name: "index_ads_on_product", using: :btree
 
   create_table "favorites", force: :cascade do |t|
-    t.integer  "ad_id"
+    t.integer  "ad_id",      null: false
+    t.integer  "user_id",    null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  add_index "favorites", ["ad_id"], name: "index_favorites_on_ad_id", unique: true, using: :btree
+  add_index "favorites", ["ad_id"], name: "index_favorites_on_ad_id", using: :btree
+  add_index "favorites", ["user_id"], name: "index_favorites_on_user_id", using: :btree
 
   create_table "genres", force: :cascade do |t|
     t.string   "name",       null: false
