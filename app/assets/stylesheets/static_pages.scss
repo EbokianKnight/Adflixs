@@ -435,15 +435,24 @@
 
 .feature-my-list {
 	margin-top: 10px;
-  padding: 0 8px 4px;
+  padding: 4px;
   text-align: left;
   border: 3px solid #ccc;
-  border-radius: 50%;
+  border-radius: 5px;
   cursor: pointer;
   color: #ccc;
+	height: 35px;
   font-weight: 900;
-  font-size: 22px;
+  font-size: 16px;
+	transition: height 500ms ease-in;
+	transition: width 500ms ease-in;
   transition: background-color 500ms linear;
+}
+
+.my-list-bubble {
+	font-size: 22px;
+	border-radius: 50%;
+	padding: 0 8px 4px;
 }
 
 .feature-my-list:hover {

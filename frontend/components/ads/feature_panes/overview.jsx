@@ -1,6 +1,7 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
 var RateStars = require('./stars');
+var MyListButton = require('../my_list/my_button');
 
 var OverviewDetail = React.createClass({
 
@@ -46,7 +47,7 @@ var OverviewDetail = React.createClass({
         { this.createProductInfo() }
         { this.createGenreInfo() }
         { <RateStars ad={this.props.ad}/> }
-        <button className="feature-my-list">+</button>
+        <MyListButton ad={this.props.ad}/>
 			</div>
 		);
 	}
