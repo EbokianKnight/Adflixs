@@ -6,6 +6,7 @@ var SessionStore = require('../../../stores/session_store');
 var ApiUtil = require('../../../util/api_util');
 var ReviewIndexItem = require ('./review_index_item');
 var Modal = require('react-modal');
+var ReactCSS = require('react-addons-css-transition-group');
 
 var settings = {
   overlay : {
@@ -94,7 +95,7 @@ var ReviewIndex = React.createClass({
 
   loadReviews: function () {
     if (!this.props.ad.views) return "";
-    return this.props.ad.views.map(function(view, i){
+    return this.props.ad.views.slice(0,8).map(function(view, i){
       if (!view.review) { return ""; }
       return <ReviewIndexItem key={i} view={view} />;
     });

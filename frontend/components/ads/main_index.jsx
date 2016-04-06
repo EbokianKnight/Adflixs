@@ -5,6 +5,7 @@ var MyListStore = require('../../stores/my_list_store');
 var ApiUtil = require('../../util/api_util');
 var AdvertRow = require('./ad_index_row');
 var DetailMain = require('./feature_panes/detail_main');
+var ReactCSS = require('react-addons-css-transition-group');
 
 var MainIndex = React.createClass({
 
@@ -95,7 +96,7 @@ var MainIndex = React.createClass({
 			<div ref="GenreRows" className="main-index-body">
 				<div className="main-index-header">
 					<DetailMain ad={ this.fetchRandomAd() } header={true} />
-				</div>
+				</div>		
 				{ this.fetchMyList() }
 				{ this.fetchRows() }
 			</div>
