@@ -1,1 +1,1 @@
-json.extract!( user, :id, :user_id, :ad_id )
+json.extract!( favorite, :id, :user_id, :ad_id )
