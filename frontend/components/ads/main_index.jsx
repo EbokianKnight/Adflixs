@@ -1,6 +1,7 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
 var GenreStore = require('../../stores/genre_store');
+var MyListStore = require('../../stores/my_list_store');
 var ApiUtil = require('../../util/api_util');
 var AdvertRow = require('./ad_index_row');
 var DetailMain = require('./feature_panes/detail_main');
@@ -9,7 +10,8 @@ var MainIndex = React.createClass({
 
 	getInitialState: function() {
 		return {
-			genres: GenreStore.all()
+			genres: GenreStore.all(),
+			myList: []
 		};
 	},
 
@@ -17,7 +19,6 @@ var MainIndex = React.createClass({
 		if (this.waiting) return;
 		if ((window.innerHeight + window.scrollY + 10) >= document.body.offsetHeight) {
 			this.getMoreRows();
-			// console.log(GenreStore.getCurrentPage());
 			this.waiting = true;
 		}
   },
@@ -29,10 +30,12 @@ var MainIndex = React.createClass({
 	componentDidMount: function() {
 		this.waiting = false;
 		$(window).bind('mousewheel', this.handleScroll);
-		genreStoreToken = GenreStore.addListener(this.getStateFromStore);
+		this.genreStoreToken = GenreStore.addListener(this.getGenresFromStore);
+		this.myListStoreToken = MyListStore.addListener(this.getMyListFromStore);
 		if (this.state.genres.length === 0){
 			this.getMoreRows();
 		}
+		ApiUtil.fetchMyList();
 	},
 
 	getMoreRows: function () {
@@ -46,17 +49,28 @@ var MainIndex = React.createClass({
 
 	componentWillUnmount: function() {
 		$(window).unbind('mousewheel');
-		genreStoreToken.remove();
+		this.genreStoreToken.remove();
+		this.myListStoreToken.remove();
 	},
 
-	getStateFromStore: function() {
+	getGenresFromStore: function() {
 		this.setState({ genres: GenreStore.all() });
+	},
+
+	getMyListFromStore: function () {
+		this.setState({ myList: MyListStore.all() });
 	},
 
 	fetchRows: function () {
 		return this.state.genres.map(function(row){
 			return <AdvertRow key={row.id} genre={row} />;
 		});
+	},
+
+	fetchMyList: function () {
+		return (
+			<AdvertRow genre={"My List"} ads={this.state.myList}/>
+		);
 	},
 
 	fetchRandomAd: function () {
@@ -66,11 +80,13 @@ var MainIndex = React.createClass({
 
 	render: function() {
 		if (this.state.genres.length === 0) return <div></div>;
+		if (this.state.myList.length === 0) return <div></div>;
 		return (
 			<div ref="GenreRows" className="main-index-body">
 				<div className="main-index-header">
 					<DetailMain ad={ this.fetchRandomAd() } header={true} />
 				</div>
+				{ this.fetchMyList() }
 				{ this.fetchRows() }
 			</div>
 		);
