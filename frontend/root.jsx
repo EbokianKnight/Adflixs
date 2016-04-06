@@ -24,8 +24,8 @@ var routes = (
     <Route path="signin" component={SignIn} />
     <Route path="main" component={MainPage} onEnter={_requireLoggedIn}>
       <IndexRoute component={MainIndex} />
-      <Route path="account" component={Account} />
     </Route>
+    <Route path="account" component={Account} />
     <Route path="*" component={NotFound}/>
   </Route>
 );
