@@ -8,10 +8,6 @@ var MainPage = React.createClass({
     document.body.style.backgroundColor = "#141414";
   },
 
-  componentWillUnmount: function() {
-    document.body.style.backgroundColor = "#141414";
-  },
-
   render: function() {
     return (
       <div>
