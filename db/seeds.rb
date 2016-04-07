@@ -56,7 +56,7 @@ end
       ad_id: ad.id,
       rate: rand(5) + 1,
       title: Faker::Hipster.word,
-      review: Faker::Hipster.paragraph(2)
+      review: Faker::Hipster.paragraph(8)
       )
   end
 end
