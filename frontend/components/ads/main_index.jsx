@@ -73,6 +73,7 @@ var MainIndex = React.createClass({
 
 	// Renders My List
 	fetchMyList: function () {
+		if (this.state.myList.length === 0) return;
 		myListPackage = {
 			name: "My List",
 			id: "My List",
@@ -91,12 +92,11 @@ var MainIndex = React.createClass({
 
 	render: function() {
 		if (this.state.genres.length === 0) return <div></div>;
-		if (this.state.myList.length === 0) return <div></div>;
 		return (
 			<div ref="GenreRows" className="main-index-body">
 				<div className="main-index-header">
 					<DetailMain ad={ this.fetchRandomAd() } header={true} />
-				</div>		
+				</div>
 				{ this.fetchMyList() }
 				{ this.fetchRows() }
 			</div>
