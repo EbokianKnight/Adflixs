@@ -8,6 +8,8 @@ module.exports = {
     $.ajax({
 			method: "POST",
       url: "/api/ads",
+      processData: false,
+      contentType: false,
       data: advertData,
       success: function (advert) {
         AdActions.recieveAdvert(advert);
