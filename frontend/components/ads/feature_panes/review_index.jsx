@@ -19,17 +19,17 @@ var settings = {
   },
   content : {
     position                   : 'absolute',
-    top                        : '10%',
-    bottom                     : '5%',
-    right                      : '5%',
-    left                       : '5%',
+    top                        : 0,
+    bottom                     : 0,
+    right                      : 0,
+    left                       : 0,
     border                     : '1px solid #000',
-    overflow                   : 'auto',
+    overflow                   : 'visible',
     WebkitOverflowScrolling    : 'touch',
     borderRadius               : '4px',
     background                 : 'rgba(0, 0, 0, 0.8)',
-    padding                    : '5%',
-    zIndex                    : '200'
+    zIndex                     : '200',
+    padding                    : '10vh 10vw'
   }
 };
 
@@ -48,10 +48,12 @@ var ReviewIndex = React.createClass({
 
   openModal: function() {
     this.setState({modalIsOpen: true});
+    $("body").addClass("disable-scroll");
   },
 
   closeModal: function() {
     this.setState({modalIsOpen: false});
+    $("body").removeClass("disable-scroll");
   },
 
 
@@ -99,6 +101,20 @@ var ReviewIndex = React.createClass({
       if (!view.review) { return ""; }
       return <ReviewIndexItem key={i} view={view} />;
     });
+  },
+
+  filloutModalReviews: function () {
+    if (!this.props.ad.views) {
+      return (
+        <div>NO REVIEWS YET</div>
+      );
+    } else {
+      return this.props.ad.views.map(function(view, i){
+        if (view.review) {
+          return <ReviewIndexItem key={i} view={view} modal={true}/>;
+        }
+      });
+    }
   },
 
   reviewForm: function () {
@@ -151,15 +167,14 @@ var ReviewIndex = React.createClass({
         <Modal
           isOpen={this.state.modalIsOpen}
           onRequestClose={this.closeModal}
-          style={settings} >
+          style={settings}>
           <div className="modal-container">
             <div className="modal-review-header">
-              <div className="close-modal-button">X</div>
-              <p>Member Reviews for { this.props.ad.title }</p>
+              <div className="modal-header-text"><p>Member Reviews for { this.props.ad.title }</p></div>
+              <div className="close-modal-button" onClick={this.closeModal}>X</div>
             </div>
-            <div className="modal-review-spacer"></div>
             <div className="modal-review-body">
-
+              { this.filloutModalReviews() }
             </div>
             <footer className="modal-footer"/>
           </div>

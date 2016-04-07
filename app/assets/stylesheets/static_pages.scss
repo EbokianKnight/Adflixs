@@ -521,7 +521,7 @@
 	height: auto;
 	padding: 10px;
 	flex-grow: 1;
-	flex-basis: 200px;
+	flex-basis: 130px;
 }
 
 .ad-link:hover {
@@ -618,7 +618,7 @@
 	flex-wrap: nowrap;
 	width: 95%;
 	justify-content: flex-start;;
-	align-items: flex-start;
+	align-items: stretch;
 	align-content: flex-start;
 }
 
@@ -687,34 +687,29 @@
 
 .close-modal-button {
 	display: block;
-	position: absolute;
-	top: 5px;
-	right: 5px;
 	font-size: 30px;
-}
-
-.modal-container {
-	display: flex;
-	flex-direction: column;
-	flex-wrap: nowrap;
-	justify-content: flex-start;
 }
 
 .modal-review-header {
 	color: #ccc;
 	font-size: 32px;
 	padding: 10px;
-	height: 3em;
-	width: 80%;
+	box-sizing: border-box;
+	position: fixed;
+	height: 10vh;
+	width: 80vw;
 	border-top: 5px solid #E50914;
 	border-bottom: 1px solid #333;
 	display: flex;
-	flex-direction: column;
 	flex-wrap: nowrap;
-	justify-content: center;
-	align-items: flex-start;
-	align-content: flex-start;
+	justify-content: space-between;;
+	align-items: center;
+	align-content: center;
 	border-bottom: 1px solid #333;
+}
+.modal-header-text {
+	color: #ccc;
+	padding: 1px;
 }
 
 body,
@@ -726,7 +721,6 @@ body,
 .modal-review-spacer {
 	font-size: 32px;
 	height: 3em;
-	width: 80%;
 }
 
 .modal-ad-review {
@@ -748,21 +742,34 @@ body,
 
 .modal-review-body {
 	display: flex;
-	flex-direction: column;
-	flex-wrap: nowrap;
-	width: 100%;
-	padding: 10px;
-	height: 30px;
-	background: orange;
-	justify-content: flex-start;;
-	align-items: flex-start;
-	align-content: flex-start;
-	border-bottom: 1px solid #333;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  box-sizing: border-box;
+  flex-grow: 1;
+  overflow: scroll;
+  position: fixed;
+  top: 20vh;
+	height: 60vh;
+	width: 80vw;
+  padding: 10px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  align-content: flex-start;
+  border-bottom: 1px solid #333;
 }
 
 .video-main-container {
+	padding: 150px;
 	display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
-  align-items: center;
+  align-items: stretch;
+}
+
+.disable-scroll {
+	overflow: hidden;
+}
+
+.modal-ad-fix {
+	padding: 30px 0;
 }

@@ -12,13 +12,14 @@ var ReviewItem = React.createClass({
     var five = stars > 4 ? "review-star" : "";
     var title = this.props.view.title || "Review";
     var review;
-    if (this.props.view.review.length > 120) {
+    if (!this.props.modal && this.props.view.review.length > 120) {
       review = this.props.view.review.slice(0,120) + "...";
     } else {
       review = this.props.view.review;
     }
+    var klass = this.props.modal ? "modal-ad-fix " : "";
     return (
-      <article className="ad-review-flex-article ad-link">
+      <article className={klass + "ad-review-flex-article ad-link"}>
         <div className="review-flex-header">
           <h3 className="review-h3">{title}</h3>
           <div className={one}>&#x2605;</div>
