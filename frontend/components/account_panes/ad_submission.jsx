@@ -8,7 +8,9 @@ var AddSubmission = React.createClass({
 
   getInitialState: function() {
     return {
-      genres: []
+      genres: [],
+      imageUrl: "",
+      imageFile: null
     };
   },
 
@@ -27,6 +29,21 @@ var AddSubmission = React.createClass({
     this.props.close("success");
   },
 
+  handleFileChange: function (e) {
+    var file = e.currentTarget.files[0];
+    var reader = new FileReader();
+    reader.onloadend = function () {
+      var result = reader.result;
+      this.setState({ imageFile: file, imageUrl: result });
+    }.bind(this);
+
+    if (file) {
+      reader.readAsDataURL(file);
+    } else {
+      this.setState({ imageUrl: "", imageFile: null });
+    }
+  },
+
   createCheckBoxes: function () {
     return (
       this.state.genres.map(function(genre, idx){
@@ -41,13 +58,28 @@ var AddSubmission = React.createClass({
     );
   },
 
+  renderPreview: function () {
+    if (this.state.imageUrl !== "") {
+      return <img className="preview-image" src={this.state.imageUrl}/>;
+    } else {
+      return "";
+    }
+  },
+
   updateGenres: function() {
     this.setState({ genres: GenreStore.fetchGenreList() });
   },
 
   sendNewAdvertRequest: function (e) {
     e.preventDefault()
-    ApiUtil.createAdvert($(this.refs.AdvertRequest).serialize());
+    var data = $(this.refs.AdvertRequest).serializeArray()
+    var formData = new FormData();
+
+    data.forEach(function(datum){
+      formData.append(datum.name, datum.value)
+    })
+    formData.append("ad[image]", this.state.imageFile)
+    ApiUtil.createAdvert(formData);
   },
 
   createAdForm: function () {
@@ -58,7 +90,9 @@ var AddSubmission = React.createClass({
           <button onClick={this.props.close} className="account-aside-button">
             Cancel</button>
         </section>
+
         <form ref="AdvertRequest" onSubmit={this.sendNewAdvertRequest}>
+
           <row className="account-section-row group">
             <label className="account-item-left group">
               <div className="form-row">Title</div>
@@ -68,6 +102,7 @@ var AddSubmission = React.createClass({
             <input type="submit" value="Submit Advert"
               className="account-aside-button account-item-right"/>
           </row>
+
           <row className="account-section-row group">
             <label className="account-item-left group">
               <div className="form-row">Company</div>
@@ -75,6 +110,7 @@ var AddSubmission = React.createClass({
                 name="ad[company]"/>
             </label>
           </row>
+
           <row className="account-section-row group">
             <label className="account-item-left group">
               <div className="form-row">Year</div>
@@ -82,6 +118,7 @@ var AddSubmission = React.createClass({
                 name="ad[year]"/>
             </label>
           </row>
+
           <row className="account-section-row group">
             <label className="account-item-left group">
               <div className="form-row">Product</div>
@@ -89,6 +126,7 @@ var AddSubmission = React.createClass({
                 name="ad[product]"/>
             </label>
           </row>
+
           <row className="account-section-row group">
             <label className="account-item-left group">
               <div className="form-row">Youtube Link</div>
@@ -99,6 +137,7 @@ var AddSubmission = React.createClass({
           <row className="account-section-row account-checkbox-container group">
             { this.createCheckBoxes() }
           </row>
+
           <row className="account-section-row group">
             <label className="account-item-left group">
               <div className="form-row">Description</div>
@@ -107,6 +146,14 @@ var AddSubmission = React.createClass({
             </label>
           </row>
         </form>
+          <row className="account-section-row group">
+            <label className="account-item-left group upload">
+              <div className="form-row">Image Upload</div>
+              <input className="account-section-input" type="file"
+                onChange={this.handleFileChange}/>
+              { this.renderPreview() }
+            </label>
+        </row>
       </div>
     );
   },
