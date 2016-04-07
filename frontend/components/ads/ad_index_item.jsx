@@ -24,7 +24,8 @@ var Advert = React.createClass({
 	render: function() {
 		var klass = this.props.show ? "" : " fliximg-effect";
 		return (
-			<div className={ "fliximg" + klass } onClick={this.sendBackID}>
+			<div className={ "fliximg" + klass } onClick={this.sendBackID}
+				style={{backgroundImage:"url(" + this.props.ad.thumbUrl + ")"}}>
 				<svg className="add-play-button" onClick={this.playAd}/>
 					{ this.props.ad.title }
 			</div>

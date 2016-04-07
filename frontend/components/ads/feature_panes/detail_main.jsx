@@ -66,7 +66,8 @@ var AdDetailPane = React.createClass({
 		var klass = this.state.display === "overview" ? "" : " blur";
 		return (
 			<div className="review-details">
-				<div className={ "feature-background-image" + klass }/>
+				<div className={ "feature-background-image" + klass }
+					style={{backgroundImage:"url(" + this.props.ad.largeUrl + ")"}}/>
 					<div className="back-grade"/>
 	        <div className="bottom-grade"/>
 					<div className="header-spacer header-left-arrow"/>

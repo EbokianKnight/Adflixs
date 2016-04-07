@@ -44,7 +44,8 @@ ads = []
     description: Faker::Lorem.paragraph,
     year: Faker::Date.between(1.year.ago, Date.today),
     genre_ids: g_ids,
-    youtube: youtube.sample(1)
+    youtube: youtube.sample(1),
+    image: File.open("app/assets/images/random_ads/" + rand(30).next.to_s + ".jpg")
   ))
 end
 
