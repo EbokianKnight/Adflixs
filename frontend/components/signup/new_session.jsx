@@ -15,6 +15,7 @@ var NewSession = React.createClass({
   },
 
   componentDidMount: function() {
+    document.body.style.backgroundColor = "#f3f3f3";
     this.sessionToken = SessionStore.addListener(this.flashMessage);
   },
 
@@ -62,30 +63,32 @@ var NewSession = React.createClass({
 
   createNewSessionForm: function () {
     return (
-      <div>
-      <div onClick={this.signUpAsGuest} className="sign-in-button sign-in-adflix">
-        Sign In As Guest</div>
-      <form  className="sign-in-pane" onSubmit={this.signIn}>
-        <h1>Sign In</h1>
+      <div className="new-session-background">
+        <form  className="sign-in-pane" onSubmit={this.signIn}>
 
-        { this.renderFlash() }
-        <label>Email
-        <input className="sign-in-input" type="text" name="email"
-          onChange={this.setEmail}
-          value={this.state.email}/>
-        </label>
-        <br/><br/>
+          <h1>Sign In</h1>
 
-        <label>Password
-        <input className="sign-in-input" type="password" name="password"
-          onChange={this.setPassword}
-          value={this.state.password}/>
-        </label>
-        <br/><br/>
-        <input type="submit" className="sign-in-button sign-in-adflix" value="Sign In"/>
-        <svg className="sign-in-button sign-in-facebook"/>
-        <svg className="sign-in-button sign-in-google"/>
-      </form>
+          { this.renderFlash() }
+          <label>Email
+            <div className="sign-in-robot"/>
+          <input className="sign-in-input" type="text" name="email"
+            onChange={this.setEmail}
+            value={this.state.email}/>
+          </label>
+          <br/><br/>
+
+          <label>Password
+          <input className="sign-in-input" type="password" name="password"
+            onChange={this.setPassword}
+            value={this.state.password}/>
+          </label>
+          <br/><br/>
+          <input type="submit" className="sign-in-button sign-in-adflix" value="Sign In"/>
+          <svg className="sign-in-button sign-in-facebook"/>
+          <svg className="sign-in-button sign-in-google"/>
+          <input onClick={this.signUpAsGuest} readOnly value="Sign In As Guest"
+            className="sign-in-button sign-in-adflix"/>
+        </form>
       </div>
     );
   },
