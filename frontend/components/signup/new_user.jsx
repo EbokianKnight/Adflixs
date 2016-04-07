@@ -14,6 +14,10 @@ var NewUser = React.createClass({
     };
   },
 
+  componentDidMount: function() {
+    document.body.style.backgroundColor = "#f3f3f3";
+  },
+
   setEmail: function (e) {
     this.setState({ email: e.target.value });
   },
