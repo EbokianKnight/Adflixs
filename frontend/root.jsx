@@ -27,7 +27,7 @@ var routes = (
       <IndexRoute component={MainIndex} />
       <Route path="streaming" component={MainVideo} />
     </Route>
-    <Route path="account" component={Account} />
+    <Route path="account" component={Account} onEnter={_requireLoggedIn}/>
     <Route path="*" component={NotFound}/>
   </Route>
 );
