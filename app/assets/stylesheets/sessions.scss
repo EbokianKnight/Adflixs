@@ -13,7 +13,9 @@
 
 .sign-in-pane {
 	width: 360px;
+	color: #333;
 	height: auto;
+	position: relative;
 	background: #eee;
 	margin: 0 auto;
 	padding: 20px;
@@ -65,6 +67,24 @@
 
 .sign-in-adflix:hover {
 	cursor: pointer;
+}
+
+.sign-in-robot {
+	position: absolute;
+	left: -140px;
+	top: 255px;
+	height: 250px;
+	width: 200px;
+	background-image: asset-url("signin/robot.png");
+	background-size:contain;
+	background-repeat: no-repeat;
+}
+
+.new-session-background {
+	height: 100vh;
+	background-image: asset-url("signin/Ads.png");
+	background-size: cover;
+	background-repeat: no-repeat;
 }
 
 .sign-in-adflix {

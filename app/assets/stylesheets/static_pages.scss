@@ -5,10 +5,28 @@
 .homepage-header {
 	width: 100%;
 	height: 55%;
-	background-size: cover;
-	background-image: asset-url("homepage/OutsideLarge.jpg");
 	position: relative;
 	border: 1px solid transparent;
+}
+
+.pepsi-header {
+	background-image: asset-url("homepage/Pepsi.jpg");
+	background-size: cover;
+}
+
+.nuka-header {
+	background-image: asset-url("homepage/Nuka.jpg");
+	background-size: cover;
+}
+
+.liquor-header {
+	background-image: asset-url("homepage/Liquor.jpg");
+	background-size: cover;
+}
+
+.rabbit-header {
+	background-image: asset-url("homepage/Rabbit.jpg");
+	background-size: cover;
 }
 
 .logo {
@@ -27,6 +45,7 @@
 
 .home-text {
 	color: #ccc;
+	text-shadow: 2px 2px 6px black;
 }
 
 .home-pitch {
@@ -45,8 +64,8 @@
 
 .home-sign-in {
 	position: absolute;
-	top: 10px;
-	right: 10px;
+	top: 3%;
+	left: 89%;
 }
 
 .home-button {
