@@ -1,5 +1,10 @@
 json.extract!( ad, :title, :youtube, :description, :product, :company, :year, :id )
 
+if (ad.image)
+  json.imageUrl asset_path(ad.image.url(:large))
+  json.thumbURL asset_path(ad.image.url(:thumb))
+end
+
 if show_genres
   json.genres do
     json.array!(ad.genres) do |genre|
