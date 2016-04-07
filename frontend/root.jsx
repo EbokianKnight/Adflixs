@@ -12,6 +12,7 @@ var App = require('./components/app');
 var HomePage = require('./components/homepage');
 var MainPage = require('./components/main_page');
 var MainIndex = require('./components/ads/main_index');
+var MainVideo = require('./components/main_video');
 var NotFound = require('./components/not_found');
 var NewUser = require('./components/signup/new_user');
 var SignIn = require('./components/signup/new_session');
@@ -24,6 +25,7 @@ var routes = (
     <Route path="signin" component={SignIn} />
     <Route path="main" component={MainPage} onEnter={_requireLoggedIn}>
       <IndexRoute component={MainIndex} />
+      <Route path="streaming" component={MainVideo} />
     </Route>
     <Route path="account" component={Account} />
     <Route path="*" component={NotFound}/>

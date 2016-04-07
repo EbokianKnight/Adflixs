@@ -3,6 +3,7 @@ var PropTypes = React.PropTypes;
 var ApiUtil = require('../../util/api_util');
 
 var Advert = React.createClass({
+	contextTypes: { router: PropTypes.object.isRequired },
 
 	// Update the Store with the last row that was clicked, as movies can exist
 	// in multiple rows, Row is listening for changes.
@@ -14,7 +15,10 @@ var Advert = React.createClass({
 	playAd: function (e) {
 		e.preventDefault();
 		e.stopPropagation();
-		console.log("push(/main/watching?=" + this.props.ad.youtube + ")");
+		this.context.router.push({
+			pathname: "/main/streaming",
+			query: { youtube: this.props.ad.youtube.slice(2,13) }
+		});
 	},
 
 	render: function() {

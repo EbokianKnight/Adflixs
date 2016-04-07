@@ -740,3 +740,10 @@ body,
 	align-content: flex-start;
 	border-bottom: 1px solid #333;
 }
+
+.video-main-container {
+	display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+}
