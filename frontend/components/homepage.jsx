@@ -52,8 +52,6 @@ var HomePage = React.createClass({
       dots: false,
 			arrows: false,
       speed: 1000,
-			autoplay: true,
-			autoplaySpeed: 6000,
 			fade: true,
 			useCSS: true
     };
