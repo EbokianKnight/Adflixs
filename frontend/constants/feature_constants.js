@@ -1,0 +1,3 @@
+module.exports = {
+	FEATURES_RECEIVED: "FEATURES_RECEIVED"
+};
