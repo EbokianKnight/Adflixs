@@ -26,6 +26,7 @@ module.exports = {
       data: { view: viewData },
       success: function (view) {
         UserActions.recieveView(view);
+        AdActions.updateView(view);
         if (callback) { callback(); }
       },
       error: function (err) {
@@ -40,6 +41,7 @@ module.exports = {
       data: { view: viewData },
       success: function (view) {
         UserActions.recieveView(view);
+        AdActions.updateView(view);
         if (callback) { callback(); }
       },
       error: function (err) {

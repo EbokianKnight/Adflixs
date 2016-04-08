@@ -20,5 +20,12 @@ module.exports = {
 		Dispatcher.dispatch({
       actionType: AdConstants.CLOSE_DETAILS,
     });
-	}
+	},
+
+  updateView: function (view) {
+    Dispatcher.dispatch({
+      actionType: AdConstants.UPDATE_VIEW,
+      view: view
+    });
+  }
 };

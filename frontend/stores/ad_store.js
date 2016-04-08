@@ -4,17 +4,29 @@ var AdConstants = require('../constants/ad_constants');
 
 var AdStore = new Store(AppDispatcher);
 
-var _adverts = {};
+var _adverts = {}; //not used?
 var _shownAd = null;
 var _recievedAd = false;
 
 var resetAdverts = function (ads) {
 	_adverts = {};
-	ads.forEach( function (el) { _advert[el.id] = el; });
+	ads.forEach( function (ad) { _advert[ad.id] = ad; });
 };
 
 var updateAdvert = function (ad) {
 	_shownAd = ad;
+};
+
+var updateView = function (newView) {
+	if (_recievedAd) {
+		_shownAd.views = _shownAd.views.map(function(view){
+			if (view.user_id === newView.user_id) {
+				return newView;
+			} else {
+				return view;
+			}
+		});
+	}
 };
 
 var clearShownAd = function () {
@@ -33,16 +45,21 @@ AdStore.__onDispatch = function (payload) {
 			resetAdverts(payload.adverts);
 			_recievedAd = true;
 			AdStore.__emitChange();
-		break;
+			break;
 		case AdConstants.AD_RECEIVED:
 			updateAdvert(payload.advert);
 			_recievedAd = true;
 			AdStore.__emitChange();
-		break;
+			break;
 		case AdConstants.CLOSE_DETAILS:
 			_recievedAd = true;
 			clearShownAd();
 			AdStore.__emitChange();
+			break;
+		case AdConstants.UPDATE_VIEW:
+			updateView(payload.view);
+			AdStore.__emitChange();
+			break;
 	}
 };
 
