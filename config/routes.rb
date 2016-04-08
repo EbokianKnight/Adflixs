@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 		get 'list', :to => 'genres#list'
 	end
 
+	get "auth/facebook/callback", to: "omniauth#facebook"
+
 	root to: "static_pages#root"
   get '*unmatched_route', to: 'static_pages#root'
 end

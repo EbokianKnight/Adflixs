@@ -12,19 +12,12 @@ class Api::UsersController < ApplicationController
   end
 
   def update
-    @user = User.find_by_credentials({
-      password: params[:oldpassword],
-      email: params[:email]
-    })
-		if @user
-      if @user.update_attributes!(user_params)
-        render :show
-  		else
-  			render json: { message: @user.errors.full_messages }
-  		end
-    else
-      render json: { message: ["Incorrect email or password"] }
-    end
+    @user.find(params[:id])
+    if @user.update_attributes!(user_params)
+      render :show
+  	else
+  		render json: { message: @user.errors.full_messages }
+  	end
   end
 
 	#Register New User
