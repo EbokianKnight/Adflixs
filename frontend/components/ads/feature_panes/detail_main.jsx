@@ -40,7 +40,7 @@ var AdDetailPane = React.createClass({
 
 	displayPane: function () {
 		if (this.state.display === "overview") {
-			return <OverviewDetail key={1} ad={this.props.ad} />;
+			return <OverviewDetail key={1} ad={this.props.ad} header={this.props.header}/>;
 		} else if (this.state.display === "similar") {
 			return <MoreLikeThisDetail key={2} ad={this.props.ad} />;
 		} else if (this.state.display === "detail") {

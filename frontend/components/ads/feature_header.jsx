@@ -17,7 +17,6 @@ var FeatureHeader = React.createClass({
   componentDidMount: function() {
     this.featureToken = FeatureStore.addListener(this.getFeaturesFromStore);
     ApiUtil.fetchFeatures();
-    this.slides = window.setInterval(this.alternateFeatures, 15000);
   },
 
   getFeaturesFromStore: function () {
@@ -26,7 +25,6 @@ var FeatureHeader = React.createClass({
 
   componentWillUnmount: function() {
     this.featureToken.remove();
-    window.clearInterval(this.slides);
   },
 
   alternateFeatures: function () {
@@ -37,7 +35,8 @@ var FeatureHeader = React.createClass({
 
   renderFeatures: function () {
     return (
-      <DetailMain ad={this.state.features[this.state.shown]} header={true}/>
+      <DetailMain ad={this.state.features[this.state.shown]}
+        header={this.alternateFeatures}/>
     );
   },
 
