@@ -44,7 +44,6 @@ var ProfileDropDown = React.createClass({
 
   goToAccount: function (e) {
     this.context.router.push("/account")
-    $("body").removeClass("disable-scroll");
   },
 
   createRollOverMenu: function () {
