@@ -41,7 +41,7 @@ gem "paperclip", '5.0.0.beta1'
 gem 'figaro'
 gem 'aws-sdk', '>= 2.0'
 gem 'omniauth-facebook'
-gem 'google-api-client'
+# gem 'google-api-client'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

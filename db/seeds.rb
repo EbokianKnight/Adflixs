@@ -45,7 +45,7 @@ ads = []
     year: Faker::Date.between(1.year.ago, Date.today),
     genre_ids: g_ids,
     youtube: youtube.sample(1),
-    image: File.open("app/assets/images/random_ads/" + rand(30).next.to_s + ".jpg")
+    image: File.open("app/assets/images/random_ads/" + rand(60).next.to_s + ".jpg")
   ))
 end
 
@@ -56,7 +56,7 @@ end
       ad_id: ad.id,
       rate: rand(5) + 1,
       title: Faker::Hipster.word,
-      review: Faker::Hipster.paragraph(8)
+      review: Faker::Hipster.paragraph(10)
       )
   end
 end
