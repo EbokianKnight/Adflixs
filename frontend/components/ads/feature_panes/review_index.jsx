@@ -10,7 +10,7 @@ var ReactCSS = require('react-addons-css-transition-group');
 
 var settings = {
   overlay : {
-    position          : 'fixed',
+    position          : 'static',
     top               : 0,
     left              : 0,
     right             : 0,
@@ -154,17 +154,17 @@ var ReviewIndex = React.createClass({
 
   render: function() {
     return (
-      <div>
-        <section className="ad-review-main group">
-          <h2 className="ad-review-title">Member Reviews</h2>
-          <section className="ad-review-flex-container">
+      <div key={"detailreview"}>
+        <section key={1} className="ad-review-main group">
+          <h2 key={2} className="ad-review-title">Member Reviews</h2>
+          <section key={3} className="ad-review-flex-container">
             { this.loadReviews() }
           </section>
           { this.reviewForm() }
-          <a onClick={this.openModal} className="ad-review-title ad-link">
+          <a key={4} onClick={this.openModal} className="ad-review-title ad-link">
             Read More...</a>
         </section>
-        <Modal
+        <Modal key={"modal"}
           isOpen={this.state.modalIsOpen}
           onRequestClose={this.closeModal}
           style={settings}>
