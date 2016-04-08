@@ -15,7 +15,7 @@ var AddSubmission = React.createClass({
   },
 
   componentDidMount: function() {
-    this.adToken = AdStore.addListener(this.adRecieved);
+    this.adToken = AdStore.addListener(this.adreceived);
     this.genreToken = GenreStore.addListener(this.updateGenres);
     ApiUtil.fetchGenreList()
   },
@@ -25,7 +25,7 @@ var AddSubmission = React.createClass({
     this.adToken.remove();
   },
 
-  adRecieved: function () {
+  adreceived: function () {
     this.props.close("success");
   },
 

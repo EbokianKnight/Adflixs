@@ -6,6 +6,7 @@ var ApiUtil = require('../../util/api_util');
 var AdvertRow = require('./ad_index_row');
 var DetailMain = require('./feature_panes/detail_main');
 var ReactCSS = require('react-addons-css-transition-group');
+// var FeatureHeader = require('./feature_header');
 
 var MainIndex = React.createClass({
 
@@ -91,6 +92,8 @@ var MainIndex = React.createClass({
 	},
 
 	render: function() {
+		// <FeatureHeader />
+		// remove header logic from DetailMain remove randomfetch from ads
 		if (this.state.genres.length === 0) return <div></div>;
 		return (
 			<div ref="GenreRows" className="main-index-body">

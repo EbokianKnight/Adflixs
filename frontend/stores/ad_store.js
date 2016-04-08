@@ -6,7 +6,7 @@ var AdStore = new Store(AppDispatcher);
 
 var _adverts = {}; //not used?
 var _shownAd = null;
-var _recievedAd = false;
+var _receivedAd = false;
 
 var resetAdverts = function (ads) {
 	_adverts = {};
@@ -18,7 +18,7 @@ var updateAdvert = function (ad) {
 };
 
 var updateView = function (newView) {
-	if (_recievedAd) {
+	if (_receivedAd) {
 		_shownAd.views = _shownAd.views.map(function(view){
 			if (view.user_id === newView.user_id) {
 				return newView;
@@ -34,8 +34,8 @@ var clearShownAd = function () {
 };
 
 AdStore.successMessage = function () {
-	var flash = _recievedAd;
-	_recievedAd = false;
+	var flash = _receivedAd;
+	_receivedAd = false;
 	return flash;
 };
 
@@ -43,16 +43,16 @@ AdStore.__onDispatch = function (payload) {
 	switch (payload.actionType) {
 		case AdConstants.ADS_RECEIVED:
 			resetAdverts(payload.adverts);
-			_recievedAd = true;
+			_receivedAd = true;
 			AdStore.__emitChange();
 			break;
 		case AdConstants.AD_RECEIVED:
 			updateAdvert(payload.advert);
-			_recievedAd = true;
+			_receivedAd = true;
 			AdStore.__emitChange();
 			break;
 		case AdConstants.CLOSE_DETAILS:
-			_recievedAd = true;
+			_receivedAd = true;
 			clearShownAd();
 			AdStore.__emitChange();
 			break;

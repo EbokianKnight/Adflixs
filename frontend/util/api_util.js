@@ -12,7 +12,7 @@ module.exports = {
       contentType: false,
       data: advertData,
       success: function (advert) {
-        AdActions.recieveAdvert(advert);
+        AdActions.receiveAdvert(advert);
       },
       error: function (err) {
         console.log("ApiUtil#createAdvert Error");
@@ -25,7 +25,7 @@ module.exports = {
       url: "/api/views",
       data: { view: viewData },
       success: function (view) {
-        UserActions.recieveView(view);
+        UserActions.receiveView(view);
         AdActions.updateView(view);
         if (callback) { callback(); }
       },
@@ -40,7 +40,7 @@ module.exports = {
       url: "/api/views/" + viewID,
       data: { view: viewData },
       success: function (view) {
-        UserActions.recieveView(view);
+        UserActions.receiveView(view);
         AdActions.updateView(view);
         if (callback) { callback(); }
       },
@@ -49,12 +49,24 @@ module.exports = {
       }
     });
   },
+  fetchFeatures: function () {
+    $.ajax({
+			method: "GET",
+      url: "/api/features",
+      success: function (ads) {
+        FeatureActions.receiveFeatures(ads);
+      },
+			error: function (err) {
+				console.log("ApiUtil#fetchGenres Error");
+			}
+    });
+  },
   fetchAdverts: function () {
     $.ajax({
 			method: "GET",
       url: "/api/ads",
       success: function (adverts) {
-        AdActions.recieveAllAdverts(adverts);
+        AdActions.receiveAllAdverts(adverts);
       }
     });
   },
@@ -64,7 +76,7 @@ module.exports = {
       url: "/api/ads/" + id,
       success: function (advert) {
 				advert.rowID = rowID;
-        AdActions.recieveAdvert(advert);
+        AdActions.receiveAdvert(advert);
       },
 			error: function (err) {
 				console.log("ApiUtil#fetchAdvert Error");
@@ -76,7 +88,7 @@ module.exports = {
 			method: "GET",
       url: "/api/list",
       success: function (list) {
-        GenreActions.recieveGenreList(list);
+        GenreActions.receiveGenreList(list);
       },
 			error: function (err) {
 				console.log("ApiUtil#fetchGenres Error");
@@ -88,7 +100,7 @@ module.exports = {
 			method: "GET",
       url: "/api/favorites",
       success: function (list) {
-        MyListActions.recieveMyList(list);
+        MyListActions.receiveMyList(list);
       },
 			error: function (err) {
 				console.log("ApiUtil#fetchMyList Error");
@@ -128,7 +140,7 @@ module.exports = {
       url: "/api/genres",
       data: { page: page },
       success: function (genres) {
-        GenreActions.recieveAllGenres(genres, callback);
+        GenreActions.receiveAllGenres(genres, callback);
       },
 			error: function (err) {
 				console.log("ApiUtil#fetchGenres Error");

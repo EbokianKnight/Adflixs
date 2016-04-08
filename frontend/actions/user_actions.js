@@ -16,7 +16,7 @@ module.exports = {
   },
   receiveCurrentUser: function ( currentUser, callback ) {
     AppDispatcher.dispatch({
-      actionType: UserConstants.RECIEVE_USER,
+      actionType: UserConstants.RECEIVE_USER,
       currentUser: currentUser,
       callback: callback
     });
@@ -33,7 +33,7 @@ module.exports = {
       message: message,
     });
   },
-  recieveView: function (view) {
+  receiveView: function (view) {
     AppDispatcher.dispatch({
       actionType: UserConstants.UPDATE_VIEW,
       view: view
