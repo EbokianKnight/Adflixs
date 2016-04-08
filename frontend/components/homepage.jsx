@@ -51,6 +51,7 @@ var HomePage = React.createClass({
 		var settings = {
       dots: false,
 			arrows: false,
+			draggable: false,
       speed: 1000,
 			fade: true,
 			useCSS: true
