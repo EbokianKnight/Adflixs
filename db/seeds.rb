@@ -49,6 +49,9 @@ ads = []
   ))
 end
 
+ads.first.features.create!
+ads.last.features.create!
+
 20.times do |user|
   t = User.create!(email: Faker::Internet.free_email, password: "lolcats" )
   ads.sample(60).each do |ad|
