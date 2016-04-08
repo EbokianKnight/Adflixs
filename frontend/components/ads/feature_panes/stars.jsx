@@ -48,11 +48,22 @@ var RateStars = React.createClass({
   },
 
   render: function() {
-    var one = this.state.rate > 0 ? " gold" : "";
-    var two = this.state.rate > 1 ? " gold" : "";
-    var three = this.state.rate > 2 ? " gold" : "";
-    var four = this.state.rate > 3 ? " gold" : "";
-    var five = this.state.rate > 4 ? " gold" : "";
+    var one, two, three, four, five;
+    if (this.state.rate === 0) {
+      if (this.props.ad.average) {
+        one = this.props.ad.average > 0 ? " review-star" : "";
+        two = this.props.ad.average > 1 ? " review-star" : "";
+        three = this.props.ad.average > 2 ? " review-star" : "";
+        four = this.props.ad.average > 3 ? " review-star" : "";
+        five = this.props.ad.average > 4 ? " review-star" : "";
+      }
+    } else {
+      one = this.state.rate > 0 ? " gold" : "";
+      two = this.state.rate > 1 ? " gold" : "";
+      three = this.state.rate > 2 ? " gold" : "";
+      four = this.state.rate > 3 ? " gold" : "";
+      five = this.state.rate > 4 ? " gold" : "";
+    }
     return (
       <ul className="rating-features" onMouseLeave={this.setStarsFromStore}>
         <div className={"rate" + one} name="1"
