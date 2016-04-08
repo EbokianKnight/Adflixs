@@ -2,19 +2,22 @@ var React = require('react');
 var PropTypes = React.PropTypes;
 var FeatureStore = require('../../stores/feature_store');
 var DetailMain = require('./feature_panes/detail_main');
-var Slider = require('react-slick');
+var ApiUtil = require('../../util/api_util');
+var ReactCSS = require('react-addons-css-transition-group');
 
 var FeatureHeader = React.createClass({
 
   getInitialState: function() {
     return {
-      features: []
+      features: [],
+      shown: 0
     };
   },
 
   componentDidMount: function() {
-    this.featureToken = FeatureStore.addListener(this.getFeaturesFromStore());
+    this.featureToken = FeatureStore.addListener(this.getFeaturesFromStore);
     ApiUtil.fetchFeatures();
+    this.slides = window.setInterval(this.alternateFeatures, 15000);
   },
 
   getFeaturesFromStore: function () {
@@ -23,29 +26,28 @@ var FeatureHeader = React.createClass({
 
   componentWillUnmount: function() {
     this.featureToken.remove();
+    window.clearInterval(this.slides);
+  },
+
+  alternateFeatures: function () {
+    var slide = this.state.shown;
+    var nextup = (slide + 1) >= this.state.features.length ? 0 : slide+1;
+    this.setState({ shown: nextup });
   },
 
   renderFeatures: function () {
     return (
-      features.map(function(ad, idx){
-        return <DetailMain key={idx} ad={ ad } />;
-      })
+      <DetailMain ad={this.state.features[this.state.shown]} header={true}/>
     );
   },
 
   render: function() {
-    var settings = {
-      infinite: true,
-      speed: 1000,
-      fade: true,
-			arrows: true,
-			useCSS: true
-    };
+    if (this.state.features.length === 0) { return <div/>; }
     return (
       <div className="main-index-header">
-        <Slider {...settings}>
+
           { this.renderFeatures() }
-        </Slider>
+
       </div>
     );
   }

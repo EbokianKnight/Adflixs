@@ -1,7 +1,8 @@
 var AdActions = require('../actions/ad_actions');
 var GenreActions = require('../actions/genre_actions');
-var UserActions = require('./../actions/user_actions');
-var MyListActions = require('./../actions/my_list_actions');
+var UserActions = require('../actions/user_actions');
+var FeatureActions = require('../actions/feature_actions');
+var MyListActions = require('../actions/my_list_actions');
 
 module.exports = {
   createAdvert: function (advertData) {
@@ -53,11 +54,11 @@ module.exports = {
     $.ajax({
 			method: "GET",
       url: "/api/features",
-      success: function (ads) {
-        FeatureActions.receiveFeatures(ads);
+      success: function (header) {
+        FeatureActions.receiveFeatures(header.feature);
       },
 			error: function (err) {
-				console.log("ApiUtil#fetchGenres Error");
+				console.log("ApiUtil#fetchFeatures Error");
 			}
     });
   },

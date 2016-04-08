@@ -28,7 +28,6 @@ var AdDetailPane = React.createClass({
 	},
 
 	createMenuButtons: function () {
-		if (this.props.header) {return;}
 		return (
 			<nav className="ad-display-nav group">
 				<button onClick={this.showOverviewPane}
@@ -41,12 +40,12 @@ var AdDetailPane = React.createClass({
 
 	displayPane: function () {
 		if (this.state.display === "overview") {
-			return <OverviewDetail key={1} ad={this.props.ad} header={this.props.header}/>;
+			return <OverviewDetail key={1} ad={this.props.ad} />;
 		} else if (this.state.display === "similar") {
-			return <MoreLikeThisDetail key={2} ad={this.props.ad} header={this.props.header}/>;
+			return <MoreLikeThisDetail key={2} ad={this.props.ad} />;
 		} else if (this.state.display === "detail") {
 			return <ReviewIndex key={3} ad={this.props.ad}
-				header={this.props.header} refresh={this.props.refresh}/>;
+				 refresh={this.props.refresh}/>;
 		}
 	},
 
@@ -74,7 +73,7 @@ var AdDetailPane = React.createClass({
 					<h2 className="feature-title">{this.props.ad.title}</h2>
 					<ReactCSS transitionName="fader"
 						transitionEnterTimeout={500}
-						transitionLeaveTimeout={300}>
+						transitionLeaveTimeout={500}>
 						{ this.displayPane() }
 					</ReactCSS>
 

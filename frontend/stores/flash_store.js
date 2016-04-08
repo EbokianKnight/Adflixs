@@ -12,7 +12,7 @@ var resetMessage = function (message) {
 
 FlashStore.__onDispatch = function (payload) {
 	switch (payload.actionType) {
-		case FlashConstants.MESSAGE_RECEIVED:
+		case FlashConstants.MESSAGE_receiveD:
 			resetMessage(payload.message);
 			FlashStore.__emitChange();
 		break;
