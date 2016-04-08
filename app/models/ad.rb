@@ -8,4 +8,5 @@ class Ad < ActiveRecord::Base
 	has_many :views
 	has_many :viewed, through: :views, source: :user
 	has_many :favorites
+	has_many :features
 end
