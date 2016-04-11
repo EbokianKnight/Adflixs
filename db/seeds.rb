@@ -21,11 +21,11 @@ youtube = [
 ]
 
 genres = [
+  Genre.create!(name: "drinks"),
   Genre.create!(name: "funny"),
+  Genre.create!(name: "foods"),
   Genre.create!(name: "cars"),
   Genre.create!(name: "previews"),
-  Genre.create!(name: "foods"),
-  Genre.create!(name: "drinks"),
   Genre.create!(name: "clothing"),
   Genre.create!(name: "arty"),
   Genre.create!(name: "animals"),
