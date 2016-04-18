@@ -31,8 +31,13 @@ class User < ActiveRecord::Base
     user = User.find_by(provider: provider, uid: uid)
     return user if user
 
-    User.create(provider: provider, uid: uid, password: SecureRandom.base64,
-			email: auth_hash[:extra][:raw_info][:email])
+		email = auth_hash[:extra][:raw_info][:email]
+		if user = User.find_by_email(email)
+			user.update(provider: provider, uid: uid, password: SecureRandom.base64)
+		else
+			User.create(provider: provider, uid: uid, password: SecureRandom.base64,
+				email: email)
+		end
   end
 
 	def password=(password)
