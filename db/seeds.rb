@@ -10,6 +10,9 @@ Genre.destroy_all
 Ad.destroy_all
 AdGenre.destroy_all
 User.destroy_all
+View.destroy_all
+Favorite.destroy_all
+Feature.destroy_all
 
 User.create!(email: "Guest", password: "password", admin: false)
 User.create!(email: "MyTest", password: "testtest", admin: true)
@@ -146,7 +149,7 @@ car.features.create!
 ads = []
 real_ads = [car, car2, bro, hulk, polar, mut, trans, london, temple, roller]
 
-150.times do |i|
+100.times do |i|
   g_ids = genres.sample(rand(3)+1).map{ |g| g.id }
   ads.push(Ad.create!(
     title: Faker::Superhero.power,
