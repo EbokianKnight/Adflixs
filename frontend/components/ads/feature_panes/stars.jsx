@@ -20,6 +20,10 @@ var RateStars = React.createClass({
     this.sessionToken.remove();
   },
 
+  componentWillReceiveProps: function (nextProps) {
+    this.setState({ rate: SessionStore.fetchView(nextProps.ad.id).rate });
+  },
+
   setStarsFromStore: function () {
     var view = SessionStore.fetchView(this.props.ad.id);
     var stars = 0;
