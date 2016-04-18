@@ -51,14 +51,9 @@ var AccountIndex = React.createClass({
 
   sendPasswordChange: function (e) {
     e.preventDefault();
-    if (e.currentTarget.oldpassword.value !== e.currentTarget.passconfirm.value ) {
-      this.flash = "password confirmation does not match"
-      return;
-    }
     UserUtil.updateUser(SessionStore.currentUser.id,
       {
         password: e.currentTarget.password.value,
-        oldpassword: e.currentTarget.oldpassword.value,
         email: this.state.user.email
       },
       this.close)
@@ -90,15 +85,6 @@ var AccountIndex = React.createClass({
               Cancel</button>
           </section>
           <form ref="PasswordRequest">
-            <row className="account-section-row group">
-              <label className="account-item-left group">
-                <div className="form-row">Old Password</div>
-                <input className="account-section-input" type="password"
-                  name="oldpassword"/>
-              </label>
-              <input type="submit" value="Update Password"
-                className="account-aside-button account-item-right"/>
-            </row>
             <row className="account-section-row group">
               <label className="account-item-left group">
                 <div className="form-row">New Password</div>
