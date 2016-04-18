@@ -68,17 +68,6 @@ polar = Ad.create!(
   image: File.open("app/assets/images/snaps/ColaPolar.jpg")
 )
 
-mut = Ad.create!(
-  title: "Yıl - Mutluluk Kamyonu",
-  company: "Coca-Cola",
-  product: "Coca-Cola",
-  description: "Coca-Cola'nın 125. Yılında insanlara mutluluk dağıttığı kamyon İstanbul trafiğine çıktı ve Boğaziçi Köprüsü'nde yüzlerce insana şaşırtıcı anlar yaşattı.",
-  year: Date.today,
-  genre_ids: [genres[0].id],
-  youtube: 'zV7N21LSr_Y',
-  image: File.open("app/assets/images/snaps/mutluluk.jpg")
-)
-
 trans = Ad.create!(
   title: "Transformer - Coca-Cola Hong Kong",
   company: "Coca-Cola",
@@ -110,6 +99,17 @@ temple = Ad.create!(
   genre_ids: [genres[0].id, genres[2].id],
   youtube: '40DykbPa4Lc',
   image: File.open("app/assets/images/snaps/temple_pepsi.jpg")
+)
+
+mut = Ad.create!(
+  title: "Yıl - Mutluluk Kamyonu",
+  company: "Coca-Cola",
+  product: "Coca-Cola",
+  description: "Coca-Cola'nın 125. Yılında insanlara mutluluk dağıttığı kamyon İstanbul trafiğine çıktı ve Boğaziçi Köprüsü'nde yüzlerce insana şaşırtıcı anlar yaşattı.",
+  year: Date.today,
+  genre_ids: [genres[0].id],
+  youtube: 'zV7N21LSr_Y',
+  image: File.open("app/assets/images/snaps/mutluluk.jpg")
 )
 roller = Ad.create!(
   title: "Pepsi Roller Coaster Commercial",
