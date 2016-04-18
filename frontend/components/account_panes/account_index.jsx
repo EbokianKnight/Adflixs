@@ -14,6 +14,7 @@ var AccountIndex = React.createClass({
       password: "",
       confirmation: "",
       email: "",
+      user: SessionStore.currentUser()
     };
   },
 
@@ -112,9 +113,7 @@ var AccountIndex = React.createClass({
                 <input
                   onChange={this.updatePassword}
                   className="account-section-input"
-                  type="password"
-                  name="newpassword"
-                  value={this.state.password}/>
+                  type="password"/>
               </label>
               <input onClick={this.sendPasswordChange} value="Update Password"
                 className="account-aside-button account-item-right"/>
@@ -125,9 +124,7 @@ var AccountIndex = React.createClass({
                 <input
                   onChange={this.updateConfirm}
                   className="account-section-input"
-                  type="password"
-                  name="passconfirm"
-                  value={this.state.confirmation}/>
+                  type="password"/>
               </label>
             </row>
           </form>
@@ -167,9 +164,7 @@ var AccountIndex = React.createClass({
                 <input
                   onChange={this.updateEmail}
                   className="account-section-input"
-                  type="text"
-                  name="user[email]"
-                  value={this.state.email}/>
+                  type="text"/>
               </label>
               <input onClick={this.sendEmailChange} value="Update Email"
                 className="account-aside-button account-item-right"/>
@@ -180,9 +175,7 @@ var AccountIndex = React.createClass({
                 <input
                   onChange={this.updateConfirm}
                   className="account-section-input"
-                  type="text"
-                  name="emailconfirm"
-                  value={this.state.confirmation}/>
+                  type="text"/>
               </label>
             </row>
           </form>
