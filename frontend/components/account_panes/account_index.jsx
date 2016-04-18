@@ -87,6 +87,7 @@ var AccountIndex = React.createClass({
 
   sendEmailChange: function (e) {
     e.preventDefault();
+    debugger
     if (this.state.email === this.state.confirm) {
       UserUtil.updateUser(SessionStore.currentUser.id,
         { email: this.state.email }, this.close )
@@ -115,7 +116,7 @@ var AccountIndex = React.createClass({
                   name="newpassword"
                   value={this.state.password}/>
               </label>
-              <input type="submit" value="Update Password"
+              <input onClick={this.sendPasswordChange} value="Update Password"
                 className="account-aside-button account-item-right"/>
             </row>
             <row className="account-section-row group">
@@ -159,19 +160,29 @@ var AccountIndex = React.createClass({
             <button onClick={this.close} className="account-aside-button">
               Cancel</button>
           </section>
-          <form onSubmit={this.sendEmailChange}>
+          <form>
             <row className="account-section-row group">
               <label className="account-item-left group">
                 <div className="form-row">New Email</div>
-                <input className="account-section-input" type="password"
-                  name="user[email]"/>
+                <input
+                  onChange={this.updateEmail}
+                  className="account-section-input"
+                  type="text"
+                  name="user[email]"
+                  value={this.state.email}/>
               </label>
+              <input onClick={this.sendEmailChange} value="Update Email"
+                className="account-aside-button account-item-right"/>
             </row>
             <row className="account-section-row group">
               <label className="account-item-left group">
                 <div className="form-row">Email Confirmation</div>
-                <input className="account-section-input" type="password"
-                  name="emailconfirm"/>
+                <input
+                  onChange={this.updateConfirm}
+                  className="account-section-input"
+                  type="text"
+                  name="emailconfirm"
+                  value={this.state.confirmation}/>
               </label>
             </row>
           </form>
