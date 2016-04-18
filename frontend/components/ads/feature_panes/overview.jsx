@@ -58,7 +58,7 @@ var OverviewDetail = React.createClass({
         <p className="feature-description">{this.props.ad.description}</p>
         { this.createProductInfo() }
         { this.createGenreInfo() }
-        { <RateStars ad={this.props.ad}/> }
+        <RateStars ad={this.props.ad}/>
         <MyListButton ad={this.props.ad}/>
 			</div>
 		);
