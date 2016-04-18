@@ -33,6 +33,10 @@ button, article, footer, small {
 	list-style: none;
 }
 
+input:focus {
+	border: 1px solid red;
+}
+
 .group:after {
 	content: "";
 	display: block;

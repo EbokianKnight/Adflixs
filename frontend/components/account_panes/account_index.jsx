@@ -8,7 +8,13 @@ var UserUtil = require('../../util/user_util');
 var AccountIndex = React.createClass({
 
   getInitialState: function() {
-    return { show: "", user: "" };
+    return {
+      show: "",
+      user: "",
+      password: "",
+      confirmation: "",
+      email: "",
+    };
   },
 
   componentDidMount: function() {
@@ -33,13 +39,25 @@ var AccountIndex = React.createClass({
     this.setState({ show: "password" });
   },
 
+  updatePassword: function (e) {
+    this.setState({ password: e.target.value })
+  },
+
+  updateConfirm: function (e) {
+    this.setState({ confirmation: e.target.value })
+  },
+
+  updateEmail: function (e) {
+    this.setState({ email: e.target.value })
+  },
+
   newAdvert: function () {
     this.setState({ show: "advert" });
   },
 
   close: function (command) {
     command = command || ""
-    this.setState({ show: command });
+    this.setState({ show: command, confirm: "", password: "", email: "" });
   },
 
   showAdvertForm: function () {
@@ -51,12 +69,12 @@ var AccountIndex = React.createClass({
 
   sendPasswordChange: function (e) {
     e.preventDefault();
-    UserUtil.updateUser(SessionStore.currentUser.id,
-      {
-        password: e.currentTarget.password.value,
-        email: this.state.user.email
-      },
-      this.close)
+    if (this.state.password === this.state.confirm) {
+      UserUtil.updateUser(SessionStore.currentUser.id,
+        { password: this.state.password }, this.close )
+    } else {
+      this.flash = "Your password must match the confirmation";
+    }
   },
 
   flashMessage: function () {
@@ -69,10 +87,12 @@ var AccountIndex = React.createClass({
 
   sendEmailChange: function (e) {
     e.preventDefault();
-    UserUtil.updateUser(SessionStore.currentUser.id,
-      $(this.refs.EmailRequest).serialize(),
-      this.close
-    )
+    if (this.state.email === this.state.confirm) {
+      UserUtil.updateUser(SessionStore.currentUser.id,
+        { email: this.state.email }, this.close )
+    } else {
+      this.flash = "Your email must match the confirmation";
+    }
   },
 
   showPasswordEdit: function () {
@@ -88,15 +108,25 @@ var AccountIndex = React.createClass({
             <row className="account-section-row group">
               <label className="account-item-left group">
                 <div className="form-row">New Password</div>
-                <input className="account-section-input" type="password"
-                  name="newpassword"/>
+                <input
+                  onChange={this.updatePassword}
+                  className="account-section-input"
+                  type="password"
+                  name="newpassword"
+                  value={this.state.password}/>
               </label>
+              <input type="submit" value="Update Password"
+                className="account-aside-button account-item-right"/>
             </row>
             <row className="account-section-row group">
               <label className="account-item-left group">
                 <div className="form-row">Password Confirmation</div>
-                <input className="account-section-input" type="password"
-                  name="passconfirm"/>
+                <input
+                  onChange={this.updateConfirm}
+                  className="account-section-input"
+                  type="password"
+                  name="passconfirm"
+                  value={this.state.confirmation}/>
               </label>
             </row>
           </form>
@@ -129,16 +159,7 @@ var AccountIndex = React.createClass({
             <button onClick={this.close} className="account-aside-button">
               Cancel</button>
           </section>
-          <form>
-            <row className="account-section-row group">
-              <label className="account-item-left group">
-                <div className="form-row">Password</div>
-                <input className="account-section-input" type="password"
-                  name="user[password]"/>
-              </label>
-              <input type="submit" value="Update Email"
-                className="account-aside-button account-item-right"/>
-            </row>
+          <form onSubmit={this.sendEmailChange}>
             <row className="account-section-row group">
               <label className="account-item-left group">
                 <div className="form-row">New Email</div>
