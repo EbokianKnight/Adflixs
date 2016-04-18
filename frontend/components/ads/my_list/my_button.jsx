@@ -42,11 +42,14 @@ var MyListButton = React.createClass({
   },
 
   toggleList: function () {
+    console.log(this.props.ad);
     if (this.state.show === "addTo") {
       ApiUtil.addToMyList(this.props.ad);
     } else {
       ApiUtil.removeFromMyList(this.props.ad);
-      AdActions.closeDetails();
+      if (this.props.ad.rowID === "My List") {
+        AdActions.closeDetails();
+      }
     }
   },
 
