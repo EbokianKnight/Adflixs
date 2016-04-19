@@ -236,24 +236,17 @@
 	overflow: hidden;
 	position: relative;
 	height: 210px;
-	margin-top:30px;
-	-webkit-animation: rowbardropin 1s; /* Safari, Chrome and Opera > 12.1 */
-     -moz-animation: rowbardropin 1s; /* Firefox < 16 */
-      -ms-animation: rowbardropin 1s; /* Internet Explorer */
-       -o-animation: rowbardropin 1s; /* Opera < 12.1 */
-          animation: rowbardropin 1s;
+	-webkit-animation: dropin 1s; /* Safari, Chrome and Opera > 12.1 */
+     -moz-animation: dropin 1s; /* Firefox < 16 */
+      -ms-animation: dropin 1s; /* Internet Explorer */
+       -o-animation: dropin 1s; /* Opera < 12.1 */
+          animation: dropin 1s;
 	transition: height 0.54s cubic-bezier(0.5, 0, 0.1, 1) 0s, opacity 0.44s cubic-bezier(0.5, 0, 0.1, 1) 0.1s;
 }
 
-@keyframes rowbardropin {
-	from {
-			height: 1px;
-	 		margin-top: 1px;
-		}
-	to {
-			height: 210px;
-	 		margin-top: 30px;
-		}
+@keyframes dropin {
+	from {height: 1px;}
+	to {height: 210px;}
 }
 
 .row-extend {
@@ -280,15 +273,28 @@
 	background-image: asset-url("demo.jpg");
 	background-size: cover;
 	margin:30px 5px;
-	transition: width .5s, height .5s, margin .5s;
-	transition: background-image, .5s;
-	transition: background-size, .5s;
+	transition: width, height, margin, background-image, .5s;
+	-webkit-animation: flixdropin 1s; /* Safari, Chrome and Opera > 12.1 */
+	-moz-animation: flixdropin 1s; /* Firefox < 16 */
+	-ms-animation: flixdropin 1s; /* Internet Explorer */
+	-o-animation: flixdropin 1s; /* Opera < 12.1 */
+	animation: flixdropin 1s;
 }
 
 .fliximg-effect:hover {
 	width: 280px !important;
 	height: 210px !important;
 	margin: 0px 20px;
+}
+
+@keyframes flixdropin {
+	from { transform: scaleY(0) }
+	to { transform: scaleY(1) }
+}
+
+@keyframes flixdropout {
+	from { transform: scaleY(1) }
+	to { transform: scaleY(0) }
 }
 
 .add-play-button {

@@ -6,7 +6,6 @@ var SessionStore = require('../../../stores/session_store');
 var ApiUtil = require('../../../util/api_util');
 var ReviewIndexItem = require ('./review_index_item');
 var Modal = require('react-modal');
-var ReactCSS = require('react-addons-css-transition-group');
 
 var settings = {
   overlay : {
@@ -154,10 +153,10 @@ var ReviewIndex = React.createClass({
 
   render: function() {
     return (
-      <div key={"detailreview"}>
-        <section key={1} className="ad-review-main group">
-          <h2 key={2} className="ad-review-title">Member Reviews</h2>
-          <section key={3} className="ad-review-flex-container">
+      <div>
+        <section className="ad-review-main group">
+          <h2 className="ad-review-title">Member Reviews</h2>
+          <section className="ad-review-flex-container">
             { this.loadReviews() }
           </section>
           { this.reviewForm() }
