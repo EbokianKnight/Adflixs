@@ -73,7 +73,7 @@ var AdDetailPane = React.createClass({
 					<h2 className="feature-title">{this.props.ad.title}</h2>
 					<ReactCSS transitionName="fader"
 						transitionEnterTimeout={500}
-						transitionLeaveTimeout={500}>
+						transitionLeaveTimeout={300}>
 						{ this.displayPane() }
 					</ReactCSS>
 

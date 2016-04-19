@@ -35,7 +35,7 @@ var FeatureHeader = React.createClass({
 
   renderFeatures: function () {
     return (
-      <DetailMain ad={this.state.features[this.state.shown]}
+      <DetailMain key={this.state.shown} ad={this.state.features[this.state.shown]}
         header={this.alternateFeatures}/>
     );
   },
@@ -44,9 +44,7 @@ var FeatureHeader = React.createClass({
     if (this.state.features.length === 0) { return <div/>; }
     return (
       <div className="main-index-header">
-
-          { this.renderFeatures() }
-
+        { this.renderFeatures() }
       </div>
     );
   }
