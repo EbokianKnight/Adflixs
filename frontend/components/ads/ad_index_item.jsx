@@ -17,7 +17,7 @@ var Advert = React.createClass({
 		e.stopPropagation();
 		this.context.router.push({
 			pathname: "/main/streaming",
-			query: { youtube: this.props.ad.youtube.slice(2,13) }
+			query: { youtube: this.props.ad.youtube }
 		});
 	},
 
