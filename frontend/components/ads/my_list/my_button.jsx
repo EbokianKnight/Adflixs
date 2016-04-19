@@ -42,7 +42,6 @@ var MyListButton = React.createClass({
   },
 
   toggleList: function () {
-    console.log(this.props.ad);
     if (this.state.show === "addTo") {
       ApiUtil.addToMyList(this.props.ad);
     } else {
