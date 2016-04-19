@@ -237,15 +237,15 @@
 	position: relative;
 	height: 210px;
 	margin-top:30px;
-	-webkit-animation: dropin 1s; /* Safari, Chrome and Opera > 12.1 */
-     -moz-animation: dropin 1s; /* Firefox < 16 */
-      -ms-animation: dropin 1s; /* Internet Explorer */
-       -o-animation: dropin 1s; /* Opera < 12.1 */
-          animation: dropin 1s;
+	-webkit-animation: rowbardropin 1s; /* Safari, Chrome and Opera > 12.1 */
+     -moz-animation: rowbardropin 1s; /* Firefox < 16 */
+      -ms-animation: rowbardropin 1s; /* Internet Explorer */
+       -o-animation: rowbardropin 1s; /* Opera < 12.1 */
+          animation: rowbardropin 1s;
 	transition: height 0.54s cubic-bezier(0.5, 0, 0.1, 1) 0s, opacity 0.44s cubic-bezier(0.5, 0, 0.1, 1) 0.1s;
 }
 
-@keyframes dropin {
+@keyframes rowbardropin {
 	from {
 			height: 1px;
 	 		margin-top: 1px;
