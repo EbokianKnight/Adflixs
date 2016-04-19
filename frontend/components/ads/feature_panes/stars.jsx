@@ -51,38 +51,34 @@ var RateStars = React.createClass({
     this.setState({ rate: gold });
   },
 
-  render: function() {
-    var one, two, three, four, five;
+
+  renderStars: function () {
+    var rating, klass;
     if (this.state.rate === 0 || !this.state.rate) {
-      if (this.props.ad.average) {
-        one = this.props.ad.average > 0 ? " review-star" : "";
-        two = this.props.ad.average > 1 ? " review-star" : "";
-        three = this.props.ad.average > 2 ? " review-star" : "";
-        four = this.props.ad.average > 3 ? " review-star" : "";
-        five = this.props.ad.average > 4 ? " review-star" : "";
-      }
+      rating = this.props.ad.average;
+      klass = " review-star";
     } else {
-      one = this.state.rate > 0 ? " gold" : "";
-      two = this.state.rate > 1 ? " gold" : "";
-      three = this.state.rate > 2 ? " gold" : "";
-      four = this.state.rate > 3 ? " gold" : "";
-      five = this.state.rate > 4 ? " gold" : "";
+      rating = this.state.rate;
+      klass = " gold";
     }
+    return ["1","2","3","4","5"].map(function(num, idx){
+      color = rating > idx ? klass : "";
+      return (
+        <div className={"rate" + color} name={num} key={idx}
+          onMouseEnter={this.makeGold} onClick={this.rate}>&#x2605;</div>
+      );
+    }.bind(this));
+  },
+
+
+  render: function() {
     return (
       <ul className="rating-features" onMouseLeave={this.setStarsFromStore}>
-        <div className={"rate" + one} name="1"
-          onMouseEnter={this.makeGold} onClick={this.rate}>&#x2605;</div>
-        <div className={"rate" + two} name="2"
-          onMouseEnter={this.makeGold} onClick={this.rate}>&#x2605;</div>
-        <div className={"rate" + three} name="3"
-          onMouseEnter={this.makeGold} onClick={this.rate}>&#x2605;</div>
-        <div className={"rate" + four} name="4"
-          onMouseEnter={this.makeGold} onClick={this.rate}>&#x2605;</div>
-        <div className={"rate" + five} name="5"
-          onMouseEnter={this.makeGold} onClick={this.rate}>&#x2605;</div>
+        { this.renderStars() }
       </ul>
     );
   }
+
 
 });
 
