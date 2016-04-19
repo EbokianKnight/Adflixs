@@ -45,7 +45,7 @@ var AdvertRow = React.createClass({
 
 	fetchAdverts: function () {
 		return this.props.genre.ads.map(function(ad){
-			return <Advert ad={ad} key={ad.id} rowID={ this.props.genre.id }
+			return <Advert ref="row" ad={ad} key={ad.id} rowID={ this.props.genre.id }
 				show={ this.state.showDetail }/>;
 		}.bind(this));
 	},
@@ -87,12 +87,11 @@ var AdvertRow = React.createClass({
 		var klass = this.state.showDetail ? " row-extend" : "";
 
 		return (
-			<div className={ "row-bar" + klass }>
+			<div className={ "row-bar row-full " + klass }>
 				{ this.fetchRowName() }
 				<Slider {...settings}>
 					{ this.fetchAdverts() }
 				</Slider>
-
 				{ this.renderDetail() }
 			</div>
 		);

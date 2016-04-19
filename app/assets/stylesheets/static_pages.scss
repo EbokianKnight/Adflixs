@@ -232,12 +232,21 @@
 
 .row-bar {
 	width:95%;
-	height:210px;
 	padding-left: 20px;
 	overflow: hidden;
 	position: relative;
 	margin-top:30px;
 	transition: height 0.54s cubic-bezier(0.5, 0, 0.1, 1) 0s, opacity 0.44s cubic-bezier(0.5, 0, 0.1, 1) 0.1s;
+	-webkit-animation: dropin 1.5s; /* Safari, Chrome and Opera > 12.1 */
+     -moz-animation: dropin 1.5s; /* Firefox < 16 */
+      -ms-animation: dropin 1.5s; /* Internet Explorer */
+       -o-animation: dropin 1.5s; /* Opera < 12.1 */
+          animation: dropin 1.5s;
+}
+
+@keyframes dropin {
+	from { height: 1px }
+	to { height: 210px }
 }
 
 .row-extend {
