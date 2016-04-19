@@ -87,7 +87,7 @@ var AdvertRow = React.createClass({
 		var klass = this.state.showDetail ? " row-extend" : "";
 
 		return (
-			<div className={ "row-bar row-full " + klass }>
+			<div className={ "row-bar " + klass }>
 				{ this.fetchRowName() }
 				<Slider {...settings}>
 					{ this.fetchAdverts() }
