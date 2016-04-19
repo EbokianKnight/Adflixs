@@ -8,7 +8,7 @@ Click around at <a href='adflixs.herokuapp.com'>adflixs.herokuapp.com</a>.
 <img src="./readme/Signup.png" width="800px"/>
 <img src="./readme/MainIndex.png" width="800px"/>
 <img src="./readme/Reviews.png" width="800px"/>
-<img src="./readme/ReviewsModal.png" width="800px"/>
+<img src="./readme/ReviewModal.png" width="800px"/>
 <img src="./readme/Streaming.png" width="800px"/>
 <img src="./readme/Account.png" width="800px"/>
 
