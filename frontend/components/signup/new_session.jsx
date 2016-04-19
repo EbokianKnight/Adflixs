@@ -85,7 +85,6 @@ var NewSession = React.createClass({
           <br/><br/>
           <input type="submit" className="sign-in-button sign-in-adflix" value="Sign In"/>
           <a href="/auth/facebook" className="sign-in-button sign-in-facebook"/>
-          <svg className="sign-in-button sign-in-google"/>
           <input onClick={this.signUpAsGuest} readOnly value="Sign In As Guest"
             className="sign-in-button sign-in-adflix"/>
         </form>

@@ -67,6 +67,11 @@
 
 .sign-in-adflix:hover {
 	cursor: pointer;
+	background: #e50914;
+}
+
+.sign-in-adflix:focus {
+	background: #690c0d;
 }
 
 .sign-in-robot {
@@ -82,7 +87,7 @@
 
 .new-session-background {
 	height: 100vh;
-	background-image: asset-url("signin/Ads.png");
+	background-image: asset-url("signin/Ads_DkBlur_1080.jpg");
 	background-size: cover;
 	background-repeat: no-repeat;
 }
@@ -97,6 +102,10 @@
 	background-image: asset-url("signin/facebook.svg");
 	background-size:cover;
 	background-repeat: no-repeat;
+}
+
+.sign-in-facebook:hover {
+	background-image: asset-url("signin/facebookHover.svg");
 }
 
 .sign-in-google {

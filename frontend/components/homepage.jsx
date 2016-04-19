@@ -1,5 +1,6 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
+var UserUtil = require('../util/user_util');
 var Slider = require('react-slick');
 
 var HomePage = React.createClass({
@@ -28,6 +29,17 @@ var HomePage = React.createClass({
 		if (current + 1 >= this.slides.length) { nextup = 0 }
 		else { nextup = current + 1 }
 		this.setState({ slideNum: nextup });
+	},
+
+	signUpAsGuest: function () {
+		UserUtil.signIn({
+			email: "Guest",
+			password: "password"
+		}, this.redirectCallback );
+	},
+
+	redirectCallback: function () {
+		this.context.router.push("/main");
 	},
 
 	goToSignUp: function () {
@@ -64,6 +76,10 @@ var HomePage = React.createClass({
 		return (
 			<div id="basicLayout">
 				{ this.generateHomeHeader() }
+				<div className="homepage-bar">
+				<input onClick={this.signUpAsGuest} readOnly value="Sign In As Guest"
+					className="sign-in-button sign-in-adflix homepage-bar-item"/>
+				</div>
 			</div>
 		);
 	}
