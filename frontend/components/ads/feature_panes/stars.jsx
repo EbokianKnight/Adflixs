@@ -53,7 +53,7 @@ var RateStars = React.createClass({
 
   render: function() {
     var one, two, three, four, five;
-    if (this.state.rate === 0) {
+    if (this.state.rate === 0 || !this.state.rate) {
       if (this.props.ad.average) {
         one = this.props.ad.average > 0 ? " review-star" : "";
         two = this.props.ad.average > 1 ? " review-star" : "";
