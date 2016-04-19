@@ -4,13 +4,13 @@ Adflixs is a web application built to showcase video advertisements and track us
 Click around at <a href='adflixs.herokuapp.com'>adflixs.herokuapp.com</a>.
 
 ###**Views**
-<img src="./readme/Homepage" width="800px"/>
-<img src="./readme/Signup" width="800px"/>
-<img src="./readme/MainIndex" width="800px"/>
-<img src="./readme/Reviews" width="800px"/>
-<img src="./readme/ReviewsModal" width="800px"/>
-<img src="./readme/Streaming" width="800px"/>
-<img src="./readme/Account" width="800px"/>
+<img src="./readme/Homepage.png" width="800px"/>
+<img src="./readme/Signup.png" width="800px"/>
+<img src="./readme/MainIndex.png" width="800px"/>
+<img src="./readme/Reviews.png" width="800px"/>
+<img src="./readme/ReviewsModal.png" width="800px"/>
+<img src="./readme/Streaming.png" width="800px"/>
+<img src="./readme/Account.png" width="800px"/>
 
 ###**Technical Details**
 Infinite Scroll for query padding
