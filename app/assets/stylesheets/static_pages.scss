@@ -7,26 +7,42 @@
 	height: 55%;
 	position: relative;
 	border: 1px solid transparent;
+	transition: background 1s ease-in;
 }
 
 .pepsi-header {
-	background-image: asset-url("homepage/Pepsi.jpg");
+	background-image: asset-url("homepage/Pepsi1920.jpg");
 	background-size: cover;
 }
 
 .nuka-header {
-	background-image: asset-url("homepage/Nuka.jpg");
+	background-image: asset-url("homepage/Nuka1920.jpg");
 	background-size: cover;
 }
 
 .liquor-header {
-	background-image: asset-url("homepage/Liquor.jpg");
+	background-image: asset-url("homepage/Liquor1920.jpg");
 	background-size: cover;
 }
 
 .rabbit-header {
-	background-image: asset-url("homepage/Rabbit.jpg");
+	background-image: asset-url("homepage/Rabbit1920.jpg");
 	background-size: cover;
+}
+
+@media (max-width: 1080px) {
+	.rabbit-header {
+		background-image: asset-url("homepage/Rabbit1080.jpg");
+	}
+	.liquor-header {
+		background-image: asset-url("homepage/Liquor1080.jpg");
+	}
+	.nuka-header {
+		background-image: asset-url("homepage/Nuka1080.jpg");
+	}
+	.pepsi-header {
+		background-image: asset-url("homepage/Pepsi1080.jpg");
+	}
 }
 
 .logo {
