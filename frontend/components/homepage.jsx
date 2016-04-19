@@ -13,7 +13,7 @@ var HomePage = React.createClass({
 
 	componentDidMount: function() {
     document.body.style.backgroundColor = "#141414";
-		this.tick = window.setInterval(this.updateSlide, 6000);
+		this.tick = window.setInterval(this.updateSlide, 8000);
 		this.slides = ["pepsi-header", "nuka-header", "liquor-header", "rabbit-header"]
 		this.setState({ slideNum: 0 });
   },
