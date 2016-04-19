@@ -1,12 +1,16 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
 var GenreStore = require('../../../stores/genre_store');
-var AdvertRow = require('./../ad_index_row.jsx');
+var AdvertRow;
+AdvertRow = require('./../ad_index_row');
+
 var MoreLikeThisDetail = React.createClass({
 
-  /// ??_??
+  /// Advert Row will not render. I will need to build another component
+  /// for this. Since I'm redoing the slider, I'll hold off for now.
   createRow: function () {
-    var getRow = GenreStore.find(this.props.ad.genres[0].id);
+    var getRow;
+    getRow = GenreStore.find(this.props.ad.genres[0].id);
     return (
       <AdvertRow genre={getRow}/>
     );

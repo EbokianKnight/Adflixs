@@ -28,11 +28,11 @@ var AdDetailPane = React.createClass({
 	},
 
 	createMenuButtons: function () {
+		//<button onClick={this.showSimilarPane}>More Like This</button>
 		return (
 			<nav className="ad-display-nav group">
 				<button onClick={this.showOverviewPane}
 					genre={this.props.genre}>Overview</button>
-				<button onClick={this.showSimilarPane}>More Like This</button>
 				<button onClick={this.showDetailPane}>Details</button>
 			</nav>
 		);
