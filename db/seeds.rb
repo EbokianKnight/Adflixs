@@ -264,6 +264,7 @@ real_ads = [
     youtube: youtube.sample(1),
     image: File.open("app/assets/images/random_ads/" + rand(60).next.to_s + ".jpg")
   ))
+  genres.select!{|g| g.length < 30} if genres.length < 3
 end
 
 20.times do |user|
