@@ -242,7 +242,7 @@ car2 = Ad.create!(
   image: File.open("app/assets/images/snaps/Hyundai.jpg")
 )
 
-
+dragon.features.create!
 polar.features.create!
 car.features.create!
 
