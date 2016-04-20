@@ -43,8 +43,10 @@ var MainIndex = React.createClass({
 	},
 
 	getMoreRows: function () {
+		console.log(GenreStore.getCurrentPage());
+		console.log(GenreStore.getLastPage());
 		var page = GenreStore.getCurrentPage();
-		if ( page >= GenreStore.getLastPage() ) {
+		if ( page > GenreStore.getLastPage() ) {
 			$(window).unbind('mousewheel');
 		} else {
 			ApiUtil.fetchGenres(page++, this.timeoutCallback);
