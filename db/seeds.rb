@@ -19,7 +19,9 @@ User.create!(email: "MyTest", password: "testtest", admin: true)
 
 youtube = [
   '0oYlOBun8UI', 'OlZqBR3yTiw', 'S2nBBMbjS8w', 'zV7N21LSr_Y', 'RZd2NDzQzA4',
-  'M0D3jKLz6sA', '40DykbPa4Lc', 'FoGGDKV88Fg', 'WMI3nDccXtc', 'LT6n1HcJOio'
+  'M0D3jKLz6sA', '40DykbPa4Lc', 'FoGGDKV88Fg', 'WMI3nDccXtc', 'LT6n1HcJOio',
+  'vnVuqfXohxc', 'TPKgC8KPBMg', 'qI-1-cVDrz0', 'Shvwd7VYpE0', 'osSD6bgvyac',
+  'jZGzXEExZcc', 'PmD0YKEOh_0', '7ptwjJFgemQ', '_Ut1Ak7zOeE'
 ]
 
 genres = [
@@ -29,11 +31,109 @@ genres = [
   Genre.create!(name: "foods"), #3
   Genre.create!(name: "previews"), #4
   Genre.create!(name: "clothing"), #5
-  Genre.create!(name: "arty"), #6
-  Genre.create!(name: "animals"), #7
-  Genre.create!(name: "politics"), #8
-  Genre.create!(name: "tech") #9
+  Genre.create!(name: "animals"), #6
+  Genre.create!(name: "animated"), #7
+  Genre.create!(name: "tech") #8
 ]
+
+friends = Ad.create!(
+  title: "Friends Furever",
+  company: "Google",
+  product: "Android",
+  description: "You don’t have to be a cute animal to show the world how to “Be Together. Not the Same.” But it definitely helps. Find out more about Android at: http://android.com.",
+  year: Date.today,
+  genre_ids: [genres[2].id, genres[6].id, genres[8].id],
+  youtube: 'vnVuqfXohxc',
+  image: File.open("app/assets/images/snaps/Android_BFF3.jpg")
+)
+
+bud = Ad.create!(
+  title: "Budwiser Lost Dog",
+  company: "Budwiser",
+  product: "Beer",
+  description: "Superbowl Commerical 2015. In the emotional spot, directed by Jake Scott, the Budweiser Clydesdales help the puppy learn the true meaning of friendship by reminding us that #BestBuds always have your back.",
+  year: Date.today,
+  genre_ids: [genres[2].id, genres[6].id, genres[0].id],
+  youtube: 'TPKgC8KPBMg',
+  image: File.open("app/assets/images/snaps/Budweiser_Lost_Dog.jpg")
+)
+
+cheetos = Ad.create!(
+  title: "Cheetos Commercial Party",
+  company: "Cheetos",
+  product: "Cheetos",
+  description: "Cheetos mascot dances with a bunch of construction workers in a half-built house.",
+  year: Date.today,
+  genre_ids: [genres[2].id, genres[3].id],
+  youtube: 'qI-1-cVDrz0',
+  image: File.open("app/assets/images/snaps/Cheetos_Party.jpg")
+)
+
+siege = Ad.create!(
+  title: "Coca-Cola Siege",
+  company: "Coca-Cola",
+  product: "Coke",
+  description: "Most likely Autodesk maya for the main animation/render, zbrush for modelling the characters and their the displacement and normal maps, Nuke or after effects for the postproduction integration and final touch and premiere,final cut, sony vegas or something alike for putting together all the cuts﻿.",
+  year: Date.today,
+  genre_ids: [genres[0].id, genres[7].id],
+  youtube: 'Shvwd7VYpE0',
+  image: File.open("app/assets/images/snaps/Coca-Cola_Siege.jpg")
+)
+
+spoof = Ad.create!(
+  title: "Diet Coke Spoof Commercial",
+  company: "Coca-Cola",
+  product: "Diet Coke",
+  description: "Man dances with coke in front of girls drinking coke. He pulls off his shirt showing his fat off then dumps cola all over himself and the girls like it﻿.",
+  year: Date.today,
+  genre_ids: [genres[0].id, genres[2].id],
+  youtube: 'osSD6bgvyac',
+  image: File.open("app/assets/images/snaps/Diet_Coke_Spoof.jpg")
+)
+
+iphone = Ad.create!(
+  title: "Photos Every Day",
+  company: "Apple",
+  product: "iPhone 5",
+  description: "People from all over the worlf are shown enjoying themselves, taking pictures and videos with their iPhone 5.",
+  year: Date.today,
+  genre_ids: [genres[8].id, genres[4].id],
+  youtube: 'jZGzXEExZcc',
+  image: File.open("app/assets/images/snaps/iPhone_Photos_Every_Day.jpg")
+)
+
+midas = Ad.create!(
+  title: "Canadian Winter Car Chase",
+  company: "Midas",
+  product: "iPhone 5",
+  description: "A blizzard stops a high speed chase dead in its tracks, the vehicles are shown spinning their wheels in place and members of both attempting to push their way in the chase.",
+  year: Date.today,
+  genre_ids: [genres[1].id, genres[2].id],
+  youtube: 'PmD0YKEOh_0',
+  image: File.open("app/assets/images/snaps/Midas-Winter-Car-Chase.jpg")
+)
+
+dragon = Ad.create!(
+  title: "The Dragon",
+  company: "United Airlines",
+  product: "Airfare",
+  description: "An animated paper knight rises from his village and fights a dragon.",
+  year: Date.today,
+  genre_ids: [genres[2].id, genres[7].id],
+  youtube: '7ptwjJFgemQ',
+  image: File.open("app/assets/images/snaps/United_Airlines_Dragon.jpg")
+)
+
+volts = Ad.create!(
+  title: "Werbung Darth Vader",
+  company: "Voltswagen",
+  product: "VW Passat 2011",
+  description: "A kid dresses up as darth vadar and tries to bend things with his mind. When invoking the force against the volts wagon, it lights up and he is shocked. His father fingers the keys.",
+  year: Date.today,
+  genre_ids: [genres[2].id, genres[1].id],
+  youtube: '_Ut1Ak7zOeE',
+  image: File.open("app/assets/images/snaps/VW_Darth_Vader.jpg")
+)
 
 bro = Ad.create!(
   title: "Brotherly Love",
@@ -147,7 +247,10 @@ polar.features.create!
 car.features.create!
 
 ads = []
-real_ads = [car, car2, bro, hulk, polar, mut, trans, london, temple, roller]
+real_ads = [
+  car, car2, bro, hulk, polar, mut, trans, london, temple, roller,
+  friends, bud, cheetos, siege, spoof, iphone, midas, dragon, volts
+]
 
 100.times do |i|
   g_ids = genres.sample(rand(3)+1).map{ |g| g.id }
@@ -176,7 +279,7 @@ end
   real_ads.each do |ad|
     t.views.create!(
       ad_id: ad.id,
-      rate: rand(3) + 3,
+      rate: rand(4) + 2,
       title: Faker::Hipster.word,
       review: Faker::Hipster.paragraph(10)
       )
