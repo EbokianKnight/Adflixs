@@ -36,9 +36,15 @@ var FeatureHeader = React.createClass({
   renderFeatures: function () {
     return (
       <DetailMain key={this.state.shown} ad={this.state.features[this.state.shown]}
-        header={this.alternateFeatures}/>
+        header={this.alternateFeatures} refresh={this.refreshState}/>
     );
   },
+
+  refreshState: function (adID) {
+		if (adID) {
+			ApiUtil.fetchAdvert(adID, "Feature");
+		}
+	},
 
   render: function() {
     if (this.state.features.length === 0) { return <div/>; }
