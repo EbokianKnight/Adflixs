@@ -88,7 +88,6 @@ var AccountIndex = React.createClass({
 
   sendEmailChange: function (e) {
     e.preventDefault();
-    debugger
     if (this.state.email === this.state.confirm) {
       UserUtil.updateUser(SessionStore.currentUser.id,
         { email: this.state.email }, this.close )
