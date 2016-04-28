@@ -60,6 +60,23 @@ var AdDetailPane = React.createClass({
     );
   },
 
+	// In Chrome the reviews get cauched by the browser and they dont successfully transition out. Leaving broken parts over the image.
+	// I know... Time to learn better CSS React Tricks.
+	headerGraphicBugfix: function () {
+		var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+		if (isChrome) {
+			return this.displayPane();
+		} else {
+			return (
+				<ReactCSS transitionName="fader"
+					transitionEnterTimeout={500}
+					transitionLeaveTimeout={300}>
+					{ this.displayPane() }
+				</ReactCSS>
+			);
+		}
+	},
+
 	render: function() {
 		if (!this.props.ad) { return <div></div>; }
 		var klass = this.state.display === "overview" ? "" : " blur";
@@ -71,11 +88,7 @@ var AdDetailPane = React.createClass({
 	        <div className="bottom-grade"/>
 					<div className="header-spacer header-left-arrow"/>
 					<h2 className="feature-title">{this.props.ad.title}</h2>
-					<ReactCSS transitionName="fader"
-						transitionEnterTimeout={500}
-						transitionLeaveTimeout={300}>
-						{ this.displayPane() }
-					</ReactCSS>
+					{ this.headerGraphicBugfix() }
 
 					{ this.createMenuButtons() }
 					<div className="header-spacer header-right-arrow"/>
