@@ -19,7 +19,6 @@ var MainIndex = React.createClass({
 
 	handleScroll: function (e) {
 		if (this.waiting) return;
-
 		if ((window.innerHeight + window.scrollY + 10) >= document.body.offsetHeight) {
 			this.getMoreRows();
 			this.waiting = true;
@@ -33,7 +32,7 @@ var MainIndex = React.createClass({
 
 	componentDidMount: function() {
 		this.waiting = false;
-		$(window).bind('mousewheel', this.handleScroll);
+		$(window).bind('mousewheel DOMMouseScroll MozMousePixelScroll', this.handleScroll);
 
 		this.genreStoreToken = GenreStore.addListener(this.getGenresFromStore);
 		this.myListStoreToken = MyListStore.addListener(this.getMyListFromStore);
@@ -43,18 +42,16 @@ var MainIndex = React.createClass({
 	},
 
 	getMoreRows: function () {
-		console.log(GenreStore.getCurrentPage());
-		console.log(GenreStore.getLastPage());
 		var page = GenreStore.getCurrentPage();
 		if ( page > GenreStore.getLastPage() ) {
-			$(window).unbind('mousewheel');
+			$(window).unbind('mousewheel DOMMouseScroll MozMousePixelScroll');
 		} else {
 			ApiUtil.fetchGenres(page++, this.timeoutCallback);
 		}
 	},
 
 	componentWillUnmount: function() {
-		$(window).unbind('mousewheel');
+		$(window).unbind('mousewheel DOMMouseScroll MozMousePixelScroll');
 		this.genreStoreToken.remove();
 		this.myListStoreToken.remove();
 	},
@@ -100,9 +97,7 @@ var MainIndex = React.createClass({
 		if (this.state.genres.length === 0) return <div></div>;
 		return (
 			<div ref="GenreRows" className="main-index-body">
-				<div className="main-index-header">
-					<FeatureHeader header={true} />
-				</div>
+				<FeatureHeader header={true} />
 				{ this.fetchMyList() }
 				{ this.fetchRows() }
 			</div>
