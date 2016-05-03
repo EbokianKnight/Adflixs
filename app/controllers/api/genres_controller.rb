@@ -6,8 +6,8 @@ class Api::GenresController < ApplicationController
 
 	def index
 		@page = params[:page].to_i || 1
-		genre_records = Genre.all.page(@page)
-		@page_count = genre_records.num_pages
+		genre_records = Genre.personalized_genres(current_user.id).page(@page)
+		@page_count = (Genre.all.length / 3.0).ceil
 		@genres = genre_records.includes(:ads)
 	end
 
