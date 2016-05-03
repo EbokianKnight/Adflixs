@@ -35,8 +35,9 @@ class User < ActiveRecord::Base
 		if user = User.find_by_email(email)
 			user.update(provider: provider, uid: uid, password: SecureRandom.base64)
 		else
-			User.create(provider: provider, uid: uid, password: SecureRandom.base64,
-				email: email)
+			new_user = User.create(provider: provider, uid: uid, password: SecureRandom.base64, email: email)
+			register_views = Ad.find_by_title("RegisterViewsWithUser")
+	    View.create(user_id: new_user.id, ad_id: register_views.id)
 		end
   end
 
