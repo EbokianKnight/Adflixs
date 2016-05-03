@@ -5,12 +5,17 @@ var GenresConstants = require('../constants/genre_constants');
 var GenreStore = new Store(AppDispatcher);
 
 var _genres = {};
+var _order = [];
 var _list = {};
-var page = 0;
+var page = 1;
 var last_page;
 
 var loadGenrePage = function (genres) {
-	genres.forEach( function (el) { _genres[el.id] = el; });
+	genres.forEach( function (el) {
+		 _genres[el.id] = el;
+		 _order.push(el.id);
+	 });
+
 	page++;
 	last_page = genres[0].pages;
 };
@@ -49,7 +54,7 @@ GenreStore.getLastPage = function () {
 
 GenreStore.all = function () {
 	var genres = [];
-	Object.keys(_genres).forEach(function(id){
+	_order.forEach(function(id){
 		genres.push(_genres[id]);
 	});
 	return genres;
