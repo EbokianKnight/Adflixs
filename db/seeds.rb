@@ -14,16 +14,6 @@ View.destroy_all
 Favorite.destroy_all
 Feature.destroy_all
 
-User.create!(email: "Guest", password: "password", admin: false)
-User.create!(email: "MyTest", password: "testtest", admin: true)
-
-youtube = [
-  '0oYlOBun8UI', 'OlZqBR3yTiw', 'S2nBBMbjS8w', 'zV7N21LSr_Y', 'RZd2NDzQzA4',
-  'M0D3jKLz6sA', '40DykbPa4Lc', 'FoGGDKV88Fg', 'WMI3nDccXtc', 'LT6n1HcJOio',
-  'vnVuqfXohxc', 'TPKgC8KPBMg', 'qI-1-cVDrz0', 'Shvwd7VYpE0', 'osSD6bgvyac',
-  'jZGzXEExZcc', 'PmD0YKEOh_0', '7ptwjJFgemQ', '_Ut1Ak7zOeE'
-]
-
 genres = [
   Genre.create!(name: "drinks"), #0
   Genre.create!(name: "cars"), #1
@@ -34,6 +24,27 @@ genres = [
   Genre.create!(name: "animals"), #6
   Genre.create!(name: "animated"), #7
   Genre.create!(name: "tech") #8
+]
+
+register = Ad.create!(
+  title: "RegisterViewsWithUser",
+  company: "RegisterViewsWithUser",
+  product: "RegisterViewsWithUser",
+  description: "RegisterViewsWithUser",
+  year: Date.today,
+  genre_ids: [genres[0].id, genres[1].id, genres[2].id, genres[3].id, genres[4].id, genres[5].id, genres[6].id, genres[7].id, genres[8].id]
+)
+
+guest = User.create!(email: "Guest", password: "password", admin: false)
+basetest = User.create!(email: "MyTest", password: "testtest", admin: true)
+View.create!(user_id: guest.id, ad_id: register.id)
+View.create!(user_id: basetest.id, ad_id: register.id)
+
+youtube = [
+  '0oYlOBun8UI', 'OlZqBR3yTiw', 'S2nBBMbjS8w', 'zV7N21LSr_Y', 'RZd2NDzQzA4',
+  'M0D3jKLz6sA', '40DykbPa4Lc', 'FoGGDKV88Fg', 'WMI3nDccXtc', 'LT6n1HcJOio',
+  'vnVuqfXohxc', 'TPKgC8KPBMg', 'qI-1-cVDrz0', 'Shvwd7VYpE0', 'osSD6bgvyac',
+  'jZGzXEExZcc', 'PmD0YKEOh_0', '7ptwjJFgemQ', '_Ut1Ak7zOeE'
 ]
 
 friends = Ad.create!(
