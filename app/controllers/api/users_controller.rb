@@ -27,7 +27,7 @@ class Api::UsersController < ApplicationController
 		if @user.save
 			sign_in(@user)
       register_views = Ad.find_by_title("RegisterViewsWithUser")
-      View.create(user_id: current_user.id, ad_id: register_views.id)
+      View.create(user_id: @user.id, ad_id: register_views.id)
       render :show
 		else
 			render json: { message: @user.errors.full_messages }
