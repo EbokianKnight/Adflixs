@@ -23,7 +23,6 @@ var routes = (
     <IndexRoute component={HomePage}/>
     <Route path="users/new" component={NewUser} />
     <Route path="signin" component={SignIn} />
-    <Route path="testing" component={Video} />
     <Route path="main" component={MainPage} onEnter={_requireLoggedIn}>
       <IndexRoute component={MainIndex} />
       <Route path="streaming" component={MainVideo} />
