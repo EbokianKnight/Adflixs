@@ -1,0 +1,42 @@
+.modal-layer {
+  z-index: 200;
+  background: black;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.movie-leftside {
+ position: absolute;
+ left: 0;
+ top: 0;
+ bottom: 0;
+ width: 10vw;
+ background: orange;
+}
+
+.movie-bottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 20vh;
+  background: orange;
+}
+
+.movie-back {
+}
+.movie-back:hover {
+  color: white;
+}
+
+.hidden {
+  background: transparent;
+}
+
+
+.movieplayercontrols {
+
+}
