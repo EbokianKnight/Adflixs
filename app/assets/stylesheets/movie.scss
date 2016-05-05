@@ -1,6 +1,6 @@
 .modal-layer {
   z-index: 200;
-  background: black;
+  background: #141414;
   position: absolute;
   top: 0;
   bottom: 0;
@@ -13,8 +13,7 @@
  left: 0;
  top: 0;
  bottom: 0;
- width: 10vw;
- background: orange;
+ width: 12vw;
 }
 
 .movie-bottom {
@@ -23,20 +22,73 @@
   right: 0;
   bottom: 0;
   height: 20vh;
-  background: orange;
 }
 
 .movie-back {
+  background: asset-url("player/backbutton.svg") no-repeat top left;
+  height: 7vw;
+  width: 7vw;
+  margin: 2vw;
+  cursor: pointer;
+  background-size: contain;
+  transition: background 500ms;
 }
+
 .movie-back:hover {
-  color: white;
+  background: asset-url("player/pressedbackbutton.svg") no-repeat top left;
+  background-size: contain;
 }
 
-.hidden {
-  background: transparent;
+.video-flex-row {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
+  margin: 0 20vw;
 }
 
+.progress-bar {
 
-.movieplayercontrols {
+}
 
+.video-controller {
+
+}
+
+.video-icon {
+  height: 3vw;
+  width: 3vw;
+  padding: 1vw;
+  cursor: pointer;
+  transition: width, height, padding 300ms;
+}
+.video-icon:hover {
+  padding: 0.5vw;
+  width: 4vw;
+  height: 4vw;
+  transition: width, height, padding 300ms;
+}
+
+.video-volumn {
+
+}
+
+.video-title {
+
+}
+
+.video-play {
+  background: asset-url("player/playbutton.svg") no-repeat top left;
+  background-size: contain;
+}
+
+.video-pause {
+  background: asset-url("player/pausebutton.svg") no-repeat top left;
+  background-size: contain;
+}
+
+.video-full-screen {
+  background: asset-url("player/fullscreen.svg") no-repeat top left;
+  background-size: contain;
 }
