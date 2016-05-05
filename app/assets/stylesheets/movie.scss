@@ -1,11 +1,75 @@
 .modal-layer {
   z-index: 200;
-  background: #141414;
+  background: black;
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
+}
+
+.loader {
+  font-size: 10px;
+  margin: 50px auto;
+  text-indent: -9999em;
+  width: 11em;
+  height: 11em;
+  border-radius: 50%;
+  background: #ffffff;
+  background: -moz-linear-gradient(left, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
+  background: -webkit-linear-gradient(left, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
+  background: -o-linear-gradient(left, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
+  background: -ms-linear-gradient(left, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
+  background: linear-gradient(to right, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
+  position: relative;
+  -webkit-animation: load3 1.4s infinite linear;
+  animation: load3 1.4s infinite linear;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+}
+.loader:before {
+  width: 50%;
+  height: 50%;
+  background: #ffffff;
+  border-radius: 100% 0 0 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: '';
+}
+.loader:after {
+  background: #0dc5c1;
+  width: 75%;
+  height: 75%;
+  border-radius: 50%;
+  content: '';
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+@-webkit-keyframes load3 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes load3 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
 }
 
 .movie-leftside {
@@ -21,14 +85,14 @@
   left: 0;
   right: 0;
   bottom: 0;
-  height: 20vh;
+  height: 15vh;
 }
 
 .movie-back {
   background: asset-url("player/backbutton.svg") no-repeat top left;
-  height: 7vw;
-  width: 7vw;
-  margin: 2vw;
+  height: 7vh;
+  width: 7vh;
+  margin: 3vh;
   cursor: pointer;
   background-size: contain;
   transition: background 500ms;
@@ -45,38 +109,61 @@
   justify-content: space-between;
   align-content: center;
   align-items: center;
-  margin: 0 20vw;
 }
 
 .progress-bar {
 
 }
 
-.video-controller {
+.video-control-container {
+  margin: auto;
+  width: 70vw;
+}
 
+.video-controller {
+  width: 100%;
+  background: #141414;
+  border-radius: 10px;
+  height: 5vh;
+  padding: 6px;
 }
 
 .video-icon {
-  height: 3vw;
-  width: 3vw;
-  padding: 1vw;
+  height: 3vh;
+  width: 3vh;
+  margin: 1vh;
   cursor: pointer;
-  transition: width, height, padding 300ms;
+  transition: background 500ms;
 }
 .video-icon:hover {
-  padding: 0.5vw;
-  width: 4vw;
-  height: 4vw;
-  transition: width, height, padding 300ms;
+  width: 4vh;
+  height: 4vh;
+  margin: 0.5vh;
+  transition: background 300ms;
 }
 
-.video-volumn {
-
+.video-spacer {
+  height: 5vh;
+  width: 0.5vh;
+  background-color: #111111;
 }
 
 .video-title {
-
+  margin-left: 2vh;
+  font-size: 2.2vh;
+  font-weight: 300;
 }
+
+.video-show {
+  opacity: 1;
+  transition: opacity 500ms;
+}
+
+.video-hide {
+  opacity: 0;
+  transition: opacity 500ms;
+}
+
 
 .video-play {
   background: asset-url("player/playbutton.svg") no-repeat top left;
@@ -90,5 +177,25 @@
 
 .video-full-screen {
   background: asset-url("player/fullscreen.svg") no-repeat top left;
+  background-size: contain;
+}
+
+.video-volume-mute {
+  background: asset-url("player/volumemute.svg") no-repeat top left;
+  background-size: contain;
+}
+
+.video-volume-low {
+  background: asset-url("player/volumelow.svg") no-repeat top left;
+  background-size: contain;
+}
+
+.video-volume-med {
+  background: asset-url("player/volumemed.svg") no-repeat top left;
+  background-size: contain;
+}
+
+.video-volume-high {
+  background: asset-url("player/volumehigh.svg") no-repeat top left;
   background-size: contain;
 }
