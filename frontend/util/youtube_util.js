@@ -6,11 +6,11 @@ var YoutubeUtil = {
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
   },
 
-  loadPlayer: function (youtubeId, onVideoEnd) {
+  loadPlayer: function (youtubeId, onVideoStateChange, togglePlay) {
     if (typeof YT === "undefined") {
       return false;
     } else {
-      return new YT.Player('song-container', {
+      var player = new YT.Player('video-player', {
         videoId: youtubeId,
         position: 'absolute',
         top: 0,
@@ -29,9 +29,11 @@ var YoutubeUtil = {
           iv_load_policy: 3
         },
         events: {
-          'onStateChange': onVideoEnd
+          'onEnd': onVideoStateChange,
+          'onReady': togglePlay
         }
       });
+      return player;
     }
   }
 };
