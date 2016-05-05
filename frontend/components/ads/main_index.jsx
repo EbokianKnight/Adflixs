@@ -91,9 +91,6 @@ var MainIndex = React.createClass({
 	},
 
 	render: function() {
-		// <FeatureHeader />
-		// <DetailMain ad={ this.fetchRandomAd() } header={true} />
-		// remove header logic from DetailMain remove randomfetch from ads
 		if (this.state.genres.length === 0) return <div></div>;
 		return (
 			<div ref="GenreRows" className="main-index-body">
