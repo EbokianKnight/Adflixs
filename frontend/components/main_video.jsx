@@ -20,35 +20,47 @@ var VideoModel = React.createClass({
 
   componentDidMount: function() {
     this.player;
+    this.meter;
     YoutubeUtil.loadApiScript();
     this.renderPlayer();
-    this.loadingScreen();
+    this.forceLoadVideo();
   },
 
   componentWillUnmount: function () {
-    window.clearInterval(this.loadtime);
+    this.forceUp = clearInterval(this.loading);
     this.cancelHide();
+    this.stopProgressCounter();
+  },
+
+  animateProgressBar: function () {
+    if (!this.player) return
+    if (!this.meter) {
+      this.meter = $("#progress")
+    }
+    console.log(this.player.getCurrentTime())
+    this.meter.width(Math.floor(this.state.progress*100)+"%");
   },
 
   cancelHide: function () {
-    clearInterval(this.hideTimer);
+    window.clearTimeout(this.hide);
   },
 
   hideControls: function () {
-    this.hideTimer = window.setTimeout(this.hideControlsNow, 1200);
+    this.hide = window.setTimeout(this.hideControlsNow, 1200);
   },
 
   hideControlsNow: function () {
     this.setState({ controls: false });
   },
 
-  loadingScreen: function () {
-    this.loadtime = window.setInterval(this.loadingScreenFn, 200);
+  forceLoadVideo: function () {
+    if (this.loading) return;
+    this.loading = window.setInterval(this.forceVideoUpdate, 200);
   },
 
-  loadingScreenFn: function () {
+  forceVideoUpdate: function () {
     this.forceUpdate();
-    console.log("check");
+    console.log("loading...");
   },
 
   onPlayerLoad: function () {
@@ -59,6 +71,7 @@ var VideoModel = React.createClass({
       duration: Math.floor(time/60)+"m "+ Math.floor(time%60)+"s",
       mute: this.player.isMuted(),
     })
+    this.startProgressCounter();
   },
 
   requestFullScreen: function () {
@@ -91,7 +104,9 @@ var VideoModel = React.createClass({
     return (
       <div className={"video-control-container " + seen}>
         <div className="video-flex-row">
-          <span className="progress-bar"></span>
+          <div className="meter">
+            <span id="progress"></span>
+          </div>
           <p>{this.state.duration}</p>
         </div>
         <menu className="video-controller video-flex-row">
@@ -118,7 +133,7 @@ var VideoModel = React.createClass({
       var url = this.props.location.query.youtube;
       this.player = YoutubeUtil.loadPlayer(url, this.videoStateChange, this.onPlayerLoad);
       if (this.player) {
-        window.clearInterval(this.loadtime);
+        clearInterval(this.loading);
       }
     }
   },
@@ -132,6 +147,22 @@ var VideoModel = React.createClass({
       this.setState({ controls: true });
     }
     this.cancelHide();
+  },
+
+  startProgressCounter: function () {
+    if (this.progress) return;
+    this.progress = window.setInterval(this.evalProgress,500);
+  },
+
+  evalProgress: function () {
+    console.log("evalProgress")
+    this.setState({
+      progress: this.player.getCurrentTime() / this.player.getDuration()
+    });
+  },
+
+  stopProgressCounter: function () {
+    clearInterval(this.progress);
   },
 
   togglePlay: function () {
@@ -185,6 +216,7 @@ var VideoModel = React.createClass({
           onMouseEnter={this.showControls}
           onMouseLeave={this.hideControls}>
           { this.renderControls(seen) }
+          { this.animateProgressBar() }
         </div>
       </div>
     );
