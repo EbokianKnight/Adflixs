@@ -6,11 +6,11 @@ var YoutubeUtil = {
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
   },
 
-  loadPlayer: function (youtubeId, onVideoStateChange, togglePlay) {
+  loadPlayer: function (youtubeId, onVideoStateChange, onPlayerLoad) {
     if (typeof YT === "undefined") {
       return false;
     } else {
-      var player = new YT.Player('video-player', {
+      return new YT.Player('video-player', {
         videoId: youtubeId,
         position: 'absolute',
         top: 0,
@@ -23,17 +23,16 @@ var YoutubeUtil = {
           'controls': 0,
           modestBranding: 1,
           showinfo: 0,
-          fs: 0,
+          fs: 1,
           disablekb: 0,
           rel:0,
           iv_load_policy: 3
         },
         events: {
-          'onEnd': onVideoStateChange,
-          'onReady': togglePlay
+          'onStateChange': onVideoStateChange,
+          'onReady': onPlayerLoad
         }
       });
-      return player;
     }
   }
 };
