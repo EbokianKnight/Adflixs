@@ -18,13 +18,11 @@ var NewUser = require('./components/signup/new_user');
 var SignIn = require('./components/signup/new_session');
 var Account = require('./components/account_panes/account_index');
 
-var Video = require('./components/ads/video_modal');
 var routes = (
   <Route path="/" component={App}>
     <IndexRoute component={HomePage}/>
     <Route path="users/new" component={NewUser} />
     <Route path="signin" component={SignIn} />
-    <Route path="testing" component={Video} />
     <Route path="main" component={MainPage} onEnter={_requireLoggedIn}>
       <IndexRoute component={MainIndex} />
       <Route path="streaming" component={MainVideo} />
