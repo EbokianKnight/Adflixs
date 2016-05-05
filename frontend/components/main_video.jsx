@@ -19,8 +19,12 @@ var VideoModel = React.createClass({
   },
 
   componentDidMount: function() {
-    this.player;
-    this.meter;
+    this.player = null;
+    this.meter = null;
+    this.forceUp = null;
+    this.hide = null;
+    this.loading = null;
+    debugger;
     YoutubeUtil.loadApiScript();
     this.renderPlayer();
     this.forceLoadVideo();
@@ -37,7 +41,6 @@ var VideoModel = React.createClass({
     if (!this.meter) {
       this.meter = $("#progress")
     }
-    console.log(this.player.getCurrentTime())
     this.meter.width(Math.floor(this.state.progress*100)+"%");
   },
 
@@ -60,7 +63,23 @@ var VideoModel = React.createClass({
 
   forceVideoUpdate: function () {
     this.forceUpdate();
-    console.log("loading...");
+  },
+
+  jumpPlayback: function (e) {
+    var percent = e.target.value;
+    var seconds = Math.floor((this.player.getDuration() * percent) / 100);
+    this.player.seekTo(seconds, true);
+  },
+
+  makeFlexButtons: function () {
+    if (this.buttons) return this.buttons;
+    this.buttons = []
+    for (var i = 0; i < 100; i++) {
+      this.buttons.push(
+        <li key={i} value={i} onClick={this.jumpPlayback}/>
+      );
+    }
+    return this.buttons;
   },
 
   onPlayerLoad: function () {
@@ -79,8 +98,6 @@ var VideoModel = React.createClass({
     var requestFullScreen = iframe.requestFullScreen || iframe.mozRequestFullScreen || iframe.webkitRequestFullScreen;
     if (requestFullScreen) {
       requestFullScreen.bind(iframe)();
-    } else {
-      debugger;
     }
   },
 
@@ -106,6 +123,9 @@ var VideoModel = React.createClass({
         <div className="video-flex-row">
           <div className="meter">
             <span id="progress"></span>
+            <div className="video-flex-progress">
+              { this.makeFlexButtons() }
+            </div>
           </div>
           <p>{this.state.duration}</p>
         </div>
@@ -155,7 +175,6 @@ var VideoModel = React.createClass({
   },
 
   evalProgress: function () {
-    console.log("evalProgress")
     this.setState({
       progress: this.player.getCurrentTime() / this.player.getDuration()
     });

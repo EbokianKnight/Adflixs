@@ -228,7 +228,22 @@
   transition: width 500ms;
 }
 
-@keyframes expandWidth {
-   0% { width: 0; }
-   100% { width: auto; }
+.video-flex-progress {
+  height: 2vh;
+  margin: 0.5vh 0;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: row;
+}
+
+.video-flex-progress > li {
+  width: 1px;
+  height: 2vh;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 1;
 }
