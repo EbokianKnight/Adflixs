@@ -121,11 +121,7 @@ var AccountIndex = React.createClass({
 
   updatePassword: function (e) {
     this.setState({ success: false, password: e.target.value });
-<<<<<<< HEAD
-    if (this.flash && this.state.password === this.state.confirmation &&  this.state.password.length > 6) {
-=======
     if (this.flash && this.state.password === this.state.confirmation &&  this.state.password.length >= 6) {
->>>>>>> issue00
       this.setState({ flash: false, message: ""});
     }
   },
