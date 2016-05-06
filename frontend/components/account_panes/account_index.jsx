@@ -10,10 +10,12 @@ var AccountIndex = React.createClass({
   getInitialState: function() {
     return {
       show: "",
-      user: "",
       password: "",
       confirmation: "",
       email: "",
+      flash: false,
+      message: "",
+      delete: false,
       user: SessionStore.currentUser()
     };
   },
@@ -26,18 +28,80 @@ var AccountIndex = React.createClass({
 
   componentWillUnmount: function() {
     this.sessionToken.remove();
+    window.clearTimeout(this.passwordTimer);
+    window.clearTimeout(this.emailTimer);
+    window.clearTimeout(this.deleteTimer);
   },
 
   getUserFromStore: function() {
-    this.setState({ user: SessionStore.currentUser() });
+    this.setState({
+      user: SessionStore.currentUser(),
+      success: SessionStore.flashUpdate(),
+    });
   },
 
-  editEmail: function () {
-    this.setState({ show: "email" });
+  editEmail: function (e) {
+    $(e.target).blur();
+    if (this.state.show === "password" || !this.state.delete) {
+      if (this.passwordTimer || this.emailTimer || this.deleteTimer){
+        return;
+      }
+      this.closeDetail();
+      this.emailTimer = window.setTimeout(function(){
+        this.setState({ show: "email" });
+        this.emailTimer = window.setTimeout(function(){
+          this.emailTimer = null;
+        }.bind(this),500);
+      }.bind(this),700);
+    } else {
+      this.setState({
+        show: "email",
+        password: "",
+        confirmation: "",
+        email: "",
+        flash: false,
+        message: "",
+        delete: false,
+      });
+    }
   },
 
-  editPassword: function () {
-    this.setState({ show: "password" });
+  editPassword: function (e) {
+    $(e.target).blur();
+    if (this.state.show === "email" || !this.state.delete) {
+      if (this.passwordTimer || this.emailTimer || this.deleteTimer){
+        return;
+      }
+      this.closeDetail();
+      this.passwordTimer = window.setTimeout(function(){
+        this.setState({ show: "password" });
+        this.passwordTimer = window.setTimeout(function(){
+          this.passwordTimer = null;
+        }.bind(this),500);
+      }.bind(this),700);
+    } else {
+      this.setState({
+        show: "password",
+        password: "",
+        confirmation: "",
+        email: "",
+        flash: false,
+        message: "",
+        delete: false,
+      });
+    }
+  },
+
+  closeDetail: function () {
+    this.setState({
+      show: "",
+      password: "",
+      confirmation: "",
+      email: "",
+      flash: false,
+      message: "",
+      delete: false,
+    });
   },
 
   updatePassword: function (e) {
@@ -45,110 +109,117 @@ var AccountIndex = React.createClass({
   },
 
   updateConfirm: function (e) {
-    this.setState({ confirmation: e.target.value })
+    if (this.state.flash && this.state.show === "password") {
+      if (this.state.password === this.state.confirmation) {
+        this.setState({
+          confirmation: e.target.value,
+          flash: false,
+          message: ""
+        });
+      } else {
+        this.setState({ confirmation: e.target.value });
+      }
+    } else if (this.state.flash && this.state.show === "email") {
+      if (this.state.email === this.state.confirmation) {
+        this.setState({
+          confirmation: e.target.value,
+          flash: false,
+          message: ""
+        });
+      } else {
+        this.setState({ confirmation: e.target.value });
+      }
+    } else {
+      this.setState({
+        confirmation: e.target.value,
+        flash: false,
+        message: ""
+      });
+    }
   },
 
   updateEmail: function (e) {
-    this.setState({ email: e.target.value })
+    this.setState({ email: e.target.value });
   },
 
-  newAdvert: function () {
-    this.setState({ show: "advert" });
+  deleteUserAccount: function () {
+    if (!this.state.delete) return;
+    UserUtil.destroyUser(this.state.user.id);
   },
 
-  closeDetail: function (e) {
-    e.preventDefault();
-    this.setState({ show: "", confirm: "", password: "", email: "" });
-  },
-
-  showAdvertForm: function () {
-    if (this.state.show === "advert") {
-      return <AdSubmission close={this.close}/>;
+  deleteUser: function (e) {
+    $(e.target).blur();
+    if (this.state.show === "email" || this.state.show === "password") {
+      if (this.passwordTimer || this.emailTimer || this.deleteTimer){
+        return;
+      }
+      this.closeDetail();
+      this.deleteTimer = window.setTimeout(function(){
+        this.setState({ delete: true });
+        this.deleteTimer = window.setTimeout(function(){
+          this.deleteTimer = null;
+        }.bind(this),500);
+      }.bind(this),700);
+    } else {
+      this.setState({
+        show: "",
+        password: "",
+        confirmation: "",
+        email: "",
+        flash: false,
+        message: "",
+        delete: true,
+      });
     }
-    return "";
   },
 
   sendPasswordChange: function (e) {
     e.preventDefault();
-    if (this.state.password === this.state.confirm) {
-      UserUtil.updateUser(SessionStore.currentUser.id,
-        { password: this.state.password }, this.close )
-    } else {
-      this.flash = "Your password must match the confirmation";
+    $(e.target).blur();
+
+    if (this.state.user.email === "Guest") {
+      return this.setState({ flash: true, message: "You cannot modify the Guest Account."});
+    }
+
+    if (this.state.password === this.state.confirmation && !this.state.flash && this.state.password.length > 6) {
+      UserUtil.updateUser(
+        this.state.user.id,
+        { password: this.state.password },
+        this.closeDetail
+      );
+    } else if (this.state.password.length < 6) {
+      this.setState({ flash: true, message: "Your password must be at least 6 characters."});
+    } else if (this.state.password !== this.state.confirm) {
+      this.setState({ flash: true, message: "Your new password and confirmation must match."});
     }
   },
 
-  // flashMessage: function () {
-  //   if (this.flash) {
-  //     var message = this.flash
-  //     this.flash = null
-  //     return <div className="flash-message">{message}</div>
-  //   }
-  // },
-  //
   sendEmailChange: function (e) {
     e.preventDefault();
-    if (this.state.email === this.state.confirm) {
-      UserUtil.updateUser(SessionStore.currentUser.id,
-        { email: this.state.email }, this.close )
-    } else {
-      this.flash = "Your email must match the confirmation";
+    $(e.target).blur();
+
+    var regex =  /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
+
+    if (this.state.user.email === "Guest") {
+      return this.setState({ flash: true, message: "You cannot modify the Guest Account."});
+    }
+
+    if (this.state.confirmation=== this.state.password && !this.state.flash && this.state.email.length > 6) {
+      UserUtil.updateUser(
+        this.state.user.id,
+        { email: this.state.email },
+        this.closeDetail
+      );
+    } else if (!regex.test(this.state.email)) {
+      this.setState({ flash: true, message: "Your new email must be valid."});
+    } else if (this.state.email !== this.state.confirm) {
+      this.setState({ flash: true, message: "Your new email and confirmation must match."});
     }
   },
-  //
-  // showPasswordEdit: function () {
-  //   if (this.state.show === "password") {
-  //     return (
-  //       <div className="account-pane group">
-  //         <section className="account-section-heading">
-  //           <strong>Edit Password</strong>
-  //           <button onClick={this.close} className="account-aside-button">
-  //             Cancel</button>
-  //         </section>
-  //         <form ref="PasswordRequest">
-  //           <row className="account-section-row group">
-  //             <label className="account-item-left group">
-  //               <div className="form-row">New Password</div>
-  //               <input
-  //                 onChange={this.updatePassword}
-  //                 className="account-section-input"
-  //                 type="password"/>
-  //             </label>
-  //             <input onClick={this.sendPasswordChange} value="Update Password"
-  //               className="account-aside-button account-item-right"/>
-  //           </row>
-  //           <row className="account-section-row group">
-  //             <label className="account-item-left group">
-  //               <div className="form-row">Password Confirmation</div>
-  //               <input
-  //                 onChange={this.updateConfirm}
-  //                 className="account-section-input"
-  //                 type="password"/>
-  //             </label>
-  //           </row>
-  //         </form>
-  //       </div>
-  //     );
-  //   }
-  //   return "";
-  // },
-  //
-  // showSuccessMessage: function () {
-  //   if (this.state.show === "success") {
-  //     return (
-  //       <div className="account-pane group">
-  //         <section className="account-section-heading">
-  //           <button onClick={this.close} className="account-aside-button">
-  //             Okay</button>
-  //         </section>
-  //         <div className="account-submission-success">Success</div>
-  //       </div>
-  //     );
-  //   }
-  // },
 
   renderPasswordDetail: function () {
-    var klass = this.state.show === "password" ? "" : "";
+    var klass = this.state.show === "password" ? "" : " acc-hide";
+    var flash = this.state.flash ? "" : " acc-hide";
     return (
       <div className={"account-pane" + klass}>
         <aside className="account-sidebar">
@@ -158,20 +229,28 @@ var AccountIndex = React.createClass({
             Cancel
           </button>
           <button className="acc-btn"
-            onClick={this.changePassword}>
+            onClick={this.sendPasswordChange}>
             Update Password
           </button>
         </aside>
         <section className="account-section">
           <div className="account-section-row">
             <label><strong>New Password</strong>
-              <input onChange={this.updatePassword} type="text" />
+              <input onChange={this.updatePassword} type="text"
+                value={this.state.password} />
             </label>
           </div>
           <div className="account-section-row">
             <label><strong>Confirm Password</strong>
-              <input onChange={this.updateConfirm} type="text" />
+              <input onChange={this.updateConfirm} type="text"
+                value={this.state.confirmation}/>
             </label>
+          </div>
+          <div className={"account-section-row " + flash}>
+            <div className="acc-message-box acc-failure">
+              <div className="acc-x"/>
+              <p>{this.state.message}</p>
+            </div>
           </div>
         </section>
         <div className="account-spacer"/>
@@ -180,7 +259,8 @@ var AccountIndex = React.createClass({
   },
 
   renderEmailDetail: function () {
-    var klass = this.state.show === "email" ? "" : "";
+    var klass = this.state.show === "email" ? "" : " acc-hide";
+    var flash = this.state.flash ? "" : " acc-hide";
     return (
       <div className={"account-pane" + klass}>
         <aside className="account-sidebar">
@@ -190,23 +270,55 @@ var AccountIndex = React.createClass({
             Cancel
           </button>
           <button className="acc-btn"
-            onClick={this.changeEmail}>
+            onClick={this.sendEmailChange}>
             Update Email
           </button>
         </aside>
         <section className="account-section">
           <div className="account-section-row">
             <label><strong>New Email</strong>
-              <input onChange={this.updateEmail} type="text" />
+              <input onChange={this.updateEmail} type="text"
+                value={this.state.email}/>
             </label>
           </div>
           <div className="account-section-row">
             <label><strong>Confirm Email</strong>
-              <input onChange={this.updateConfirm} type="text" />
+              <input onChange={this.updateConfirm} type="text"
+                value={this.state.confirmation}/>
             </label>
+          </div>
+          <div className={"account-section-row " + flash}>
+            <div className="acc-message-box acc-failure">
+              <div className="acc-x"/>
+              <p>{this.state.message}</p>
+            </div>
           </div>
         </section>
         <div className="account-spacer"/>
+      </div>
+    );
+  },
+
+  renderConfirmDelete: function () {
+    var klass = this.state.delete ? "" : " acc-hide";
+    return (
+      <div className={"account-pane" + klass}>
+      <aside className="account-sidebar"/>
+      <section className="account-section">
+        <div className="account-section-row">
+          <strong>Are You Sure?</strong>
+            <div className="acc-message-box acc-success acc-cursor"
+              onClick={this.closeDetail}>
+              <div className="acc-check"/>
+              <p>CANCEL STOP NOOOOO!</p>
+            </div>
+            <div className="acc-message-box acc-failure acc-cursor"
+              onClick={this.deleteUserAccount}>
+              <div className="acc-x"/>
+              <p>YES VERY IM SURE.</p>
+            </div>
+        </div>
+      </section>
       </div>
     );
   },
@@ -217,7 +329,8 @@ var AccountIndex = React.createClass({
         <div className="account-pane">
           <aside className="account-sidebar">
             <h2>Membership Details</h2>
-            <button className="acc-btn">Delete Membership</button>
+            <button className="acc-btn"
+              onClick={this.deleteUser}>Delete Membership</button>
           </aside>
           <section className="account-section">
             <div className="account-section-row">
@@ -232,6 +345,7 @@ var AccountIndex = React.createClass({
             </div>
           </section>
         </div>
+        { this.renderConfirmDelete() }
         { this.renderEmailDetail() }
         { this.renderPasswordDetail() }
       </container>
@@ -245,7 +359,7 @@ var AccountIndex = React.createClass({
         <div className='account-main'>
           <h1>My Account</h1>
           { this.renderMembership() }
-          <AdSubmission close={this.closeDetail}/>
+          <AdSubmission/>
         </div>
       </div>
     );

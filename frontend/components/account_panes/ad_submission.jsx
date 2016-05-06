@@ -139,17 +139,14 @@ var AddSubmission = React.createClass({
     if (this.state.show) return;
     var message = <div></div>;
     if (this.state.submission === "success") {
+      var klass = this.props.show === "advert" ? "" : " acc-hide";
       message =
-        <div className="acc-message-box acc-success">
-          <div className="acc-check"/> <p>SUCCESS!</p>
+        <div className={"acc-message-box acc-success" + klass}>
+          <div className="acc-check"/>
+          <p>{this.state.title + " has been successfully uploaded."}</p>
         </div>;
     } else if (this.state.submission === "loading") {
       message = <div className="acc-loader"/>;
-      if (this.state.imageUrl !== "") {
-        message.backgroundImage = "url("+this.state.imageUrl+")";
-        message.backgroundSize = "cover";
-        message.repeat = "no-repeat";
-      }
     }
     return (
       <section className="account-section-row">
