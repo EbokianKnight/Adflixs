@@ -76,6 +76,6 @@ body {
 		asset-url(homepage/Pepsi1920) no-repeat -9999px -9999px,
 		asset-url(homepage/Rabbit1080) no-repeat -9999px -9999px,
 		asset-url(homepage/Rabbit1920) no-repeat -9999px -9999px,
-		asset-url(BackGradiant.png) no-repeat -9999px -9999px,
-		asset-url(nav-shadow.png) no-repeat -9999px -9999px;
+		asset-url(BackGradiant) no-repeat -9999px -9999px,
+		asset-url(nav-shadow) no-repeat -9999px -9999px;
 	}
