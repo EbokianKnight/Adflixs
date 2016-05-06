@@ -9,14 +9,16 @@ var FeatureHeader = React.createClass({
 
   getInitialState: function() {
     return {
-      features: [],
+      features: FeatureStore.all(),
       shown: 0
     };
   },
 
   componentDidMount: function() {
     this.featureToken = FeatureStore.addListener(this.getFeaturesFromStore);
-    ApiUtil.fetchFeatures();
+    if (this.state.features.length < 1) {
+      ApiUtil.fetchFeatures();
+    }
   },
 
   getFeaturesFromStore: function () {
