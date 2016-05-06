@@ -56,9 +56,9 @@ var AccountIndex = React.createClass({
     this.setState({ show: "advert" });
   },
 
-  close: function (command) {
-    command = command || ""
-    this.setState({ show: command, confirm: "", password: "", email: "" });
+  closeDetail: function (e) {
+    e.preventDefault();
+    this.setState({ show: "", confirm: "", password: "", email: "" });
   },
 
   showAdvertForm: function () {
@@ -78,14 +78,14 @@ var AccountIndex = React.createClass({
     }
   },
 
-  flashMessage: function () {
-    if (this.flash) {
-      var message = this.flash
-      this.flash = null
-      return <div className="flash-message">{message}</div>
-    }
-  },
-
+  // flashMessage: function () {
+  //   if (this.flash) {
+  //     var message = this.flash
+  //     this.flash = null
+  //     return <div className="flash-message">{message}</div>
+  //   }
+  // },
+  //
   sendEmailChange: function (e) {
     e.preventDefault();
     if (this.state.email === this.state.confirm) {
@@ -95,159 +95,158 @@ var AccountIndex = React.createClass({
       this.flash = "Your email must match the confirmation";
     }
   },
+  //
+  // showPasswordEdit: function () {
+  //   if (this.state.show === "password") {
+  //     return (
+  //       <div className="account-pane group">
+  //         <section className="account-section-heading">
+  //           <strong>Edit Password</strong>
+  //           <button onClick={this.close} className="account-aside-button">
+  //             Cancel</button>
+  //         </section>
+  //         <form ref="PasswordRequest">
+  //           <row className="account-section-row group">
+  //             <label className="account-item-left group">
+  //               <div className="form-row">New Password</div>
+  //               <input
+  //                 onChange={this.updatePassword}
+  //                 className="account-section-input"
+  //                 type="password"/>
+  //             </label>
+  //             <input onClick={this.sendPasswordChange} value="Update Password"
+  //               className="account-aside-button account-item-right"/>
+  //           </row>
+  //           <row className="account-section-row group">
+  //             <label className="account-item-left group">
+  //               <div className="form-row">Password Confirmation</div>
+  //               <input
+  //                 onChange={this.updateConfirm}
+  //                 className="account-section-input"
+  //                 type="password"/>
+  //             </label>
+  //           </row>
+  //         </form>
+  //       </div>
+  //     );
+  //   }
+  //   return "";
+  // },
+  //
+  // showSuccessMessage: function () {
+  //   if (this.state.show === "success") {
+  //     return (
+  //       <div className="account-pane group">
+  //         <section className="account-section-heading">
+  //           <button onClick={this.close} className="account-aside-button">
+  //             Okay</button>
+  //         </section>
+  //         <div className="account-submission-success">Success</div>
+  //       </div>
+  //     );
+  //   }
+  // },
 
-  showPasswordEdit: function () {
-    if (this.state.show === "password") {
-      return (
-        <div className="account-pane group">
-          <section className="account-section-heading">
-            <strong>Edit Password</strong>
-            <button onClick={this.close} className="account-aside-button">
-              Cancel</button>
-          </section>
-          <form ref="PasswordRequest">
-            <row className="account-section-row group">
-              <label className="account-item-left group">
-                <div className="form-row">New Password</div>
-                <input
-                  onChange={this.updatePassword}
-                  className="account-section-input"
-                  type="password"/>
-              </label>
-              <input onClick={this.sendPasswordChange} value="Update Password"
-                className="account-aside-button account-item-right"/>
-            </row>
-            <row className="account-section-row group">
-              <label className="account-item-left group">
-                <div className="form-row">Password Confirmation</div>
-                <input
-                  onChange={this.updateConfirm}
-                  className="account-section-input"
-                  type="password"/>
-              </label>
-            </row>
-          </form>
-        </div>
-      );
-    }
-    return "";
+  renderPasswordDetail: function () {
+    var klass = this.state.show === "password" ? "" : "";
+    return (
+      <div className={"account-pane" + klass}>
+        <aside className="account-sidebar">
+          <h2>Edit Password</h2>
+          <button className="acc-btn"
+            onClick={this.closeDetail}>
+            Cancel
+          </button>
+          <button className="acc-btn"
+            onClick={this.changePassword}>
+            Update Password
+          </button>
+        </aside>
+        <section className="account-section">
+          <div className="account-section-row">
+            <label><strong>New Password</strong>
+              <input onChange={this.updatePassword} type="text" />
+            </label>
+          </div>
+          <div className="account-section-row">
+            <label><strong>Confirm Password</strong>
+              <input onChange={this.updateConfirm} type="text" />
+            </label>
+          </div>
+        </section>
+        <div className="account-spacer"/>
+      </div>
+    );
   },
 
-  showSuccessMessage: function () {
-    if (this.state.show === "success") {
-      return (
-        <div className="account-pane group">
-          <section className="account-section-heading">
-            <button onClick={this.close} className="account-aside-button">
-              Okay</button>
-          </section>
-          <div className="account-submission-success">Success</div>
-        </div>
-      );
-    }
+  renderEmailDetail: function () {
+    var klass = this.state.show === "email" ? "" : "";
+    return (
+      <div className={"account-pane" + klass}>
+        <aside className="account-sidebar">
+          <h2>Edit Email</h2>
+          <button className="acc-btn"
+            onClick={this.closeDetail}>
+            Cancel
+          </button>
+          <button className="acc-btn"
+            onClick={this.changeEmail}>
+            Update Email
+          </button>
+        </aside>
+        <section className="account-section">
+          <div className="account-section-row">
+            <label><strong>New Email</strong>
+              <input onChange={this.updateEmail} type="text" />
+            </label>
+          </div>
+          <div className="account-section-row">
+            <label><strong>Confirm Email</strong>
+              <input onChange={this.updateConfirm} type="text" />
+            </label>
+          </div>
+        </section>
+        <div className="account-spacer"/>
+      </div>
+    );
   },
-
-  showEmailEdit: function () {
-    if (this.state.show === "email") {
-      return (
-        <div className="account-pane group">
-          <section className="account-section-heading">
-            <strong>Edit Email</strong>
-            <button onClick={this.close} className="account-aside-button">
-              Cancel</button>
-          </section>
-          <form>
-            <row className="account-section-row group">
-              <label className="account-item-left group">
-                <div className="form-row">New Email</div>
-                <input
-                  onChange={this.updateEmail}
-                  className="account-section-input"
-                  type="text"/>
-              </label>
-              <input onClick={this.sendEmailChange} value="Update Email"
-                className="account-aside-button account-item-right"/>
-            </row>
-            <row className="account-section-row group">
-              <label className="account-item-left group">
-                <div className="form-row">Email Confirmation</div>
-                <input
-                  onChange={this.updateConfirm}
-                  className="account-section-input"
-                  type="text"/>
-              </label>
-            </row>
-          </form>
-        </div>
-      );
-    }
-    return "";
-  },
-
 
   renderMembership: function () {
     return (
-      <div className="account-pane group">
-        <section className="account-section-heading">
-          <strong>Membership Details</strong>
-          <button className="account-aside-button">Cancel Membership</button>
-        </section>
-        <section className="account-section-row group">
-          <strong className="account-item-left">Your Email: {this.state.user.email}</strong>
-          <button onClick={this.editEmail} className="account-item-right">
-            Change Email</button>
-        </section>
-        <section className="account-section-row group">
-          <p className="account-item-left">Your Password: ******</p>
-          <button onClick={this.editPassword} className="account-item-right">
-            Change Password</button>
-        </section>
-        <section className="account-section-row group">
-          <p className="account-item-left">Admin Commands</p>
-          <button onClick={this.newAdvert} className="account-item-right">
-            Add New Advert</button>
-        </section>
-      </div>
-    );
-  },
-
-  renderPlanDetails: function () {
-    return (
-      <div>
-      </div>
-    );
-  },
-
-  renderMyProfile: function () {
-    return (
-      <div>
-      </div>
-    );
-  },
-
-  renderFooter: function () {
-    return (
-      <footer className="account-main account-footer">
-      </footer>
+      <container>
+        <div className="account-pane">
+          <aside className="account-sidebar">
+            <h2>Membership Details</h2>
+            <button className="acc-btn">Delete Membership</button>
+          </aside>
+          <section className="account-section">
+            <div className="account-section-row">
+              <strong>Your Email: {this.state.user.email}</strong>
+              <button className="acc-btn"
+                onClick={this.editEmail}>Change Email</button>
+            </div>
+            <div className="account-section-row">
+              <strong>Password: ********</strong>
+              <button className="acc-btn"
+                onClick={this.editPassword}>Change Password</button>
+            </div>
+          </section>
+        </div>
+        { this.renderEmailDetail() }
+        { this.renderPasswordDetail() }
+      </container>
     );
   },
 
   render: function() {
     return (
       <div>
-        <spacer className="account-spacer"></spacer>
-        <content className='account-main'>
+        <div className='black-nav'><NavBar /></div>
+        <div className='account-main'>
           <h1>My Account</h1>
           { this.renderMembership() }
-            { this.showEmailEdit() }
-            { this.showPasswordEdit() }
-            { this.showAdvertForm() }
-            { this.showSuccessMessage() }
-          { this.renderPlanDetails() }
-          { this.renderMyProfile() }
-        </content>
-        <div className='black-nav'><NavBar /></div>
-        { this.renderFooter() }
+          <AdSubmission close={this.closeDetail}/>
+        </div>
       </div>
     );
   }

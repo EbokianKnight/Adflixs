@@ -10,14 +10,22 @@ var AddSubmission = React.createClass({
     return {
       genres: [],
       imageUrl: "",
-      imageFile: null
+      imageFile: null,
+      title: "",
+      product: "",
+      company: "",
+      date: "",
+      youtube: "",
+      description: "",
+      show: false,
+      submission: "none",
     };
   },
 
   componentDidMount: function() {
-    this.adToken = AdStore.addListener(this.adreceived);
+    this.adToken = AdStore.addListener(this.successCallback);
     this.genreToken = GenreStore.addListener(this.updateGenres);
-    ApiUtil.fetchGenreList()
+    ApiUtil.fetchGenreList();
   },
 
   componentWillUnmount: function() {
@@ -25,8 +33,28 @@ var AddSubmission = React.createClass({
     this.adToken.remove();
   },
 
-  adreceived: function () {
-    this.props.close("success");
+  successCallback: function () {
+    this.setState({ submission: "success" });
+  },
+
+  toggleClose: function (e) {
+    $(e.target).blur();
+    document.getElementById("fileInput").value = "";
+    if (this.state.show) {
+      this.setState({
+        show: false,
+        imageUrl: "",
+        imageFile: null,
+        title: "",
+        product: "",
+        company: "",
+        date: "",
+        youtube: "",
+        description: "",
+      });
+    } else {
+      this.setState({ submission: "none", show: true });
+    }
   },
 
   handleFileChange: function (e) {
@@ -48,8 +76,8 @@ var AddSubmission = React.createClass({
     return (
       this.state.genres.map(function(genre, idx){
         return (
-          <div className="account-checkbox" key={idx}>
-            <input className="account-checkbox-item" type="checkbox"
+          <div key={idx}>
+            <input type="checkbox"
               name="ad[genre_ids][]" key={genre.id} value={genre.id}/>
             <strong>{genre.name}</strong>
           </div>
@@ -70,90 +98,165 @@ var AddSubmission = React.createClass({
     this.setState({ genres: GenreStore.fetchGenreList() });
   },
 
+  updateTitle: function (e) {
+    this.setState({ title: e.target.value });
+  },
+
+  updateProduct: function (e) {
+    this.setState({ product: e.target.value });
+  },
+
+  updateCompany: function (e) {
+    this.setState({ company: e.target.value });
+  },
+
+  updateDate: function (e) {
+    this.setState({ date: e.target.value });
+  },
+
+  updateYouTube: function (e) {
+    this.setState({ youtube: e.target.value });
+  },
+
+  updateDescription: function (e) {
+    this.setState({ description: e.target.value });
+  },
+
   sendNewAdvertRequest: function (e) {
-    e.preventDefault()
-    var data = $(this.refs.AdvertRequest).serializeArray()
+    e.preventDefault();
+    this.setState({submission: "loading", show: false});
+    var data = $(this.refs.AdvertRequest).serializeArray();
     var formData = new FormData();
 
     data.forEach(function(datum){
-      formData.append(datum.name, datum.value)
-    })
-    formData.append("ad[image]", this.state.imageFile)
+      formData.append(datum.name, datum.value);
+    });
+    formData.append("ad[image]", this.state.imageFile);
     ApiUtil.createAdvert(formData);
   },
 
-  createAdForm: function () {
+  submissionActivity: function() {
+    if (this.state.show) return;
+    var message = <div></div>;
+    if (this.state.submission === "success") {
+      message =
+        <div className="acc-message-box acc-success">
+          <div className="acc-check"/> <p>SUCCESS!</p>
+        </div>;
+    } else if (this.state.submission === "loading") {
+      message = <div className="acc-loader"/>;
+      if (this.state.imageUrl !== "") {
+        message.backgroundImage = "url("+this.state.imageUrl+")";
+        message.backgroundSize = "cover";
+        message.repeat = "no-repeat";
+      }
+    }
     return (
-      <div className="account-pane group">
-        <section className="account-section-heading">
-          <strong>ADD NEW ADVERT</strong>
-          <button onClick={this.props.close} className="account-aside-button">
-            Cancel</button>
-        </section>
+      <section className="account-section-row">
+        { message }
+      </section>
+    );
+  },
 
-        <form ref="AdvertRequest" onSubmit={this.sendNewAdvertRequest}>
+  createAdForm: function () {
+    var klass, btnToggle;
+    if (this.state.show) {
+      klass = "";
+      btnToggle = "Cancel";
+    } else {
+      klass = " acc-hide";
+      btnToggle = "Upload";
+    }
+    return (
+      <div className="account-pane">
+        <aside className="account-sidebar">
+          <h2>Add new advert</h2>
+          <button className="acc-btn"
+            onClick={this.toggleClose}>
+            {btnToggle}</button>
+          <label htmlFor="submit-form"
+            className={"acc-btn" + klass}>
+            Upload Advert
+          </label>
+        </aside>
+        <div className="account-section">
+          <section className={"account-section " + klass}>
+          <form ref="AdvertRequest"
+            className="account-section"
+            onSubmit={this.sendNewAdvertRequest}>
 
-          <row className="account-section-row group">
-            <label className="account-item-left group">
-              <div className="form-row">Title</div>
-              <input className="account-section-input" type="text"
-                name="ad[title]"/>
-            </label>
-            <input type="submit" value="Submit Advert"
-              className="account-aside-button account-item-right"/>
-          </row>
+            <div className="account-section-row">
+              <label>
+                <strong>Title</strong>
+                <input type="text" name="ad[title]"
+                  onChange={this.updateTitle}
+                  value={this.state.title}/>
+              </label>
+            </div>
 
-          <row className="account-section-row group">
-            <label className="account-item-left group">
-              <div className="form-row">Company</div>
-              <input className="account-section-input" type="text"
-                name="ad[company]"/>
-            </label>
-          </row>
+            <div className="account-section-row">
+              <label>
+                <strong>Company</strong>
+                <input type="text" name="ad[company]"
+                  onChange={this.updateCompany}
+                  value={this.state.company}/>
+              </label>
+              <label>
+                <strong>Product</strong>
+                <input type="text" name="ad[product]"
+                  onChange={this.updateProduct}
+                  value={this.state.product}/>
+              </label>
+            </div>
 
-          <row className="account-section-row group">
-            <label className="account-item-left group">
-              <div className="form-row">Year</div>
-              <input className="account-section-input as-date" type="date"
-                name="ad[year]"/>
-            </label>
-          </row>
+            <div className="account-section-row">
+              <label>
+                <strong>Youtube Link</strong>
+                <input type="text" name="ad[youtube]"
+                  onChange={this.updateYouTube}
+                  value={this.state.youtube}/>
+              </label>
 
-          <row className="account-section-row group">
-            <label className="account-item-left group">
-              <div className="form-row">Product</div>
-              <input className="account-section-input" type="text"
-                name="ad[product]"/>
-            </label>
-          </row>
+              <label>
+                <strong>Year</strong>
+                <input type="date" name="ad[year]"
+                    onChange={this.updateDate}
+                    value={this.state.date}/>
+              </label>
+            </div>
+            <div className="account-section-row">
+              <label>
+                <strong>Genres</strong>
+                <div className="account-section-row acc-checkboxes">
+                  { this.createCheckBoxes() }
+                </div>
+              </label>
+            </div>
 
-          <row className="account-section-row group">
-            <label className="account-item-left group">
-              <div className="form-row">Youtube Link</div>
-              <input className="account-section-input" type="text"
-                name="ad[youtube]"/>
-            </label>
-          </row>
-          <row className="account-section-row account-checkbox-container group">
-            { this.createCheckBoxes() }
-          </row>
+            <div className="account-section-row">
+              <label>
+                <strong>Description</strong>
+                <textarea type="textarea"
+                  name="ad[description]"
+                  onChange={this.updateDescription}
+                  value={this.state.description}/>
+              </label>
+            </div>
 
-          <row className="account-section-row group">
-            <label className="account-item-left group">
-              <div className="form-row">Description</div>
-              <textarea className="account-section-input as-area" type="textarea"
-                name="ad[description]"/>
-            </label>
-          </row>
-        </form>
-          <row className="account-section-row group">
-            <label className="account-item-left group upload">
-              <div className="form-row">Image Upload</div>
-              <input className="account-section-input" type="file"
-                onChange={this.handleFileChange}/>
-              { this.renderPreview() }
-            </label>
-        </row>
+            <input type="submit" id="submit-form" style={{display: "none"}} />
+          </form>
+            <div className="account-section-row">
+              <label>
+                <strong>Image Upload</strong>
+                <input id="fileInput" type="file"
+                  style={{background: "transparent"}}
+                  onChange={this.handleFileChange}/>
+              </label>
+          </div>
+          { this.renderPreview() }
+          </section>
+          { this.submissionActivity() }
+        </div>
       </div>
     );
   },

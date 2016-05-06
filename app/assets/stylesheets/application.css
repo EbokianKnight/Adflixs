@@ -16,8 +16,8 @@
 
 body, header nav, a, h1, h2, h3, h4, h5, h6,
 li, ul, ol, div, span, strong, main, section,
-img, div, p, form, fieldset, label, input, textarea,
-button, article, footer, small {
+img, div, p, form, fieldset, label, input,
+textarea, button, article, footer, small {
 	vertical-align: baseline;
 	font-weight: inherit;
 	text-decoration: none;

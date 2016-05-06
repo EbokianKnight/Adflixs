@@ -2,179 +2,328 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+$buttonColor: #EAEAEA;
+$buttonHover: #D1D1D1;
+$buttonFocus: #B5B5B5;
+$linkColor: blue;
+$headerColor: #777;
+$adflixRed: #b9090b;
+$lightBackground: #f3f3f3;
+$successGreen: #7ec780;
+$successDarkGreen: #2b782d;
+$failRed: #e3898a;
+
+$speed: 500ms;
+$bigFont: 2.4em;
+$mediumFont: 1.2em;
+$smallFont: 0.9em;
+
 .account-main {
+  position: relative;
+  top: 80px;
   width: 80%;
   display: block;
   margin: 0 auto;
   color: #333;
 }
 
-.account-main h1 {
-  font-size: 36px;
-  margin-bottom: 20px;
-}
-
-.account-spacer {
-  display: block;
-  height: 80px;
+.account-main > h1 {
+  font-size: $bigFont;
+  font-weight: bolder;
+  margin-bottom: 0.5em;
 }
 
 .black-nav {
   position: fixed;
 	top: 0;
-  z-index: 90px;
+  z-index: 100;
 	width: 100%;
   height: 60px;
   background: black;
-}
-
-.account-footer {
-  width: 100%;
-  height: 200px;
-	color: #333;
-	background: #f3f3f3;
 }
 
 .account-pane {
   position: relative;
   border-top: 1px solid #ccc;
   margin-bottom: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-between;
+  max-height: 100vh;
+  -webkit-transition: max-height $speed ease-in-out, opacity $speed ease-in-out;
+	-moz-transition: max-height $speed ease-in-out, opacity $speed ease-in-out;
+	transition: max-height $speed ease-in-out, opacity $speed ease-in-out;
 }
 
-.account-section-heading {
-  text-transform: uppercase;
-  font-size: 18px;
-  width: 20%;
-  min-width: 200px;
-  height: 80px;
-  margin: 10px 0 0 0;
-  display: block;
-  float: left;
-  color: #999;
-  font-weight: 400;
-}
-
-.account-section-heading > strong {
-  min-width: 75px;
-  display: block;
-}
-
-.account-pane > strong {
-  float: left;
-  display: block;
-  display: block;
-  margin: auto;
-  float: left;
-}
-
-.account-section-row {
-  display: block;
-  float: right;
-  width: 78%;
-  height: 20px;
+.account-sidebar {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  width: 15%;
   margin-top: 10px;
-  color: #999;
+  min-width: 200px;
+  justify-content: flex-start;
+  align-content: center;
+  align-items: center;
 }
 
-.account-section-row > strong {
-  color: #111;
+.acc-btn {
+  padding: 0.5em 1em;
+  min-width: 10%;
+  margin: 5px;
+  display: block;
+  cursor: pointer;
+  background: $buttonColor;
+  border-bottom: 2px solid $buttonFocus;
+  border-right: 2px solid $buttonFocus;
+  -webkit-transition: background 0.5s ease;
+    -moz-transition: background 0.5s ease;
+    -ms-transition: background 0.5s ease;
+    -o-transition: background 0.5s ease;
+    transition: background 0.5s ease;
+}
+
+.acc-btn:hover {
+  background: $buttonHover;
+}
+
+.acc-btn:focus {
+  background: $buttonFocus;
+}
+
+.account-sidebar > h2 {
+  font-size: $mediumFont;
   font-weight: bold;
-}
-
-.account-section-row > button {
-  color: blue;
-}
-
-.account-section-row > button:hover {
-  cursor: pointer;
-}
-
-.account-section-input {
-  background: white;
-  width: 300px;
-  margin-left: 10px;
-  float: left;
-  padding: 3px;
-}
-
-.form-row {
-  width: 150px;
-  float: left;
-}
-
-.account-aside-button {
-  font-size: 12px;
-  font-weight: 500;
+  padding-bottom: 10px;
   text-transform: uppercase;
-  color: #111;
-  margin-top: 15px;
-  float: left;
-  padding: 10px;
-  background: #e6e6e6;
-  box-shadow: 1px 2px 1px #999;
-}
-
-.account-aside-button:hover {
-  background: #eee;
-  cursor: pointer;
-}
-
-.account-item-left, .account-item-right {
-  display: block;
-}
-
-.account-item-left {
-  float:left;
-  margin-left: 10px;
-}
-
-.account-item-right {
-  float:right;
-  margin-right: 10px;
-}
-
-.account-checkbox-container {
-  height: auto;
-}
-
-.account-checkbox {
-  float: left;
-  display: block;
-  width: 80px;
-  margin: 5px 0px 5px 10px;
-}
-
-.account-checkbox-item {
+  color: $headerColor;
   margin: 5px;
 }
 
-.as-area {
-  height: 75px;
-  max-width:300px;
+.account-section {
+  display: flex;
+  flex-grow: 1;
+  padding-top: 10px;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: stretch;
+  max-height: 100vh;
+  -webkit-transition: max-height $speed ease-in-out, opacity $speed ease-in-out;
+	-moz-transition: max-height $speed ease-in-out, opacity $speed ease-in-out;
+	transition: max-height $speed ease-in-out, opacity $speed ease-in-out;
 }
 
-.as-date {
-  padding: 2px 2px 0 2px;
-  width: auto;
+.account-section-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-left: 2em;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  flex-grow: 1;
 }
 
-.account-submission-success {
-  color: red;
-  font-size: 24px;
+.account-section-row > strong {
   font-weight: bold;
-  padding: 5px;
-  margin: 25px;
-  border: 3px solid red;
-  border-radius: 10px;
-  float:left;
-  width: auto;
 }
 
-.upload {
-  margin-top: 60px;
+.account-section-row > label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0.5em 1em 0.5em 0;
+  align-content: stretch;
+  flex-grow: 1;
+  flex-shrink: 0;
+  font-weight: bold;
+}
+
+.account-section-row > label > input {
+  flex-grow: 1;
+  height: 1em;
+  padding: 0.6em;
+  font-weight: normal;
+  margin-left: 1em;
+  border-bottom: 1px solid transparent;
+  background: white;
+  transition: border 800ms;
+}
+
+.account-section-row > label > textarea {
+  flex-grow: 1;
+  height: 1em;
+  padding: 0.6em;
+  font-weight: normal;
+  margin-left: 1em;
+  border-bottom: 1px solid transparent;
+  background: white;
+  transition: border 800ms;
+  height: 15vh;
+  overflow: scroll;
+}
+
+.account-section-row > label > input:focus {
+  border-bottom: 1px solid $buttonFocus;
+}
+
+.account-section-row > label > textarea:focus {
+  border-bottom: 1px solid $buttonFocus;
+}
+
+.acc-message {
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
+.acc-message {
+  color: $adflixRed;
+  border: 0.2em solid $adflixRed;
+  border-radius: 10px;
+  padding: 0.5em;
+  font-size: $mediumFont;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin: 5px;
+}
+
+.acc-checkboxes {
+  width: 50px;
+  justify-content:flex-start;
+}
+
+.acc-checkboxes > div {
+  margin: 0.3em 1em;
+}
+
+.acc-checkboxes > div > strong {
+  font-weight: bold;
+  padding-left: 0.5em;
+  font-size: $smallFont;
+}
+
+.acc-hide {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
 }
 
 .preview-image {
   height: 300px;
   width: 300px;
+}
+
+.account-spacer {
+  width: 12vw;
+}
+
+.acc-message-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  align-content: center;
+  flex-grow: 1;
+  padding-left: 1em;
+  margin: 1em;
+}
+
+.acc-message-box > p {
+  padding: 1em;
+  font-weight: bolder;
+  font-size: $mediumFont;
+}
+
+.acc-success {
+  border: 0.2em solid $successDarkGreen;
+  background-color: $successGreen;
+}
+
+.acc-failure {
+  border: 0.2em solid $adflixRed;
+  background-color: $failRed;
+}
+
+.acc-check {
+  width: 3em;
+  height: 3em;
+  background-image: asset-url("account/check-green.gif");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.acc-x {
+  width: 2em;
+  height: 2em;
+  background-image: asset-url("account/x-red.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.acc-loader {
+  font-size: 10px;
+  margin: 50px auto;
+  text-indent: -9999em;
+  width: 11em;
+  height: 11em;
+  border-radius: 50%;
+  background: $adflixRed;
+  background: -moz-linear-gradient(left, $adflixRed 10%, rgba(255, 255, 255, 0) 42%);
+  background: -webkit-linear-gradient(left, $adflixRed 10%, rgba(255, 255, 255, 0) 42%);
+  background: -o-linear-gradient(left, $adflixRed 10%, rgba(255, 255, 255, 0) 42%);
+  background: -ms-linear-gradient(left, $adflixRed 10%, rgba(255, 255, 255, 0) 42%);
+  background: linear-gradient(to right, $adflixRed 10%, rgba(255, 255, 255, 0) 42%);
+  position: relative;
+  -webkit-animation: load3 1.4s infinite linear;
+  animation: load3 1.4s infinite linear;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+}
+.acc-loader:before {
+  width: 50%;
+  height: 50%;
+  background: $adflixRed;
+  border-radius: 100% 0 0 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: '';
+}
+.acc-loader:after {
+  background: $lightBackground;
+  width: 75%;
+  height: 75%;
+  border-radius: 50%;
+  content: '';
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+@-webkit-keyframes load3 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
+}
+@keyframes load3 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
 }
