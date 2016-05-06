@@ -34,7 +34,7 @@ module.exports = React.createClass({
        style={{backgroundImage: this.state.features}}/>;
     return (
       <div>
-        <div class="preload-images"/>
+        <div className="preload-images"/>
         { preloader }
       </div>
     );
