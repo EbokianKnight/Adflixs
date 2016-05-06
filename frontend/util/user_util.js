@@ -33,7 +33,7 @@ module.exports = {
   updateUser: function (id, user, callback) {
     $.ajax({
 			method: "PATCH",
-      url: "/api/users" + id,
+      url: "/api/users/" + id,
       data: { user: user },
       success: function (user) {
         UserActions.receiveCurrentUser(user, callback);
@@ -43,10 +43,10 @@ module.exports = {
 			}
     });
   },
-  removeUser: function (userID, redirectCallback) {
+  destroyUser: function (userID, redirectCallback) {
     $.ajax({
-      method: "POST",
-      url: "/api/users" + user.id,
+      method: "DELETE",
+      url: "/api/users/" + userID,
       success: function () {
         UserActions.removeUser(userID);
         if (redirectCallback) { redirectCallback(); }

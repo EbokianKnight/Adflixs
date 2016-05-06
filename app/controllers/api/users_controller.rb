@@ -12,8 +12,8 @@ class Api::UsersController < ApplicationController
   end
 
   def update
-    @user.find(params[:id])
-    if @user.update_attributes!(user_params)
+    if current_user.id == params[:id].to_i && current_user.update_attributes!(user_params)
+      @user = current_user
       render :show
   	else
   		render json: { message: @user.errors.full_messages }
@@ -36,14 +36,18 @@ class Api::UsersController < ApplicationController
 
 	#Remove Registered User
 	def destroy
-		redirect_to root_url unless @current_user.admin
-		User.find(params[:id]).destroy!
-		render json: { message: ["user account destroyed"] }
+    if current_user.id == params[:id]
+      user = current_user
+      user.sign_out
+  		user.destroy!
+  		render json: { message: "deleted user" }
+    end
+    render json: { message: "failed to delete user" }
 	end
 
 	private
 
 	def user_params
-		params.require(:user).permit(:password, :email, :oldpassword)
+		params.require(:user).permit(:password, :email)
 	end
 end

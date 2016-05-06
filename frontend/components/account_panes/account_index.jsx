@@ -6,6 +6,7 @@ var SessionStore = require('../../stores/session_store');
 var UserUtil = require('../../util/user_util');
 
 var AccountIndex = React.createClass({
+  contextTypes: { router: PropTypes.object.isRequired },
 
   getInitialState: function() {
     return {
@@ -105,7 +106,10 @@ var AccountIndex = React.createClass({
   },
 
   updatePassword: function (e) {
-    this.setState({ password: e.target.value })
+    this.setState({ password: e.target.value });
+    if (this.flash && this.state.password === this.state.confirmation &&  this.state.password.length > 6) {
+      this.setState({ flash: false, message: ""});
+    }
   },
 
   updateConfirm: function (e) {
@@ -140,11 +144,18 @@ var AccountIndex = React.createClass({
 
   updateEmail: function (e) {
     this.setState({ email: e.target.value });
+    if (this.flash && this.state.email === this.state.confirmation) {
+      this.setState({ flash: false, message: ""});
+    }
   },
 
   deleteUserAccount: function () {
     if (!this.state.delete) return;
-    UserUtil.destroyUser(this.state.user.id);
+    UserUtil.destroyUser(SessionStore.currentUser().id, this.redirectCallback);
+  },
+
+  redirectCallback: function () {
+    this.context.router.push("/");
   },
 
   deleteUser: function (e) {
@@ -180,8 +191,7 @@ var AccountIndex = React.createClass({
     if (this.state.user.email === "Guest") {
       return this.setState({ flash: true, message: "You cannot modify the Guest Account."});
     }
-
-    if (this.state.password === this.state.confirmation && !this.state.flash && this.state.password.length > 6) {
+    if (this.state.password === this.state.confirmation && !this.state.flash && this.state.password.length >= 6) {
       UserUtil.updateUser(
         this.state.user.id,
         { password: this.state.password },
@@ -204,7 +214,7 @@ var AccountIndex = React.createClass({
       return this.setState({ flash: true, message: "You cannot modify the Guest Account."});
     }
 
-    if (this.state.confirmation=== this.state.password && !this.state.flash && this.state.email.length > 6) {
+    if (this.state.confirmation === this.state.email && !this.state.flash) {
       UserUtil.updateUser(
         this.state.user.id,
         { email: this.state.email },
@@ -215,6 +225,8 @@ var AccountIndex = React.createClass({
     } else if (this.state.email !== this.state.confirm) {
       this.setState({ flash: true, message: "Your new email and confirmation must match."});
     }
+    console.log(this.state.password);
+    console.log(this.state.confirmation);
   },
 
   renderPasswordDetail: function () {

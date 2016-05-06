@@ -24,7 +24,6 @@ var VideoModel = React.createClass({
     this.forceUp = null;
     this.hide = null;
     this.loading = null;
-    debugger;
     YoutubeUtil.loadApiScript();
     this.renderPlayer();
     this.forceLoadVideo();
