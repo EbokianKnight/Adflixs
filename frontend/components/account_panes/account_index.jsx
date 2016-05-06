@@ -151,7 +151,13 @@ var AccountIndex = React.createClass({
 
   deleteUserAccount: function () {
     if (!this.state.delete) return;
-    UserUtil.destroyUser(SessionStore.currentUser().id, this.redirectCallback);
+
+    console.log(this.state.user.email === "Guest")
+    if (this.state.user.email === "Guest") {
+      this.setState({ flash: true, message: "You cannot modify the Guest Account."});
+    } else {
+      UserUtil.destroyUser(SessionStore.currentUser().id, this.redirectCallback);
+    }
   },
 
   redirectCallback: function () {
@@ -313,6 +319,7 @@ var AccountIndex = React.createClass({
 
   renderConfirmDelete: function () {
     var klass = this.state.delete ? "" : " acc-hide";
+    var flash = this.state.flash ? "" : " acc-hide";
     return (
       <div className={"account-pane" + klass}>
       <aside className="account-sidebar"/>
@@ -329,6 +336,12 @@ var AccountIndex = React.createClass({
               <div className="acc-x"/>
               <p>YES VERY IM SURE.</p>
             </div>
+        </div>
+        <div className={"account-section-row " + flash}>
+          <div className="acc-message-box acc-failure">
+            <div className="acc-x"/>
+            <p>{this.state.message}</p>
+          </div>
         </div>
       </section>
       </div>
