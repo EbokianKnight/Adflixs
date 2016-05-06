@@ -3,6 +3,7 @@ var PropTypes = React.PropTypes;
 var NavBar = require('../ads/nav_bar');
 var AdSubmission = require('./ad_submission');
 var SessionStore = require('../../stores/session_store');
+var FlashStore = require('../../stores/flash_store');
 var UserUtil = require('../../util/user_util');
 
 var AccountIndex = React.createClass({
@@ -16,6 +17,7 @@ var AccountIndex = React.createClass({
       email: "",
       flash: false,
       message: "",
+      success: false,
       delete: false,
       user: SessionStore.currentUser()
     };
@@ -24,11 +26,12 @@ var AccountIndex = React.createClass({
   componentDidMount: function() {
     document.body.style.backgroundColor = "#f3f3f3";
     this.sessionToken = SessionStore.addListener(this.getUserFromStore)
-    this.flash = null;
+    this.errorToken = FlashStore.addListener(this.respondToErrors)
   },
 
   componentWillUnmount: function() {
     this.sessionToken.remove();
+    this.errorToken.remove();
     window.clearTimeout(this.passwordTimer);
     window.clearTimeout(this.emailTimer);
     window.clearTimeout(this.deleteTimer);
@@ -37,8 +40,16 @@ var AccountIndex = React.createClass({
   getUserFromStore: function() {
     this.setState({
       user: SessionStore.currentUser(),
-      success: SessionStore.flashUpdate(),
+      success: true,
     });
+  },
+
+  respondToErrors: function () {
+    var email = this.state.show === "email";
+    var pass = this.state.show === "password";
+    if (FlashStore.hasError() && (email || pass || this.state.delete)) {
+      this.setState({ flash: true, message: FlashStore.flashMessage() });
+    }
   },
 
   editEmail: function (e) {
@@ -63,6 +74,7 @@ var AccountIndex = React.createClass({
         flash: false,
         message: "",
         delete: false,
+        success: false
       });
     }
   },
@@ -89,6 +101,7 @@ var AccountIndex = React.createClass({
         flash: false,
         message: "",
         delete: false,
+        success: false
       });
     }
   },
@@ -102,11 +115,12 @@ var AccountIndex = React.createClass({
       flash: false,
       message: "",
       delete: false,
+      success: false
     });
   },
 
   updatePassword: function (e) {
-    this.setState({ password: e.target.value });
+    this.setState({ success: false, password: e.target.value });
     if (this.flash && this.state.password === this.state.confirmation &&  this.state.password.length > 6) {
       this.setState({ flash: false, message: ""});
     }
@@ -118,32 +132,35 @@ var AccountIndex = React.createClass({
         this.setState({
           confirmation: e.target.value,
           flash: false,
+          success: false,
           message: ""
         });
       } else {
-        this.setState({ confirmation: e.target.value });
+        this.setState({ confirmation: e.target.value, success: false });
       }
     } else if (this.state.flash && this.state.show === "email") {
       if (this.state.email === this.state.confirmation) {
         this.setState({
           confirmation: e.target.value,
           flash: false,
+          success: false,
           message: ""
         });
       } else {
-        this.setState({ confirmation: e.target.value });
+        this.setState({ confirmation: e.target.value, success: false });
       }
     } else {
       this.setState({
         confirmation: e.target.value,
         flash: false,
+        success: false,
         message: ""
       });
     }
   },
 
   updateEmail: function (e) {
-    this.setState({ email: e.target.value });
+    this.setState({ success: false, email: e.target.value });
     if (this.flash && this.state.email === this.state.confirmation) {
       this.setState({ flash: false, message: ""});
     }
@@ -151,7 +168,13 @@ var AccountIndex = React.createClass({
 
   deleteUserAccount: function () {
     if (!this.state.delete) return;
-    UserUtil.destroyUser(SessionStore.currentUser().id, this.redirectCallback);
+
+    console.log(this.state.user.email === "Guest")
+    if (this.state.user.email === "Guest") {
+      this.setState({ flash: true, message: "You cannot modify the Guest Account."});
+    } else {
+      UserUtil.destroyUser(SessionStore.currentUser().id, this.redirectCallback);
+    }
   },
 
   redirectCallback: function () {
@@ -194,8 +217,7 @@ var AccountIndex = React.createClass({
     if (this.state.password === this.state.confirmation && !this.state.flash && this.state.password.length >= 6) {
       UserUtil.updateUser(
         this.state.user.id,
-        { password: this.state.password },
-        this.closeDetail
+        { password: this.state.password }
       );
     } else if (this.state.password.length < 6) {
       this.setState({ flash: true, message: "Your password must be at least 6 characters."});
@@ -217,8 +239,7 @@ var AccountIndex = React.createClass({
     if (this.state.confirmation === this.state.email && !this.state.flash) {
       UserUtil.updateUser(
         this.state.user.id,
-        { email: this.state.email },
-        this.closeDetail
+        { email: this.state.email }
       );
     } else if (!regex.test(this.state.email)) {
       this.setState({ flash: true, message: "Your new email must be valid."});
@@ -232,6 +253,7 @@ var AccountIndex = React.createClass({
   renderPasswordDetail: function () {
     var klass = this.state.show === "password" ? "" : " acc-hide";
     var flash = this.state.flash ? "" : " acc-hide";
+    var success = this.state.success ? "" : " acc-hide";
     return (
       <div className={"account-pane" + klass}>
         <aside className="account-sidebar">
@@ -248,13 +270,13 @@ var AccountIndex = React.createClass({
         <section className="account-section">
           <div className="account-section-row">
             <label><strong>New Password</strong>
-              <input onChange={this.updatePassword} type="text"
+              <input onChange={this.updatePassword} type="password"
                 value={this.state.password} />
             </label>
           </div>
           <div className="account-section-row">
             <label><strong>Confirm Password</strong>
-              <input onChange={this.updateConfirm} type="text"
+              <input onChange={this.updateConfirm} type="password"
                 value={this.state.confirmation}/>
             </label>
           </div>
@@ -262,6 +284,12 @@ var AccountIndex = React.createClass({
             <div className="acc-message-box acc-failure">
               <div className="acc-x"/>
               <p>{this.state.message}</p>
+            </div>
+          </div>
+          <div className={"account-section-row " + success}>
+            <div className="acc-message-box acc-success">
+              <div className="acc-check"/>
+              <p>YOUR PASSWORD HAS BEEN SUCCESSFULLY UPDATED</p>
             </div>
           </div>
         </section>
@@ -273,6 +301,7 @@ var AccountIndex = React.createClass({
   renderEmailDetail: function () {
     var klass = this.state.show === "email" ? "" : " acc-hide";
     var flash = this.state.flash ? "" : " acc-hide";
+    var success = this.state.success ? "" : " acc-hide";
     return (
       <div className={"account-pane" + klass}>
         <aside className="account-sidebar">
@@ -305,6 +334,12 @@ var AccountIndex = React.createClass({
               <p>{this.state.message}</p>
             </div>
           </div>
+          <div className={"account-section-row " + success}>
+            <div className="acc-message-box acc-success">
+              <div className="acc-check"/>
+              <p>YOUR EMAIL HAS BEEN SUCCESSFULLY UPDATED</p>
+            </div>
+          </div>
         </section>
         <div className="account-spacer"/>
       </div>
@@ -313,6 +348,7 @@ var AccountIndex = React.createClass({
 
   renderConfirmDelete: function () {
     var klass = this.state.delete ? "" : " acc-hide";
+    var flash = this.state.flash ? "" : " acc-hide";
     return (
       <div className={"account-pane" + klass}>
       <aside className="account-sidebar"/>
@@ -329,6 +365,12 @@ var AccountIndex = React.createClass({
               <div className="acc-x"/>
               <p>YES VERY IM SURE.</p>
             </div>
+        </div>
+        <div className={"account-section-row " + flash}>
+          <div className="acc-message-box acc-failure">
+            <div className="acc-x"/>
+            <p>{this.state.message}</p>
+          </div>
         </div>
       </section>
       </div>

@@ -1,4 +1,5 @@
 var UserActions = require('./../actions/user_actions');
+var FlashActions = require('./../actions/flash_actions');
 
 module.exports = {
   fetchCurrentUser: function (completion) {
@@ -39,6 +40,9 @@ module.exports = {
         UserActions.receiveCurrentUser(user, callback);
       },
 			error: function (err) {
+        var regex = /Validation failed:.(.*)/;
+        var error = err.responseText.match(regex)[0];
+        FlashActions.throwError(error);
         console.log('UserUtil#updateUser Error');
 			}
     });

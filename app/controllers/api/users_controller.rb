@@ -12,11 +12,11 @@ class Api::UsersController < ApplicationController
   end
 
   def update
-    if current_user.id == params[:id].to_i && current_user.update_attributes!(user_params)
-      @user = current_user
+    @user = current_user
+    if @user.id == params[:id].to_i && @user.update_attributes!(user_params)
       render :show
   	else
-  		render json: { message: @user.errors.full_messages }
+  		format.json { render json: { :error => @user.errors.full_messages }, status: 422 }
   	end
   end
 
@@ -30,7 +30,7 @@ class Api::UsersController < ApplicationController
       View.create(user_id: @user.id, ad_id: register_views.id)
       render :show
 		else
-			render json: { message: @user.errors.full_messages }
+			format.json { render json: { :error => @user.errors.full_messages }, status: 422 }
 		end
 	end
 
