@@ -1,0 +1,162 @@
+$buttonColor: #EAEAEA;
+$buttonHover: #D1D1D1;
+$buttonFocus: #B5B5B5;
+$linkColor: blue;
+$headerColor: #777;
+$adflixRed: #b9090b;
+$lightBackground: #f3f3f3;
+$darkBackground: #141414;
+$successGreen: #7ec780;
+$successDarkGreen: #2b782d;
+$failRed: #e3898a;
+
+$speed: 500ms;
+$bigFont: 2.4em;
+$mediumFont: 1.2em;
+$smallFont: 0.9em;
+
+$flix-row-padding: 5vw;
+$flix-auto-spacer: 25px;
+
+@mixin flix-height ($num-flix) {
+  height: (((90vw - $num-flix) / $num-flix) / 3) * 2;
+}
+
+@mixin flix-height-width ($num-flix) {
+  height: (((90vw - $num-flix) / $num-flix) / 3) * 2;
+  width: (90vw - $num-flix) / $num-flix;
+}
+
+@mixin flix-hover-height-width ($num-flix) {
+  height: ((120vw / $num-flix) / 3) * 2;
+  width: 120vw / $num-flix;
+}
+
+.flexible-flix-height {
+  @include flix-height(3)
+}
+.flix {
+  @include flix-height-width(3)
+}
+.flix:hover {
+  @include flix-hover-height-width(3)
+}
+@media (min-width: 800px) {
+  .flexible-flix-height {
+    @include flix-height(4)
+  }
+  .flix {
+    @include flix-height-width(4)
+  }
+  .flix:hover {
+    @include flix-hover-height-width(4)
+  }
+}
+@media (min-width: 1300px) {
+  .flexible-flix-height {
+    @include flix-height(5)
+  }
+  .flix {
+    @include flix-height-width(5)
+  }
+  .flix:hover {
+    @include flix-hover-height-width(5)
+  }
+}
+@media (min-width: 1800px) {
+  .flexible-flix-height {
+    @include flix-height(6)
+  }
+  .flix {
+    @include flix-height-width(6)
+  }
+  .flix:hover {
+    @include flix-hover-height-width(6)
+  }
+}
+@media (min-width: 2300px) {
+  .flexible-flix-height {
+    @include flix-height(7)
+  }
+  .flix {
+    @include flix-height-width(7)
+  }
+  .flix:hover {
+    @include flix-hover-height-width(7)
+  }
+}
+@media (min-width: 2800px) {
+  .flexible-flix-height {
+    @include flix-height(8)
+  }
+  .flix {
+    @include flix-height-width(8)
+  }
+  .flix:hover {
+    @include flix-hover-height-width(8)
+  }
+}
+
+.index-row {
+  display: flex;
+  flex-wrap: nowrap;
+  position: relative;
+  padding: $flix-auto-spacer 0;
+}
+
+.index-row-inner {
+  @extend .flexible-flix-height;
+  display: flex;
+  flex-wrap: nowrap;
+  position: relative;
+  align-items: center;
+  align-content: center;
+  margin-left: $flix-row-padding;
+  -webkit-transition: transform 800ms ease-in-out;
+   -moz-transition: transform 800ms ease-in-out;
+     -o-transition: transform 800ms ease-in-out;
+        transition: transform 800ms ease-in-out;
+}
+
+.index-row-arrows {
+  @extend .flexible-flix-height;
+  background: rgba(0,0,0,0.5);
+  width: $flix-row-padding - 0.5vw;
+  position: absolute;
+  top: $flix-auto-spacer;
+  z-index: 10;
+}
+.index-arrows-left {
+  left:0;
+}
+.index-arrows-right {
+  right:0;
+}
+
+.index-row-caption {
+  position: absolute;
+  font-weight: bold;
+  top: 0;
+  left: $flix-row-padding;
+  font-size: $mediumFont;
+  color: $headerColor;
+  text-transform: uppercase;
+}
+
+.flix {
+  background-size: cover;
+  background-repeat: no-repeat;
+  box-sizing: border-box;
+  margin: 0 0.5vw;
+  flex-shrink: 0;
+  flex-grow: 1;
+  -webkit-transition: background 0.5s ease-in;
+    -moz-transition: height 0.5s ease-in, width 0.5s ease-in-out, background 0.5s ease-in-out;
+    -ms-transition: height 0.5s ease-in-out, width 0.5s ease-in-out, background 0.5s ease-in-out;
+    -o-transition: height 0.5s ease-in-out, width 0.5s ease-in-out, background 0.5s ease-in-out;
+    transition: height 0.5s ease-in-out, width 0.5s ease-in-out, background 0.5s ease-in-out;
+}
+
+.flix:hover {
+  z-index: 25;
+}

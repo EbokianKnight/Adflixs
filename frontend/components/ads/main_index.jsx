@@ -7,6 +7,7 @@ var AdvertRow = require('./ad_index_row');
 var DetailMain = require('./feature_panes/detail_main');
 var ReactCSS = require('react-addons-css-transition-group');
 var FeatureHeader = require('./feature_header');
+var AdvertRowTwo = require('./ad_index_row2');
 
 var MainIndex = React.createClass({
 
@@ -95,8 +96,7 @@ var MainIndex = React.createClass({
 		return (
 			<div ref="GenreRows" className="main-index-body">
 				<FeatureHeader header={true} />
-				{ this.fetchMyList() }
-				{ this.fetchRows() }
+				<AdvertRowTwo genre={this.state.genres[0]}/>
 			</div>
 		);
 	}
