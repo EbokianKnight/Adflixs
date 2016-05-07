@@ -211,7 +211,7 @@ var AdvertRow = React.createClass({
 		return (
 			<container className="index-row">
 				<button className={"index-row-arrows index-arrows-left" + left}
-					onClick={this.moveLeft}/>
+					onClick={this.moveLeft}><div className="a-left"/></button>
 				{ this.renderRowHeader() }
 				<div id={this.props.genre.name}
 					className="index-row-inner">
@@ -219,7 +219,7 @@ var AdvertRow = React.createClass({
 				</div>
 				{ this.renderDetail() }
 				<button className={"index-row-arrows index-arrows-right" + right}
-					onClick={this.moveRight}/>
+					onClick={this.moveRight}><div className="a-right"/></button>
 			</container>
 		);
 	}
