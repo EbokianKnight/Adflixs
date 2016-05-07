@@ -161,9 +161,11 @@ var AdvertRow = React.createClass({
 
 	renderIndicies: function () {
 		if (!this.state.pages) return;
-		return this.state.pages.map(function(p, idx){
-			return <li key={idx} value={idx} onClick={this.seekPage}/>;
-		});
+		var pages = this.state.pages;
+		return pages.map(function(p, idx){
+			return <li className={ p === this.state.currentFocus ? "idx-focus" : "" }
+				key={idx} value={p} onClick={this.seekPage}></li>;
+		}.bind(this));
 	},
 
 	// renders the row heading
@@ -181,7 +183,7 @@ var AdvertRow = React.createClass({
 	},
 
 	seekPage: function (e) {
-		this.setState({ currentFocus: this.state.pages[e.target.value] });
+		this.setState({ currentFocus: e.target.value });
 	},
 
 	render: function() {

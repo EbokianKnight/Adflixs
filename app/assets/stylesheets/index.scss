@@ -161,13 +161,18 @@ $flix-auto-spacer: 25px;
   width: $flix-auto-spacer;
   height: $flix-auto-spacer / 4;
   cursor: pointer;
-  -webkit-transition: background 300ms ease-in-out;
-   -moz-transition: background 300ms ease-in-out;
-     -o-transition: background 300ms ease-in-out;
-        transition: background 300ms ease-in-out;
+  -webkit-transition: background-color 300ms ease-in-out;
+   -moz-transition: background-color 300ms ease-in-out;
+     -o-transition: background-color 300ms ease-in-out;
+        transition: background-color 300ms ease-in-out;
 }
 
 .scroll-to-index-bar > li:hover {
+  background-color: rgba(0,0,0,0.7);
+}
+
+.scroll-to-index-bar > li.idx-focus {
+  cursor: default;
   background-color: rgba(0,0,0,0.7);
 }
 
