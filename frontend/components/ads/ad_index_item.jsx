@@ -21,12 +21,14 @@ var Advert = React.createClass({
 	// in multiple rows, Row is listening for changes.
 	sendBackID: function (e) {
 		e.preventDefault();
+		ApiUtil.fetchAdvert(this.props.ad.id, this.props.rowID);
 		$(".flix").removeClass("selected");
 		var makeID = "#"+this.props.ad.id + "-" + this.props.rowID;
 		var select = $(makeID)
-		select.removeClass("img-effect");
+		if (select.hasClass("img-effect")) {
+			select.removeClass("img-effect");
+		}
 		select.addClass("selected");
-		ApiUtil.fetchAdvert(this.props.ad.id, this.props.rowID);
 	},
 
 	mouseIn: function (e) {

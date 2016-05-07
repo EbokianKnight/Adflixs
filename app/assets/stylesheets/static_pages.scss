@@ -17,6 +17,20 @@ $smallFont: 0.9em;
 	transition: background 1s ease-in;
 }
 
+.transition-all {
+  -webkit-transition: all 500ms ease-in;
+   -moz-transition: all 500ms ease-in;
+     -o-transition: all 500ms ease-in;
+        transition: all 500ms ease-in;
+}
+
+.transition-all-fast {
+  -webkit-transition: all 500ms ease-in;
+   -moz-transition: all 500ms ease-in;
+     -o-transition: all 500ms ease-in;
+        transition: all 500ms ease-in;
+}
+
 .pepsi-header {
 	background-image: asset-url("homepage/Pepsi1920.jpg");
 	background-size: cover;
@@ -340,14 +354,14 @@ $smallFont: 0.9em;
 
 .top-right-x {
 	position: absolute;
-	top: 20px;
-	right: 25px;
+	top: 10px;
+	right: 15px;
 	padding: 3px;
 	z-index: 60;
-	font-size: $bigFont;
-	font-weight: bolder;
+	font-size: 4.5em;
 	color: #ccc;
 	cursor: pointer;
+	position: absolute;
 }
 
 .ad-display-container {
@@ -359,6 +373,7 @@ $smallFont: 0.9em;
 	left: 50px;
 	color: #999;
 	z-index: 50;
+	opacity: 1;
 }
 
 .ad-display-nav {
@@ -376,6 +391,7 @@ $smallFont: 0.9em;
 	padding: 5px 25px;
 	z-index: 40;
 	cursor: pointer;
+	@extend .transition-all-fast;
 }
 
 .ad-display-nav > button:hover {

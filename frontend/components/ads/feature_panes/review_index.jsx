@@ -26,7 +26,7 @@ var settings = {
     overflow                   : 'visible',
     WebkitOverflowScrolling    : 'touch',
     borderRadius               : '4px',
-    background                 : 'rgba(0, 0, 0, 0.8)',
+    background                 : 'rgba(0, 0, 0, 0.9)',
     zIndex                     : '200',
     padding                    : '10vh 10vw'
   }
@@ -153,7 +153,7 @@ var ReviewIndex = React.createClass({
 
   render: function() {
     return (
-      <div className={this.props.klass}>
+      <container className={this.props.klass}>
         <section className="ad-review-main group">
           <h2 className="ad-review-title">Member Reviews</h2>
           <section className="ad-review-flex-container">
@@ -178,7 +178,7 @@ var ReviewIndex = React.createClass({
             <footer className="modal-footer"/>
           </div>
         </Modal>
-      </div>
+      </container>
     );
   }
 
