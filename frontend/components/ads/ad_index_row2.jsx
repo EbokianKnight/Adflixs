@@ -12,114 +12,138 @@ var AdvertRow = React.createClass({
 	getInitialState: function() {
 		return {
 			showDetail: false,
-			numPage: 0,
-			adFocus: false
+			currentFocus: 0,
+			index: false,
+			pages: false,
 		};
 	},
 
 	componentDidMount: function() {
 		this.adStoreToken = AdStore.addListener(this.checkDetails);
 		this.slider = document.getElementById(this.props.genre.name);
+		this.getPages();
+		$(window).bind('resize', function(){
+		   this.timer && clearTimeout(this.timer);
+		   this.timer = setTimeout(this.handleResize, 100);
+		}.bind(this));
 	},
 
 	componentWillUnmount: function() {
 		this.adStoreToken.remove();
-		$(window).off('mouseup', this.handlePageReset);
-		this.slider = null;
-		this.sliderPages = null;
+		this.timer && clearTimeout(this.timer);
 	},
 
-	// after page resize, helps redetermine new scroll positions
-	calcPages: function (visible, focus) {
-		if (visible < 800) {
-			return (visible / 3) * focus
-		} else if (visible < 1300) {
-			return (visible / 4) * focus
-		} else if (visible < 1800) {
-			return (visible / 5) * focus
-		} else if (visible < 2300) {
-			return (visible / 6) * focus
-		} else {
-			return (visible / 7) * focus
-		}
+	// Used to reset the state if the DOM has been resized
+	componentDidUpdate: function(prevProps, prevState) {
+		if (!this.state.index) { this.getPages(); }
 	},
 
+	// See if any Advert has been opened yet, if not, nothings open.
+	// See if the Advert that is open is in this row, if so open it.
+	// See if this was open, if so close it.
 	checkDetails: function() {
 		if (AdStore.getAd() === null) {
 			this.setState({ showDetail: false });
 		} else if (AdStore.getAd().rowID === this.props.genre.id){
-			this.setState({
-				showDetail: true
-			});
+			this.setState({ showDetail: true });
 		} else if (this.state.showDetail) {
 			this.setState({ showDetail: false });
 		}
 	},
 
-	fetchRowName: function () {
-		return (
-			<div className="index-row-caption">
-				{ this.props.genre.name }
-			</div>
-		);
+	// nulling index triggers my componentDidUpdate conditional.
+	// this is designed to recalculate the slider based on the new DOM sizes.
+	handleResize: function () {
+		this.setState({ index: null });
 	},
 
-	fetchAdverts: function () {
-		return this.props.genre.ads.map(function(ad){
-			return <Advert ref="row" ad={ad} key={ad.id} rowID={ this.props.genre.id }
-				show={ this.state.showDetail }/>;
-		}.bind(this));
-	},
-
-	getPages: function (thisFocus) {
-		var numAds = this.props.genre.ads.length;
-		var visible = $(window).width() * 0.9;
-		var totalScrollWidth = $(this.slider).width();
-		var pages = Math.ceil(totalScrollWidth/visible);
-		var perPageAds = Math.ceil(numAds/pages);
-		var book = { last: pages };
-		for (var i = 0; i < pages; i++) {
-			book[i] = {
-				dist: visible * i,
-				focus: (perPageAds * i)
-			};
-			if (thisFocus && thisFocus >= (perPageAds * i)
-										&& thisFocus < (perPageAds * i++)) {
-				 book.findNewNumPage = (perPageAds * i);
-				 book.focusDist = this.calcFocusDist(visible, thisFocus);
+	getLastPage: function () {
+		var pages = this.state.pages;
+		for (var i = pages.length - 1; i >= 0; i--) {
+			if (pages[i] < this.state.currentFocus) {
+				return pages[i];
 			}
 		}
-		this.sliderPages = book;
+		return 0;
 	},
 
-	// when start resizing throw switch and wait for release
-	handleResize: function () {
-		if (!this.stopHandling) return;
-		this.stopHandling = true;
-		$(window).on('mouseup', this.handlePageReset);
+	getNextPage: function () {
+		var pages = this.state.pages;
+		for (var i = 0; i < pages.length; i++) {
+			if (pages[i] > this.state.currentFocus) {
+				return pages[i];
+			}
+		}
+		return pages[pages.length - 1]
 	},
 
-	// when released, reset switch, record the ad in focus,
-	// recalculate pages, and change state to update changes
-	handlePageReset: function () {
-		this.stopHandling = false;
-		$(window).off('mouseup', this.handlePageReset);
-		var focus = this.sliderPages[this.state.numPage].focus;
-		this.setState({ numPage: newNumPage });
+	// dynamically determines the size of the slider and number of ads
+	// calculates the index[keys] in an array to cycle over with the carousel
+	// indexes the pages with the distance the sliders need to slide.
+	getPages: function () {
+		var numAds = this.props.genre.ads.length;
+		var width, visible, perPageAds, widthPerAd, totalScrollWidth;
+
+		width = $(window).width();
+		visible = width * 0.9;
+
+		if (width < 800) {
+			perPageAds = 3;
+		} else if (width < 1300) {
+			perPageAds = 4;
+		} else if (width < 1800) {
+			perPageAds = 5;
+		} else if (width < 2300) {
+			perPageAds = 6;
+		} else if (width < 2800) {
+			perPageAds = 7;
+		} else {
+			perPageAds = 8;
+		}
+
+		widthPerAd = visible / perPageAds;
+		totalScrollWidth = widthPerAd * numAds;
+		numPages = Math.ceil(totalScrollWidth/visible);
+
+		var pages = [], index = {};
+
+		for (var i = 0; i < numPages; i++) {
+			pages.push(perPageAds * i);
+		}
+
+		for (var i = 0; i < numAds; i++) {
+			index[i] = widthPerAd * i
+		}
+
+		this.setState({ index: index, pages: pages });
 	},
 
 	moveLeft: function () {
-		if (this.state.numPage === 0) return;
-		this.setState({ numPage: this.state.numPage - 1 });
+		if (this.state.currentFocus === 0) return;
+		var priorPage = this.getLastPage();
+		this.setState({ currentFocus: priorPage });
 	},
 
 	moveRight: function () {
-		if (this.state.numPage.dist === this.sliderPages.last) return;
-		this.setState({ numPage: this.state.numPage + 1 });
+		var nextPage;
+		var pages = this.state.pages;
+		var lookup = pages.indexOf(this.state.currentFocus);
+
+		if (lookup !== 0 && lookup >= pages.length - 1) return;
+		nextPage = this.getNextPage();
+		this.setState({ currentFocus: nextPage });
 	},
 
 	refreshState: function (adID) {
 		if (adID) { ApiUtil.fetchAdvert(adID, this.props.genre.id); }
+	},
+
+	// renders the Ads in the Row
+	renderAdverts: function () {
+		return this.props.genre.ads.map(function(ad){
+			return <Advert ref="row" ad={ad} key={ad.id} rowID={ this.props.genre.id }
+				show={ this.state.showDetail }/>;
+		}.bind(this));
 	},
 
 	renderDetail: function () {
@@ -135,25 +159,37 @@ var AdvertRow = React.createClass({
 		}
 	},
 
+	renderIndicies: function () {
+		if (!this.state.pages) return;
+		return this.state.pages.map(function(p, idx){
+			return <li key={idx} value={idx} onClick={this.seekPage}/>;
+		});
+	},
+
+	// renders the row heading
+	renderRowHeader: function () {
+		return (
+			<div>
+				<div className="index-row-caption">
+					{ this.props.genre.name }
+				</div>
+				<div className="scroll-to-index-bar">
+					{ this.renderIndicies() }
+				</div>
+			</div>
+		);
+	},
+
+	seekPage: function (e) {
+		this.setState({ currentFocus: this.state.pages[e.target.value] });
+	},
+
 	render: function() {
 		if (!this.props.genre) { return <div></div>; }
-		if (this.slider) this.getPages();
-		if (this.sliderPages) {
-			var dist
 
-
-
-
-			if (this.state.getFocus) {
-				dist = this.state.getFocus;
-			} else {
-				dist = this.sliderPages[this.state.numPage].dist;
-			}
-
-
-
-
-			var slideToPage = 'translate(' + -dist + 'px,0)' + 'translateZ(0)';
+		if (this.slider && this.state.index) {
+			var dist = -this.state.index[this.state.currentFocus] || 0;
+			var slideToPage = 'translate(' + dist + 'px,0)' + 'translateZ(0)';
 			this.slider.style.webkitTransform = slideToPage;
 			this.slider.style.msTransform = slideToPage;
 			this.slider.style.MozTransform = slideToPage;
@@ -162,10 +198,10 @@ var AdvertRow = React.createClass({
 			<container className="index-row">
 				<button className="index-row-arrows index-arrows-left"
 					onClick={this.moveLeft}/>
-				{ this.fetchRowName() }
+				{ this.renderRowHeader() }
 				<div id={this.props.genre.name}
 					className="index-row-inner">
-					{ this.fetchAdverts() }
+					{ this.renderAdverts() }
 				</div>
 				{ this.renderDetail() }
 				<button className="index-row-arrows index-arrows-right"
