@@ -1,14 +1,14 @@
 class Api::GenresController < ApplicationController
 
 	def show
-		@genre = Genre.find(params[:id])
+		@genre = Genre.find(params[:id]).includes(ads: :views)
 	end
 
 	def index
 		@page = params[:page].to_i || 1
 		genre_records = Genre.personalized_genres(current_user.id).page(@page)
 		@page_count = (Genre.all.length / 3.0).ceil
-		@genres = genre_records.includes(:ads)
+		@genres = genre_records.includes(ads: :views)
 	end
 
 	def list
