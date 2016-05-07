@@ -38,15 +38,24 @@ var AdDetailPane = React.createClass({
 		);
 	},
 
-	displayPane: function () {
+	renderDisplayPanes: function () {
+		var detail = "acc-hide", review = "acc-hide";
 		if (this.state.display === "overview") {
-			return <OverviewDetail key={1} ad={this.props.ad} header={this.props.header}/>;
-		} else if (this.state.display === "similar") {
-			return <MoreLikeThisDetail key={2} ad={this.props.ad} />;
+			detail = "";
 		} else if (this.state.display === "detail") {
-			return <ReviewIndex key={3} ad={this.props.ad}
-				 refresh={this.props.refresh}/>;
+			review = "";
 		}
+		return (
+			<div>
+				<OverviewDetail klass={detail}
+					key={1} ad={this.props.ad}
+					header={this.props.header}/>
+				<ReviewIndex klass={review}
+					key={2} ad={this.props.ad}
+					refresh={this.props.refresh}/>
+			</div>
+
+		);
 	},
 
 	closeDetails: function () {
@@ -63,20 +72,20 @@ var AdDetailPane = React.createClass({
 
 	// In Chrome the reviews get cauched by the browser and they dont successfully transition out. Leaving broken parts over the image.
 	// I know... Time to learn better CSS React Tricks.
-	headerGraphicBugfix: function () {
-		var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
-		if (isChrome) {
-			return this.displayPane();
-		} else {
-			return (
-				<ReactCSS transitionName="fader"
-					transitionEnterTimeout={500}
-					transitionLeaveTimeout={300}>
-					{ this.displayPane() }
-				</ReactCSS>
-			);
-		}
-	},
+	// headerGraphicBugfix: function () {
+	// 	var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+	// 	if (isChrome) {
+	// 		return this.displayPane();
+	// 	} else {
+	// 		return (
+	// 			<ReactCSS transitionName="fader"
+	// 				transitionEnterTimeout={500}
+	// 				transitionLeaveTimeout={300}>
+	// 				{ this.displayPane() }
+	// 			</ReactCSS>
+	// 		);
+	// 	}
+	// },
 
 	render: function() {
 		if (!this.props.ad) { return <div></div>; }
@@ -89,7 +98,7 @@ var AdDetailPane = React.createClass({
 	        <div className="bottom-grade"/>
 					<div className="header-spacer header-left-arrow"/>
 					<h2 className="feature-title">{this.props.ad.title}</h2>
-					{ this.headerGraphicBugfix() }
+					{ this.renderDisplayPanes() }
 
 					{ this.createMenuButtons() }
 					<div className="header-spacer header-right-arrow"/>

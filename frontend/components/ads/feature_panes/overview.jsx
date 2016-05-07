@@ -19,16 +19,16 @@ var OverviewDetail = React.createClass({
 
   createProductInfo: function () {
     return (
-      <ul className="feature-info-bar group">
-        <li className="feature-info-item group">
+      <ul className="feature-info-bar">
+        <li className="feature-info-item">
           <strong>Company:</strong>
           <p>{this.props.ad.company}</p>
         </li>
-        <li className="feature-info-item group">
+        <li className="feature-info-item">
           <strong>Product:</strong>
           <p>{this.props.ad.product}</p>
         </li>
-        <li className="feature-info-item group">
+        <li className="feature-info-item">
           <strong>Year:</strong>
           <p>{this.props.ad.year}</p>
         </li>
@@ -43,9 +43,10 @@ var OverviewDetail = React.createClass({
       genres.push(this.props.ad.genres[i].name);
     }
     return (
-      <ul className="feature-info-bar group">
-        <li className="feature-info-item group">
-          <strong>genres</strong><p>{ genres.join(", ")}</p>
+      <ul className="feature-info-bar">
+        <li className="feature-info-item">
+          <strong>Genres:</strong>
+          <p>{ genres.join(", ")}</p>
         </li>
       </ul>
     );
@@ -54,8 +55,10 @@ var OverviewDetail = React.createClass({
   render: function () {
     if (!this.props.ad) { return <div></div>; }
 		return (
-			<div className="ad-display-container">
-        <p className="feature-description">{this.props.ad.description}</p>
+			<div className={"ad-display-container" + this.props.klass}>
+        <p className="feature-description">
+          {this.props.ad.description}
+        </p>
         { this.createProductInfo() }
         { this.createGenreInfo() }
         <RateStars ad={this.props.ad}/>

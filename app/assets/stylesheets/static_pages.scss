@@ -3,6 +3,7 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 $speed: 500ms;
+$biggerFont: 3em;
 $bigFont: 2.4em;
 $largeFont: 2em;
 $mediumFont: 1.2em;
@@ -343,9 +344,10 @@ $smallFont: 0.9em;
 	right: 25px;
 	padding: 3px;
 	z-index: 60;
-	font-size: $mediumFont;
+	font-size: $bigFont;
 	font-weight: bolder;
 	color: #ccc;
+	cursor: pointer;
 }
 
 .ad-display-container {
@@ -373,6 +375,7 @@ $smallFont: 0.9em;
 	font-size: 1em;
 	padding: 5px 25px;
 	z-index: 40;
+	cursor: pointer;
 }
 
 .ad-display-nav > button:hover {
@@ -423,32 +426,44 @@ $smallFont: 0.9em;
 
 .feature-title {
 	position: absolute;
-	top: 15px;
+	top: 25px;
 	left: 50px;
 	display: block;
 	box-sizing: border-box;
 	text-shadow: 3px 3px 20px black;
-	font-size: $bigFont;
+	font-size: $biggerFont;
 	font-weight: bold;
 	z-index: 40;
 }
 
 .feature-description {
 	margin: 10px 0;
+	font-size: $mediumFont;
 	box-sizing: border-box;
 }
 
 .feature-info-bar {
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	align-items: center;
+	align-content: flex-start;
 	margin: 10px 0;
 }
 
 .feature-info-item {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	align-items: center;
+	align-content: center;
 	width: 100%;
 	margin: 3px 10px 3px 0;
 }
 
 .feature-info-item > strong, li {
-	float: left;
 	margin-right: 10px;
 }
 
@@ -488,16 +503,6 @@ $smallFont: 0.9em;
 	color: #141414;
 }
 
-.ad-review-main {
-	width: 95%;
-	margin: auto;
-	height: 375px;
-	top: -410px;
-	position: relative;
-	z-index: 60;
-	box-sizing: border-box;
-}
-
 .ad-review-flex-container {
 	float:left;
 	width: 60%;
@@ -532,6 +537,7 @@ $smallFont: 0.9em;
 .ad-link:hover {
 	color: white;
 	text-shadow: 0 0 1px white;
+	cursor: pointer;
 }
 
 .review-flex-header {

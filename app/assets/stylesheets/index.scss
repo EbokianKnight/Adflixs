@@ -465,3 +465,15 @@ body { font-size: 5%; }
      -o-transition: max-height 800ms cubic-bezier(0.5,0,0.1,1);
         transition: max-height 800ms cubic-bezier(0.5,0,0.1,1);
 }
+
+.ad-review-main {
+	width: 95%;
+	margin: auto;
+	height: 375px;
+	top: 90px;
+  left: $flix-row-padding;
+  overflow: hidden;
+	position: absolute;
+	z-index: 60;
+	box-sizing: border-box;
+}

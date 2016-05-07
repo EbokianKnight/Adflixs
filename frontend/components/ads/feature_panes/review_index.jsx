@@ -14,7 +14,7 @@ var settings = {
     left              : 0,
     right             : 0,
     bottom            : 0,
-    backgroundColor   : 'rgba(0, 0, 0, 0.5)'
+    backgroundColor   : 'rgba(0, 0, 0, 0.7)'
   },
   content : {
     position                   : 'absolute',
@@ -153,7 +153,7 @@ var ReviewIndex = React.createClass({
 
   render: function() {
     return (
-      <div>
+      <div className={this.props.klass}>
         <section className="ad-review-main group">
           <h2 className="ad-review-title">Member Reviews</h2>
           <section className="ad-review-flex-container">
