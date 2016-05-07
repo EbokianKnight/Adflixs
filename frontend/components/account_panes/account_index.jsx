@@ -351,18 +351,17 @@ var AccountIndex = React.createClass({
     var flash = this.state.flash ? "" : " acc-hide";
     return (
       <div className={"account-pane" + klass}>
-      <aside className="account-sidebar"/>
       <section className="account-section">
         <div className="account-section-row">
           <strong>Are You Sure?</strong>
-            <div className="acc-message-box acc-success acc-cursor"
+            <div className="acc-message-box acc-failure acc-cursor"
               onClick={this.closeDetail}>
-              <div className="acc-check"/>
+              <div className="acc-x"/>
               <p>CANCEL STOP NOOOOO!</p>
             </div>
-            <div className="acc-message-box acc-failure acc-cursor"
+            <div className="acc-message-box acc-success acc-cursor"
               onClick={this.deleteUserAccount}>
-              <div className="acc-x"/>
+              <div className="acc-check"/>
               <p>YES VERY IM SURE.</p>
             </div>
         </div>
