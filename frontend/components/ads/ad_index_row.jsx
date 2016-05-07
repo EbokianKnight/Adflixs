@@ -205,13 +205,8 @@ var AdvertRow = React.createClass({
 		var left = right = "";
 		var lastPage = this.state.pages[this.state.pages.length -1];
 
-		if (this.state.currentFocus === 0) {
-			left = " acc-hide";
-			right = "";
-		} else if (this.state.currentFocus === lastPage) {
-			right = " acc-hide";
-			left = "";
-		}
+		if (this.state.currentFocus === 0) { left = " acc-hide"; }
+		if (this.state.currentFocus === lastPage) { right = " acc-hide"; }
 
 		return (
 			<container className="index-row">
