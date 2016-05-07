@@ -11,13 +11,13 @@ var MyListButton = React.createClass({
   getInitialState: function() {
     var state;
     if (MyListStore.find(this.props.ad.id)) {
-      state = "removeFrom";
+      state = true;
     } else {
-      state = "addTo";
+      state = false;
     }
     return {
       show: state,
-      hover: "off"
+      hover: false
     };
   },
 
@@ -34,15 +34,15 @@ var MyListButton = React.createClass({
   getStateFromStore: function () {
     var state;
     if (MyListStore.find(this.props.ad.id)) {
-      state = "removeFrom";
+      state = true;
     } else {
-      state = "addTo";
+      state = false;
     }
     this.setState({ show: state });
   },
 
   toggleList: function () {
-    if (this.state.show === "addTo") {
+    if (this.state.show) {
       ApiUtil.addToMyList(this.props.ad);
     } else {
       ApiUtil.removeFromMyList(this.props.ad);
@@ -53,24 +53,21 @@ var MyListButton = React.createClass({
   },
 
   onHover: function () {
-    this.setState({ hover: "on" });
+    this.setState({ hover: true });
   },
 
   offHover: function () {
-    this.setState({ hover: "off" });
+    this.setState({ hover: false });
   },
 
   render: function() {
-    var value, klass ;
-    if (this.state.hover === "off") {
-      value = this.state.show === "addTo" ? " +" : " ✓";
-      klass = " my-list-bubble";
-    } else {
-      value = this.state.show === "addTo" ? "Add To My List" : "Remove From My List";
-      klass = "";
+    var value = "", klass = this.state.show ? "plus" : "check";
+    if (this.state.hover && this.props.words) {
+      value = this.state.show ? "Add To My List" : "Remove From My List";
     }
+    var small = this.props.small ? " sm-btn" : "";
     return (
-      <button className={"feature-my-list" + klass}
+      <button className={"detail-my-list-btn " + klass + small}
         onMouseEnter={this.onHover}
         onMouseLeave={this.offHover}
         onClick={this.toggleList}>{value}</button>
