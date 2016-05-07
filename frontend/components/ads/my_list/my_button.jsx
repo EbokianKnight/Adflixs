@@ -4,7 +4,7 @@ var MyListStore = require('../../../stores/my_list_store.js');
 var AdStore = require('../../../stores/ad_store.js');
 var ApiUtil = require('../../../util/api_util');
 var AdActions = require('../../../actions/ad_actions');
-// this is the button that toggles ads listed on my list
+// this is the button that toggles ads listed on MyList
 // it requires an ad id to function
 
 var MyListButton = React.createClass({
@@ -41,12 +41,13 @@ var MyListButton = React.createClass({
     this.setState({ show: state });
   },
 
-  toggleList: function () {
+  toggleList: function (e) {
+    e.stopPropagation();
     if (this.state.show) {
       ApiUtil.addToMyList(this.props.ad);
     } else {
       ApiUtil.removeFromMyList(this.props.ad);
-      if (this.props.ad.rowID === "My List") {
+      if (this.props.ad.rowID === "MyList") {
         AdActions.closeDetails();
       }
     }
@@ -63,14 +64,15 @@ var MyListButton = React.createClass({
   render: function() {
     var value = "", klass = this.state.show ? "plus" : "check";
     if (this.state.hover && this.props.words) {
-      value = this.state.show ? "Add To My List" : "Remove From My List";
+      value = this.state.show ? "Add To MyList" : "Remove From MyList";
     }
-    var small = this.props.small ? " sm-btn" : "";
     return (
-      <button className={"detail-my-list-btn " + klass + small}
+      <button className={"detail-my-list-btn " + klass}
         onMouseEnter={this.onHover}
         onMouseLeave={this.offHover}
-        onClick={this.toggleList}>{value}</button>
+        onClick={this.toggleList}>
+        {value}
+      </button>
     );
   }
 

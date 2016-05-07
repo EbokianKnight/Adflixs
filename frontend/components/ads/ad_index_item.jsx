@@ -21,6 +21,11 @@ var Advert = React.createClass({
 	// in multiple rows, Row is listening for changes.
 	sendBackID: function (e) {
 		e.preventDefault();
+		$(".flix").removeClass("selected");
+		var makeID = "#"+this.props.ad.id + "-" + this.props.rowID;
+		var select = $(makeID)
+		select.removeClass("img-effect");
+		select.addClass("selected");
 		ApiUtil.fetchAdvert(this.props.ad.id, this.props.rowID);
 	},
 
@@ -36,6 +41,7 @@ var Advert = React.createClass({
 	},
 
 	mouseOut: function (e) {
+		if (!this.mouseInSwitch) return;
 		$(e.target).removeClass("img-effect");
 		this.mouseInSwitch = false;
 		this.mouseTime && clearTimeout(this.mouseTime);
@@ -55,7 +61,7 @@ var Advert = React.createClass({
 	render: function() {
 		var klass = this.state.details && !this.props.show ? "" : " acc-hide";
 		return (
-			<div className="flix"
+			<div id={this.props.ad.id + "-" + this.props.rowID} className="flix"
 				onClick={this.sendBackID}
 				onMouseEnter={this.mouseIn}
 				onMouseLeave={this.mouseOut}

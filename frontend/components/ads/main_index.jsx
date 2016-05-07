@@ -71,12 +71,12 @@ var MainIndex = React.createClass({
 		});
 	},
 
-	// Renders My List
+	// Renders MyList
 	fetchMyList: function () {
 		if (this.state.myList.length === 0) return;
 		myListPackage = {
-			name: "My List",
-			id: "My List",
+			name: "MyList",
+			id: "MyList",
 			ads: this.state.myList
 		};
 		return (

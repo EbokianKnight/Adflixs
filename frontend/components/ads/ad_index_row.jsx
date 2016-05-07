@@ -156,6 +156,7 @@ var AdvertRow = React.createClass({
 				<div className="index-detail-pane">
 					<DetailMain show={this.state.showDetail}
 						ad={AdStore.getAd()}
+						rowID={this.props.genre.id}
 						refresh={this.refreshState}/>
 				</div>
 			);
@@ -165,7 +166,7 @@ var AdvertRow = React.createClass({
 	},
 
 	renderIndicies: function () {
-		if (!this.state.pages) return;
+		if (!this.state.pages || this.state.pages.length === 1) return;
 		var pages = this.state.pages;
 		return pages.map(function(p, idx){
 			return <li className={ p === this.state.currentFocus ? "idx-focus" : "" }

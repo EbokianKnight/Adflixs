@@ -84,15 +84,15 @@ getMoreRows: function () {
   }
 },
 ```
-**My List**<br/>
+**MyList**<br/>
 When Implementing MyList towards the end of the project I was reusing the row and row item components to generate its DOM. Those were originally created dynamically and required a very specific information to function and not break any of the other features that relied on them. To build another component, or write in a bunch of exceptions through a passed down prop would require a lot of work and be ugly after. I solved this by packaging the information in a way that could play nice with all of the pre-exiting code, including the multiple flux cycles involved.
 
 ```
 fetchMyList: function () {
   if (this.state.myList.length === 0) return;
   myListPackage = {
-    name: "My List",
-    id: "My List",
+    name: "MyList",
+    id: "MyList",
     ads: this.state.myList
   };
   return (

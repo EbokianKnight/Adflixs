@@ -32,6 +32,7 @@ var RateStars = React.createClass({
   },
 
   rate: function (e) {
+    e.stopPropagation();
     var adID = this.props.ad.id;
     var userID = SessionStore.currentUser().id;
     var view = SessionStore.fetchView(this.props.ad.id);

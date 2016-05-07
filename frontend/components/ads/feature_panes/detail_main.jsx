@@ -49,14 +49,15 @@ var AdDetailPane = React.createClass({
 		}
 	},
 
-	close_details: function () {
+	closeDetails: function () {
 		AdAction.closeDetails();
+		$(".flix").removeClass("selected");
 	},
 
   closeButton: function () {
     if (this.props.header) return "";
     return (
-      <button className="top-right-x" onClick={this.close_details}>X</button>
+      <button className="top-right-x" onClick={this.closeDetails}>X</button>
     );
   },
 
