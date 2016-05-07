@@ -25,8 +25,8 @@ var routes = (
     <Route path="signin" component={SignIn} />
     <Route path="main" component={MainPage} onEnter={_requireLoggedIn}>
       <IndexRoute component={MainIndex} />
-      <Route path="streaming" component={MainVideo} />
     </Route>
+    <Route path="streaming" component={MainVideo} onEnter={_requireLoggedIn}/>
     <Route path="account" component={Account} onEnter={_requireLoggedIn}/>
     <Route path="*" component={NotFound}/>
   </Route>
