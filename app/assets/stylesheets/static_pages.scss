@@ -2,6 +2,12 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+$speed: 500ms;
+$bigFont: 2.4em;
+$largeFont: 2em;
+$mediumFont: 1.2em;
+$smallFont: 0.9em;
+
 .homepage-header {
 	width: 100%;
 	height: 55%;
@@ -65,12 +71,12 @@
 }
 
 .home-pitch {
-	font-size: 46px;
+	font-size: $bigFont;
 	font-weight: bold;
 }
 
 .home-pricing {
-	font-size: 24px;
+	font-size: $bigFont;
 }
 
 .home-sign-up {
@@ -207,7 +213,7 @@
 .nav-user {
 	display: block;
 	float: left;
-	font-size: 12;
+	font-size: $smallFont;
 	font-weight: bold;
 	width: 120px;
 	overflow: hidden;
@@ -221,7 +227,7 @@
 	float: left;
 	color: #ccc;
 	padding: 10px;
-	font-size: 14px;
+	font-size: $mediumFont;
 	text-align: center;
 }
 
@@ -319,15 +325,6 @@
 	display: block;
 }
 
-.ad-detail-pane {
-	width: 100%;
-	height: 500px;
-	top: -50px;
-	display: block;
-	position: relative;
-	background: #444;
-}
-
 .ad-detail-button {
 	position: absolute;
 	z-index: 5;
@@ -346,7 +343,7 @@
 	right: 25px;
 	padding: 3px;
 	z-index: 60;
-	font-size: 22px;
+	font-size: $mediumFont;
 	font-weight: bolder;
 	color: #ccc;
 }
@@ -355,7 +352,7 @@
 	width: 400px;
 	height: auto;
 	position: absolute;
-	font-size: 16px;
+	font-size: $mediumFont;
 	top: 80px;
 	left: 50px;
 	color: #999;
@@ -373,7 +370,7 @@
 	float: left;
 	color: #ccc;
 	text-transform: uppercase;
-	font-size: 14px;
+	font-size: 1em;
 	padding: 5px 25px;
 	z-index: 40;
 }
@@ -431,7 +428,7 @@
 	display: block;
 	box-sizing: border-box;
 	text-shadow: 3px 3px 20px black;
-	font-size: 48px;
+	font-size: $bigFont;
 	font-weight: bold;
 	z-index: 40;
 }
@@ -439,31 +436,6 @@
 .feature-description {
 	margin: 10px 0;
 	box-sizing: border-box;
-}
-
-.rating-features {
-	padding: 0 5px;
-	margin-top: 10px;
-	display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
-	justify-content: flex-start;
-	align-items: flex-start;
-	align-content: flex-start;
-	position: relative;
-}
-
-.rate {
-	flex-grow:0;
-	flex-shrink: 0;
-	flex-basis: auto;
-	font-size: 14px;
-	cursor: pointer;
-	color: #777;
-}
-
-.gold {
-	color: gold;
 }
 
 .feature-info-bar {
@@ -494,11 +466,11 @@
 	height: 35px;
 	width: auto;
   font-weight: 900;
-  font-size: 16px;
+  font-size: $mediumFont;
 }
 
 .my-list-bubble {
-	font-size: 22px;
+	font-size: $largeFont;
 	text-align: center;
 	border-radius: 50%;
 	padding: 0;
@@ -545,7 +517,7 @@
 	display: block;
 	padding: 5px;
 	font-weight: bold;
-	font-size: 16px;
+	font-size: $mediumFont;
 	box-sizing: border-box;
 }
 
@@ -574,10 +546,6 @@
 .review-h3 {
 	font-weight: bold;
 	margin-right: 5px;
-}
-
-.review-star {
-	color: red;
 }
 
 .ad-review-right-panel {
@@ -674,7 +642,7 @@
 
 .review-form-h3 {
 	padding: 10px;
-	font-size: 16px;
+	font-size: $mediumFont;
 	font-weight: bold;
 	margin-right: 5px;
 }
@@ -718,12 +686,12 @@
 
 .close-modal-button {
 	display: block;
-	font-size: 30px;
+	font-size: $largeFont;
 }
 
 .modal-review-header {
 	color: #ccc;
-	font-size: 32px;
+	font-size: $largeFont;
 	padding: 10px;
 	box-sizing: border-box;
 	position: fixed;
@@ -750,13 +718,13 @@ body,
 
 
 .modal-review-spacer {
-	font-size: 32px;
+	font-size: $largeFont;
 	height: 3em;
 }
 
 .modal-ad-review {
 	width: 100%;
-	font-size: 16px;
+	font-size: $mediumFont;
   height: auto;
   padding: 10px;
   flex-grow: 1;

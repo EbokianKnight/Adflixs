@@ -15,6 +15,7 @@ $failRed: #e3898a;
 
 $speed: 500ms;
 $bigFont: 2.4em;
+$largeFont: 2em;
 $mediumFont: 1.2em;
 $smallFont: 0.9em;
 
@@ -206,12 +207,6 @@ $smallFont: 0.9em;
   font-size: $smallFont;
 }
 
-.acc-hide {
-  opacity: 0;
-  max-height: 0;
-  overflow: hidden;
-}
-
 .preview-image {
   height: 300px;
   width: 300px;
@@ -269,7 +264,7 @@ $smallFont: 0.9em;
 }
 
 .acc-loader {
-  font-size: 10px;
+  font-size: 1em;
   margin: 50px auto;
   text-indent: -9999em;
   width: 11em;

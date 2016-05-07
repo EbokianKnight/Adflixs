@@ -23,7 +23,7 @@ textarea, button, article, footer, small {
 	text-decoration: none;
 	font-family: inherit;
 	font-style: inherit;
-	font-size: 100%;
+	font-size: inherit;
 	border: 0 none;
 	outline: 0;
 	color: inherit;
@@ -41,9 +41,24 @@ textarea, button, article, footer, small {
 
 body {
 	font-family: "Helvetica Neue", "Helvetica", "Arial", "sans-serif";
-	font-size: 14px;
 	color: #ccc;
 	background: #f3f3f3;
+	font-size: 11px;
+}
+@media (min-width: 800px) {
+  body { font-size: 12px; }
+}
+@media (min-width: 1300px) {
+  body { font-size: 13px; }
+}
+@media (min-width: 1800px) {
+  body { font-size: 14px; }
+}
+@media (min-width: 2300px) {
+  body { font-size: 15px; }
+}
+@media (min-width: 2800px) {
+  body { font-size: 16px; }
 }
 
 .blur {
@@ -64,4 +79,10 @@ body {
 .fader-leave.fader-leave-active {
   opacity: 0.01;
   transition: opacity 300ms ease-in;
+}
+
+.acc-hide {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
 }
