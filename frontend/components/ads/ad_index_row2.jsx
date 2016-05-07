@@ -196,9 +196,21 @@ var AdvertRow = React.createClass({
 			this.slider.style.msTransform = slideToPage;
 			this.slider.style.MozTransform = slideToPage;
 		}
+
+		var left = right = "";
+		var lastPage = this.state.pages[this.state.pages.length -1];
+
+		if (this.state.currentFocus === 0) {
+			left = " acc-hide";
+			right = "";
+		} else if (this.state.currentFocus === lastPage) {
+			right = " acc-hide";
+			left = "";
+		}
+
 		return (
 			<container className="index-row">
-				<button className="index-row-arrows index-arrows-left"
+				<button className={"index-row-arrows index-arrows-left" + left}
 					onClick={this.moveLeft}/>
 				{ this.renderRowHeader() }
 				<div id={this.props.genre.name}
@@ -206,7 +218,7 @@ var AdvertRow = React.createClass({
 					{ this.renderAdverts() }
 				</div>
 				{ this.renderDetail() }
-				<button className="index-row-arrows index-arrows-right"
+				<button className={"index-row-arrows index-arrows-right" + right}
 					onClick={this.moveRight}/>
 			</container>
 		);
