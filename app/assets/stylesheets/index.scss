@@ -138,7 +138,10 @@ body { font-size: 5%; }
   display: flex;
   flex-wrap: wrap;
   position: relative;
-  padding: $flix-auto-spacer 0;
+  padding-top: $flix-auto-spacer * 2;
+  padding-left:0;
+  padding-right:0;
+  padding-bottom: $flix-auto-spacer;
   overflow-x: hidden;
   overflow-y: visible;
 }
@@ -167,7 +170,7 @@ body { font-size: 5%; }
   width: $flix-row-padding - 0.3vw;
   position: absolute;
   cursor: pointer;
-  top: $flix-auto-spacer;
+  top: $flix-auto-spacer * 2;
   z-index: 10;
 }
 .index-arrows-left {
@@ -206,7 +209,7 @@ body { font-size: 5%; }
 
 .index-row-caption {
   position: absolute;
-  top: 0;
+  top: $flix-auto-spacer;
   left: $flix-row-padding;
   font-size: $mediumFont;
   color: $headerColor;
@@ -455,7 +458,7 @@ body { font-size: 5%; }
 .selected:after {
   content: "";
   position: absolute;
-  bottom: -1.5vw;
+  bottom: -1.4vw;
   width: 0px;
   left: 45%;
   border-top: 1vw solid $headerColor;
