@@ -29,9 +29,16 @@ var FeatureHeader = React.createClass({
     this.featureToken.remove();
   },
 
-  alternateFeatures: function () {
+  nextFeatures: function () {
     var slide = this.state.shown;
-    var nextup = (slide + 1) >= this.state.features.length ? 0 : slide+1;
+    var nextup = (slide + 1) >= this.state.features.length ? 0 : slide + 1;
+    this.setState({ shown: nextup });
+  },
+
+  previousFeatures: function () {
+    var slide = this.state.shown;
+    var nextup = (slide - 1) < 0 ? this.state.features.length - 1 : slide - 1;
+    console.log(nextup);
     this.setState({ shown: nextup });
   },
 
@@ -39,7 +46,7 @@ var FeatureHeader = React.createClass({
     return (
       <DetailMain key={this.state.shown}
         ad={this.state.features[this.state.shown]}
-        header={this.alternateFeatures}
+        header={this.nextFeatures}
         refresh={this.refreshState}/>
     );
   },
@@ -54,7 +61,15 @@ var FeatureHeader = React.createClass({
     if (this.state.features.length === 0) { return <div/>; }
     return (
       <div className="main-index-header">
+        <div className="index-header-arrow index-arrows-left"
+          onClick={this.previousFeatures}>
+          <div className="a-left"/>
+        </div>
         { this.renderFeatures() }
+        <div className="index-header-arrow index-arrows-right"
+          onClick={this.nextFeatures}>
+          <div className="a-right"/>
+        </div>
       </div>
     );
   }
