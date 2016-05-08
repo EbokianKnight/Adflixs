@@ -4,6 +4,13 @@ var RateStars = require('./stars');
 var MyListButton = require('../my_list/my_button');
 
 var OverviewDetail = React.createClass({
+  contextTypes: { router: PropTypes.object.isRequired },
+
+  getInitialState: function() {
+    return {
+      hover: false,
+    };
+  },
 
   createProductInfo: function () {
     return (
@@ -40,8 +47,29 @@ var OverviewDetail = React.createClass({
     );
   },
 
+  onHover: function () {
+    this.setState({ hover: true });
+  },
+
+  offHover: function () {
+    this.setState({ hover: false });
+  },
+
+  playAd: function (e) {
+		e.preventDefault();
+		e.stopPropagation();
+		this.context.router.push({
+			pathname: "/streaming",
+			query: {
+        title: this.props.ad.title,
+			 	youtube: this.props.ad.youtube
+      }
+		});
+	},
+
   render: function () {
     if (!this.props.ad) { return <div></div>; }
+    var hover = this.state.hover ? "-hover" : "";
 		return (
 			<div className={"ad-display-container" + this.props.klass}>
         <p className="feature-description">
@@ -50,7 +78,16 @@ var OverviewDetail = React.createClass({
         { this.createProductInfo() }
         { this.createGenreInfo() }
         <RateStars ad={this.props.ad}/>
-        <MyListButton ad={this.props.ad}/>
+        <div className="ad-overview-btns">
+          <button className="my-word-box red-box"
+            onMouseEnter={this.onHover}
+            onMouseLeave={this.offHover}
+            onClick={this.playAd}>
+            <div className={"detail-my-list-btn play-btn"+hover}/>
+            <p>Play</p>
+          </button>
+          <MyListButton ad={this.props.ad} showFull={true}/>
+        </div>
 			</div>
 		);
 	}
