@@ -62,18 +62,29 @@ var MyListButton = React.createClass({
   },
 
   render: function() {
-    var value = "", klass = this.state.show ? "plus" : "check";
-    if (this.state.hover && this.props.words) {
-      value = this.state.show ? "Add To MyList" : "Remove From MyList";
+    var hover = "", klass = this.state.show ? "plus" : "check";
+    var value = this.state.show ? "MyList" : "Remove";
+    if (this.props.showFull) {
+      if (this.state.hover) {
+        hover = "-hover";
+      }
+      return (
+        <button className="my-word-box light-box"
+          onMouseEnter={this.onHover}
+          onMouseLeave={this.offHover}
+          onClick={this.toggleList}>
+          <div className={"detail-my-list-btn " + klass+"-btn"+hover}/>
+          <p>{value}</p>
+        </button>
+      );
+    } else {
+      return (
+        <button className={"detail-my-list-btn " + klass}
+          onMouseEnter={this.onHover}
+          onMouseLeave={this.offHover}
+          onClick={this.toggleList}/>
+      );
     }
-    return (
-      <button className={"detail-my-list-btn " + klass}
-        onMouseEnter={this.onHover}
-        onMouseLeave={this.offHover}
-        onClick={this.toggleList}>
-        {value}
-      </button>
-    );
   }
 
 });
