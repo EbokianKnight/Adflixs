@@ -5,7 +5,6 @@ var MyListStore = require('../../stores/my_list_store');
 var ApiUtil = require('../../util/api_util');
 var AdvertRow = require('./ad_index_row');
 var DetailMain = require('./feature_panes/detail_main');
-var ReactCSS = require('react-addons-css-transition-group');
 var FeatureHeader = require('./feature_header');
 
 var MainIndex = React.createClass({
@@ -65,14 +64,14 @@ var MainIndex = React.createClass({
 	},
 
 	// Renders the Individual Rows
-	fetchRows: function () {
+	renderRows: function () {
 		return this.state.genres.map(function(row){
 			return <AdvertRow key={row.id} genre={row} />;
 		});
 	},
 
 	// Renders MyList
-	fetchMyList: function () {
+	renderMyList: function () {
 		if (this.state.myList.length === 0) return;
 		myListPackage = {
 			name: "MyList",
@@ -95,8 +94,8 @@ var MainIndex = React.createClass({
 		return (
 			<div ref="GenreRows" className="main-index-body">
 				<FeatureHeader header={true} />
-				{ this.fetchMyList() }
-				{ this.fetchRows() }
+				{ this.renderMyList() }
+				{ this.renderRows() }
 			</div>
 		);
 	}

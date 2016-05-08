@@ -364,18 +364,6 @@ $smallFont: 0.9em;
 	position: absolute;
 }
 
-.ad-display-container {
-	width: 400px;
-	height: auto;
-	position: absolute;
-	font-size: $mediumFont;
-	top: 80px;
-	left: 50px;
-	color: #999;
-	z-index: 50;
-	opacity: 1;
-}
-
 .ad-display-nav {
 	position: absolute;
 	left: 40%;
@@ -414,7 +402,7 @@ $smallFont: 0.9em;
 }
 
 .header-spacer {
-	width: 50px;
+	width: 5vw;
 	height: 500px;
 	position: absolute;
 	top:0;
@@ -440,18 +428,6 @@ $smallFont: 0.9em;
 	color: #ccc;
 }
 
-.feature-title {
-	position: absolute;
-	top: 25px;
-	left: 50px;
-	display: block;
-	box-sizing: border-box;
-	text-shadow: 3px 3px 20px black;
-	font-size: $biggerFont;
-	font-weight: bold;
-	z-index: 40;
-}
-
 .feature-description {
 	margin: 10px 0;
 	font-size: $mediumFont;
@@ -459,13 +435,7 @@ $smallFont: 0.9em;
 }
 
 .feature-info-bar {
-	display: flex;
-	flex-direction: column;
-	flex-wrap: wrap;
-	justify-content: flex-start;
-	align-items: center;
-	align-content: flex-start;
-	margin: 10px 0;
+  margin: 0.5em 0;
 }
 
 .feature-info-item {

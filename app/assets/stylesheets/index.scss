@@ -4,6 +4,7 @@ $buttonFocus: #B5B5B5;
 $linkColor: blue;
 $headerColor: #777;
 $adflixRed: #b9090b;
+$adflixRedHover: #e50914;
 $lightBackground: #f3f3f3;
 $darkBackground: #141414;
 $successGreen: #7ec780;
@@ -11,6 +12,7 @@ $successDarkGreen: #2b782d;
 $failRed: #e3898a;
 
 $speed: 500ms;
+$biggerFont: 3em;
 $bigFont: 2.4em;
 $largeFont: 2em;
 $mediumFont: 1.2em;
@@ -137,6 +139,8 @@ body { font-size: 5%; }
   flex-wrap: wrap;
   position: relative;
   padding: $flix-auto-spacer 0;
+  overflow-x: hidden;
+  overflow-y: visible;
 }
 
 .index-row-inner {
@@ -384,14 +388,10 @@ body { font-size: 5%; }
   background-image: asset-url('index/reddownarrow.svg');
 }
 
-.detail-my-list-btn {
-  @extend .advert-play-img;
-}
-
 .plus {
   background-image: asset-url("index/whiteplus.svg");
-  width: $mediumFont * 2;
-  height: $mediumFont * 2;
+  width: $biggerFont;
+  height: $biggerFont;
 }
 
 .plus:hover {
@@ -400,14 +400,29 @@ body { font-size: 5%; }
 
 .check {
   background-image: asset-url("index/whitecheck.svg");
-  width: $mediumFont * 2;
-  height:$mediumFont * 2;
+  width: $biggerFont;
+  height: $biggerFont;
 }
 
 .check:hover {
   background-image: asset-url("index/blackcheck.svg");
 }
 
+.plus {
+  background-image: asset-url("index/whiteplus.svg");
+}
+
+.plus:hover {
+  background-image: asset-url("index/blackplus.svg");
+}
+
+.check {
+  background-image: asset-url("index/whitecheck.svg");
+}
+
+.check:hover {
+  background-image: asset-url("index/blackcheck.svg");
+}
 
 .rating-features {
 	display: flex;
@@ -481,4 +496,140 @@ body { font-size: 5%; }
 	position: absolute;
 	z-index: 60;
 	box-sizing: border-box;
+}
+
+.my-word-box {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  align-content: center;
+  cursor: pointer;
+  margin: 0.2em;
+  padding: 0 0.3em;
+  -webkit-transition: background-color 300ms ease-in-out;
+   -moz-transition: background-color 300ms ease-in-out;
+     -o-transition: background-color 300ms ease-in-out;
+        transition: background-color 300ms ease-in-out;
+}
+
+.light-box {
+  border: 1px solid rgba(0,0,0,0.6);
+  background-color: rgba(255,255,255,0.3);
+}
+
+.light-box:hover {
+  background-color: rgba(255,255,255,0.4);
+}
+
+.red-box {
+  border: 1px solid rgba(0,0,0,0.6);
+  background-color: $adflixRed;
+}
+.red-box:hover {
+  background-color: $adflixRedHover;
+}
+
+.my-word-box > p {
+  color: #ccc;
+  margin: 0 0.5em;
+  font-size: 1em;
+}
+
+.ad-overview-btns {
+  display: flex;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-start;
+  align-content: center;
+  margin-top: 0.5em;
+}
+
+.detail-my-list-btn {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+	cursor: pointer;
+  width: $largeFont;
+  height: $largeFont;
+  @extend .transition-smooth-hover;
+}
+
+.plus-btn {
+  background-image: asset-url("index/whiteplus.svg");
+}
+
+.plus-btn-hover {
+  background-image: asset-url("index/blackplus.svg");
+}
+
+.check-btn {
+  background-image: asset-url("index/whitecheck.svg");
+}
+
+.check-btn-hover {
+  background-image: asset-url("index/blackcheck.svg");
+}
+
+.play-btn {
+  background-image: asset-url("index/playbuttongrey.svg");
+}
+
+.play-btn-hover {
+  background-image: asset-url("index/playbutton.svg");
+}
+
+.acc-show {
+  max-height: 200vh;
+  opacity: 1;
+  -webkit-transition: opacity 300ms ease-in-out,
+                      max-height 300ms ease-in-out;
+   -moz-transition: opacity 300ms ease-in-out,
+                    max-height 300ms ease-in-out;;
+     -o-transition: opacity 300ms ease-in-out,
+                    max-height 300ms ease-in-out;;
+        transition: opacity 300ms ease-in-out,
+                    max-height 300ms ease-in-out;;
+}
+
+.feature-title {
+	position: absolute;
+	top: 30px;
+	left: $flix-row-padding;
+	display: block;
+	box-sizing: border-box;
+	text-shadow: 3px 3px 20px black;
+	font-size: $biggerFont;
+	font-weight: bold;
+	z-index: 40;
+}
+
+.ad-display-container {
+	width: 400px;
+	height: auto;
+	position: absolute;
+	font-size: $mediumFont;
+	top: 80px;
+	left: $flix-row-padding;
+	color: rgba(255,255,255,0.4);
+	z-index: 50;
+	opacity: 1;
+}
+
+.index-header-arrow {
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0.5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  width: $flix-row-padding;
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  bottom: 0;
+  z-index: 90;
 }
