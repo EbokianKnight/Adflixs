@@ -5,18 +5,6 @@ var MyListButton = require('../my_list/my_button');
 
 var OverviewDetail = React.createClass({
 
-  componentDidMount: function() {
-    if (this.props.header) {
-      this.slides = window.setInterval(this.props.header, 15000);
-    }
-  },
-
-  componentWillUnmount: function () {
-    if (this.props.header) {
-      window.clearInterval(this.slides);
-    }
-  },
-
   createProductInfo: function () {
     return (
       <ul className="feature-info-bar">

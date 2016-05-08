@@ -11,6 +11,28 @@ var AdDetailPane = React.createClass({
 		return { display: "overview" };
 	},
 
+	componentDidUpdate: function(prevProps, prevState) {
+		if (!this.props.header) return;
+		if (this.slides && this.state.display !== "overview") {
+			clearInterval(this.slides);
+			this.slides = null;
+		} else if (!this.slides && this.state.display === "overview") {
+			this.slides = window.setInterval(this.props.header, 15000);
+		}
+	},
+
+	componentDidMount: function() {
+    if (this.props.header) {
+      this.slides = window.setInterval(this.props.header, 15000);
+    }
+  },
+
+  componentWillUnmount: function () {
+    if (this.props.header) {
+      window.clearInterval(this.slides);
+    }
+  },
+
 	showDetailPane: function () {
 		if (this.state.display === "detail") return ;
 		this.setState({ display: "detail" });
@@ -47,8 +69,7 @@ var AdDetailPane = React.createClass({
 		return (
 			<div>
 				<OverviewDetail klass={detail}
-					key={1} ad={this.props.ad}
-					header={this.props.header}/>
+					key={1} ad={this.props.ad}/>
 				<ReviewIndex klass={review}
 					key={2} ad={this.props.ad}
 					refresh={this.props.refresh}/>
