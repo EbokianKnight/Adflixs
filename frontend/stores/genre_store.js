@@ -20,8 +20,7 @@ var loadGenrePage = function (genres) {
 	last_page = genres[0].pages;
 };
 var resetGenreList = function (list) {
-	_list = {};
-	list.forEach( function (el) { _list[el.id] = el; });
+	_list = list;
 };
 
 //asyncCallback for MainIndex Scroller
@@ -61,11 +60,7 @@ GenreStore.all = function () {
 };
 
 GenreStore.fetchGenreList = function () {
-	var genres = [];
-	Object.keys(_list).forEach(function(id){
-		genres.push(_list[id]);
-	});
-	return genres;
+	return _list.slice();
 };
 
 GenreStore.find = function (id) {

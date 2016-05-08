@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160408151113) do
+ActiveRecord::Schema.define(version: 20160508182646) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -27,18 +27,19 @@ ActiveRecord::Schema.define(version: 20160408151113) do
   add_index "ad_genres", ["genre_id"], name: "index_ad_genres_on_genre_id", using: :btree
 
   create_table "ads", force: :cascade do |t|
-    t.string   "product",            null: false
-    t.string   "company",            null: false
-    t.text     "description",        null: false
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.string   "product",                        null: false
+    t.string   "company",                        null: false
+    t.text     "description",                    null: false
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.string   "title"
     t.string   "youtube"
-    t.date     "year",               null: false
+    t.date     "year",                           null: false
     t.string   "image_file_name"
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.integer  "average_rate",       default: 0
   end
 
   add_index "ads", ["company"], name: "index_ads_on_company", using: :btree

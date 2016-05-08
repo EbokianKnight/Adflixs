@@ -1,12 +1,12 @@
 class Api::FeaturesController < ApplicationController
 
   def index
-    @features = Feature.all.includes(ad: :genres)
+    @features = Feature.all.includes(ad: :views)
     render :index
   end
 
   def show
-    @feature = Feature.find(params[:id])
+    @feature = Feature.find(params[:id]).includes(ad: :views)
   end
 
   def create

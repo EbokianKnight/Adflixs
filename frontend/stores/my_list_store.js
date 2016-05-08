@@ -16,7 +16,7 @@ var addToMyList = function (ad) {
 
 var removeFromMyList = function (ad) {
 	var index = MyListStore.find(ad.id);
-	_list.splice(index - 1, 1);
+	_list.splice(index, 1);
 };
 
 MyListStore.__onDispatch = function (payload) {
@@ -40,11 +40,10 @@ MyListStore.all = function () {
 	return _list.slice();
 };
 
-// Hacky return value to be used for var removeFromMyList above
 MyListStore.find = function (adID) {
 	for (var i = 0; i < _list.length; i++) {
 		if (_list[i].id === adID) {
-			return i + 1;
+			return i;
 		}
 	}
 	return false;

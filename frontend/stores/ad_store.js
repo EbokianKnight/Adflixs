@@ -17,14 +17,15 @@ var updateAdvert = function (ad) {
 };
 
 var updateView = function (newView) {
-	if (_receivedAd) {
-		_shownAd.views = _shownAd.views.map(function(view){
+	if (_shownAd) {
+		_shownAd.views = _shownAd.views.map( function (view) {
 			if (view.user_id === newView.user_id) {
 				return newView;
 			} else {
 				return view;
 			}
 		});
+		AdStore.__emitChange();
 	}
 };
 
@@ -42,17 +43,14 @@ AdStore.__onDispatch = function (payload) {
 	switch (payload.actionType) {
 		case AdConstants.AD_RECEIVED:
 			updateAdvert(payload.advert);
-			_receivedAd = true;
 			AdStore.__emitChange();
 			break;
 		case AdConstants.CLOSE_DETAILS:
-			_receivedAd = true;
 			clearShownAd();
 			AdStore.__emitChange();
 			break;
 		case AdConstants.UPDATE_VIEW:
 			updateView(payload.view);
-			AdStore.__emitChange();
 			break;
 	}
 };

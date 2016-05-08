@@ -1,3 +1,3 @@
 json.array!(@ads) do |ad|
-	json.partial!('ad', ad: ad, show_genres:false)
+	json.partial!('ad', ad: ad, show_more_details:false)
 end

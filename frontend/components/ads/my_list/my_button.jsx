@@ -9,14 +9,8 @@ var AdActions = require('../../../actions/ad_actions');
 
 var MyListButton = React.createClass({
   getInitialState: function() {
-    var state;
-    if (MyListStore.find(this.props.ad.id)) {
-      state = true;
-    } else {
-      state = false;
-    }
     return {
-      show: state,
+      show: this.checkIfFavorited(),
       hover: false
     };
   },
@@ -31,14 +25,12 @@ var MyListButton = React.createClass({
     this.adToken.remove();
   },
 
+  checkIfFavorited: function () {
+    return MyListStore.find(this.props.ad.id) >= 0;
+  },
+
   getStateFromStore: function () {
-    var state;
-    if (MyListStore.find(this.props.ad.id)) {
-      state = true;
-    } else {
-      state = false;
-    }
-    this.setState({ show: state });
+    this.setState({ show: this.checkIfFavorited() });
   },
 
   toggleList: function (e) {

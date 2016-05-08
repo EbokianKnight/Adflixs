@@ -1,7 +1,7 @@
 class Api::FavoritesController < ApplicationController
 
   def index
-    @favorites = current_user.mylist.includes(:genres, :views)
+    @favorites = current_user.mylist
     @favorites.order(:created_at)
   end
 
