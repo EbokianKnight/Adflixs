@@ -60,7 +60,7 @@ var AdDetailPane = React.createClass({
 	},
 
 	renderDisplayPanes: function () {
-		var detail = "acc-hide", review = "acc-hide";
+		var detail = " acc-hide", review = " acc-hide";
 		if (this.state.display === "overview") {
 			detail = "";
 		} else if (this.state.display === "detail") {
@@ -68,9 +68,9 @@ var AdDetailPane = React.createClass({
 		}
 		return (
 			<div>
-				<OverviewDetail klass={detail}
+				<OverviewDetail klass={" acc-show"+ detail}
 					key={1} ad={this.props.ad}/>
-				<ReviewIndex klass={review}
+				<ReviewIndex klass={" acc-show"+ review}
 					key={2} ad={this.props.ad}
 					refresh={this.props.refresh}/>
 			</div>
@@ -102,12 +102,9 @@ var AdDetailPane = React.createClass({
 					style={{backgroundImage:"url(" + this.props.ad.largeUrl + ")"}}/>
 					<div className="back-grade"/>
 	        <div className="bottom-grade"/>
-					<div className="header-spacer header-left-arrow"/>
 					<h2 className="feature-title">{this.props.ad.title}</h2>
 					{ this.renderDisplayPanes() }
-
 					{ this.createMenuButtons() }
-					<div className="header-spacer header-right-arrow"/>
 					{ this.closeButton() }
 			</div>
 		);
