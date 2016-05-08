@@ -608,6 +608,15 @@ $smallFont: 0.9em;
 .review-details {
 	position: relative;
 	height: 500px;
+	max-height: 500px;
+	-webkit-transition: max-height 800ms cubic-bezier(0.5,0,0.1,1),
+											max-height 800ms cubic-bezier(0.5,0,0.1,1);
+	 -moz-transition: max-height 800ms cubic-bezier(0.5,0,0.1,1),
+										max-height 800ms cubic-bezier(0.5,0,0.1,1);
+		 -o-transition: max-height 800ms cubic-bezier(0.5,0,0.1,1),
+										max-height 800ms cubic-bezier(0.5,0,0.1,1);
+				transition: max-height 800ms cubic-bezier(0.5,0,0.1,1),
+										max-height 800ms cubic-bezier(0.5,0,0.1,1);
 }
 
 .ad-review-cancel {

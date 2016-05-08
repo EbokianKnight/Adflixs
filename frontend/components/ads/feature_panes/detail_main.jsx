@@ -4,7 +4,6 @@ var AdAction = require('../../../actions/ad_actions');
 var OverviewDetail = require('./overview');
 var ReviewIndex = require('./review_index');
 var MoreLikeThisDetail = require('./more_like_this');
-var ReactCSS = require('react-addons-css-transition-group');
 
 var AdDetailPane = React.createClass({
 
@@ -66,29 +65,15 @@ var AdDetailPane = React.createClass({
   closeButton: function () {
     if (this.props.header) return "";
     return (
-      <button className="top-right-x" onClick={this.closeDetails}>X</button>
+      <button className="top-right-x"
+				onClick={this.closeDetails}>
+				X
+			</button>
     );
   },
 
-	// In Chrome the reviews get cauched by the browser and they dont successfully transition out. Leaving broken parts over the image.
-	// I know... Time to learn better CSS React Tricks.
-	// headerGraphicBugfix: function () {
-	// 	var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
-	// 	if (isChrome) {
-	// 		return this.displayPane();
-	// 	} else {
-	// 		return (
-	// 			<ReactCSS transitionName="fader"
-	// 				transitionEnterTimeout={500}
-	// 				transitionLeaveTimeout={300}>
-	// 				{ this.displayPane() }
-	// 			</ReactCSS>
-	// 		);
-	// 	}
-	// },
-
 	render: function() {
-		if (!this.props.ad) { return <div></div>; }
+		if (!this.props.ad) { return <div/>; }
 		var klass = this.state.display === "overview" ? "" : " blur";
 		return (
 			<div className="review-details">

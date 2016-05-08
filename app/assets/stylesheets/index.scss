@@ -455,15 +455,20 @@ body { font-size: 5%; }
 .index-detail-pane {
   margin-top: 1.5vw;
   width: 100%;
+  height: 500px;
 	max-height: 500px;
 	display: block;
 	position: relative;
   overflow: hidden;
 	background: #444;
-  -webkit-transition: max-height 800ms cubic-bezier(0.5,0,0.1,1);
-   -moz-transition: max-height 800ms cubic-bezier(0.5,0,0.1,1);
-     -o-transition: max-height 800ms cubic-bezier(0.5,0,0.1,1);
-        transition: max-height 800ms cubic-bezier(0.5,0,0.1,1);
+  -webkit-transition: max-height 800ms cubic-bezier(0.5,0,0.1,1),
+                      max-height 800ms cubic-bezier(0.5,0,0.1,1);
+   -moz-transition: max-height 800ms cubic-bezier(0.5,0,0.1,1),
+                    max-height 800ms cubic-bezier(0.5,0,0.1,1);
+     -o-transition: max-height 800ms cubic-bezier(0.5,0,0.1,1),
+                    max-height 800ms cubic-bezier(0.5,0,0.1,1);
+        transition: max-height 800ms cubic-bezier(0.5,0,0.1,1),
+                    max-height 800ms cubic-bezier(0.5,0,0.1,1);
 }
 
 .ad-review-main {

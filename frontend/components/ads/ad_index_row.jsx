@@ -151,18 +151,15 @@ var AdvertRow = React.createClass({
 	},
 
 	renderDetail: function () {
-		if (this.state.showDetail) {
-			return (
-				<div className="index-detail-pane">
-					<DetailMain show={this.state.showDetail}
-						ad={AdStore.getAd()}
-						rowID={this.props.genre.id}
-						refresh={this.refreshState}/>
-				</div>
-			);
-		} else {
-			return <div className="index-detail-pane acc-hide"></div>;
-		}
+		var klass = this.state.showDetail ? "" : " acc-hide";
+		return (
+			<div className={"index-detail-pane" + klass}>
+				<DetailMain show={this.state.showDetail}
+					ad={AdStore.getAd()}
+					rowID={this.props.genre.id}
+					refresh={this.refreshState}/>
+			</div>
+		);
 	},
 
 	renderIndicies: function () {
