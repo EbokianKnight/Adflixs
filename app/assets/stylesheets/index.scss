@@ -632,3 +632,20 @@ body { font-size: 5%; }
   bottom: 0;
   z-index: 90;
 }
+
+.nav-menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  height: 3.2em;
+  background-color: rgba(0,0,0,0.5);
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 10%, transparent)
+}
+
+.nav-adflix {
+	background-image: asset-url('signin/profile.png');
+	width: 3em;
+	height: 3em;
+	display: block;
+}

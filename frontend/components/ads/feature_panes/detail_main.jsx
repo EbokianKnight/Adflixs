@@ -22,15 +22,13 @@ var AdDetailPane = React.createClass({
 	},
 
 	componentDidMount: function() {
-    if (this.props.header) {
-      this.slides = window.setInterval(this.props.header, 15000);
-    }
+    if (!this.props.header) return;
+	  this.slides = window.setInterval(this.props.header, 15000);
   },
 
   componentWillUnmount: function () {
-    if (this.props.header) {
-      window.clearInterval(this.slides);
-    }
+    if (!this.props.header) return;
+    window.clearInterval(this.slides);
   },
 
 	showDetailPane: function () {
@@ -58,23 +56,34 @@ var AdDetailPane = React.createClass({
 		);
 	},
 
-	renderDisplayPanes: function () {
-		var detail = " acc-hide", review = " acc-hide";
-		if (this.state.display === "overview") {
-			detail = "";
-		} else if (this.state.display === "detail") {
-			review = "";
-		}
-		return (
-			<div>
-				<OverviewDetail klass={" acc-show"+ detail}
-					key={1} ad={this.props.ad}/>
-				<ReviewIndex klass={" acc-show"+ review}
-					key={2} ad={this.props.ad}
-					refresh={this.props.refresh}/>
-			</div>
+	// renderDisplayPanes: function () {
+	// 	var detail = " acc-hide", review = " acc-hide";
+	// 	if (this.state.display === "overview") {
+	// 		detail = "";
+	// 	} else if (this.state.display === "detail") {
+	// 		review = "";
+	// 	}
+	// 	return (
+	// 		<div>
+	// 			<OverviewDetail klass={" acc-show"+ detail}
+	// 				key={1} ad={this.props.ad}/>
+	// 			<ReviewIndex klass={" acc-show"+ review}
+	// 				key={2} ad={this.props.ad}
+	// 				refresh={this.props.refresh}/>
+	// 		</div>
+	//
+	// 	);
+	// },
 
-		);
+	renderDisplayPanes: function () {
+		if (this.state.display === "overview") {
+			return <OverviewDetail ad={this.props.ad}/>;
+		} else {
+			return (
+				<ReviewIndex ad={this.props.ad}
+					refresh={this.props.refresh}/>
+			);
+		}
 	},
 
 	closeDetails: function () {
@@ -95,10 +104,11 @@ var AdDetailPane = React.createClass({
 	render: function() {
 		if (!this.props.ad) { return <div/>; }
 		var klass = this.state.display === "overview" ? "" : " blur";
+		var url = "url(" + this.props.ad.largeUrl + ")";
 		return (
 			<div className="review-details">
 				<div className={ "feature-background-image" + klass }
-					style={{backgroundImage:"url(" + this.props.ad.largeUrl + ")"}}/>
+					style={{backgroundImage:url}}/>
 					<div className="back-grade"/>
 	        <div className="bottom-grade"/>
 					<h2 className="feature-title">{this.props.ad.title}</h2>

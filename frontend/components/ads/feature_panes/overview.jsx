@@ -71,7 +71,7 @@ var OverviewDetail = React.createClass({
     if (!this.props.ad) { return <div></div>; }
     var hover = this.state.hover ? "-hover" : "";
 		return (
-			<div className={"ad-display-container" + this.props.klass}>
+			<div className="ad-display-container">
         <p className="feature-description">
           {this.props.ad.description}
         </p>

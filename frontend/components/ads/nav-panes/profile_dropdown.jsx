@@ -70,20 +70,19 @@ var ProfileDropDown = React.createClass({
 
   render: function() {
     return (
-      <menu className="nav-profile-menu group"
-        onMouseEnter={this.onRollOver}>
-        <img className='nav-profile-thumb'/>
-        <h3 className='nav-user'>{this.state.user.email}</h3>
-        <ReactCSS
-          transitionName="fader"
-          transitionEnterTimeout={500}
-          transitionLeaveTimeout={300}>
-          { this.createRollOverMenu() }
-        </ReactCSS>
+      <menu className="nav-profile-menu group">
+
       </menu>
     );
   }
 
 });
-
+// <img className='nav-profile-thumb'/>
+// <h3 className='nav-user'>{this.state.user.email}</h3>
+// <ReactCSS
+//   transitionName="fader"
+//   transitionEnterTimeout={500}
+//   transitionLeaveTimeout={300}>
+//   { this.createRollOverMenu() }
+// </ReactCSS>
 module.exports = ProfileDropDown;
