@@ -151,11 +151,10 @@ var AdvertRow = React.createClass({
 	},
 
 	renderDetail: function () {
-		var klass = this.state.showDetail ? "" : " acc-hide";
+		var px = this.state.showDetail ? "500px" : "0";
 		return (
-			<div className={"index-detail-pane" + klass}>
-				<DetailMain show={this.state.showDetail}
-					ad={AdStore.getAd()}
+			<div className="index-detail-pane" style={{maxHeight:px}}>
+				<DetailMain show={this.state.showDetail} ad={AdStore.getAd()}
 					rowID={this.props.genre.id}
 					refresh={this.refreshState}/>
 			</div>
