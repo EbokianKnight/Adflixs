@@ -15,6 +15,8 @@ var AdvertRow = React.createClass({
 			currentFocus: 0,
 			index: false,
 			pages: false,
+			hover: false,
+			loaded: false
 		};
 	},
 
@@ -31,6 +33,7 @@ var AdvertRow = React.createClass({
 	componentWillUnmount: function() {
 		this.adStoreToken.remove();
 		this.timer && clearTimeout(this.timer);
+		this.timer2 && clearTimeout(this.timer2);
 	},
 
 	// Used to reset the state if the DOM has been resized
@@ -167,7 +170,7 @@ var AdvertRow = React.createClass({
 	},
 
 	renderIndicies: function () {
-		if (!this.state.pages || this.state.pages.length === 1) return;
+		if (!this.state.pages || !this.state.hover || this.state.pages.length === 1) return;
 		var pages = this.state.pages;
 		return pages.map(function(p, idx){
 			return <li className={ p === this.state.currentFocus ? "idx-focus" : "" }
@@ -187,6 +190,14 @@ var AdvertRow = React.createClass({
 				</div>
 			</div>
 		);
+	},
+
+	mouseOn: function () {
+		this.setState({ hover:true });
+	},
+
+	mouseOff: function () {
+		this.setState({ hover:false });
 	},
 
 	seekPage: function (e) {
@@ -209,17 +220,27 @@ var AdvertRow = React.createClass({
 
 		if (this.state.currentFocus === 0) { left = " acc-hide"; }
 		if (this.state.currentFocus === lastPage) { right = " acc-hide"; }
+		var hover = this.state.hover ? "" : " acc-hide";
 
+		var load = " acc-hide";
+		if (this.state.loaded) {
+			load = "";
+		} else {
+			this.setState({ loaded: true });
+		}
 		return (
-			<container className="index-row">
-				<button className={"index-row-arrows index-arrows-left" + left}
+			<container id={"row"+this.props.genre.name}
+				className={"index-row "+ load}
+				onMouseEnter={this.mouseOn}
+				onMouseLeave={this.mouseOff}>
+				<button className={"index-row-arrows index-arrows-left" + left + hover}
 					onClick={this.moveLeft}><div className="a-left"/></button>
 				{ this.renderRowHeader() }
 				<div id={this.props.genre.name}
 					className="index-row-inner">
 					{ this.renderAdverts() }
 				</div>
-				<button className={"index-row-arrows index-arrows-right" + right} onClick={this.moveRight}>
+				<button className={"index-row-arrows index-arrows-right" + right + hover} onClick={this.moveRight}>
 					<div className="a-right"/>
 				</button>
 				{ this.renderDetail() }

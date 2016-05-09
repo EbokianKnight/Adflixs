@@ -128,10 +128,18 @@ $smallFont: 0.9em;
 	position: relative;
 	margin-bottom: 20px;
 	width: 100%;
-	height: 500px;
+	max-height: 500px;
 	overflow: hidden;
 	box-sizing: border-box;
 	background: #444;
+	-webkit-transition: opacity 1s ease-in,
+                    max-height 0.5s ease-in;
+   -moz-transition: opacity 1s ease-in,
+                    max-height 0.5s ease-in;
+     -o-transition: opacity 1s ease-in,
+                    max-height 0.5s ease-in;
+        transition: opacity 1s ease-in,
+                    max-height 0.5s ease-in;
 }
 
 .homepage-bar {
@@ -258,6 +266,7 @@ $smallFont: 0.9em;
 
 .main-index-body {
 	background: #141414;
+	overflow:hidden;
 }
 
 .row-bar {

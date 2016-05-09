@@ -10,7 +10,9 @@ var FeatureHeader = React.createClass({
   getInitialState: function() {
     return {
       features: FeatureStore.all(),
-      shown: 0
+      shown: 0,
+      loaded: false,
+      hover: false,
     };
   },
 
@@ -27,6 +29,18 @@ var FeatureHeader = React.createClass({
 
   componentWillUnmount: function() {
     this.featureToken.remove();
+  },
+
+  mouseOn: function () {
+    this.setState({ hover:true });
+  },
+
+  mouseOff: function () {
+    this.setState({ hover:false });
+  },
+
+  seekPage: function (e) {
+    this.setState({ currentFocus: e.target.value });
   },
 
   nextFeatures: function () {
@@ -59,17 +73,30 @@ var FeatureHeader = React.createClass({
 
   render: function() {
     if (this.state.features.length === 0) { return <div/>; }
+    var load = " acc-hide";
+		if (this.state.loaded) {
+			load = "";
+		} else {
+			this.setState({ loaded: true });
+		}
+    var hover = this.state.hover ? "" : " acc-hide";
     return (
-      <div className="main-index-header">
-        <div className="index-header-arrow index-arrows-left"
+      <div className={"main-index-header" + load}
+        onMouseEnter={this.mouseOn}
+				onMouseLeave={this.mouseOff}>
+
+        <div className={"index-header-arrow index-arrows-left" + hover}
           onClick={this.previousFeatures}>
           <div className="a-left"/>
         </div>
+
         { this.renderFeatures() }
-        <div className="index-header-arrow index-arrows-right"
+
+        <div className={"index-header-arrow index-arrows-right" + hover}
           onClick={this.nextFeatures}>
           <div className="a-right"/>
         </div>
+
       </div>
     );
   }

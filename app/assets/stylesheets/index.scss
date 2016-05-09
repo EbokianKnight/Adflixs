@@ -137,10 +137,19 @@ body { font-size: 5%; }
 .index-row {
   display: flex;
   flex-wrap: wrap;
+  opacity: 1;
+  max-height: 200vh;
+  height: auto;
   position: relative;
   padding: $flix-auto-spacer 0;
-  overflow-x: hidden;
-  overflow-y: visible;
+  -webkit-transition: opacity 2.0s ease-in,
+                    max-height 1.8s ease-in;;
+   -moz-transition: opacity 2.0s ease-in,
+                    max-height 1.8s ease-in;;
+     -o-transition: opacity 2.0s ease-in,
+                    max-height 1.8s ease-in;;
+        transition: opacity 2.0s ease-in,
+                    max-height 1.8s ease-in;
 }
 
 .index-row-inner {
