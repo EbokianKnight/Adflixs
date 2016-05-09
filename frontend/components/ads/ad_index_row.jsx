@@ -37,7 +37,6 @@ var AdvertRow = React.createClass({
 	componentWillUnmount: function() {
 		this.adStoreToken.remove();
 		this.timer && clearTimeout(this.timer);
-		this.timer2 && clearTimeout(this.timer2);
 	},
 
 	// Used to reset the state if the DOM has been resized

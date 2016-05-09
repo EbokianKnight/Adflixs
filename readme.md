@@ -191,7 +191,7 @@ componentWillReceiveProps: function (nextProps) {
 - [ ] Implement Viewing History and Statistics within Account Details
 - [ ] Implement Recently Watched / Watch Again Rows
 - [ ] Implement Most Watched / Popular Ad Rows
-- [ ] Implement Fluid CSS Transitions for Un/Mounting Components
-- [ ] Rebuild and Improve ReactSlick Carousel
+- [x] Implement Fluid CSS Transitions for Un/Mounting Components
+- [x] Rebuild and Improve ReactSlick Carousel
 - [ ] Add Rich Text formatting into Ad Reviews
-- [ ] Revisit CSS for multimedia and universal Browser Compatibility
+- [x] Revisit CSS for multimedia and universal Browser Compatibility
