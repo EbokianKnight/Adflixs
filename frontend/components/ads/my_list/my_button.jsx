@@ -10,7 +10,7 @@ var AdActions = require('../../../actions/ad_actions');
 var MyListButton = React.createClass({
   getInitialState: function() {
     return {
-      show: this.checkIfFavorited(),
+      onMyList: this.checkIfFavorited(),
       hover: false
     };
   },
@@ -26,16 +26,16 @@ var MyListButton = React.createClass({
   },
 
   checkIfFavorited: function () {
-    return MyListStore.find(this.props.ad.id) >= 0;
+    return MyListStore.includes(this.props.ad.id);
   },
 
   getStateFromStore: function () {
-    this.setState({ show: this.checkIfFavorited() });
+    this.setState({ onMyList: this.checkIfFavorited() });
   },
 
   toggleList: function (e) {
     e.stopPropagation();
-    if (this.state.show) {
+    if (!this.state.onMyList) {
       ApiUtil.addToMyList(this.props.ad);
     } else {
       ApiUtil.removeFromMyList(this.props.ad);
@@ -54,8 +54,8 @@ var MyListButton = React.createClass({
   },
 
   render: function() {
-    var hover = "", klass = this.state.show ? "plus" : "check";
-    var value = this.state.show ? "MyList" : "Remove";
+    var hover = "", klass = this.state.onMyList ? "check" : "plus";
+    var value = this.state.onMyList ? "Remove" : "MyList";
     if (this.props.showFull) {
       if (this.state.hover) {
         hover = "-hover";

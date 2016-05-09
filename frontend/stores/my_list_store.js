@@ -15,7 +15,7 @@ var addToMyList = function (ad) {
 };
 
 var removeFromMyList = function (ad) {
-	var index = MyListStore.find(ad.id);
+	var index = _list.indexOf(ad);
 	_list.splice(index, 1);
 };
 
@@ -40,10 +40,10 @@ MyListStore.all = function () {
 	return _list.slice();
 };
 
-MyListStore.find = function (adID) {
+MyListStore.includes = function (adID) {
 	for (var i = 0; i < _list.length; i++) {
 		if (_list[i].id === adID) {
-			return i;
+			return true;
 		}
 	}
 	return false;
