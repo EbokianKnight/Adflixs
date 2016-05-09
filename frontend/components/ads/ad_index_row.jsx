@@ -11,16 +11,17 @@ var AdvertRow = React.createClass({
 
 	getInitialState: function() {
 		return {
-			showDetail: false,
+			showDetail: null,
 			currentFocus: 0,
 			index: false,
 			pages: false,
 			hover: false,
-			loaded: false
+			loaded: false,
+			adjust: false,
 		};
 	},
 
-	componentDidMount: function() {
+	componentDidMount: function () {
 		this.adStoreToken = AdStore.addListener(this.checkDetails);
 		this.slider = document.getElementById(this.props.genre.name);
 		this.getPages();
@@ -28,6 +29,9 @@ var AdvertRow = React.createClass({
 		   this.timer && clearTimeout(this.timer);
 		   this.timer = setTimeout(this.handleResize, 100);
 		}.bind(this));
+		if (!this.state.loaded) {
+			this.setState({ loaded: true });
+		}
 	},
 
 	componentWillUnmount: function() {
@@ -41,16 +45,21 @@ var AdvertRow = React.createClass({
 		if (!this.state.index) { this.getPages(); }
 	},
 
+	shouldComponentUpdate: function(nextProps, nextState) {
+		return nextState !== this.state || this.props.show !== nextProps.show;
+	},
+
 	// See if any Advert has been opened yet, if not, nothings open.
 	// See if the Advert that is open is in this row, if so open it.
 	// See if this was open, if so close it.
 	checkDetails: function() {
-		if (AdStore.getAd() === null) {
-			this.setState({ showDetail: false });
-		} else if (AdStore.getAd().rowID === this.props.genre.id){
-			this.setState({ showDetail: true });
+		var selector = AdStore.getAd()
+		if (selector === null) {
+			this.setState({ showDetail: null });
+		} else if (selector.rowID === this.props.genre.id){
+			this.setState({ showDetail: selector.id });
 		} else if (this.state.showDetail) {
-			this.setState({ showDetail: false });
+			this.setState({ showDetail: null });
 		}
 	},
 
@@ -117,7 +126,8 @@ var AdvertRow = React.createClass({
 		for (var i = 0; i < numAds; i++) {
 			index[i] = widthPerAd * i
 		}
-
+		var offset = widthPerAd - (width / 100)
+		this.adjust = (width * 1.2) / perPageAds - offset;
 		this.setState({ index: index, pages: pages });
 	},
 
@@ -141,14 +151,27 @@ var AdvertRow = React.createClass({
 		if (adID) { ApiUtil.fetchAdvert(adID, this.props.genre.id); }
 	},
 
+	// This is passed back whenever an item gets hovered
+	// When the idx of the item + 1 % 4 === 0 then it's the last item
+	// When the last item is hovered, scrollY by setState({adjust})
+	itemHoverCallback: function (idx, mouseIn) {
+		if (mouseIn && (idx + 1) % 4 === 0) {
+			this.setState({ adjust: true });
+		} else {
+			this.setState({ adjust: false });
+		}
+	},
+
 	// renders the Ads in the Row
 	renderAdverts: function () {
-		return this.props.genre.ads.map(function(ad){
+		return this.props.genre.ads.map(function(ad, idx){
 			return (
 				<Advert ref="row"
 					ad={ad} key={ad.id}
 					rowID={this.props.genre.id}
-					show={this.state.showDetail}/>
+					show={this.state.showDetail}
+					itemHover={this.itemHoverCallback}
+					idx={idx}/>
 			);
 		}.bind(this));
 	},
@@ -205,10 +228,9 @@ var AdvertRow = React.createClass({
 	},
 
 	render: function() {
-		if (!this.props.genre) { return <div></div>; }
-
 		if (this.slider && this.state.index) {
 			var dist = -this.state.index[this.state.currentFocus] || 0;
+			dist = this.state.adjust ? dist - this.adjust : dist;
 			var slideToPage = 'translate(' + dist + 'px,0)' + 'translateZ(0)';
 			this.slider.style.webkitTransform = slideToPage;
 			this.slider.style.msTransform = slideToPage;
@@ -222,28 +244,31 @@ var AdvertRow = React.createClass({
 		if (this.state.currentFocus === lastPage) { right = " acc-hide"; }
 		var hover = this.state.hover ? "" : " acc-hide";
 
-		var load = " acc-hide";
-		if (this.state.loaded) {
-			load = "";
-		} else {
-			this.setState({ loaded: true });
-		}
+		var load = this.state.loaded ? "" : " acc-hide";
 		return (
 			<container id={"row"+this.props.genre.name}
 				className={"index-row "+ load}
 				onMouseEnter={this.mouseOn}
 				onMouseLeave={this.mouseOff}>
+
 				<button className={"index-row-arrows index-arrows-left" + left + hover}
-					onClick={this.moveLeft}><div className="a-left"/></button>
+					onClick={this.moveLeft}>
+					<div className="a-left"/>
+				</button>
+
 				{ this.renderRowHeader() }
+
 				<div id={this.props.genre.name}
 					className="index-row-inner">
 					{ this.renderAdverts() }
 				</div>
+
 				<button className={"index-row-arrows index-arrows-right" + right + hover} onClick={this.moveRight}>
 					<div className="a-right"/>
 				</button>
+
 				{ this.renderDetail() }
+
 			</container>
 		);
 	}

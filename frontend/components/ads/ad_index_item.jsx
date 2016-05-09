@@ -3,6 +3,7 @@ var PropTypes = React.PropTypes;
 var ApiUtil = require('../../util/api_util');
 var MyButton = require('./my_list/my_button');
 var Stars = require('./feature_panes/stars');
+var AdStore = require('../../stores/ad_store');
 
 var Advert = React.createClass({
 	contextTypes: { router: PropTypes.object.isRequired },
@@ -10,11 +11,37 @@ var Advert = React.createClass({
 	getInitialState: function() {
 		return {
 			details: false,
+			hover: false
 		};
 	},
 
 	componentWillUnmount: function() {
-		this.mouseTime && clearTimeout(this.mouseTime);
+		this.timedMouse && clearTimeout(this.timedMouse);
+		this.timedSelection && clearTimeout(this.timedSelection);
+		this.timedMouse = undefined;
+		this.timedSelection = undefined;
+	},
+
+	componentDidUpdate: function(prevProps, prevState) {
+		// If you just started hovering for the first time...
+		// If the timer has been started, skip this step.
+		if (this.state.hover && !this.state.details && !prevState.hover && !this.timedMouse) {
+			// Start a timer to update again
+			this.timedMouse = window.setTimeout(function(){
+				this.setState({ details: true });
+				this.timedMouse = undefined;
+			}.bind(this), 400);
+
+			// If you started the timer but moused off before it timedout...
+		} else if (!this.state.details && !this.state.hover && this.timedMouse) {
+			// then immediately stop the timer
+			clearInterval(this.timedMouse)
+			this.timedMouse = undefined;
+		}
+	},
+
+	shouldComponentUpdate: function(nextProps, nextState) {
+		return nextState !== this.state || this.props.show !== nextProps.show;
 	},
 
 	// Update the Store with the last row that was clicked, as movies can exist
@@ -22,32 +49,38 @@ var Advert = React.createClass({
 	sendBackID: function (e) {
 		e.preventDefault();
 		ApiUtil.fetchAdvert(this.props.ad.id, this.props.rowID);
-		$(".flix").removeClass("selected");
-		var makeID = "#"+this.props.ad.id + "-" + this.props.rowID;
-		var select = $(makeID)
-		if (select.hasClass("img-effect")) {
-			select.removeClass("img-effect");
+		this.setState({ hover: false, details: false });
+		var selectedNode = $(e.currentTarget);
+
+		if (this.props.show === this.props.ad.id) {
+			$(".selected").removeClass("selected");
+			selectedNode.addClass("selected");
+		} else {
+			$(".selected").removeClass("selected");
+			this.timedSelection = window.setTimeout(function(){
+				selectedNode.addClass("selected");
+				this.timedSelection = undefined;
+			}.bind(this), 350);
 		}
-		select.addClass("selected");
 	},
 
 	mouseIn: function (e) {
-		if(this.mouseInSwitch) return;
-		if (!this.props.show) {
-			$(e.target).addClass("img-effect");
-		}
-		this.mouseInSwitch = true;
-		this.mouseTime = window.setTimeout(function(){
-			this.setState({ details: true });
-		}.bind(this), 300);
+		if (this.state.hover || this.props.show) return;
+		this.props.itemHover(this.props.idx, true);
+		this.setState({ hover: true });
 	},
 
 	mouseOut: function (e) {
-		if (!this.mouseInSwitch) return;
-		$(e.target).removeClass("img-effect");
-		this.mouseInSwitch = false;
-		this.mouseTime && clearTimeout(this.mouseTime);
-		this.setState({ details: false });
+		if (!this.state.hover || this.props.show) return;
+		this.props.itemHover(this.props.idx, false);
+
+		if (this.state.details) {
+			// remove class immediately to prioritize it over setState
+			$(e.target.children[0]).removeClass("acc-hide");
+			this.setState({ hover: false, details: false });
+		} else {
+			this.setState({ hover: false });
+		}
 	},
 
 	playAd: function (e) {
@@ -63,19 +96,24 @@ var Advert = React.createClass({
 	},
 
 	render: function() {
-		var klass = this.state.details && !this.props.show ? "" : " acc-hide";
+		var details = this.state.details && !this.props.show ? "" : " acc-hide";
+		var playbtn = this.state.details || this.props.show ? "" : " acc-hide";
+		var hover = this.state.hover && !this.props.show ? " img-effect" : "";
 		return (
-			<div id={this.props.ad.id + "-" + this.props.rowID} className="flix"
+			<div id={this.props.ad.id + "-" + this.props.rowID}
+				className={"flix" + hover}
 				onClick={this.sendBackID}
 				onMouseEnter={this.mouseIn}
 				onMouseLeave={this.mouseOut}
 				style={{backgroundImage:"url(" + this.props.ad.thumbUrl + ")"}}>
-				<container className={"advert-detail" + klass}>
+
+				<container className={"advert-detail" + playbtn}>
 					<section className="advert-play">
 						<div className="advert-play-img"
 							onClick={this.playAd}/>
 					</section>
-					<section className="advert-modal">
+
+					<section className={"advert-modal" + details}>
 						<strong className="advert-modal-header">
 							{ this.props.ad.title }
 						</strong>
@@ -90,6 +128,7 @@ var Advert = React.createClass({
 						<div className="advert-show-detail-btn"
 							onClick={this.sendBackID}/>
 					</section>
+
 				</container>
 			</div>
 		);
