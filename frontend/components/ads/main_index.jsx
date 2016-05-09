@@ -4,7 +4,6 @@ var GenreStore = require('../../stores/genre_store');
 var MyListStore = require('../../stores/my_list_store');
 var ApiUtil = require('../../util/api_util');
 var AdvertRow = require('./ad_index_row');
-var DetailMain = require('./feature_panes/detail_main');
 var FeatureHeader = require('./feature_header');
 
 var MainIndex = React.createClass({
