@@ -12,11 +12,15 @@ var NavBar = React.createClass({
 	},
 
 	render: function() {
-		//<SearchComponent />
 		return (
-			<nav className="nav-bar group">
-				<svg className="logo nav-logo" onClick={this.goToAds}></svg>
-				<ProfileDropDown />
+			<nav className="nav-menu">
+				<svg className="logo nav-logo"
+					onClick={this.goToAds}>
+				</svg>
+				<menu className="nav-left-container">
+					<ProfileDropDown />
+
+	      </menu>
 			</nav>
 		);
 	}

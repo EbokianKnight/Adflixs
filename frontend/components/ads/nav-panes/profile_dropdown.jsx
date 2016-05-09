@@ -1,7 +1,6 @@
 var React = require('react');
 var PropTypes = React.PropTypes;
 var SessionStore = require('../../../stores/session_store');
-var ReactCSS = require('react-addons-css-transition-group');
 var UserUtil = require('../../../util/user_util');
 
 var ProfileDropDown = React.createClass({
@@ -9,10 +8,10 @@ var ProfileDropDown = React.createClass({
 
   getInitialState: function() {
     return {
-      show: false,
-      user: SessionStore.currentUser()
+      user: SessionStore.currentUser(),
+      hover: false,
     };
-  }, //onMouseEnter
+  },
 
   componentDidMount: function() {
     this.sessionToken = SessionStore.addListener(this.getUserFromStore)
@@ -26,12 +25,12 @@ var ProfileDropDown = React.createClass({
     this.setState({ user: SessionStore.currentUser() });
   },
 
-  onRollOver: function () {
-    this.setState({ show: true });
+  mouseOn: function () {
+    this.setState({ hover:true });
   },
 
-  rollBack: function () {
-    this.setState({ show: false });
+  mouseOff: function () {
+    this.setState({ hover:false });
   },
 
   logOut: function (e) {
@@ -46,43 +45,39 @@ var ProfileDropDown = React.createClass({
     this.context.router.push("/account")
   },
 
-  createRollOverMenu: function () {
-    if (this.state.show) {
-      return (
-        <div className="nav-profile-dropdown"
-          onMouseLeave={this.rollBack} key="1">
-          <spacer className="sixty-pix">
-            <div className="nav-white-arrow"/>
-          </spacer>
-          <div className="nav-white-bar"/>
-          <spacer className="nav-menu-fill group">
-            <button className="nav-profile-item"
-              onClick={this.goToAccount}>Your Account</button>
-            <button className="nav-profile-item"
-              onClick={this.logOut}>Logout of Adflix</button>
-          </spacer>
-        </div>
-      );
-    } else {
-      return '';
-    }
+  renderMenuDropdown: function () {
+    var hover = this.state.hover ? "" : " acc-hide"
+    return (
+      <menu className="nav-profile-dropdown"
+        onMouseEnter={this.mouseOn}
+        onMouseLeave={this.mouseOff}>
+        <ul className={"nav-dropdown-list" + hover}>
+          <li className="nav-dropdown-items"
+            onClick={this.goToAccount}>
+            Your Account
+          </li>
+          <li className="nav-dropdown-items"
+            onClick={this.logOut}>
+            Logout of Adflix
+          </li>
+        </ul>
+      </menu>
+    );
   },
 
   render: function() {
+    var email = this.state.user ? this.state.user.email : "Email"
     return (
-      <menu className="nav-profile-menu group">
-
-      </menu>
+      <container className="nav-profile">
+        { this.renderMenuDropdown() }
+        <img className='nav-profile-thumb'/>
+        <h3 className='nav-email'>
+          { email }
+        </h3>
+      </container>
     );
   }
 
 });
-// <img className='nav-profile-thumb'/>
-// <h3 className='nav-user'>{this.state.user.email}</h3>
-// <ReactCSS
-//   transitionName="fader"
-//   transitionEnterTimeout={500}
-//   transitionLeaveTimeout={300}>
-//   { this.createRollOverMenu() }
-// </ReactCSS>
+
 module.exports = ProfileDropDown;

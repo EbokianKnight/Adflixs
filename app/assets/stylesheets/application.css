@@ -83,6 +83,7 @@ body {
 
 .acc-hide {
   opacity: 0;
+	padding: 0;
   max-height: 0;
   overflow: hidden;
 }

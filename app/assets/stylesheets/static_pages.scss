@@ -1,6 +1,19 @@
 // Place all the styles related to the StaticPages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+$buttonColor: #EAEAEA;
+$buttonHover: #D1D1D1;
+$buttonFocus: #B5B5B5;
+$linkColor: blue;
+$headerColor: #777;
+$adflixRed: #b9090b;
+$adflixRedHover: #e50914;
+$lightBackground: #f3f3f3;
+$darkBackground: #141414;
+$successGreen: #7ec780;
+$successDarkGreen: #2b782d;
+$failRed: #e3898a;
+
 
 $speed: 500ms;
 $biggerFont: 3em;
@@ -91,7 +104,7 @@ $smallFont: 0.9em;
 }
 
 .home-pricing {
-	font-size: $bigFont;
+	font-size: $biggerFont;
 }
 
 .home-sign-up {
@@ -120,6 +133,7 @@ $smallFont: 0.9em;
 .main-nav-background {
 	display: block;
 	height: 60px;
+	background-color: rgba(0,0,0,0.8);
 }
 
 
@@ -149,117 +163,10 @@ $smallFont: 0.9em;
 
 .homepage-bar-item {
 	width: 100%;
-}
-
-.nav-bar {
-	position: fixed;
-	top: 0;
-	width: 100%;
-	z-index: 100;
-	padding: 0 4%;
-	white-space: nowrap;
-	box-sizing: border-box;
-	background-image: linear-gradient(to bottom,rgba(0,0,0,.7) 10%,rgba(0,0,0,0));
-}
-
-.nav-search {
-	display: block;
-	float: right;
-	padding: 10px;
-	margin: 10px 0px 10px 30px;
-}
-
-.nav-profile-menu {
-	display: block;
-	float: right;
-	padding: 10px 0;
-	margin: 10px 0px 10px 30px;
-	width: 170px;
-	padding: 0;
-}
-
-.nav-profile-dropdown {
-	display: block;
-	float: right;
-	height: 250px;
-	width: 170px;
-	position: fixed;
-	top: 0px;
-	right: 50px;
-}
-
-.nav-menu-fill {
-	position: relative;
-	display: block;
-	border: 1px solid #333;
-	width: inherit;
-	height: 185px;
-	background: #111;
-	// background-color:rgba(0, 0, 0, 0.5);
-}
-
-.sixty-pix {
-	display: block;
-	height: 60px;
-	width: inherit;
-	position: relative;
-}
-
-.nav-white-bar {
-	display: block;
-	height: 2px;
-	width: 100%;
-	background: #f3f3f3;
-}
-
-.nav-white-arrow {
-	position: relative;
-	display: block;
-	margin:auto;
-	top: 52px;
-	width: 1px;
-	height: 1px;
-	border-bottom: 8px solid #f3f3f3;
-	border-left: 8px solid transparent;
-	border-right: 8px solid transparent;
-}
-
-.nav-profile-thumb {
-	background-image: asset-url('signin/profile.png');
-	width: 30px;
-	height: 30px;
-	margin: 4px 4px 4px 0;
-	display: block;
-	float:left;
-}
-
-.nav-user {
-	display: block;
-	float: left;
-	font-size: $smallFont;
-	font-weight: bold;
-	width: 120px;
-	overflow: hidden;
-	color: #f3f3f3;
-	margin: 10px 5px;
-}
-
-.nav-profile-item {
-	width: inherit;
-	height: 40px;
-	float: left;
-	color: #ccc;
-	padding: 10px;
-	font-size: $mediumFont;
-	text-align: center;
-}
-
-.nav-profile-item:hover {
-	background: #333;
+	font-size: $largeFont;
 }
 
 .nav-logo {
-	float: left;
 	height: 35px;
 	width: 120px;
 }
@@ -269,67 +176,6 @@ $smallFont: 0.9em;
 	overflow:hidden;
 }
 
-.row-bar {
-	width:95%;
-	padding-left: 20px;
-	overflow: hidden;
-	position: relative;
-	height: 210px;
-	-webkit-animation: flixdropin 1s; /* Safari, Chrome and Opera > 12.1 */
-     -moz-animation: flixdropin 1s; /* Firefox < 16 */
-      -ms-animation: flixdropin 1s; /* Internet Explorer */
-       -o-animation: flixdropin 1s; /* Opera < 12.1 */
-          animation: flixdropin 1s;
-	transition: height 0.54s cubic-bezier(0.5, 0, 0.1, 1) 0s, opacity 0.44s cubic-bezier(0.5, 0, 0.1, 1) 0.1s;
-}
-
-.row-extend {
-	height: 695px;
-	z-index: 0;
-	transition: height 0.54s cubic-bezier(0.5, 0, 0.1, 1) 0s, opacity 0.44s cubic-bezier(0.5, 0, 0.1, 1) 0.1s;
-}
-
-.row-caption {
-	position:absolute;
-	top: 0;
-	left: 10px;
-	color: #999;
-	text-transform: uppercase;
-	letter-spacing: 2px;
-}
-
-.fliximg{
-	float:left;
-	width:200px;
-	height:150px;
-	position: relative;
-	z-index: 3;
-	background-image: asset-url("demo.jpg");
-	background-size: cover;
-	margin:30px 5px;
-	transition: width, height, margin, background-image, .5s;
-	-webkit-animation: flixdropin 1s; /* Safari, Chrome and Opera > 12.1 */
-	-moz-animation: flixdropin 1s; /* Firefox < 16 */
-	-ms-animation: flixdropin 1s; /* Internet Explorer */
-	-o-animation: flixdropin 1s; /* Opera < 12.1 */
-	animation: flixdropin 1s;
-}
-
-.fliximg-effect:hover {
-	width: 280px !important;
-	height: 210px !important;
-	margin: 0px 20px;
-}
-
-@keyframes flixdropin {
-	from { transform: scaleY(0) }
-	to { transform: scaleY(1) }
-}
-
-@keyframes flixdropout {
-	from { transform: scaleY(1) }
-	to { transform: scaleY(0) }
-}
 
 .add-play-button {
 	width: 30%;
@@ -381,7 +227,6 @@ $smallFont: 0.9em;
 }
 
 .ad-display-nav > button {
-	float: left;
 	color: #ccc;
 	text-transform: uppercase;
 	font-size: 1em;
@@ -516,6 +361,7 @@ $smallFont: 0.9em;
 	width: 100%;
 	display: block;
 	padding: 5px;
+	cursor: default;
 	font-weight: bold;
 	font-size: $mediumFont;
 	box-sizing: border-box;
@@ -525,6 +371,7 @@ $smallFont: 0.9em;
 	width: auto;
 	height: auto;
 	padding: 10px;
+	cursor: default;
 	flex-grow: 1;
 	flex-basis: 130px;
 }
@@ -573,11 +420,10 @@ $smallFont: 0.9em;
 }
 
 .ad-review-button {
-	width: 20%;
+	width: 7em;
 	border-radius: 10px;
-	background: #E50914;
+	background: $adflixRed;
 	padding: 15px;
-	margin-top: 15px;
 }
 .ad-review-button:hover {
 	background: #f40612;
@@ -599,7 +445,7 @@ $smallFont: 0.9em;
 }
 
 .ad-review-cancel {
-	width: 20%;
+	width: 7em;
 	border-radius: 10px;
 	background: #999;
 	padding: 15px;
