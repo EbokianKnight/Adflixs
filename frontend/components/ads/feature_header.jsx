@@ -21,6 +21,9 @@ var FeatureHeader = React.createClass({
     if (this.state.features.length < 1) {
       ApiUtil.fetchFeatures();
     }
+    if (!this.state.loaded) {
+			this.setState({ loaded: true });
+		}
   },
 
   getFeaturesFromStore: function () {
@@ -52,7 +55,6 @@ var FeatureHeader = React.createClass({
   previousFeatures: function () {
     var slide = this.state.shown;
     var nextup = (slide - 1) < 0 ? this.state.features.length - 1 : slide - 1;
-    console.log(nextup);
     this.setState({ shown: nextup });
   },
 
@@ -73,13 +75,8 @@ var FeatureHeader = React.createClass({
 
   render: function() {
     if (this.state.features.length === 0) { return <div/>; }
-    var load = " acc-hide";
-		if (this.state.loaded) {
-			load = "";
-		} else {
-			this.setState({ loaded: true });
-		}
     var hover = this.state.hover ? "" : " acc-hide";
+    var load = this.state.loaded ? "" : " acc-hide";
     return (
       <div className={"main-index-header" + load}
         onMouseEnter={this.mouseOn}
