@@ -6,6 +6,8 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+puts "Destroy_all"
+
 Genre.destroy_all
 Ad.destroy_all
 AdGenre.destroy_all
@@ -13,6 +15,8 @@ User.destroy_all
 View.destroy_all
 Favorite.destroy_all
 Feature.destroy_all
+
+puts "Generate Genres"
 
 genres = [
   Genre.create!(name: "drinks"), #0
@@ -25,6 +29,8 @@ genres = [
   Genre.create!(name: "animated"), #7
   Genre.create!(name: "tech") #8
 ]
+
+puts "Setup First Users and Register with Views"
 
 register = Ad.create!(
   title: "RegisterViewsWithUser",
@@ -47,6 +53,7 @@ youtube = [
   'jZGzXEExZcc', 'PmD0YKEOh_0', '7ptwjJFgemQ', '_Ut1Ak7zOeE'
 ]
 
+puts "Friends"
 friends = Ad.create!(
   title: "Friends Furever",
   company: "Google",
@@ -57,7 +64,7 @@ friends = Ad.create!(
   youtube: 'vnVuqfXohxc',
   image: File.open("app/assets/images/snaps/Android_BFF3.jpg")
 )
-
+puts "Bud"
 bud = Ad.create!(
   title: "Budwiser Lost Dog",
   company: "Budwiser",
@@ -68,7 +75,7 @@ bud = Ad.create!(
   youtube: 'TPKgC8KPBMg',
   image: File.open("app/assets/images/snaps/Budweiser_Lost_Dog.jpg")
 )
-
+puts "Cheetos"
 cheetos = Ad.create!(
   title: "Cheetos Commercial Party",
   company: "Cheetos",
@@ -79,7 +86,7 @@ cheetos = Ad.create!(
   youtube: 'qI-1-cVDrz0',
   image: File.open("app/assets/images/snaps/Cheetos_Party.jpg")
 )
-
+puts "Seige"
 siege = Ad.create!(
   title: "Coca-Cola Siege",
   company: "Coca-Cola",
@@ -90,7 +97,7 @@ siege = Ad.create!(
   youtube: 'Shvwd7VYpE0',
   image: File.open("app/assets/images/snaps/Coca-Cola_Siege.jpg")
 )
-
+puts "Spoof"
 spoof = Ad.create!(
   title: "Diet Coke Spoof Commercial",
   company: "Coca-Cola",
@@ -101,7 +108,7 @@ spoof = Ad.create!(
   youtube: 'osSD6bgvyac',
   image: File.open("app/assets/images/snaps/Diet_Coke_Spoof.jpg")
 )
-
+puts "iPhone"
 iphone = Ad.create!(
   title: "Photos Every Day",
   company: "Apple",
@@ -112,7 +119,7 @@ iphone = Ad.create!(
   youtube: 'jZGzXEExZcc',
   image: File.open("app/assets/images/snaps/iPhone_Photos_Every_Day.jpg")
 )
-
+puts "Midas"
 midas = Ad.create!(
   title: "Canadian Winter Car Chase",
   company: "Midas",
@@ -123,7 +130,7 @@ midas = Ad.create!(
   youtube: 'PmD0YKEOh_0',
   image: File.open("app/assets/images/snaps/Midas-Winter-Car-Chase.jpg")
 )
-
+puts "dragon"
 dragon = Ad.create!(
   title: "The Dragon",
   company: "United Airlines",
@@ -134,7 +141,7 @@ dragon = Ad.create!(
   youtube: '7ptwjJFgemQ',
   image: File.open("app/assets/images/snaps/United_Airlines_Dragon.jpg")
 )
-
+puts "volts"
 volts = Ad.create!(
   title: "Werbung Darth Vader",
   company: "Voltswagen",
@@ -145,7 +152,7 @@ volts = Ad.create!(
   youtube: '_Ut1Ak7zOeE',
   image: File.open("app/assets/images/snaps/VW_Darth_Vader.jpg")
 )
-
+puts "Bro"
 bro = Ad.create!(
   title: "Brotherly Love",
   company: "Coca-Cola",
@@ -156,7 +163,7 @@ bro = Ad.create!(
   youtube: '0oYlOBun8UI',
   image: File.open("app/assets/images/snaps/brotherly_love.jpg")
 )
-
+puts "Hulk"
 hulk = Ad.create!(
   title: "Coke Mini (Hulk vs. Ant-Man)",
   company: "Coca-Cola",
@@ -167,7 +174,7 @@ hulk = Ad.create!(
   youtube: 'OlZqBR3yTiw',
   image: File.open("app/assets/images/snaps/coke_mini.jpg")
 )
-
+puts "Polar"
 polar = Ad.create!(
   title: "\"Catch\" starring NE_Bear",
   company: "Coca-Cola",
@@ -178,7 +185,7 @@ polar = Ad.create!(
   youtube: 'S2nBBMbjS8w',
   image: File.open("app/assets/images/snaps/ColaPolar.jpg")
 )
-
+puts "Trans"
 trans = Ad.create!(
   title: "Transformer - Coca-Cola Hong Kong",
   company: "Coca-Cola",
@@ -189,7 +196,7 @@ trans = Ad.create!(
   youtube: 'RZd2NDzQzA4',
   image: File.open("app/assets/images/snaps/cola_transformer.jpg")
 )
-
+puts "London"
 london = Ad.create!(
   title: "Happiness Machine London",
   company: "Coca-Cola",
@@ -200,7 +207,7 @@ london = Ad.create!(
   youtube: 'M0D3jKLz6sA',
   image: File.open("app/assets/images/snaps/cola_london.jpg")
 )
-
+puts "Temple"
 temple = Ad.create!(
   title: "Very Funny Pepsi Commercial",
   company: "Pepsi",
@@ -211,7 +218,7 @@ temple = Ad.create!(
   youtube: '40DykbPa4Lc',
   image: File.open("app/assets/images/snaps/temple_pepsi.jpg")
 )
-
+puts "Mut"
 mut = Ad.create!(
   title: "Yıl - Mutluluk Kamyonu",
   company: "Coca-Cola",
@@ -222,6 +229,7 @@ mut = Ad.create!(
   youtube: 'zV7N21LSr_Y',
   image: File.open("app/assets/images/snaps/mutluluk.jpg")
 )
+puts "Roller"
 roller = Ad.create!(
   title: "Pepsi Roller Coaster Commercial",
   company: "Pepsi",
@@ -232,6 +240,7 @@ roller = Ad.create!(
   youtube: 'WMI3nDccXtc',
   image: File.open("app/assets/images/snaps/pepsi_coaster.jpg")
 )
+puts "Car"
 car = Ad.create!(
   title: "The Chase",
   company: "Hyundai",
@@ -242,6 +251,7 @@ car = Ad.create!(
   youtube: 'WMI3nDccXtc',
   image: File.open("app/assets/images/snaps/Hyundai.jpg")
 )
+puts "Car2"
 car2 = Ad.create!(
   title: "\"Bull\" Matthew McConaughey and the MKC",
   company: "Lincoln Motor Co",
@@ -253,6 +263,8 @@ car2 = Ad.create!(
   image: File.open("app/assets/images/snaps/Hyundai.jpg")
 )
 
+puts "Features"
+
 dragon.features.create!
 polar.features.create!
 car.features.create!
@@ -262,6 +274,8 @@ real_ads = [
   car, car2, bro, hulk, polar, mut, trans, london, temple, roller,
   friends, bud, cheetos, siege, spoof, iphone, midas, dragon, volts
 ]
+
+puts "Generate General Ads"
 
 100.times do |i|
   g_ids = genres.sample(rand(3)+1).map{ |g| g.id }
@@ -298,11 +312,13 @@ end
   end
 end
 
+puts "Determine Average Ratings"
+
 Ad.all.each do |ad|
   if (ad.views.average(:rate))
     average = ad.views.average(:rate).round
   else
     average = 0
   end
-  ad.update_attributes(average_rate: average)
+  ad.update_attributes!(average_rate: average)
 end
