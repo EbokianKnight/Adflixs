@@ -30,6 +30,13 @@ var NewUser = React.createClass({
     this.setState({ confirmation: e.target.value });
   },
 
+  signUpAsGuest: function () {
+    UserUtil.signIn({
+      email: "Guest",
+      password: "password"
+    }, this.redirectCallback );
+  },
+
   makeUser: function (e) {
     e.preventDefault();
     if (this.state.confirmation !== this.state.password) {
@@ -86,6 +93,8 @@ var NewUser = React.createClass({
 
         { this.createFlashedMessage() }
         <button className="sign-in-button sign-in-adflix">SignUp</button>
+        <input onClick={this.signUpAsGuest} readOnly value="Sign In As Guest"
+          className="sign-in-button sign-in-adflix"/>
       </form>
     );
   },
