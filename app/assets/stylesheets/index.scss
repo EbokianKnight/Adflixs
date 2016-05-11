@@ -690,6 +690,8 @@ $navWidth: 20em;
 
 .nav-profile-thumb {
   background-image: asset-url('signin/profile.png');
+  background-repeat: no-repeat;
+  background-size: cover;
   width: 3em;
   height: 3em;
   margin: 1em;
