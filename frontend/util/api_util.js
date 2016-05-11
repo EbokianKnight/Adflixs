@@ -71,13 +71,14 @@ module.exports = {
       }
     });
   },
-	fetchAdvert: function (id, rowID) {
+	fetchAdvert: function (id, rowID, selectCallback) {
     $.ajax({
 			method: "GET",
       url: "/api/ads/" + id,
       success: function (advert) {
 				advert.rowID = rowID;
         AdActions.receiveAdvert(advert);
+        if (selectCallback) { selectCallback(); }
       },
 			error: function (err) {
 				console.log("ApiUtil#fetchAdvert Error");

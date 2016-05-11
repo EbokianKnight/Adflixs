@@ -11,7 +11,8 @@ var Advert = React.createClass({
 	getInitialState: function() {
 		return {
 			details: false,
-			hover: false
+			hover: false,
+			selected: false,
 		};
 	},
 
@@ -47,21 +48,9 @@ var Advert = React.createClass({
 	// Update the Store with the last row that was clicked, as movies can exist
 	// in multiple rows, Row is listening for changes.
 	sendBackID: function (e) {
-		e.preventDefault();
-		ApiUtil.fetchAdvert(this.props.ad.id, this.props.rowID);
+		e.stopPropagation();
 		this.setState({ hover: false, details: false });
-		var selectedNode = $(e.currentTarget);
-
-		if (this.props.show === this.props.ad.id) {
-			$(".selected").removeClass("selected");
-			selectedNode.addClass("selected");
-		} else {
-			$(".selected").removeClass("selected");
-			this.timedSelection = window.setTimeout(function(){
-				selectedNode.addClass("selected");
-				this.timedSelection = undefined;
-			}.bind(this), 350);
-		}
+		ApiUtil.fetchAdvert(this.props.ad.id, this.props.rowID, selectCallback);
 	},
 
 	mouseIn: function (e) {
@@ -125,8 +114,7 @@ var Advert = React.createClass({
 							<p>{ this.props.ad.description.substring(0,107) }...</p>
 							<div><MyButton small={true} ad={this.props.ad}/></div>
 						</div>
-						<div className="advert-show-detail-btn"
-							onClick={this.sendBackID}/>
+						<div className="advert-show-detail-btn"/>
 					</section>
 
 				</container>

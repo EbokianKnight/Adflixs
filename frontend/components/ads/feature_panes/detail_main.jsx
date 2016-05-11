@@ -56,25 +56,6 @@ var AdDetailPane = React.createClass({
 		);
 	},
 
-	// renderDisplayPanes: function () {
-	// 	var detail = " acc-hide", review = " acc-hide";
-	// 	if (this.state.display === "overview") {
-	// 		detail = "";
-	// 	} else if (this.state.display === "detail") {
-	// 		review = "";
-	// 	}
-	// 	return (
-	// 		<div>
-	// 			<OverviewDetail klass={" acc-show"+ detail}
-	// 				key={1} ad={this.props.ad}/>
-	// 			<ReviewIndex klass={" acc-show"+ review}
-	// 				key={2} ad={this.props.ad}
-	// 				refresh={this.props.refresh}/>
-	// 		</div>
-	//
-	// 	);
-	// },
-
 	renderDisplayPanes: function () {
 		if (this.state.display === "overview") {
 			return <OverviewDetail ad={this.props.ad}/>;
@@ -88,7 +69,6 @@ var AdDetailPane = React.createClass({
 
 	closeDetails: function () {
 		AdAction.closeDetails();
-		$(".flix").removeClass("selected");
 	},
 
   closeButton: function () {

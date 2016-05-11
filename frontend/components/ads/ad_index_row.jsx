@@ -15,6 +15,7 @@ var AdvertRow = React.createClass({
 			currentFocus: 0,
 			index: false,
 			pages: false,
+			perPageAds: 0,
 			hover: false,
 			loaded: false,
 			adjust: false,
@@ -39,9 +40,8 @@ var AdvertRow = React.createClass({
 		this.timer && clearTimeout(this.timer);
 	},
 
-	// Used to reset the state if the DOM has been resized
-	componentDidUpdate: function(prevProps, prevState) {
-		if (!this.state.index) { this.getPages(); }
+	componentWillUpdate: function(nextProps, nextState) {
+		if (!nextState.index) { this.getPages(); }
 	},
 
 	shouldComponentUpdate: function(nextProps, nextState) {
@@ -62,7 +62,7 @@ var AdvertRow = React.createClass({
 		}
 	},
 
-	// nulling index triggers my componentDidUpdate conditional.
+	// nulling index triggers my componentWillUpdate conditional.
 	// this is designed to recalculate the slider based on the new DOM sizes.
 	handleResize: function () {
 		this.setState({ index: null });
@@ -127,7 +127,7 @@ var AdvertRow = React.createClass({
 		}
 		var offset = widthPerAd - (width / 100)
 		this.adjust = (width * 1.2) / perPageAds - offset;
-		this.setState({ index: index, pages: pages });
+		this.setState({ index: index, pages: pages, perPageAds: perPageAds });
 	},
 
 	moveLeft: function () {
@@ -154,7 +154,7 @@ var AdvertRow = React.createClass({
 	// When the idx of the item + 1 % 4 === 0 then it's the last item
 	// When the last item is hovered, scrollY by setState({adjust})
 	itemHoverCallback: function (idx, mouseIn) {
-		if (mouseIn && (idx + 1) % 4 === 0) {
+		if (mouseIn && (idx + 1) % this.state.perPageAds === 0) {
 			this.setState({ adjust: true });
 		} else {
 			this.setState({ adjust: false });
