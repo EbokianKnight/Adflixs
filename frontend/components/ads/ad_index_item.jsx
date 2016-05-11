@@ -50,7 +50,7 @@ var Advert = React.createClass({
 	sendBackID: function (e) {
 		e.stopPropagation();
 		this.setState({ hover: false, details: false });
-		ApiUtil.fetchAdvert(this.props.ad.id, this.props.rowID, selectCallback);
+		ApiUtil.fetchAdvert(this.props.ad.id, this.props.rowID);
 	},
 
 	mouseIn: function (e) {
