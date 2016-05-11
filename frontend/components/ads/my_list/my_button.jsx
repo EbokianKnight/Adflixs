@@ -26,7 +26,7 @@ var MyListButton = React.createClass({
   },
 
   checkIfFavorited: function () {
-    return MyListStore.includes(this.props.ad.id);
+    return MyListStore.includes(this.props.ad);
   },
 
   getStateFromStore: function () {

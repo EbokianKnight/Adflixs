@@ -96,9 +96,9 @@ var ReviewIndex = React.createClass({
 
   loadReviews: function () {
     if (!this.props.ad.views) return "";
-    return this.props.ad.views.slice(0,8).map(function(view, i){
+    return this.props.ad.views.slice(0,8).map(function(view){
       if (!view.review) { return ""; }
-      return <ReviewIndexItem key={i} view={view} />;
+      return <ReviewIndexItem key={view.id} view={view} />;
     });
   },
 
@@ -108,9 +108,9 @@ var ReviewIndex = React.createClass({
         <div>NO REVIEWS YET</div>
       );
     } else {
-      return this.props.ad.views.map(function(view, i){
+      return this.props.ad.views.map(function(view){
         if (view.review) {
-          return <ReviewIndexItem key={i} view={view} modal={true}/>;
+          return <ReviewIndexItem key={view.id} view={view} modal={true}/>;
         }
       });
     }

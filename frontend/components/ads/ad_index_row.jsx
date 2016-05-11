@@ -42,10 +42,14 @@ var AdvertRow = React.createClass({
 
 	componentWillUpdate: function(nextProps, nextState) {
 		if (!nextState.index) { this.getPages(); }
+		if ( this.props.genre.id === "MyList" &&
+			nextProps.genre != this.props.genre ) {
+			this.setState({ hover: false, adjust: false });
+		}
 	},
 
 	shouldComponentUpdate: function(nextProps, nextState) {
-		return nextState !== this.state || this.props.show !== nextProps.show;
+		return nextState !== this.state || this.props !== nextProps;
 	},
 
 	// See if any Advert has been opened yet, if not, nothings open.
