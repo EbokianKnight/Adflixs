@@ -26,21 +26,11 @@ MyListStore.__onDispatch = function (payload) {
 			MyListStore.__emitChange();
 			break;
 		case MyListConstants.ADD_TO:
-		console.log(MyListStore.includes(payload.ad))
 			addToMyList(payload.ad);
-			console.log(payload.ad)
-			console.log("added")
-			console.log(_list)
 			MyListStore.__emitChange();
-			console.log(MyListStore.includes(payload.ad))
 			break;
 		case MyListConstants.REMOVE_FROM:
-			console.log(MyListStore.includes(payload.ad))
 			removeFromMyList(payload.ad);
-			console.log(payload.ad)
-			console.log("removed")
-			console.log(_list)
-			console.log(MyListStore.includes(payload.ad))
 			MyListStore.__emitChange();
 			break;
 	}
