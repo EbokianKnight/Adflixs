@@ -120,15 +120,15 @@ var ReviewIndex = React.createClass({
     var view = this.checkCurrentUser();
     if (this.state.show === "none") {
       return (
-        <section className="flix-review-flex-button flix-review-right-panel">
+        <section className="ad-review-flex-button ad-review-right-panel">
           <RateStars ad={this.props.ad}/>
-          <button className="flix-review-button" onClick={this.showForm}>
+          <button className="ad-review-button" onClick={this.showForm}>
             Review</button>
         </section>
       );
     } else if (this.state.show === "form") {
       return (
-        <section className="flix-review-flex-form flix-review-right-panel">
+        <section className="ad-review-flex-form ad-review-right-panel">
           <form onSubmit={this.sendReview} ref="UpdateForm"
             className="review-form-flex-container">
             <label>Title
@@ -140,9 +140,9 @@ var ReviewIndex = React.createClass({
                 className="form-review-input form-review-area" />
             </label>
             <div className="button-flex-form-container">
-              <input className="flix-review-button" type="submit" value="Submit"/>
+              <input className="ad-review-button" type="submit" value="Submit"/>
               <RateStars ad={this.props.ad}/>
-              <button className="flix-review-cancel" onClick={this.closeForm}>
+              <button className="ad-review-cancel" onClick={this.closeForm}>
                 Cancel</button>
             </div>
           </form>
@@ -154,13 +154,13 @@ var ReviewIndex = React.createClass({
   render: function() {
     return (
       <container className={this.props.klass}>
-        <section className="flix-review-main group">
-          <h2 className="flix-review-title">Member Reviews</h2>
-          <section className="flix-review-flex-container">
+        <section className="ad-review-main group">
+          <h2 className="ad-review-title">Member Reviews</h2>
+          <section className="ad-review-flex-container">
             { this.loadReviews() }
           </section>
           { this.reviewForm() }
-          <a key={4} onClick={this.openModal} className="flix-review-title ad-link">
+          <a key={4} onClick={this.openModal} className="ad-review-title ad-link">
             Read More...</a>
         </section>
         <Modal key={"modal"}
