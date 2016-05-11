@@ -19,7 +19,7 @@ var ReviewItem = React.createClass({
     }
     var klass = this.props.modal ? "modal-ad-fix " : "";
     return (
-      <article className={klass + "flix-review-flex-article"}>
+      <article className={klass + "ad-review-flex-article"}>
         <div className="review-flex-header">
           <h3 className="review-h3">{title}</h3>
           <div className={one}>&#x2605;</div>

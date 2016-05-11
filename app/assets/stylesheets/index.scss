@@ -501,10 +501,10 @@ body { font-size: 5%; }
 }
 
 .ad-review-main {
-	width: 95%;
 	margin: auto;
 	height: 375px;
 	top: 90px;
+  right: $flix-row-padding;
   left: $flix-row-padding;
   overflow: hidden;
 	position: absolute;
