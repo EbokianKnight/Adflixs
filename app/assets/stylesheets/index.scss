@@ -267,10 +267,7 @@ body { font-size: 5%; }
   background-size: cover;
   background-repeat: no-repeat;
   position: relative;
-  cursor: pointer;;
-  margin: 0 0.5vw;
-  flex-shrink: 0;
-  flex-grow: 1;
+  cursor: pointer;
   -webkit-transition: width 400ms cubic-bezier(.5,0,.1,1),
                       height 400ms cubic-bezier(.5,0,.1,1);
    -moz-transition: width 400ms cubic-bezier(.5,0,.1,1),
@@ -279,6 +276,21 @@ body { font-size: 5%; }
                     height 400ms cubic-bezier(.5,0,.1,1);
         transition: width 400ms cubic-bezier(.5,0,.1,1),
                     height 400ms cubic-bezier(.5,0,.1,1);
+}
+
+.flix-container {
+  background: #777;
+  position: relative;
+  margin: 0 0.5vw;
+}
+
+.adblocked {
+  background-image: asset-url('index/adblockmessage.svg');
+}
+
+.adblocked:hover {
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .img-effect:hover {

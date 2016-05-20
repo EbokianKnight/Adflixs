@@ -12,6 +12,7 @@
     "babel-loader": "^6.2.4",
     "babel-preset-react": "^6.5.0",
     "flux": "^2.1.1",
+    "fuckadblock": "^3.2.1",
     "react": "^0.14.7",
     "react-addons-css-transition-group": "^0.14.8",
     "react-dom": "^0.14.7",

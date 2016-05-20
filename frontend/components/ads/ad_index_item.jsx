@@ -88,36 +88,40 @@ var Advert = React.createClass({
 		var details = this.state.details && !this.props.show ? "" : " acc-hide";
 		var playbtn = this.state.details || this.props.show ? "" : " acc-hide";
 		var hover = this.state.hover && !this.props.show ? " img-effect" : "";
+		var adblock = this.props.block ? " adblocked" : "";
+		var adblockAlt = this.props.block ? "" : "url(" + this.props.ad.thumbUrl + ")"
 		return (
-			<div id={this.props.ad.id + "-" + this.props.rowID}
-				className={"flix" + hover}
-				onClick={this.sendBackID}
-				onMouseEnter={this.mouseIn}
-				onMouseLeave={this.mouseOut}
-				style={{backgroundImage:"url(" + this.props.ad.thumbUrl + ")"}}>
+			<div className="flix-container">
+				<div id={this.props.ad.id + "-" + this.props.rowID}
+					className={"flix" + adblock + hover}
+					onClick={this.sendBackID}
+					onMouseEnter={this.mouseIn}
+					onMouseLeave={this.mouseOut}
+					style={{backgroundImage: adblockAlt}}>
 
-				<container className={"advert-detail" + playbtn}>
-					<section className="advert-play">
-						<div className="advert-play-img"
-							onClick={this.playAd}/>
-					</section>
+					<container className={"advert-detail" + playbtn}>
+						<section className="advert-play">
+							<div className="advert-play-img"
+								onClick={this.playAd}/>
+						</section>
 
-					<section className={"advert-modal" + details}>
-						<strong className="advert-modal-header">
-							{ this.props.ad.title }
-						</strong>
-						<div className="advert-modal-details">
-							<Stars ad={this.props.ad}/>
-							<p>{ this.props.ad.year }</p>
-						</div>
-						<div className="advert-modal-desc">
-							<p>{ this.props.ad.description.substring(0,107) }...</p>
-							<div><MyButton small={true} ad={this.props.ad}/></div>
-						</div>
-						<div className="advert-show-detail-btn"/>
-					</section>
+						<section className={"advert-modal" + details}>
+							<strong className="advert-modal-header">
+								{ this.props.ad.title }
+							</strong>
+							<div className="advert-modal-details">
+								<Stars ad={this.props.ad}/>
+								<p>{ this.props.ad.year }</p>
+							</div>
+							<div className="advert-modal-desc">
+								<p>{ this.props.ad.description.substring(0,107) }...</p>
+								<div><MyButton small={true} ad={this.props.ad}/></div>
+							</div>
+							<div className="advert-show-detail-btn"/>
+						</section>
 
-				</container>
+					</container>
+				</div>
 			</div>
 		);
 	}

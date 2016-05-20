@@ -171,6 +171,7 @@ var AdvertRow = React.createClass({
 			return (
 				<Advert ref="row"
 					ad={ad} key={ad.id}
+					block={this.props.block}
 					rowID={this.props.genre.id}
 					show={this.state.showDetail}
 					itemHover={this.itemHoverCallback}

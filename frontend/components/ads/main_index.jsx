@@ -5,13 +5,15 @@ var MyListStore = require('../../stores/my_list_store');
 var ApiUtil = require('../../util/api_util');
 var AdvertRow = require('./ad_index_row');
 var FeatureHeader = require('./feature_header');
+var testForAdBlock = require('fuckAdBlock');
 
 var MainIndex = React.createClass({
 
 	getInitialState: function() {
 		return {
 			genres: GenreStore.all(),
-			myList: []
+			myList: [],
+			adblock: undefined,
 		};
 	},
 
@@ -37,6 +39,16 @@ var MainIndex = React.createClass({
 
 		if (this.state.genres.length === 0){ this.getMoreRows(); }
 		ApiUtil.fetchMyList();
+
+		if (typeof fuckAdBlock === 'undefined') {
+			this.setState({ adblock: true });
+		} else {
+			fuckAdBlock.on(true, this.adBlockDetected)
+		}
+	},
+
+	adBlockDetected: function () {
+	  this.setState({ adblock: true });
 	},
 
 	getMoreRows: function () {
@@ -65,8 +77,13 @@ var MainIndex = React.createClass({
 	// Renders the Individual Rows
 	renderRows: function () {
 		return this.state.genres.map(function(row){
-			return <AdvertRow key={row.id} genre={row} />;
-		});
+			return (
+				<AdvertRow
+					key={row.id}
+					genre={row}
+					block={this.state.adblock} />
+			);
+		}.bind(this));
 	},
 
 	// Renders MyList
@@ -78,7 +95,9 @@ var MainIndex = React.createClass({
 			ads: this.state.myList
 		};
 		return (
-			<AdvertRow genre={myListPackage}/>
+			<AdvertRow
+				genre={myListPackage}
+				block={this.state.adblock} />
 		);
 	},
 
