@@ -5,7 +5,7 @@ var MyListStore = require('../../stores/my_list_store');
 var ApiUtil = require('../../util/api_util');
 var AdvertRow = require('./ad_index_row');
 var FeatureHeader = require('./feature_header');
-var testForAdBlock = require('fuckAdBlock');
+var testForAdBlock = require('fuckadblock');
 
 var MainIndex = React.createClass({
 
