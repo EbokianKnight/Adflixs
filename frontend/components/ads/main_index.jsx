@@ -39,9 +39,13 @@ var MainIndex = React.createClass({
 
 		if (this.state.genres.length === 0){ this.getMoreRows(); }
 		ApiUtil.fetchMyList();
+
+		// if loading the file is blocked, adblock is present
+		// else test for adblock, if adblock is detected run adBlockDetected
 		if (typeof fuckAdBlock === 'undefined') {
 			this.adBlockDetected();
 		} else {
+			fuckAdBlock.check(5);
 			fuckAdBlock.on(true, this.adBlockDetected);
 		}
 	},
