@@ -13,7 +13,7 @@ var MainIndex = React.createClass({
 		return {
 			genres: GenreStore.all(),
 			myList: [],
-			adblock: undefined,
+			adblock: false,
 		};
 	},
 
@@ -39,16 +39,16 @@ var MainIndex = React.createClass({
 
 		if (this.state.genres.length === 0){ this.getMoreRows(); }
 		ApiUtil.fetchMyList();
-
 		if (typeof fuckAdBlock === 'undefined') {
-			this.setState({ adblock: true });
+			this.adBlockDetected();
 		} else {
-			fuckAdBlock.on(true, this.adBlockDetected)
+			fuckAdBlock.on(true, this.adBlockDetected);
 		}
 	},
 
 	adBlockDetected: function () {
 	  this.setState({ adblock: true });
+		console.log("I never used AdBlock before this site, and was taken by surprise at it's veracity. Altering the naming structure to get around it requires specific changes throughout the backend and frontend. Until that is finished this message will appear.");
 	},
 
 	getMoreRows: function () {
@@ -64,6 +64,7 @@ var MainIndex = React.createClass({
 		$(window).unbind('mousewheel DOMMouseScroll MozMousePixelScroll');
 		this.genreStoreToken.remove();
 		this.myListStoreToken.remove();
+		if (fuckAdBlock) { fuckAdBlock.clearEvent(); }
 	},
 
 	getGenresFromStore: function() {
